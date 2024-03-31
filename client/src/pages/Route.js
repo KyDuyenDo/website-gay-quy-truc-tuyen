@@ -1,0 +1,163 @@
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
+import { Link } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Home from "./Home";
+import BecomeFundraiser from "./BecomeFundraiser";
+import ProjectCategories from "./ProjectCategories";
+import Project from "./Project";
+import Member from "./Member";
+import FundraiserDetail from "./FundraiserDetail";
+import MemberDetail from "./MemberDetail";
+import Payment from "./Payment";
+import Map from "./Map";
+// import Management from "./Management";
+import "../css/management.css";
+import {
+  faChartLine,
+  faBell,
+  faClockRotateLeft,
+  faListCheck,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DashBoard from "../components/DashBroad/DashBoard";
+import Notify from "../components/DashBroad/Notify";
+import ProjectHistory from "../components/DashBroad/ProjectHistory";
+import ManagementProject from "../components/DashBroad/ManagementProject";
+import ProjectEdit from "../components/DashBroad/ProjectEdit";
+import VerifyEmail from "./VerifyEmail";
+import EmailVerifiedMessage from "./EmailVerifiedMessage";
+import ProjectCreate from "./ProjectCreate";
+function Index() {
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/auth/verify" exact element={<VerifyEmail />} />
+          <Route
+            path="/email-verified"
+            exact
+            element={<EmailVerifiedMessage />}
+          />
+          <Route element={<MainLayout />}>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/payment" exact element={<Payment />} />
+            <Route
+              path="/become-a-fundraiser"
+              exact
+              element={<BecomeFundraiser />}
+            />
+            <Route path="/create-project" exact element={<ProjectCreate />} />
+            <Route
+              path="/fundraiser-detail"
+              exact
+              element={<FundraiserDetail />}
+            />
+            <Route path="/project" exact element={<Project />} />
+            <Route path="/member" exact element={<Member />} />
+            <Route
+              path="/project-categories"
+              exact
+              element={<ProjectCategories />}
+            />
+            <Route path="/member-detail" exact element={<MemberDetail />} />
+            <Route path="/map" exact element={<Map />} />
+            <Route path="/management" exact element={<Management />}>
+              <Route path="/management" exact element={<DashBoard />} />
+              <Route path="/management/notify" exact element={<Notify />} />
+              <Route
+                path="/management/history"
+                exact
+                element={<ProjectHistory />}
+              />
+              <Route
+                path="/management/management_project"
+                exact
+                element={<ManagementProject />}
+              />
+              <Route
+                path="/management/management_project/1"
+                exact
+                element={<ProjectEdit />}
+              />
+            </Route>
+          </Route>
+        </Routes>
+        <ScrollToTop />
+      </Router>
+    </>
+  );
+}
+
+function Management() {
+  return (
+    <div className="contain-bg">
+      <div className="container-fluid contain-main">
+        <div className="row">
+          <div className="col-md-12 col-xl-3">
+            <div className="card-menu">
+              <ul className="contain-item-menu">
+                <li className="item-menu">
+                  <Link to="/management">
+                    <FontAwesomeIcon
+                      size="lg"
+                      icon={faChartLine}
+                    ></FontAwesomeIcon>{" "}
+                    <span>Tổng quan</span>
+                  </Link>
+                </li>
+                <li className="item-menu">
+                  <Link to="/management/notify">
+                    <FontAwesomeIcon size="lg" icon={faBell}></FontAwesomeIcon>
+                    <span>Thông báo</span>
+                  </Link>
+                </li>
+                <li className="item-menu">
+                  <Link to="/management/history">
+                    <FontAwesomeIcon
+                      size="lg"
+                      icon={faClockRotateLeft}
+                    ></FontAwesomeIcon>
+                    <span>Lịch sử quyên góp</span>
+                  </Link>
+                </li>
+                <li className="item-menu">
+                  <Link to="/management/management_project">
+                    <FontAwesomeIcon
+                      size="lg"
+                      icon={faListCheck}
+                    ></FontAwesomeIcon>{" "}
+                    <span>Quản lý chiến dịch</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="col-md-12 col-xl-9">
+            <div className="board-main">
+              <Outlet />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MainLayout() {
+  return (
+    <div className="page-wraper">
+      <Header />
+      <Outlet />
+      <Footer />
+    </div>
+  );
+}
+export default Index;

@@ -1,0 +1,55 @@
+.user-avatar img {
+  width: 152px;
+  border-radius: 100%;
+}
+
+.user-counters .counter-item:not(:last-child) {
+  border-right: 0.5px solid #e0e0e0;
+  padding-right: 15px;
+  margin-right: 25px;
+}
+.align-items-center {
+  align-items: center !important;
+}
+.flex-column {
+  flex-direction: column !important;
+}
+.d-flex {
+  display: flex !important;
+}
+.font-size-20 {
+  font-size: 20px;
+}
+.text-bold {
+  font-weight: 700;
+}
+.text-dark {
+  color: #272d4e !important;
+}
+.media-item {
+    margin-right: 10px;
+}
+.media-item.face {
+    color: #0B57D0 !important;
+}
+.media-item.youtube {
+    color: #F63B3B !important;
+}
+
+.media-item.tiktok {
+    color: #fff !important;
+    background-color: #212529;
+    border-radius: 5px;
+}
+.media-item.tiktok {
+    padding: 5px !important;
+}
+.see-more {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px  !important;
+}
+.user-page{
+    padding: 60px 0px !important;
+    border-top: 1px solid #d7d7d7;
+}

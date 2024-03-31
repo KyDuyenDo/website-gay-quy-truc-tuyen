@@ -1,0 +1,163 @@
+#loading-area {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 999999999;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#loading-area.loading-page-1 {
+  background: #faf8f2;
+}
+#loading-area.loading-page-1 .item-wrapper {
+  height: 60px;
+  width: 68px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+#loading-area.loading-page-1 .item-wrapper .item1 {
+  position: absolute;
+  left: 0;
+  animation: leftHand 1.2s linear infinite;
+}
+#loading-area.loading-page-1 .item-wrapper .item2 {
+  position: absolute;
+  right: 0;
+  animation: rightHand 1.2s linear infinite;
+}
+#loading-area.loading-page-1 .item-wrapper .item3 {
+  position: absolute;
+  left: 17px;
+  -webkit-animation: HeartUpToDown 1.5s infinite;
+  -moz-animation: HeartUpToDown 1.5s infinite;
+  animation: HeartUpToDown 1.5s infinite;
+}
+#loading-area.loading-page-1 .load-text {
+  margin-top: 5px;
+}
+#loading-area.loading-page-1 .load-text .text-load {
+  font-weight: 800;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.1);
+  position: relative;
+  font-size: 70px;
+  line-height: 1.4;
+  font-size: 24px;
+  text-align: center;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+#loading-area.loading-page-1 .load-text .text-load:before {
+  animation: lettersLoading 4s infinite;
+  color: var(--title);
+  content: attr(data-text);
+  left: 0;
+  opacity: 0;
+  top: 0;
+  line-height: 1.4;
+  position: absolute;
+  text-transform: uppercase;
+}
+#loading-area.loading-page-1 .load-text .text-load:nth-child(2):before {
+  animation-delay: 0.2s;
+}
+#loading-area.loading-page-1 .load-text .text-load:nth-child(3):before {
+  animation-delay: 0.4s;
+}
+#loading-area.loading-page-1 .load-text .text-load:nth-child(4):before {
+  animation-delay: 0.6s;
+}
+#loading-area.loading-page-1 .load-text .text-load:nth-child(5):before {
+  animation-delay: 0.8s;
+}
+#loading-area.loading-page-1 .load-text .text-load:nth-child(6):before {
+  animation-delay: 1s;
+}
+#loading-area.loading-page-1 .load-text .text-load:nth-child(7):before {
+  animation-delay: 1.2s;
+}
+#loading-area.loading-page-1 .load-text .text-load:nth-child(8):before {
+  animation-delay: 1.4s;
+}
+
+@keyframes HeartUpToDown {
+  0% {
+    transform: translateY(-35px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes leftHand {
+  0% {
+    transform: rotate(-20deg) translateX(-20px);
+  }
+  100% {
+    transform: rotate(0) translateX(0);
+  }
+}
+
+@keyframes rightHand {
+  0% {
+    transform: rotate(20deg) translateX(20px);
+  }
+  100% {
+    transform: rotate(0) translateX(0);
+  }
+}
+
+/* =Elements style
+---------------------- */
+.line {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 15px;
+  background-color: var(--primary);
+  margin-left: 4px;
+}
+
+.load-3 .line:nth-last-child(1) {
+  animation: loadingC 0.8s 0.1s linear infinite; /* Animation duration increased to 0.8s */
+}
+
+.load-3 .line:nth-last-child(2) {
+  animation: loadingC 0.8s 0.2s linear infinite; /* Animation duration increased to 0.8s */
+}
+
+.load-3 .line:nth-last-child(3) {
+  animation: loadingC 0.8s 0.3s linear infinite; /* Animation duration increased to 0.8s */
+}
+
+@keyframes loadingC {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 15px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

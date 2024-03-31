@@ -1,0 +1,25 @@
+POST http://localhost:5000/article/create
+Content-Type: application/json
+
+{
+     "userId":"65f848de980fff204fddc32e",
+      "categotyId":"1234223",
+      "address":{
+        "city": "Cần thơ",
+        "street": "3/2",
+        "district": "ninh kiều",
+        "ward": "12",
+        "lat": 0,
+        "lon": 0,
+      },
+      "articletitle":"Hỗ trợ các học sinh khó khăn",
+      "image":[],
+      "body":"When a $sort precedes a $limit and there are no intervening stages that modify the number of documents, the optimizer can coalesce the $limit into the $sort. This allows the $sort operation to only maintain the top",
+      "categoryTitle":"Học sinh nghèo",
+      "expireDate":"25/4/2024",
+      "releaseDate":"25/3/2024",
+      "accountNumber":"38327382632",
+      "amountRaised":"1000000",
+      "emailPayPal":"duyenk200@gmail.com",
+      "methodPayment":"paypal",
+}

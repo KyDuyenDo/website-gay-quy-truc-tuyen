@@ -1,0 +1,10 @@
+export const SET_PAYER_NAME = "SET_PAYER_NAME";
+export const SET_PAYER_EMAIL = "SET_PAYER_EMAIL";
+export const SET_AMOUNT = "SET_AMOUNT";
+export const SET_MOUNT_TIP = "SET_MOUNT_TIP";
+export const SET_ANONYMOUS = "SET_ANONYMOUS";
+export const SET_PAY_METHOD = "SET_PAY_METHOD";
+export const PAYMENT_FAIL = "PAYMENT_FAIL";
+export const PAYMENT_SUCCESS = "PAYMENT_SUCCESS";
+export const PAYMENT_CLEAR = "PAYMENT_CLEAR";
+export const SET_USER_DATA = "SET_USER_DATA";

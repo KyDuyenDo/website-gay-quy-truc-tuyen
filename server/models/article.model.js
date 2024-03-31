@@ -1,0 +1,43 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const ArticleSchema = new Schema({
+  // _id
+  userId: { type: Schema.Types.ObjectId, ref: "fundraisers", required: true },
+  categotyId: {
+    type: Schema.Types.ObjectId,
+    ref: "categories",
+    required: true,
+  },
+  addressId: { type: Schema.Types.ObjectId, ref: "addresses", required: true },
+  addedBy: { type: String, require: true },
+  createdAt: { type: Date, default: Date.now, required: true },
+  articletitle: { type: String, require: true },
+  image: [String],
+  body: { type: String, require: true },
+  state: { type: String, require: true },
+  expireDate: { type: String, require: true },
+  releaseDate: { type: String, require: true },
+  accountNumber: { type: String, require: true },
+  emailPayPal: { type: String, require: true },
+  methodPayment: { type: String, require: true },
+  bankcode: { type: String, require: true },
+  adminApproval: { type: Boolean, require: true },
+  published: { type: Boolean, require: true },
+  amountRaised: { type: String },
+  amountEarned: { type: String },
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "comments",
+    },
+  ],
+  activities: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "activities",
+    },
+  ],
+});
+
+module.exports = mongoose.model("articles", ArticleSchema);

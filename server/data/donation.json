@@ -1,0 +1,33 @@
+[
+    {
+        "articleId": "6606e5b2f58cccedf7183e64",
+        "paymentId": "6606e5b2f58cccedf7183e64",
+        "donorId": "6606e5b2f58cccedf7183e64",
+        "donationAmount": 1500000,
+        "donationDate": "2024-03-30T10:42:00.672+00:00",
+        "anonymous": false
+    },
+    {
+        "articleId": "6606e5b2f58cccedf7183e64",
+        "paymentId": "6606e5b2f58cccedf7183e64",
+        "donorId": "660819d6a72d0b2444b7467d",
+        "donationAmount": 1600000,
+        "donationDate": "2024-03-30T10:42:00.672+00:00",
+        "anonymous": false
+    },{
+        "articleId": "6606e5b2f58cccedf7183e64",
+        "paymentId": "6606e5b2f58cccedf7183e64",
+        "donorId": "66016237f33fbdcf59d045a1",
+        "donationAmount": 1700000,
+        "donationDate": "2024-03-30T10:42:00.672+00:00",
+        "anonymous": false
+    },
+    {
+        "articleId": "6606e5b2f58cccedf7183e64",
+        "paymentId": "6606e5b2f58cccedf7183e64",
+        "donorId": "6601628ff33fbdcf59d045a4",
+        "donationAmount": 1800000,
+        "donationDate": "2024-03-30T10:42:00.672+00:00",
+        "anonymous": false
+    }
+]

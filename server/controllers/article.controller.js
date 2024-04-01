@@ -3,7 +3,7 @@ const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const Article = require("../models/article.model");
-const { User } = require("../models/user.model");
+const User = require("../models/user.model");
 const Address = require("../models/address.model");
 const Comment = require("../models/commentAndEvaluation.model");
 const Activity = require("../models/activity.model");
@@ -310,7 +310,7 @@ const getArticleByUser = async (req, res) => {
 };
 
 const getDonorOfArticle = async (req, res) => {
-  // try {
+  try {
     const { articleId } = req.body;
     let donation;
     // neu co name thi tra ve name
@@ -336,9 +336,9 @@ const getDonorOfArticle = async (req, res) => {
     }
     const totalCount = donation.length;
     res.status(200).json({ totalCount, donation });
-  // } catch (error) {
-  //   res.status(500).json({ message: "Internal error" });
-  // }
+  } catch (error) {
+    res.status(500).json({ message: "Internal error" });
+  }
 };
 
 const deleteArticle = async (req, res) => {
@@ -357,7 +357,7 @@ const deleteArticle = async (req, res) => {
       message: "Post deleted successfully",
     });
   } catch (error) {
-    res.status(404).json({
+    res.status(500).json({
       message: "An error occurred while deleting the post",
     });
   }

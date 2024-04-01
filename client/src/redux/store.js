@@ -20,7 +20,6 @@ const createAppStore = async () => {
         getDefaultMiddleware().concat([thunk, tokenMiddleware]),
     });
     await store.dispatch(initializeAuth()); // lấy dữ liệu từ localstorage
-    await store.dispatch(getCategoriesAction());
     
     return store;
   } catch (err) {

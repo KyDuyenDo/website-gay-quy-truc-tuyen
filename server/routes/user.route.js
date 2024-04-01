@@ -17,9 +17,10 @@ const {
 
 const { sendVerificationEmail } = require("../middleware/users/verifyEmail");
 
-const decodeToken = require("../middleware/decodeToken");
-
 const requireAuth = passport.authenticate("jwt", { session: false }, null);
+const requireAdminAuth = require("../middleware/adminAuth");
+const requireFundraiserAuth = require("../middleware/fundraiserAuth");
+const decodeToken = require("../middleware/decodeToken");
 
 router.get("/:id", getUser);
 
@@ -29,10 +30,29 @@ router.post("/signin", signin);
 
 router.post("/logout", logout);
 router.post("/protected", requireAuth, decodeToken, protected);
+router.get(
+  "/protected/isFundraiserAuth",
+  requireAuth,
+  requireFundraiserAuth,
+  async (req, res) => {
+    try {
+      const userId = req.userId;
+      if (userId !== null) {
+        return res.json({ success: true, message: "you are fundraiser." });
+      }
+      res.json({ success: false, message: "you are not fundraiser." });
+    } catch (error) {
+      console.log(error);
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+  }
+);
 router.put("/:id", requireAuth, decodeToken, updateInfo);
 
-router.post("/become/fundraiser", becomeFundraiser);
-router.put("/up/image/fund", upLoadImageFundraiser);
+router.post("/become/fundraiser", requireAuth, decodeToken, becomeFundraiser);
+router.put("/fund/image", requireAuth, decodeToken, upLoadImageFundraiser);
 router.get("/fundraiser", getAllMember);
 router.get("/fundraiser/:id", getMemberDetail);
 

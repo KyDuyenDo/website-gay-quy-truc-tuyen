@@ -67,7 +67,7 @@
 } */
 .fixed-top {
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.05);
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
 }
 .fixed-top .main-bar {
   animation: 0.95s ease 0s normal forwards 1 running headerSlideDown;
@@ -312,10 +312,10 @@
 }
 .sub-menu .link-item:hover span {
   color: var(--primary);
-} 
+}
 .notify {
   position: absolute;
-  background-color: #E41E3F;
+  background-color: #e41e3f;
   width: 20px;
   height: 20px;
   text-align: center;
@@ -323,7 +323,7 @@
   top: -10%;
   right: -10%;
 }
-.notify span{
+.notify span {
   color: #fff;
 }
 .notify_contain {
@@ -392,5 +392,3 @@
   padding-top: 10px;
   font-weight: bold;
 }
-
-

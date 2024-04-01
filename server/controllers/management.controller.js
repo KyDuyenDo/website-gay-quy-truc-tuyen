@@ -1,7 +1,7 @@
 const Donation = require("../models/donation.model");
 const Activity = require("../models/activity.model");
 const Article = require("../models/article.model");
-
+const Notify = require("../models/notify.model");
 const getUserDonation = async (req, res) => {
   const { userId } = req.body;
   try {
@@ -16,8 +16,36 @@ const getUserDonation = async (req, res) => {
     res.status(500).json({ message: "An error occurred" });
   }
 };
-const getNotify = async (req, res) => {};
-const delNotify = async (req, res) => {};
+const getNotify = async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const notify = Notify.find({ donorId: userId })
+      .populate("articleId", "articletitle image")
+      .lean();
+    if (!notify) {
+      res.status(404).json({ message: "Not Found" });
+    }
+    res.status(200).json(notify);
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred" });
+  }
+};
+const delNotify = async (req, res) => {
+  const { notifyId } = req.body;
+  try {
+    const notify = await Notify.findById(notifyId);
+    if (!notify) {
+      return res.status(404).json({
+        message: "Notify not found.",
+      });
+    }
+    await notify.remove();
+  } catch (error) {
+    res.status(500).json({
+      message: "An error occurred while deleting the notify",
+    });
+  }
+};
 
 function getWeekDays() {
   const today = new Date();

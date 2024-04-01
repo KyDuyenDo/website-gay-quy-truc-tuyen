@@ -8,7 +8,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 import Loader from "../components/Loader";
+import { becomeFundraiser, upLoadImageFundraiser } from "../redux/api/userAPI";
 import { upLoadImage } from "../redux/api/uploadAPI";
+import { Link } from "react-router-dom";
 //images
 import bg from "../assets/images/bg7.jpeg";
 import FirstRaiserStep from "../components/AddFundraiser/FirstRaiserStep";
@@ -27,7 +29,7 @@ const schemaFundRaiser = yup.object().shape({
       /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
       "không đúng định dạng (dd/mm/yyyy)"
     ),
-  mumberPhone: yup.string().required("Số điện thoại trống trống"),
+  numberPhone: yup.string().required("Số điện thoại trống trống"),
   emailContact: yup
     .string()
     .email("email không hợp lệ")
@@ -55,12 +57,12 @@ const BecomeFundraiser = () => {
   const [notifyAdd, setNotifyAdd] = useState(false);
   const [notifyMess, setNotifyMess] = useState("");
 
-  const uploadImages = async (files) => {
+  const uploadImages = async (files, type) => {
     const imageData = await Promise.all(
       files.map(async (file) => {
         const formData = new FormData();
         formData.append("file", file);
-        const data = await upLoadImage("article", formData);
+        const data = await upLoadImage(type, formData);
         return data;
       })
     );
@@ -193,7 +195,64 @@ const BecomeFundraiser = () => {
                       </form>
                     )}
                     {goSteps === 3 && (
-                      <>
+                      <form
+                        onSubmit={handleSubmit(async (data) => {
+                          const formData = new FormData();
+                          formData.append("fullname", data.fullname);
+                          formData.append("birthday", data.birthday);
+                          formData.append("numberPhone", data.numberPhone);
+                          formData.append("emailContact", data.emailContact);
+                          formData.append("type", data.type);
+                          formData.append("groupName", data.groupName);
+                          formData.append("describe", data.describe);
+                          formData.append("introLink", data.introLink);
+                          // for (const pair of formData) {
+                          //   const key = pair[0];
+                          //   const value = pair[1];
+                          //   console.log(`Key: ${key}, Value: ${value}`);
+                          // }
+                          setLoading(true);
+                          setNotifyAdd(true);
+                          try {
+                            await becomeFundraiser(formData).then(
+                              async (res) => {
+                                const imageCard = await uploadImages(
+                                  data.identificationCard,
+                                  "identifyCard"
+                                );
+                                const imageAvatar = await uploadImages(
+                                  data.identificationImage,
+                                  "identifyAvatar"
+                                );
+
+                                const formDataImage = new FormData();
+                                formDataImage.append("fundId", res);
+                                formDataImage.append(
+                                  "identificationImage",
+                                  imageAvatar[0].imageURL
+                                );
+                                imageCard.forEach((item, index) => {
+                                  formDataImage.append(
+                                    `identificationCard${index + 1}`,
+                                    item.imageURL
+                                  );
+                                });
+
+                                await upLoadImageFundraiser(formDataImage);
+                                setLoading(false);
+                                setNotifyMess(
+                                  "Tạo yêu cầu thành công, hãy vui lòng đợi kết quả, chúng tôi sẽ thông báo cho bạn sớm nhất."
+                                );
+                              }
+                            );
+                          } catch (error) {
+                            setLoading(false);
+                            setNotifyMess(
+                              "có lỗi xảy ra khi tạo yêu cầu, xin hãy thử lại"
+                            );
+                          }
+                        })}
+                      >
                         <FourthRaiserStep />
                         <div className="text-end toolbar toolbar-bottom p-2">
                           <button
@@ -209,7 +268,7 @@ const BecomeFundraiser = () => {
                             Gửi
                           </button>
                         </div>
-                      </>
+                      </form>
                     )}
                   </div>
                 </div>
@@ -218,6 +277,35 @@ const BecomeFundraiser = () => {
           </div>
         </section>
       </div>
+      <Modal
+        className="modal fade modal-wrapper auth-modal"
+        show={notifyAdd}
+        onHide={setNotifyAdd}
+        backdrop="static"
+        centered
+      >
+        <div style={{ textAlign: "center" }}>
+          <h2 className="title">Yêu cầu trở thành nhà gây quỹ</h2>
+          {loading === true ? (
+            <Loader />
+          ) : (
+            <>
+              <h6 className="m-0">{notifyMess}</h6>
+              <Link
+                to="/"
+                className="sign-text d-block"
+                data-bs-toggle="collapse"
+                onClick={() => {
+                  setNotifyAdd(false);
+                  reset();
+                }}
+              >
+                Trở lại
+              </Link>
+            </>
+          )}
+        </div>
+      </Modal>
     </>
   );
 };

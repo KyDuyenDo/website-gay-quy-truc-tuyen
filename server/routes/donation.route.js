@@ -1,8 +1,4 @@
 const express = require("express");
-const { isAuth } = require("../middleware/isAuth");
-const {
-  getAllMember,
-} = require("../controllers/management.controller");
 const router = express.Router();
 
 // create donation

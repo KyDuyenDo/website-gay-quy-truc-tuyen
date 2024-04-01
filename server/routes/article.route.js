@@ -28,8 +28,8 @@ const {
 
 const router = express.Router();
 
-router.post("/create", addArticle);
-router.put("/up_image", upLoadImage);
+router.post("/create", requireAuth, requireFundraiserAuth, addArticle);
+router.put("/up_image", requireAuth, upLoadImage);
 router.post("/confirm/:postId", requireAuth, requireAdminAuth, confirmArticle);
 router.post("/reject/:postId", requireAuth, requireAdminAuth, rejectArticle);
 
@@ -47,9 +47,9 @@ router.post(
 );
 router.post("/add/activity", requireAuth, requireFundraiserAuth, addActivity);
 
-router.delete("/del/:id", deleteArticle);
+router.delete("/del/:id", requireAuth, requireAdminAuth, deleteArticle);
 
-router.post("/add/category", addCategory);
+router.post("/add/category", requireAuth, requireAdminAuth, addCategory);
 router.get("/all/categories", getCategories);
 
 module.exports = router;

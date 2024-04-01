@@ -63,15 +63,15 @@ const ThirdRaiserStep = ({ register, errors }) => {
                   Số điện thoại
                 </label>
                 <input
-                  name="mumberPhone"
-                  id="mumberPhone"
-                  {...register("mumberPhone")}
+                  name="numberPhone"
+                  id="numberPhone"
+                  {...register("numberPhone")}
                   type="text"
                   className="cf-form__input"
                 />
-                {errors.mumberPhone && (
+                {errors.numberPhone && (
                   <small className="text-danger m-1 p-0">
-                    {errors.mumberPhone.message}
+                    {errors.numberPhone.message}
                   </small>
                 )}
               </div>

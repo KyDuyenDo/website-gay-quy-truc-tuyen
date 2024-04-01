@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stepper, Step } from "react-form-stepper";
 import { Modal } from "react-bootstrap";
 import "../css/fund.css";
@@ -17,7 +17,8 @@ import FirstStep from "../components/AddArticle/FirstStep";
 import SecondStep from "../components/AddArticle/SecondStep";
 import ThirdStep from "../components/AddArticle/ThirdStep";
 import FourthStep from "../components/AddArticle/FourthStep";
-
+import { getCategoriesAction } from "../redux/actions/categoryAction";
+import { useDispatch } from "react-redux";
 const schema = yup.object().shape({
   projectTitle: yup.string().required("Tiêu đề trống"),
   // .min(10, "Quá ngắn, tối thiểu 10 từ"),
@@ -76,13 +77,16 @@ const ProjectCreate = () => {
     getValues,
     setValue,
   } = useForm({ resolver: yupResolver(schema) });
-
+  const dispatch = useDispatch();
   const [goSteps, setGoSteps] = useState(0);
   const [errorImage, setErrorImage] = useState("");
   const [loading, setLoading] = useState(false);
   const [notifyAdd, setNotifyAdd] = useState(false);
   const [notifyMess, setNotifyMess] = useState("");
 
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+  }, []);
   const uploadImages = async (files) => {
     const imageData = await Promise.all(
       files.map(async (file) => {

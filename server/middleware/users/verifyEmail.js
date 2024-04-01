@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const { User } = require("../../models/user.model");
+const User = require("../../models/user.model");
 const EmailVerification = require("../../models/email.model");
 const { query, validationResult } = require("express-validator");
 const { verifyEmailHTML } = require("../../utils/emailTemplates");

@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { User } = require("../models/user.model"); // lấy model người dùng
+const User = require("../models/user.model"); // lấy model người dùng
 const Token = require("../models/token.model"); // lấy model token
 const JwtStrategy = require("passport-jwt").Strategy, //Cung cấp chiến lược sử dụng xác thực JWT với Passport.js.
   ExtractJwt = require("passport-jwt").ExtractJwt;

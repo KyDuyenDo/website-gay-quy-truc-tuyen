@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
-const { User, Fundraiser } = require("../models/user.model");
+const User = require("../models/user.model");
+const Fundraiser = require("../models/fundraiser.model");
 
 const jwt = require("jsonwebtoken");
 const Token = require("../models/token.model");
@@ -81,9 +82,23 @@ const signin = async (req, res) => {
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).select("-password").lean();
+    const starEvalution = await Comment.aggregate([
+      {
+        $match: {
+          evaluatee: req.params.id,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          averageRating: { $avg: "$rating" },
+        },
+      },
+    ]);
+    user.starEvalution = starEvalution[0].averageRating;
     res.status(200).json(user);
   } catch (error) {
-    next(err);
+    return res.status(500).json({ message: "server error" });
   }
 };
 
@@ -123,9 +138,16 @@ const getAllMember = async (req, res) => {
       });
     }
     const members = await Fundraiser.aggregate(pipeline);
-    res.status(200).json({ members });
+    let limitMember = members;
+    if (req.query.limit && req.query.skip) {
+      const skip = parseInt(req.query.skip);
+      const limit = parseInt(req.query.limit);
+      limitMember = limitMember.slice(skip, skip + limit);
+    }
+    const totalCount = limitMember.length;
+    res.status(200).json({ limitMember, totalCount });
   } catch (error) {
-    res.status(500).json({ message: "An error occurred" });
+    return res.status(500).json({ message: "An error occurred" });
   }
 };
 
@@ -140,9 +162,23 @@ const getMemberDetail = async (req, res) => {
         "email username joindate youtubeUrl facebookUrl tiktokUrk"
       )
       .lean();
+    const starEvalution = await Comment.aggregate([
+      {
+        $match: {
+          evaluatee: req.params.id,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          averageRating: { $avg: "$rating" },
+        },
+      },
+    ]);
+    user.starEvalution = starEvalution[0].averageRating;
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: "server error" });
+    return res.status(500).json({ message: "server error" });
   }
 };
 
@@ -156,12 +192,13 @@ const becomeFundraiser = async (req, res) => {
     groupName,
     describe,
     introLink,
-    userId,
   } = req.body;
+  const userId = req.userId;
+
   try {
-    const fundRelate = Fundraiser({ userId: userId });
-    if (fundRelate) {
-      res.status(409).json({ message: "Cannot Add" });
+    const fund = await Fundraiser.findOne({ userId: userId });
+    if (fund) {
+      return res.status(400).json({ message: "User was Fundraiser" }); // Use 404 for not found
     }
     const fundraiser = await new Fundraiser({
       userId: userId,
@@ -170,38 +207,36 @@ const becomeFundraiser = async (req, res) => {
       numberPhone: numberPhone,
       emailContact: emailContact,
       type: type,
-      adminApproval: false,
       groupName: groupName,
       describe: describe,
       introLink: introLink,
     });
     fundraiser.save();
-    res.status(200).json({ message: "successfully" });
+    res.status(200).json(fundraiser._id);
   } catch (error) {
-    res.status(500).json({
-      message: "Error",
-    });
+    console.error("Error finding:", error);
+    return res.status(500).json({ message: "Internal server error" }); // More specific error message
   }
 };
 
 const upLoadImageFundraiser = async (req, res) => {
   const {
-    userId,
+    fundId,
     identificationImage,
     identificationCard1,
     identificationCard2,
   } = req.body;
   try {
-    const fundraiser = await Fundraiser.findOne({ userId: userId });
+    const fundraiser = await Fundraiser.findById(fundId);
     if (!fundraiser) {
-      res.status(404).json({ message: "Not Fund" });
+      return res.status(404).json({ message: "Not Fund" });
     }
     fundraiser.identificationCard = [identificationCard1, identificationCard2];
     fundraiser.identificationImage = identificationImage;
     fundraiser.save();
     res.status(200).json({ message: "successfully" });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Error",
     });
   }
@@ -250,7 +285,7 @@ const addUser = async (req, res, next) => {
       next();
     }
   } catch (err) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "Thêm tài khoản thất bại.",
     });
   }
@@ -266,7 +301,7 @@ const logout = async (req, res) => {
       message: "Logout successful",
     });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Internal server error. Please try again later.",
     });
   }
@@ -423,5 +458,5 @@ module.exports = {
   getUser,
   updateInfo,
   becomeFundraiser,
-  upLoadImageFundraiser
+  upLoadImageFundraiser,
 };

@@ -1,14 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-// get donation's payment history
-
-// get all payments
-// create payment
-// delete payment
-
-
-
 router.get("/config", async (req, res) => {
   return res.status(200).json({
     status: "success",
@@ -16,6 +8,22 @@ router.get("/config", async (req, res) => {
   });
 });
 
+router.post("/create", async (req, res) => {
+  try {
+    const {
+      donationId,
+      payerName,
+      payerEmail,
+      TradingCode,
+      method,
+      status,
+      amount,
+      tip,
+    } = req.body;
 
+  } catch (error) {
+    
+  }
+});
 
 module.exports = router;

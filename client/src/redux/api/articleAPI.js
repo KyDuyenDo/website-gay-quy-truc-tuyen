@@ -26,21 +26,40 @@ export const upDateImage = async (formData) => {
 };
 export const getArticle = async (idArticle) => {
   try {
-    const { data } = await API.get(`/article/${idArticle}`);
+    const { data } = await API.get(`/article/get/${idArticle}`);
     return { error: null, data };
   } catch (error) {
     return handleApiError(error);
   }
 };
 
-export const getArticles = async (limit, skip) => {
+export const getArticles = async (query) => {
   try {
-    const { data } = await API.get(`/article/limit=${limit}&skip=${skip}`);
+    const { data } = await API.get(`/article/get${query}`);
     return { error: null, data };
   } catch (error) {
     return handleApiError(error);
   }
 };
+
+export const getArticleByUser = async (query) => {
+  try {
+    const { data } = await API.get(`/article/user/get${query}`);
+    return { error: null, data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const getDonorOfArticle = async (query) => {
+  try {
+    const { data } = await API.get(`/article/donors/get${query}`);
+    return { error: null, data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
 // rating, content, postId, userId
 export const addComment = async (formData) => {
   try {
@@ -67,3 +86,4 @@ export const addActivity = async (formData) => {
     return handleApiError(error);
   }
 };
+

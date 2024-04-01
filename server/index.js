@@ -6,6 +6,7 @@ const paymentRoutes = require("./routes/payment.route");
 const paypalRoutes = require("./routes/paypal.route");
 const articleRoutes = require("./routes/article.route");
 const imageRoutes = require("./routes/image.route");
+const managementRoutes = require("./routes/management.route");
 const cookieParser = require("cookie-parser");
 const MongoDB = require("./utils/mongodb.util");
 const decodeToken = require("./middleware/decodeToken");
@@ -36,6 +37,7 @@ app.use("/payment", paymentRoutes);
 app.use("/paypal", paypalRoutes);
 app.use("/article", articleRoutes);
 app.use("/image", imageRoutes);
+app.use("/manage", managementRoutes);
 
 //start server
 const PORT = 5000;

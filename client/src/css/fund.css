@@ -343,3 +343,7 @@
   background-color: #ced4da; /* Equivalent to hover:bg-secondary-400 (adjust if needed) */
   color: #fff; /* Equivalent to hover:text-white */
 }
+.buttons {
+  color: #fff !important;
+  text-align: center;
+}

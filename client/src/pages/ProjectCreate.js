@@ -11,11 +11,12 @@ import { addArticle, upDateImage } from "../redux/api/articleAPI";
 import { upLoadImage } from "../redux/api/uploadAPI";
 //images
 import bg from "../assets/images/bg7.jpeg";
-import FirstStep from "../components/BecomeFundraiser/FirstStep";
-import SecondStep from "../components/BecomeFundraiser/SecondStep";
-import ThirdStep from "../components/BecomeFundraiser/ThirdStep";
-import FourthStep from "../components/BecomeFundraiser/FourthStep";
+
 import { Link } from "react-router-dom";
+import FirstStep from "../components/AddArticle/FirstStep";
+import SecondStep from "../components/AddArticle/SecondStep";
+import ThirdStep from "../components/AddArticle/ThirdStep";
+import FourthStep from "../components/AddArticle/FourthStep";
 
 const schema = yup.object().shape({
   projectTitle: yup.string().required("Tiêu đề trống"),
@@ -144,6 +145,7 @@ const ProjectCreate = () => {
                     {goSteps === 1 && (
                       <form
                         onSubmit={handleSubmit((data) => {
+                          // console.log(data)
                           setGoSteps(2);
                         })}
                       >

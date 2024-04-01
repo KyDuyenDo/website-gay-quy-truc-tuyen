@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
-const { User } = require("../models/user.model");
+const { User, Fundraiser } = require("../models/user.model");
+
 const jwt = require("jsonwebtoken");
 const Token = require("../models/token.model");
 
@@ -83,6 +84,126 @@ const getUser = async (req, res, next) => {
     res.status(200).json(user);
   } catch (error) {
     next(err);
+  }
+};
+
+const getAllMember = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $match: {
+          $or: [],
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          "user.avatar": 1,
+          groupName: 1,
+          type: 1,
+        },
+      },
+    ];
+    if (req.query.type) {
+      pipeline[1].$match.$or.push({
+        type: { $regex: new RegExp(req.query.type, "i") },
+      });
+    }
+    if (req.query.q) {
+      pipeline[1].$match.$or.push({
+        groupName: { $regex: new RegExp(req.query.q, "i") },
+      });
+    }
+    const members = await Fundraiser.aggregate(pipeline);
+    res.status(200).json({ members });
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred" });
+  }
+};
+
+const getMemberDetail = async (req, res) => {
+  try {
+    const user = await Fundraiser.findOne({ userId: req.params.id })
+      .select(
+        "-identificationCard -identificationImage -identificationNumber -expirationDate -achievements -adminApproval"
+      )
+      .populate(
+        "userId",
+        "email username joindate youtubeUrl facebookUrl tiktokUrk"
+      )
+      .lean();
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "server error" });
+  }
+};
+
+const becomeFundraiser = async (req, res) => {
+  const {
+    fullname,
+    birthday,
+    numberPhone,
+    emailContact,
+    type,
+    groupName,
+    describe,
+    introLink,
+    userId,
+  } = req.body;
+  try {
+    const fundRelate = Fundraiser({ userId: userId });
+    if (fundRelate) {
+      res.status(409).json({ message: "Cannot Add" });
+    }
+    const fundraiser = await new Fundraiser({
+      userId: userId,
+      fullname: fullname,
+      birthday: birthday,
+      numberPhone: numberPhone,
+      emailContact: emailContact,
+      type: type,
+      adminApproval: false,
+      groupName: groupName,
+      describe: describe,
+      introLink: introLink,
+    });
+    fundraiser.save();
+    res.status(200).json({ message: "successfully" });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error",
+    });
+  }
+};
+
+const upLoadImageFundraiser = async (req, res) => {
+  const {
+    userId,
+    identificationImage,
+    identificationCard1,
+    identificationCard2,
+  } = req.body;
+  try {
+    const fundraiser = await Fundraiser.findOne({ userId: userId });
+    if (!fundraiser) {
+      res.status(404).json({ message: "Not Fund" });
+    }
+    fundraiser.identificationCard = [identificationCard1, identificationCard2];
+    fundraiser.identificationImage = identificationImage;
+    fundraiser.save();
+    res.status(200).json({ message: "successfully" });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error",
+    });
   }
 };
 
@@ -291,72 +412,16 @@ const updateInfo = async (req, res) => {};
 //   }
 // };
 
-// const getPublicUsers = async (req, res) => {
-//   try {
-//     const userId = req.userId;
-
-//     const followingIds = await Relationship.find({ follower: userId }).distinct(
-//       "following"
-//     );
-
-//     const userIdObj = mongoose.Types.ObjectId(userId);
-
-//     const excludedIds = [...followingIds, userIdObj];
-
-//     const usersToDisplay = await User.aggregate([
-//       {
-//         $match: {
-//           _id: { $nin: excludedIds },
-//           role: { $ne: "moderator" },
-//         },
-//       },
-//       {
-//         $project: {
-//           _id: 1,
-//           name: 1,
-//           avatar: 1,
-//           location: 1,
-//         },
-//       },
-//       {
-//         $lookup: {
-//           from: "relationships",
-//           localField: "_id",
-//           foreignField: "following",
-//           as: "followers",
-//         },
-//       },
-//       {
-//         $project: {
-//           _id: 1,
-//           name: 1,
-//           avatar: 1,
-//           location: 1,
-//           followerCount: { $size: "$followers" },
-//         },
-//       },
-//       {
-//         $sort: { followerCount: -1 },
-//       },
-//       {
-//         $limit: 5,
-//       },
-//     ]);
-
-//     res.status(200).json(usersToDisplay);
-//   } catch (error) {
-//     res.status(500).json({ message: "An error occurred" });
-//   }
-// };
-
 module.exports = {
   addUser,
   signin,
   logout,
   protected,
   refreshToken,
-  // getPublicUser,
-  // getPublicUsers,
+  getAllMember,
+  getMemberDetail,
   getUser,
   updateInfo,
+  becomeFundraiser,
+  upLoadImageFundraiser
 };

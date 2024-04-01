@@ -16,6 +16,7 @@ const UserSchema = new Schema({
   youtubeUrl: { type: String, default: "" },
   facebookUrl: { type: String, default: "" },
   tiktokUrk: { type: String, default: "" },
+  intro: { type: String, default: "" },
   isEmailVerified: {
     type: Boolean,
     default: false,
@@ -25,16 +26,18 @@ const UserSchema = new Schema({
 const FundraiserSchema = new Schema({
   // _id
   userId: { type: Schema.Types.ObjectId, ref: "users", required: true },
+  fullname: { type: String, required: true },
+  birthday: { type: String, required: true },
+  numberPhone: { type: String, required: true },
+  emailContact: { type: String, required: true },
   identificationCard: [String],
   identificationImage: { type: String, required: true },
-  identificationNumber: { type: String, required: true },
-  expirationDate: { type: Date, required: true },
   type: { type: String, required: true },
   adminApproval: { type: Boolean, default: false },
-  achievements: [String],
   groupName: { type: String, required: true },
-  logo: { type: String, required: true },
   describe: { type: String, required: true },
+  introLink: { type: String, required: true },
+  approvaldate: { type: Date, default: null },
 });
 const User = mongoose.model("users", UserSchema);
 const Fundraiser = mongoose.model("fundraisers", FundraiserSchema);

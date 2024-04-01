@@ -28,11 +28,20 @@ const FirstStep = () => {
     lineHeight: "22px",
     width: "110px",
   };
+  function dataURItoBlob(dataURI) {
+    const byteString = atob(dataURI.split(",")[1]);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      uint8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([uint8Array], { type: "image/jpeg" });
+    return blob;
+  }
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImg(imageSrc);
   }, [webcamRef]);
-
   useEffect(() => {
     if (isCameraOn) {
       setIsCameraActive(true); // Ensure camera starts when active
@@ -42,10 +51,10 @@ const FirstStep = () => {
   return (
     <>
       <div id="wizard_Time" className="tab-pane" role="tabpanel">
-      <span className="header-title">Nhận diện khuôn mặt</span>
+        <span className="header-title">Nhận diện khuôn mặt</span>
         <p>
-          Bật camera và tiến hành chụp ảnh khuôn mặt, đảm bảo độ sáng và
-          hiển thị rõ khuôn mặt để tăng độ chính xác trong quá trình xác thực.
+          Bật camera và tiến hành chụp ảnh khuôn mặt, đảm bảo độ sáng và hiển
+          thị rõ khuôn mặt để tăng độ chính xác trong quá trình xác thực.
         </p>
         <div className="row sp15">
           <div className="camera-controls">

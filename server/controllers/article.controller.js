@@ -222,7 +222,7 @@ const getArticles = async (req, res) => {
       },
       {
         $match: {
-          published: true,
+          $and: [{ published: true }],
         },
       },
       {
@@ -242,14 +242,16 @@ const getArticles = async (req, res) => {
         },
       },
     ];
+    // bệnh%20nhân
     if (req.query.q) {
-      pipeline[1].$match.$and.push({
+      pipeline[3].$match.$and.push({
         $or: [
           { articletitle: { $regex: new RegExp(req.query.q, "i") } },
           { body: { $regex: new RegExp(req.query.q, "i") } },
           { "category.title": { $regex: new RegExp(req.query.q, "i") } },
         ],
       });
+      console.log(pipeline);
     }
     const posts = await Article.aggregate(pipeline);
     let sortedPosts = posts;
@@ -275,8 +277,8 @@ const getArticles = async (req, res) => {
       const limit = parseInt(req.query.limit);
       limitedPosts = sortedPosts.slice(skip, skip + limit);
     }
-
-    res.status(200).json({ limitedPosts });
+    const totalCount = limitedPosts.length;
+    res.status(200).json({ limitedPosts, totalCount });
   } catch (error) {
     res.status(500).json({ message: "An error occurred" });
   }
@@ -297,7 +299,6 @@ const getArticleByUser = async (req, res) => {
     } else {
       articles = await Article.find({ userId: userId });
     }
-
     if (articles.length === 0) {
       res.status(404).json({ message: "No articles found" });
     } else {
@@ -306,6 +307,38 @@ const getArticleByUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
+};
+
+const getDonorOfArticle = async (req, res) => {
+  // try {
+    const { articleId } = req.body;
+    let donation;
+    // neu co name thi tra ve name
+    if (req.query.name) {
+      donation = await Donation.find({ articleId: articleId })
+        .populate("donorId", "username")
+        .lean();
+
+      donation = donation.filter((donation) =>
+        donation.users.username.includes(req.query.name)
+      );
+    } else {
+      // neu khong co thi tra ve tat ca
+      donation = await Donation.find({ articleId: articleId }).populate(
+        "donorId",
+        "username"
+      );
+    }
+    // neu co skip va limit thi tra ve nhu vay
+    if (req.query.skip && req.query.limit) {
+      donation = donation.slice(parseInt(req.query.skip));
+      donation = donation.slice(0, parseInt(req.query.limit));
+    }
+    const totalCount = donation.length;
+    res.status(200).json({ totalCount, donation });
+  // } catch (error) {
+  //   res.status(500).json({ message: "Internal error" });
+  // }
 };
 
 const deleteArticle = async (req, res) => {
@@ -456,4 +489,5 @@ module.exports = {
   addCategory,
   getCategories,
   upLoadImage,
+  getDonorOfArticle,
 };

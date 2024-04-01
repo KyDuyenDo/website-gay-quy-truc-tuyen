@@ -9,6 +9,10 @@ const {
   refreshToken,
   getUser,
   updateInfo,
+  getAllMember,
+  getMemberDetail,
+  becomeFundraiser,
+  upLoadImageFundraiser,
 } = require("../controllers/user.controller");
 
 const { sendVerificationEmail } = require("../middleware/users/verifyEmail");
@@ -27,6 +31,9 @@ router.post("/logout", logout);
 router.post("/protected", requireAuth, decodeToken, protected);
 router.put("/:id", requireAuth, decodeToken, updateInfo);
 
-
+router.post("/become/fundraiser", becomeFundraiser);
+router.put("/up/image/fund", upLoadImageFundraiser);
+router.get("/fundraiser", getAllMember);
+router.get("/fundraiser/:id", getMemberDetail);
 
 module.exports = router;

@@ -10,6 +10,7 @@ const {
   rejectArticle,
   getArticle,
   getArticles,
+  getArticleByUser,
   deleteArticle,
   addComment,
   updateArticle,
@@ -17,6 +18,7 @@ const {
   addActivity,
   addCategory,
   upLoadImage,
+  getDonorOfArticle,
 } = require("../controllers/article.controller");
 
 const {
@@ -33,7 +35,8 @@ router.post("/reject/:postId", requireAuth, requireAdminAuth, rejectArticle);
 
 router.get("/get/:id", getArticle);
 router.get("/get", getArticles);
-
+router.get("/user/get", getArticleByUser);
+router.get("/donors/get", getDonorOfArticle);
 router.post(
   "/add/comment",
   requireAuth,

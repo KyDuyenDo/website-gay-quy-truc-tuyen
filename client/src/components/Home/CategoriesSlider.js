@@ -105,7 +105,7 @@ const CategoriesSlider = () => {
                 <div className="swiper-pagination style-1 text-center" ref={paginationRef}></div>
 			</Swiper>
             <div className='d-flex justify-content-center'>
-                <button class="cf-button cf-button--hollow cf-button--small">Xem thêm</button>
+                <button className="cf-button cf-button--hollow cf-button--small">Xem thêm</button>
             </div>
         </>
     );

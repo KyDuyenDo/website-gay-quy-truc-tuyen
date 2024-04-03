@@ -143,7 +143,7 @@ const MenberMasonry = () => {
                       <p>Tham gia từ {item.time}</p>
                       <p>Số tiền gây quỹ {item.money}</p>
                       <Link to="/member-detail">
-                        <button class="cta">
+                        <button className="cta">
                           <span>Xem chi tiết</span>
                           <svg width="15px" height="10px" viewBox="0 0 13 10">
                             <path d="M1,5 L11,5"></path>

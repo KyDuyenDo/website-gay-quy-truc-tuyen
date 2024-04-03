@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
+const Fundraiser = require("../models/fundraiser.model");
 
 const {
   addUser,
@@ -55,5 +56,13 @@ router.post("/become/fundraiser", requireAuth, decodeToken, becomeFundraiser);
 router.put("/fund/image", requireAuth, decodeToken, upLoadImageFundraiser);
 router.get("/fundraiser", getAllMember);
 router.get("/fundraiser/:id", getMemberDetail);
+router.get("/fundraiser/get/name", async (req, res) => {
+  const { userId } = req.body;
+  const fund = Fundraiser.findOne({ userId: userId });
+  if (!fund) {
+    return res.status(404).json({ message: "Not Fund" });
+  }
+  res.status(200).json(fund.groupName);
+});
 
 module.exports = router;

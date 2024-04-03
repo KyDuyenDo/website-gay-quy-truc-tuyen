@@ -62,7 +62,10 @@ const schema = yup.object().shape({
   town: yup.string().default(""),
   street: yup.string().default(""),
   detail: yup.string().default(""),
+  address: yup.string().default(""),
   total: yup.string().default(""),
+  lat: yup.string().default(""),
+  lon: yup.string().default(""),
   image: yup.array().default([]),
 });
 
@@ -212,10 +215,6 @@ const ProjectCreate = () => {
                             formData.append("title", data.projectTitle);
                             formData.append("category", data.projectCategory);
                             formData.append("body", data.projectBody);
-                            formData.append(
-                              "userId",
-                              "65f848de980fff204fddc32e"
-                            );
                             formData.append("expireDate", data.projectDay);
                             formData.append("releaseDate", "");
                             formData.append(
@@ -232,11 +231,17 @@ const ProjectCreate = () => {
                             formData.append("city", data.city);
                             formData.append("county", data.county);
                             formData.append("detail", data.total);
+                            formData.append("address", data.address);
                             formData.append("lat", data.lat);
                             formData.append("lon", data.lon);
                             formData.append("street", data.street);
                             formData.append("town", data.town);
 
+                            // for (const pair of formData) {
+                            //   const key = pair[0];
+                            //   const value = pair[1];
+                            //   console.log(`Key: ${key}, Value: ${value}`);
+                            // }
                             const formDataImage = new FormData();
                             addArticle(formData)
                               .then((result) => {

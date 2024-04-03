@@ -63,7 +63,7 @@ const FundraiserDetail = () => {
                                     <div className="swiper fundraiser-gallery-wrapper">
                                         <GallerySlider />
                                     </div>
-                                    <h2 class="title">Lời khẩn cầu của một người mẹ tìm liều thuốc mắc nhất thế giới để cứu mạng con trai! <span className='state'>Đang gây quỹ</span></h2>
+                                    <h2 className="title">Lời khẩn cầu của một người mẹ tìm liều thuốc mắc nhất thế giới để cứu mạng con trai! <span className='state'>Đang gây quỹ</span></h2>
                                     {/* <!--  selection --> */}
                                     <div className='inner-section'>
                                       <ul className='step-section' activeStep={activeStep} label={false}>

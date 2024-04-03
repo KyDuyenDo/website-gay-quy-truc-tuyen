@@ -230,10 +230,10 @@ const ProjectEdit = () => {
           </div>
           {/* button thêm mới hoặc xem thêm */}
           <div className="contain-button">
-            <button type="button" class="btn btn-outline-success">
+            <button type="button" className="btn btn-outline-success">
               Xem thêm
             </button>
-            <button type="button" class="btn btn-outline-primary">
+            <button type="button" className="btn btn-outline-primary">
               Thêm mới
             </button>
           </div>
@@ -286,10 +286,10 @@ const ProjectEdit = () => {
               </div>
             </div>
             <div className="contain-button">
-              <button type="button" class="btn btn-secondary ml-2">
+              <button type="button" className="btn btn-secondary ml-2">
                 Thoát
               </button>
-              <button type="button" class="btn btn-primary">
+              <button type="button" className="btn btn-primary">
                 Thêm
               </button>
             </div>

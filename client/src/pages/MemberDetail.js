@@ -24,56 +24,56 @@ const MemberDetail = () => {
             <div className="col-9 py-5">
               <div className="d-flex flex-row flex-wrap">
                 <div className="user-info-container flex-1-1-0 ml-3 ml-md-4">
-                  <div class="d-flex flex-row flex-wrap">
-                    <div class="username-row flex-fill d-flex flex-column flex-shrink-1">
-                      <h2 class="text-single-line text-dark text-bold font-size-20 font-size-md-24 mt-2 mb-0">
+                  <div className="d-flex flex-row flex-wrap">
+                    <div className="username-row flex-fill d-flex flex-column flex-shrink-1">
+                      <h2 className="text-single-line text-dark text-bold font-size-20 font-size-md-24 mt-2 mb-0">
                         Như chưa hề có cuộc chia ly
                       </h2>
-                      <div class="mt-2 text-gray-900">@nchcccl</div>
-                      <div class="mt-2 font-size-15 font-size-md-16">
+                      <div className="mt-2 text-gray-900">@nchcccl</div>
+                      <div className="mt-2 font-size-15 font-size-md-16">
                         Tham gia từ: 3/2023
                       </div>
                     </div>
-                    <div class="counter-row d-none d-md-block">
-                      <ul class="user-counters d-flex flex-row list-unstyled mb-0">
-                        <li class="counter-item d-flex flex-column align-items-center">
-                          <div class="text-bold text-dark font-size-20">
+                    <div className="counter-row d-none d-md-block">
+                      <ul className="user-counters d-flex flex-row list-unstyled mb-0">
+                        <li className="counter-item d-flex flex-column align-items-center">
+                          <div className="text-bold text-dark font-size-20">
                             0 VND
                           </div>
-                          <div class="text-gray-800 font-size-12 font-size-md-16">
+                          <div className="text-gray-800 font-size-12 font-size-md-16">
                             Số tiền ủng hộ
                           </div>
                         </li>
-                        <li class="counter-item d-flex flex-column align-items-center">
-                          <div class="text-bold text-dark font-size-20">
+                        <li className="counter-item d-flex flex-column align-items-center">
+                          <div className="text-bold text-dark font-size-20">
                             <span>0</span>
                           </div>
-                          <div class="text-gray-800 font-size-12 font-size-md-16">
+                          <div className="text-gray-800 font-size-12 font-size-md-16">
                             Lượt ủng hộ
                           </div>
                         </li>
-                        <li class="counter-item d-flex flex-column align-items-center">
-                          <div class="text-bold text-dark font-size-20">
+                        <li className="counter-item d-flex flex-column align-items-center">
+                          <div className="text-bold text-dark font-size-20">
                             <span>5 sao</span>
                           </div>
-                          <div class="text-gray-800 font-size-12 font-size-md-16">
+                          <div className="text-gray-800 font-size-12 font-size-md-16">
                             Đánh giá uy tín
                           </div>
                         </li>
                       </ul>
                     </div>
                   </div>
-                  <div class="bio-row flex-shrink-0 d-none d-md-block mt-3">
-                    <span class="text-gray-800 font-size-15 font-size-md-18">
+                  <div className="bio-row flex-shrink-0 d-none d-md-block mt-3">
+                    <span className="text-gray-800 font-size-15 font-size-md-18">
                       “Hoạt động Nhân đạo Tìm kiếm &amp; Đoàn tụ người thân Như
                       chưa hề có cuộc chia ly hoàn toàn miễn phí; do công ty xã
                       hội Nối Thân Thương (WeConnect) chủ trì.”
                     </span>
                   </div>
-                  <div class="mt-2 font-size-15 font-size-md-16">
+                  <div className="mt-2 font-size-15 font-size-md-16">
                     Xem thêm thông tin tài khoản tại
                   </div>
-                  <div class="mt-2 font-size-15 font-size-md-16 see-more">
+                  <div className="mt-2 font-size-15 font-size-md-16 see-more">
                     <a>
                       <FontAwesomeIcon
                         size="2x"

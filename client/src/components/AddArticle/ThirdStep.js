@@ -105,8 +105,9 @@ const ThirdStep = ({ register, lackAddMess, getValues, setValue }) => {
               />
             </div>
           </div>
-          <button
+          <a
             onClick={() => {
+              setListPlace([]);
               const searchText =
                 getValues("city") +
                 " " +
@@ -143,10 +144,10 @@ const ThirdStep = ({ register, lackAddMess, getValues, setValue }) => {
                   });
               }
             }}
-            className="btn btn-outline-primary"
+            className="btn btn-outline-primary cusbtn"
           >
             Tìm kiếm
-          </button>
+          </a>
           {lackAddMess !== "" ? (
             <small className="text-danger m-1 p-0">{lackAddMess}</small>
           ) : (
@@ -167,12 +168,15 @@ const ThirdStep = ({ register, lackAddMess, getValues, setValue }) => {
                   onClick={() => {
                     setPosition([item?.lat, item?.lon]);
                     setListPlace([item]);
+                    setValue("lat", item?.lat);
+                    setValue("lon", item?.lon);
                     const detail =
                       item.display_name +
                       (getValues("detail") === ""
                         ? ""
                         : `, ${getValues("detail")}`);
-                    setValue("total", detail);
+                    setValue("address", detail);
+                    setValue("total", item.display_name);
                     console.log(getValues("total"));
                     setListPlace([]);
                   }}
@@ -182,7 +186,7 @@ const ThirdStep = ({ register, lackAddMess, getValues, setValue }) => {
               );
             })
           ) : (
-            <li className="list-group-item">{getValues("total")}</li>
+            <li className="list-group-item">{getValues("address")}</li>
           )}
         </ul>
         <Map positionSelect={position} />

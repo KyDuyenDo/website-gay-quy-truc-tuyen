@@ -107,7 +107,7 @@ const donors = [
 function ItemDonors({ currentItems }) {
   return (
     <div className="table-responsive">
-      <table class="table-list-donate-container table">
+      <table className="table-list-donate-container table">
         <thead>
           <tr>
             <th style={{ width: "40%" }}>Người ủng hộ</th>
@@ -155,7 +155,7 @@ const DonorList = ({ itemsPerPage }) => {
   return (
     <div className="MuiBox-root css-16k4iv4">
       <div className="list-donate-container">
-        <div class="input-icons">
+        <div className="input-icons">
           <div className="input-group md-form form-sm form-1 pl-0">
             <div className="input-group-prepend">
               <span

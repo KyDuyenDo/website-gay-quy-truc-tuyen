@@ -181,8 +181,8 @@ const Home = () => {
                       </svg>
                     </div>
                   </div>
-                  <div class="discrip">
-                    <h5 class="title">Đăng ký làm đại sứ kêu gọi</h5>
+                  <div className="discrip">
+                    <h5 className="title">Đăng ký làm đại sứ kêu gọi</h5>
                     <p>
                       Cung cấp các thông tin của bạn, các thông tin được kiểm
                       duyệt minh bạch, sẵn sàn để trở thành nhà kêu gọi nhân
@@ -221,8 +221,8 @@ const Home = () => {
                       </svg>
                     </div>
                   </div>
-                  <div class="icon-content">
-                    <h5 class="title">Tạo chiến dịch</h5>
+                  <div className="icon-content">
+                    <h5 className="title">Tạo chiến dịch</h5>
                     <p>
                       Nhận diện khuôn mặt giúp xác minh danh tính tác giả kêu
                       gọi. Thiết kế, quản lý các chiến dịch dễ dàng!
@@ -292,8 +292,8 @@ const Home = () => {
                       </svg>
                     </div>
                   </div>
-                  <div class="icon-content">
-                    <h5 class="title">Chia sẻ chiến dịch</h5>
+                  <div className="icon-content">
+                    <h5 className="title">Chia sẻ chiến dịch</h5>
                     <p>
                       Chia sẻ chiến dịch của bạn tới bạn bè, người thân và cộng
                       đồng thông qua mạng xã hội. Đồng thời kêu gọi sự đồng hành

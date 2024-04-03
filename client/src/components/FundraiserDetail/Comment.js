@@ -169,9 +169,9 @@ const Comment = () => {
           </div>
         </p>
         <p className="comment-form-comment">
-          <div class="mb-3">
+          <div className="mb-3">
             <textarea
-              class="form-control"
+              className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="Bình luận"

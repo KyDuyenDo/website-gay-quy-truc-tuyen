@@ -347,3 +347,7 @@
   color: #fff !important;
   text-align: center;
 }
+
+.cusbtn:hover {
+  color: #ffff !important;
+}

@@ -10,6 +10,7 @@ const ArticleSchema = new Schema({
     required: true,
   },
   addressId: { type: Schema.Types.ObjectId, ref: "addresses", required: true },
+  address: { type: String, require: true },
   addedBy: { type: String, require: true },
   createdAt: { type: Date, default: Date.now, required: true },
   articletitle: { type: String, require: true },

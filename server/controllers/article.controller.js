@@ -18,7 +18,6 @@ const addArticle = async (req, res) => {
       title,
       category,
       body,
-      userId,
       expireDate,
       releaseDate,
       accountNumber,
@@ -28,15 +27,14 @@ const addArticle = async (req, res) => {
       city,
       county,
       detail,
+      address,
       lat,
       lon,
       street,
       town,
-      // imageURL1,
-      // imageURL2,
-      // imageURL3,
       bankcode,
     } = req.body;
+    const userId = req.userId;
     let add = null;
     const addressRelate = await Address.findOne({
       lat: lat,
@@ -63,9 +61,9 @@ const addArticle = async (req, res) => {
       userId: new mongoose.Types.ObjectId(userId),
       categotyId: new mongoose.Types.ObjectId(category),
       addressId: add._id,
-      addedBy: "Duyen Do",
+      address: address,
+      addedBy: userAdd.username,
       articletitle: title,
-      // image: [imageURL1, imageURL2, imageURL3],
       body: body,
       state: "pending",
       expireDate: expireDate,
@@ -218,9 +216,6 @@ const getArticles = async (req, res) => {
         },
       },
       {
-        $unwind: "$comments", // Unwind single document from nested "comments" array
-      },
-      {
         $match: {
           $and: [{ published: true }],
         },
@@ -244,14 +239,18 @@ const getArticles = async (req, res) => {
     ];
     // bệnh%20nhân
     if (req.query.q) {
-      pipeline[3].$match.$and.push({
+      pipeline[2].$match.$and.push({
         $or: [
           { articletitle: { $regex: new RegExp(req.query.q, "i") } },
           { body: { $regex: new RegExp(req.query.q, "i") } },
           { "category.title": { $regex: new RegExp(req.query.q, "i") } },
         ],
       });
-      console.log(pipeline);
+    }
+    if (req.query.category) {
+      pipeline[2].$match.$and.push({
+        "category.title": { $regex: new RegExp(req.query.q, "i") },
+      });
     }
     const posts = await Article.aggregate(pipeline);
     let sortedPosts = posts;

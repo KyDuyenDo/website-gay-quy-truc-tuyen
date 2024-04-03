@@ -69,10 +69,10 @@ const ProjectHistory = () => {
             <tbody>
               <tr>
                 <td className="col-xs-6">
-                  <div class="d-flex align-items-center">
+                  <div className="d-flex align-items-center">
                     <img src={project} alt="" style={{ width: "100px" }} />
-                    <div class="ms-3">
-                      <p class="text-muted mb-0">
+                    <div className="ms-3">
+                      <p className="text-muted mb-0">
                         Hỗ trợ những hoc sinh có hoàn cảnh khó khăn ở Tiền Giang
                       </p>
                     </div>

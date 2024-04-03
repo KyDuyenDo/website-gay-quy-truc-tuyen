@@ -36,7 +36,7 @@ const Activity = () => {
         <img className="img-main" src={project} />
       </div>
       <div className="content-doc"></div>
-      <hr class="horizontalLines"></hr>
+      <hr className="horizontalLines"></hr>
     </div>
   );
 };

@@ -2,10 +2,10 @@ import React from "react";
 import "../css/loading.css";
 const Loader = () => {
   return (
-    <div class="load-3">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
+    <div className="load-3">
+      <div className="line"></div>
+      <div className="line"></div>
+      <div className="line"></div>
     </div>
   );
 };

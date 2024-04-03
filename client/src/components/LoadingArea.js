@@ -5,12 +5,12 @@ import heart from "../assets/images/heart.png";
 import "../css/loading.css";
 const LoadingArea = () => {
   return (
-    <div id="loading-area" class="loading-page-1">
-      <div class="loading-inner">
-        <div class="item-wrapper">
-          <img class="item1" src={hand1} alt="" />
-          <img class="item2" src={hand2} alt="" />
-          <img class="item3" src={heart} alt="" />
+    <div id="loading-area" className="loading-page-1">
+      <div className="loading-inner">
+        <div className="item-wrapper">
+          <img className="item1" src={hand1} alt="" />
+          <img className="item2" src={hand2} alt="" />
+          <img className="item3" src={heart} alt="" />
         </div>
       </div>
     </div>

@@ -103,35 +103,35 @@ const Payment = () => {
       }}
       data-background="transparent"
     >
-      <div class="cf-container">
-        <form class="cf-form">
-          <div class="cf-checkout">
-            <div class="cf-checkout__blocks">
-              <fieldset class="cf-form__section">
-                <h3 class="cf-form__section-title">Thủ Tục Thanh Toán</h3>
-                <h4 class="cf-form__section-subttitle">
+      <div className="cf-container">
+        <form className="cf-form">
+          <div className="cf-checkout">
+            <div className="cf-checkout__blocks">
+              <fieldset className="cf-form__section">
+                <h3 className="cf-form__section-title">Thủ Tục Thanh Toán</h3>
+                <h4 className="cf-form__section-subttitle">
                   Thông tin người ủng hộ
                 </h4>
-                <div class="cf-form__group ">
+                <div className="cf-form__group ">
                   {" "}
                   <input
-                    class="cf-form__input "
+                    className="cf-form__input "
                     placeholder="Tên đầy đủ"
                     type="text"
                   />
                 </div>
 
                 <br />
-                <h4 class="cf-form__section-subttitle">
+                <h4 className="cf-form__section-subttitle">
                   Phương thức thanh toán
                 </h4>
                 <div data-stripe-type="payment">
-                  <div class="cf-form__error-box">
-                    <div class="cf-form__error-text" data-error="true"></div>
+                  <div className="cf-form__error-box">
+                    <div className="cf-form__error-text" data-error="true"></div>
                   </div>
-                  <div data-stripe-element="payment" class="StripeElement">
+                  <div data-stripe-element="payment" className="StripeElement">
                     <div
-                      class="__PrivateStripeElement"
+                      className="__PrivateStripeElement"
                       style={{
                         margin: "-4px 0px !important",
                         padding: "0px !important",
@@ -206,29 +206,29 @@ const Payment = () => {
                   </div>
                 </div>
               </fieldset>
-              <div class="cf-form__section">
-                <div class="cf-form__group ">
+              <div className="cf-form__section">
+                <div className="cf-form__group ">
                   {" "}
                   <label
-                    class="cf-form__label"
+                    className="cf-form__label"
                     for="checkout_type_neu_anonymous"
                   >
-                    <div class="round">
+                    <div className="round">
                       <input type="checkbox" id="checkbox-18" />
                       <label for="checkbox-18"></label>
                     </div>
-                    <span class="cf-form__label-text" data-input-label="true">
+                    <span className="cf-form__label-text" data-input-label="true">
                       Không hiển thị tên của tôi
                     </span>
                   </label>
                 </div>
-                <div class="cf-form__group-extra-text">
+                <div className="cf-form__group-extra-text">
                   Khoản đóng góp của bạn sẽ được hiển thị dưới dạng ẩn danh đối
                   với công chúng trên trang dự án, tuy nhiên bạn không thể bình
                   luận ẩn danh. Để biết thêm thông tin vui lòng tham khảo của
                   chúng tôi{" "}
                   <a
-                    class="cf-anchor"
+                    className="cf-anchor"
                     target="_blank"
                     href="https://intercom.help/crowdfunder/en/articles/1642648-can-i-pledge-anonymously"
                     previewlistener="true"
@@ -239,33 +239,33 @@ const Payment = () => {
                 </div>
               </div>
             </div>
-            <div class="cf-checkout__summary">
-              <div class="js-sticky-dummy" style={{ minHeight: "0px" }}></div>
-              <div class="cf-form__section">
-                <h3 class="cf-form__section-title">Tổng Kết</h3>
-                <h4 class="cf-form__section-secondary-title">
+            <div className="cf-checkout__summary">
+              <div className="js-sticky-dummy" style={{ minHeight: "0px" }}></div>
+              <div className="cf-form__section">
+                <h3 className="cf-form__section-title">Tổng Kết</h3>
+                <h4 className="cf-form__section-secondary-title">
                   Giúp nhà máy chưng cất Silver Circle di dời
                 </h4>
-                <div class="cf-form__layout" data-form-layout-padded="bottom">
+                <div className="cf-form__layout" data-form-layout-padded="bottom">
                   <a
                     href="/checkout/help-silver-circle-distillery-to-relocate/start"
-                    class="cf-form__anchor"
+                    className="cf-form__anchor"
                     previewlistener="true"
                   >
                     Xem lại bài viết
                   </a>
                 </div>
-                <div class="cf-form__layout">
+                <div className="cf-form__layout">
                   <label
-                    class="cf-form__label"
+                    className="cf-form__label"
                     for="checkout_type_neu_donation_unitCost"
                   >
                     Số tiền quyên góp
                   </label>
-                  <div class="cf-form__group" data-icon="" data-currency="VNĐ">
+                  <div className="cf-form__group" data-icon="" data-currency="VNĐ">
                     <input
                       onChange={(event) => setAmount(event.target.value)}
-                      class="cf-form__input"
+                      className="cf-form__input"
                       value={amount}
                       step="1000"
                       min="10000"
@@ -274,31 +274,31 @@ const Payment = () => {
                   </div>
                 </div>
                 <div data-checkout-tip="true">
-                  <div class="cf-form__layout" data-form-layout="twin small">
-                    <span class="cf-form__general-text">Tiền tip</span>
-                    <span class="cf-form__general-text cf-text--break-word">
+                  <div className="cf-form__layout" data-form-layout="twin small">
+                    <span className="cf-form__general-text">Tiền tip</span>
+                    <span className="cf-form__general-text cf-text--break-word">
                       <span data-checkout-tip-amount="true">
                         {amountTip} VNĐ
                       </span>
-                      <div class="d-none">
-                        <button class="cf-anchor" type="button">
+                      <div className="d-none">
+                        <button className="cf-anchor" type="button">
                           Edit
                         </button>
                         <div></div>
                       </div>
                     </span>
                   </div>
-                  <div class="cf-form__layout">
-                    <div class="cf-well cf-checkout__tiprange-wrap">
-                      <div class="cf-media">
-                        <div class="cf-media__content">
-                          <div class="cf-thumb cf-thumb--small">
+                  <div className="cf-form__layout">
+                    <div className="cf-well cf-checkout__tiprange-wrap">
+                      <div className="cf-media">
+                        <div className="cf-media__content">
+                          <div className="cf-thumb cf-thumb--small">
                             {" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="32"
                               height="37"
-                              class="cf-svg"
+                              className="cf-svg"
                               viewBox="0 0 42 37"
                             >
                               <g fill="none" fill-rule="evenodd">
@@ -318,8 +318,8 @@ const Payment = () => {
                             </svg>
                           </div>
                         </div>
-                        <div class="cf-media__content">
-                          <div class="cf-text cf-text--fixed14 cf-text--dark">
+                        <div className="cf-media__content">
+                          <div className="cf-text cf-text--fixed14 cf-text--dark">
                             ZenGive giúp các dự án huy động được số tiền họ cần.
                             Để duy trì hoạt động website, chúng tôi dựa vào sự
                             hỗ trợ của bạn để tiếp tục đem đến nhiều dự án và
@@ -327,9 +327,9 @@ const Payment = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="cf-checkout__tiprange" data-tiprange="true">
+                      <div className="cf-checkout__tiprange" data-tiprange="true">
                         <input
-                          class="cf-form__input "
+                          className="cf-form__input "
                           type="range"
                           id="checkout_type_neu_tip_feesChoice"
                           name="checkout_type_neu[tip][feesChoice]"
@@ -349,9 +349,9 @@ const Payment = () => {
                           }}
                           style={progress[tip].css}
                         />
-                        <div class="cf-checkout__tiprange-label-wrap">
+                        <div className="cf-checkout__tiprange-label-wrap">
                           <div
-                            class="cf-checkout__tiprange-label"
+                            className="cf-checkout__tiprange-label"
                             data-range-tip-label="true"
                             style={{ left: `${progress[tip].mes}` }}
                           >
@@ -359,7 +359,7 @@ const Payment = () => {
                             ({amountTip} VNĐ)
                           </div>
                           <div
-                            class="cf-checkout__tiprange-tip"
+                            className="cf-checkout__tiprange-tip"
                             data-range-tip-label-tip="true"
                             style={{ left: `${progress[tip].ar}` }}
                           ></div>
@@ -368,12 +368,12 @@ const Payment = () => {
                     </div>
                   </div>
                 </div>
-                <div class="cf-form__highlight-box">
-                  <div class="cf-form__layout" data-form-layout="twin small">
-                    <span class="cf-form__general-text">
+                <div className="cf-form__highlight-box">
+                  <div className="cf-form__layout" data-form-layout="twin small">
+                    <span className="cf-form__general-text">
                       <strong>Tổng cộng:</strong>
                     </span>
-                    <span class="cf-form__general-text cf-text--break-word">
+                    <span className="cf-form__general-text cf-text--break-word">
                       <strong data-checkout-cart-total="true">
                         {parseInt(amount) + parseInt(amountTip)} VNĐ
                       </strong>
@@ -382,28 +382,28 @@ const Payment = () => {
                 </div>
               </div>
             </div>
-            <div class="cf-checkout__action">
+            <div className="cf-checkout__action">
               <div
-                class="cf-form__section"
+                className="cf-form__section"
                 data-form-layout="full-width"
                 data-form-section="checkout-submit"
               >
                 {/* <div
-                  class="cf-form__group "
+                  className="cf-form__group "
                   data-field-name="checkout_type_neu[terms][crowdfunder_terms]"
                   data-form-group="checkbox"
                 >
                   {" "}
                   <label
-                    class="cf-form__label"
+                    className="cf-form__label"
                     for="checkout_type_neu_terms_crowdfunder_terms"
                   >
-                    <div class="round">
+                    <div className="round">
                       <input type="checkbox" id="checkbox-16" />
                       <label for="checkbox-16"></label>
                     </div>
 
-                    <span class="cf-form__label-text" data-input-label="true">
+                    <span className="cf-form__label-text" data-input-label="true">
                       Tôi chấp nhận Điều khoản và điều kiện được cập nhật vào
                       ngày 14/11/2022 và đã đọc hướng dẫn của Cơ quan quản lý
                       việc gây quỹ.
@@ -411,33 +411,33 @@ const Payment = () => {
                   </label>
                 </div>
                 <div
-                  class="cf-form__group "
+                  className="cf-form__group "
                   data-field-name="checkout_type_neu[terms][newsletter]"
                   data-form-group="checkbox"
                 >
                   {" "}
                   <label
-                    class="cf-form__label"
+                    className="cf-form__label"
                     for="checkout_type_neu_terms_newsletter"
                   >
-                    <div class="round">
+                    <div className="round">
                       <input type="checkbox" id="checkbox-17" />
                       <label for="checkbox-17"></label>
                     </div>
 
-                    <span class="cf-form__label-text" data-input-label="true">
+                    <span className="cf-form__label-text" data-input-label="true">
                       Có - Tôi chọn tham gia nhận tin tức mới nhất từ Người gây
                       quỹ cộng đồng thiện nguyện.
                     </span>
                   </label>
                 </div> */}
-                <p class="cf-form__general-text cf-text--spacer1">
+                <p className="cf-form__general-text cf-text--spacer1">
                   Chúng tôi rất nghiêm túc trong bảo mật. Để tìm hiểu thêm, vui
                   lòng xem chính sách quyền riêng tư của chúng tôi
                   <a
                     target="_blank"
                     href="/privacy-policy"
-                    class="cf-form__anchor"
+                    className="cf-form__anchor"
                     previewlistener="true"
                   >
                     {" "}
@@ -447,7 +447,7 @@ const Payment = () => {
                 {methodpay === "" ? (
                   ""
                 ) : (
-                  <div class="cf-form__group" data-form-layout-padded="bottom">
+                  <div className="cf-form__group" data-form-layout-padded="bottom">
                     <PayPalScriptProvider options={initialOptions}>
                       <PayPalPayment
                         amount={total}
@@ -470,7 +470,7 @@ const Payment = () => {
                 {methodpay === "" ? (
                   ""
                 ) : (
-                  <p class="cf-text cf-text--small cf-text--light cf-text--center">
+                  <p className="cf-text cf-text--small cf-text--light cf-text--center">
                     Thẻ của bạn sẽ bị tính phí ngay lập tức
                   </p>
                 )}

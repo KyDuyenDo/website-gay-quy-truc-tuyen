@@ -258,7 +258,7 @@ const Header = () => {
                         </Nav.Item>
                       </Nav>
                       <div className="search_contain">
-                        <div class="form-group has-search">
+                        <div className="form-group has-search">
                           <FontAwesomeIcon
                             icon={faSearch}
                             className="form-control-feedback"
@@ -266,7 +266,7 @@ const Header = () => {
                           <input
                             type="search"
                             aria-label="Search"
-                            class="form-control me-2"
+                            className="form-control me-2"
                             placeholder="Tìm kiếm tên chiến dịch"
                           />
                         </div>

@@ -110,7 +110,7 @@ const RecentProjectsSlider = () => {
 				))}				
 			</Swiper>
             <div className='d-flex justify-content-center' style={{marginTop:'30px'}}>
-                <button class="cf-button cf-button--hollow cf-button--small">Xem thêm</button>
+                <button className="cf-button cf-button--hollow cf-button--small">Xem thêm</button>
             </div>
         </>
     );

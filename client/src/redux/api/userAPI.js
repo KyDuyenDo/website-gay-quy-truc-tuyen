@@ -68,16 +68,24 @@ export const upLoadImageFundraiser = async (formData) => {
 
 export const getAllMember = async (query) => {
   try {
-    const { data } = await API.get(`/fundraiser${query}`);
+    const { data } = await API.get(`users/fundraiser${query}`);
     return data;
   } catch (error) {
     return handleApiError(error);
   }
 };
-
+///fundraiser/get/name
+export const getNameFund = async () => {
+  try {
+    const { data } = await API.get(`users/fundraiser/get/name`);
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
 export const getMemberDetail = async (id) => {
   try {
-    const { data } = await API.get(`/fundraiser/${id}`);
+    const { data } = await API.get(`users/fundraiser/${id}`);
     return data;
   } catch (error) {
     return handleApiError(error);

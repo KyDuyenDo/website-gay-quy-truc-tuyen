@@ -2,137 +2,14 @@ import React, { useState, useEffect } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactPaginate from "react-paginate";
+import { setDataDetailDonation } from "../../redux/actions/donorsAction";
+import { useSelector, useDispatch } from "react-redux";
 
-const donors = [
-  { name: "", money: "10.000 VND", time: "14:01:21 - 15/02/2024" },
-  { name: "", money: "11.000 VND", time: "14:02:21 - 15/02/2024" },
-  {
-    name: "NGUYEN DU THUONG",
-    money: "12.000 VND",
-    time: "14:03:21 - 15/02/2024",
-  },
-  { name: "", money: "13.000 VND", time: "14:04:21 - 15/02/2024" },
-  {
-    name: "PHAM PHUONG LINH",
-    money: "14.000 VND",
-    time: "14:05:21 - 15/02/2024",
-  },
-  { name: "", money: "15.000 VND", time: "14:06:21 - 15/02/2024" },
-  {
-    name: "TONG THANH BINH",
-    money: "16.000 VND",
-    time: "14:07:21 - 15/02/2024",
-  },
-  { name: "", money: "17.000 VND", time: "14:08:21 - 15/02/2024" },
-  { name: "", money: "18.000 VND", time: "14:09:21 - 15/02/2024" },
-  { name: "HOANG HOA", money: "19.000 VND", time: "14:10:21 - 15/02/2024" },
-  { name: "", money: "20.000 VND", time: "14:11:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "21.000 VND", time: "14:12:21 - 15/02/2024" },
-  { name: "", money: "22.000 VND", time: "14:13:21 - 15/02/2024" },
-  { name: "", money: "23.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "24.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "25.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "26.000 VND", time: "14:14:21 - 15/02/2024" },
-  { name: "", money: "27.000 VND", time: "14:14:21 - 15/02/2024" },
-];
 
-function ItemDonors({ currentItems }) {
-  return (
-    <div className="table-responsive">
-      <table className="table-list-donate-container table">
-        <thead>
-          <tr>
-            <th style={{ width: "40%" }}>Người ủng hộ</th>
-            <th>Số tiền ủng hộ</th>
-            <th>Thời gian ủng hộ</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems &&
-            currentItems.map((item) => (
-              <tr>
-                <td>{item.name}</td>
-                <td>
-                  <span>{item.money}</span> VND
-                </td>
-                <td>{item.time} </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-const DonorList = ({ itemsPerPage }) => {
+const DonorList = ({ itemsPerPage, articleId }) => {
+  const donations = useSelector((state) => state.donation.donations);
+  console.log(donations);
+  const dispatch = useDispatch();
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
 
@@ -141,12 +18,13 @@ const DonorList = ({ itemsPerPage }) => {
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(donors.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(donors.length / itemsPerPage));
+    setCurrentItems(donations.formatDonation.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(donations.formatDonation.length / itemsPerPage));
   }, [itemOffset, itemsPerPage]);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % donors.length;
+    const newOffset =
+      (event.selected * itemsPerPage) % donations.formatDonation.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
@@ -155,7 +33,7 @@ const DonorList = ({ itemsPerPage }) => {
   return (
     <div className="MuiBox-root css-16k4iv4">
       <div className="list-donate-container">
-        <div className="input-icons">
+        <div class="input-icons">
           <div className="input-group md-form form-sm form-1 pl-0">
             <div className="input-group-prepend">
               <span
@@ -170,10 +48,42 @@ const DonorList = ({ itemsPerPage }) => {
               type="text"
               placeholder="Nhập tên người ủng hộ"
               aria-label="Search"
+              onChange={(event) => {
+                const queryString = `?name=${event.target.value.replace(
+                  / /g,
+                  "%20"
+                )}`;
+                const formData = new FormData();
+                formData.append("articleId", articleId);
+                dispatch(setDataDetailDonation(formData, queryString));
+              }}
             />
           </div>
         </div>
-        <ItemDonors currentItems={currentItems} />
+        {/* <ItemDonors currentItems={currentItems} /> */}
+        <div className="table-responsive">
+          <table class="table-list-donate-container table">
+            <thead>
+              <tr>
+                <th style={{ width: "40%" }}>Người ủng hộ</th>
+                <th>Số tiền ủng hộ</th>
+                <th>Thời gian ủng hộ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {donations.formatDonation &&
+                donations.formatDonation.map((item) => (
+                  <tr>
+                    <td>{item.anonymous === true ? "" : item.fullnameDonor}</td>
+                    <td>
+                      <span>{item.donationAmount}</span> VND
+                    </td>
+                    <td>{item.donationDate} </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className="contain-paginate">
         <ReactPaginate

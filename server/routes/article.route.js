@@ -19,6 +19,7 @@ const {
   addCategory,
   upLoadImage,
   getDonorOfArticle,
+  getArticleHighRating,
 } = require("../controllers/article.controller");
 
 const {
@@ -35,8 +36,9 @@ router.post("/reject/:postId", requireAuth, requireAdminAuth, rejectArticle);
 
 router.get("/get/:id", getArticle);
 router.get("/get", getArticles);
+router.get("/get/high/rating", getArticleHighRating);
 router.get("/user/get", getArticleByUser);
-router.get("/donors/get", getDonorOfArticle);
+router.post("/donors/get", getDonorOfArticle);
 router.post(
   "/add/comment",
   requireAuth,
@@ -46,10 +48,9 @@ router.post(
   addComment
 );
 router.post("/add/activity", requireAuth, requireFundraiserAuth, addActivity);
-
 router.delete("/del/:id", requireAuth, requireAdminAuth, deleteArticle);
-
 router.post("/add/category", requireAuth, requireAdminAuth, addCategory);
 router.get("/all/categories", getCategories);
 
 module.exports = router;
+

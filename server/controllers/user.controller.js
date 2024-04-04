@@ -82,20 +82,20 @@ const signin = async (req, res) => {
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).select("-password").lean();
-    const starEvalution = await Comment.aggregate([
-      {
-        $match: {
-          evaluatee: req.params.id,
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          averageRating: { $avg: "$rating" },
-        },
-      },
-    ]);
-    user.starEvalution = starEvalution[0].averageRating;
+    // const starEvalution = await Comment.aggregate([
+    //   {
+    //     $match: {
+    //       evaluatee: req.params.id,
+    //     },
+    //   },
+    //   {
+    //     $group: {
+    //       _id: null,
+    //       averageRating: { $avg: "$rating" },
+    //     },
+    //   },
+    // ]);
+    // user.starEvalution = starEvalution[0].averageRating;
     res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: "server error" });
@@ -115,26 +115,28 @@ const getAllMember = async (req, res) => {
       },
       {
         $match: {
-          $or: [],
+          $and: [{ adminApproval: true }],
         },
       },
       {
         $project: {
           _id: 1,
+          userId: 1,
           "user.avatar": 1,
           groupName: 1,
           type: 1,
+          approvaldate: 1,
         },
       },
     ];
     if (req.query.type) {
-      pipeline[1].$match.$or.push({
-        type: { $regex: new RegExp(req.query.type, "i") },
+      pipeline[1].$match.$and.push({
+        $or: [{ type: { $regex: new RegExp(req.query.type, "i") } }],
       });
     }
     if (req.query.q) {
-      pipeline[1].$match.$or.push({
-        groupName: { $regex: new RegExp(req.query.q, "i") },
+      pipeline[1].$match.$and.push({
+        $or: [{ groupName: { $regex: new RegExp(req.query.q, "i") } }],
       });
     }
     const members = await Fundraiser.aggregate(pipeline);
@@ -146,6 +148,74 @@ const getAllMember = async (req, res) => {
     }
     const totalCount = limitMember.length;
     res.status(200).json({ limitMember, totalCount });
+  } catch (error) {
+    return res.status(500).json({ message: "An error occurred" });
+  }
+};
+
+const getHighRaiseMember = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $lookup: {
+          from: "articles",
+          localField: "userId",
+          foreignField: "userId",
+          as: "articles",
+          pipeline: [
+            {
+              $group: {
+                _id: null,
+                totalAmountRaised: {
+                  $sum: {
+                    $cond: [
+                      { $eq: ["$amountEarned", null] },
+                      0,
+                      "$amountEarned",
+                    ],
+                  },
+                }, // Handle missing or non-numeric values
+              },
+            },
+          ],
+        },
+      },
+      {
+        $match: {
+          $and: [{ adminApproval: true }],
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          userId: 1,
+          "user.avatar": 1,
+          groupName: 1,
+          type: 1,
+          articles: 1,
+          approvaldate: 1,
+          totalAmountRaised: {
+            $arrayElemAt: ["$articles.totalAmountRaised", 0],
+          },
+        },
+      },
+      {
+        $sort: { totalAmountRaised: -1 }, // Sắp xếp theo averageRating (giảm dần)
+      },
+      {
+        $limit: 4, // Giới hạn 4 kết quả đầu tiên
+      },
+    ];
+    const results = await Fundraiser.aggregate(pipeline);
+    res.status(200).json(results);
   } catch (error) {
     return res.status(500).json({ message: "An error occurred" });
   }
@@ -371,82 +441,6 @@ const refreshToken = async (req, res) => {
 
 const updateInfo = async (req, res) => {};
 
-// const getPublicUser = async (req, res) => {
-//   try {
-//     const currentUserId = req.userId;
-//     const id = req.params.id;
-
-//     const user = await User.findById(id).select(
-//       "-password -email -savedPosts -updatedAt"
-//     );
-
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-//     const totalPosts = await Post.countDocuments({ user: user._id });
-//     const communities = await Community.find({ members: user._id })
-//       .select("name")
-//       .lean();
-
-//     const currentUserCommunities = await Community.find({
-//       members: currentUserId,
-//     })
-//       .select("_id name")
-//       .lean();
-
-//     const userCommunities = await Community.find({ members: user._id })
-//       .select("_id name")
-//       .lean();
-
-//     const commonCommunities = currentUserCommunities.filter((comm) => {
-//       return userCommunities.some((userComm) => userComm._id.equals(comm._id));
-//     });
-
-//     const isFollowing = await Relationship.findOne({
-//       follower: currentUserId,
-//       following: user._id,
-//     });
-
-//     const followingSince = isFollowing
-//       ? dayjs(isFollowing.createdAt).format("MMM D, YYYY")
-//       : null;
-
-//     const last30Days = dayjs().subtract(30, "day").toDate();
-//     const postsLast30Days = await Post.aggregate([
-//       { $match: { user: user._id, createdAt: { $gte: last30Days } } },
-//       { $count: "total" },
-//     ]);
-
-//     const totalPostsLast30Days =
-//       postsLast30Days.length > 0 ? postsLast30Days[0].total : 0;
-
-//     const responseData = {
-//       name: user.name,
-//       avatar: user.avatar,
-//       location: user.location,
-//       bio: user.bio,
-//       role: user.role,
-//       interests: user.interests,
-//       totalPosts,
-//       communities,
-//       totalCommunities: communities.length,
-//       joinedOn: dayjs(user.createdAt).format("MMM D, YYYY"),
-//       totalFollowers: user.followers?.length,
-//       totalFollowing: user.following?.length,
-//       isFollowing: !!isFollowing,
-//       followingSince,
-//       postsLast30Days: totalPostsLast30Days,
-//       commonCommunities,
-//     };
-
-//     res.status(200).json(responseData);
-//   } catch (error) {
-//     res.status(500).json({
-//       message: "Some error occurred while retrieving the user",
-//     });
-//   }
-// };
-
 module.exports = {
   addUser,
   signin,
@@ -459,4 +453,5 @@ module.exports = {
   updateInfo,
   becomeFundraiser,
   upLoadImageFundraiser,
+  getHighRaiseMember,
 };

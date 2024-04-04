@@ -27,7 +27,7 @@ export const upDateImage = async (formData) => {
 export const getArticle = async (idArticle) => {
   try {
     const { data } = await API.get(`/article/get/${idArticle}`);
-    return { error: null, data };
+    return data;
   } catch (error) {
     return handleApiError(error);
   }
@@ -36,7 +36,16 @@ export const getArticle = async (idArticle) => {
 export const getArticles = async (query) => {
   try {
     const { data } = await API.get(`/article/get${query}`);
-    return { error: null, data };
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const getArticleHighRating = async () => {
+  try {
+    const { data } = await API.get(`/article/get/high/rating`);
+    return data;
   } catch (error) {
     return handleApiError(error);
   }
@@ -45,16 +54,20 @@ export const getArticles = async (query) => {
 export const getArticleByUser = async (query) => {
   try {
     const { data } = await API.get(`/article/user/get${query}`);
-    return { error: null, data };
+    return data;
   } catch (error) {
     return handleApiError(error);
   }
 };
 
-export const getDonorOfArticle = async (query) => {
+export const getDonorOfArticle = async (formData, query) => {
   try {
-    const { data } = await API.get(`/article/donors/get${query}`);
-    return { error: null, data };
+    const { data } = await API.post(`/article/donors/get${query}`, formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
   } catch (error) {
     return handleApiError(error);
   }
@@ -86,4 +99,3 @@ export const addActivity = async (formData) => {
     return handleApiError(error);
   }
 };
-

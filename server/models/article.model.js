@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ArticleSchema = new Schema({
   // _id
-  userId: { type: Schema.Types.ObjectId, ref: "fundraisers", required: true },
+  userId: { type: Schema.Types.ObjectId, ref: "users", required: true },
   categotyId: {
     type: Schema.Types.ObjectId,
     ref: "categories",
@@ -17,7 +17,7 @@ const ArticleSchema = new Schema({
   image: [String],
   body: { type: String, require: true },
   state: { type: String, require: true },
-  expireDate: { type: String, require: true },
+  expireDate: { type: Number, require: true },
   releaseDate: { type: String, require: true },
   accountNumber: { type: String, require: true },
   emailPayPal: { type: String, require: true },
@@ -25,8 +25,8 @@ const ArticleSchema = new Schema({
   bankcode: { type: String, require: true },
   adminApproval: { type: Boolean, require: true },
   published: { type: Boolean, require: true },
-  amountRaised: { type: String },
-  amountEarned: { type: String },
+  amountRaised: { type: Number },
+  amountEarned: { type: Number },
   comments: [
     {
       type: Schema.Types.ObjectId,

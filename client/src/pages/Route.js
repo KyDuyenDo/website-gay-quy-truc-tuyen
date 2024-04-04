@@ -14,7 +14,7 @@ import BecomeFundraiser from "./BecomeFundraiser";
 import ProjectCategories from "./ProjectCategories";
 import Project from "./Project";
 import Member from "./Member";
-import FundraiserDetail from "./FundraiserDetail";
+import ArticleDetail from "./ArticleDetail";
 import MemberDetail from "./MemberDetail";
 import Payment from "./Payment";
 import Map from "./Map";
@@ -56,9 +56,9 @@ function Index() {
             />
             <Route path="/create-project" exact element={<ProjectCreate />} />
             <Route
-              path="/fundraiser-detail"
+              path="/article-detail/:id"
               exact
-              element={<FundraiserDetail />}
+              element={<ArticleDetail />}
             />
             <Route path="/project" exact element={<Project />} />
             <Route path="/member" exact element={<Member />} />

@@ -3,7 +3,7 @@ import { API, handleApiError } from "./utils";
 export const getUser = async (id) => {
   try {
     const { data } = await API.get(`/users/${id}`);
-    return { error: null, data };
+    return data;
   } catch (error) {
     return handleApiError(error);
   }
@@ -74,15 +74,16 @@ export const getAllMember = async (query) => {
     return handleApiError(error);
   }
 };
-///fundraiser/get/name
-export const getNameFund = async () => {
+
+export const getHighRaiseMember = async (query) => {
   try {
-    const { data } = await API.get(`users/fundraiser/get/name`);
+    const { data } = await API.get(`users/get/fundraiser/high/amount`);
     return data;
   } catch (error) {
     return handleApiError(error);
   }
 };
+
 export const getMemberDetail = async (id) => {
   try {
     const { data } = await API.get(`users/fundraiser/${id}`);

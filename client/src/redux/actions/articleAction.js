@@ -1,15 +1,6 @@
 import * as api from "../api/articleAPI";
 import * as types from "../constants/projectConstants";
 
-/*
-        title: payload ? payload.title : null,
-        categogy: payload ? payload.categogy : null,
-        expireDate: payload ? payload.expireDate : null,
-        releaseDate: payload ? payload.releaseDate : null,
-        body: payload ? payload.body : null,
-        amountRaised: payload ? payload.amountRaised : null,
-*/
-
 export const setDetailArticleAction = (data) => async (dispatch) => {
   dispatch({ type: types.SET_ARTICLE_DETAIL, payload: data });
 };

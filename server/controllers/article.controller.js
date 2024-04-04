@@ -1,6 +1,7 @@
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
+const moment = require("moment");
 
 const Article = require("../models/article.model");
 const User = require("../models/user.model");
@@ -9,6 +10,7 @@ const Comment = require("../models/commentAndEvaluation.model");
 const Activity = require("../models/activity.model");
 const Donation = require("../models/donation.model");
 const Category = require("../models/category.model");
+const Fundraiser = require("../models/fundraiser.model");
 const formatCreatedAt = require("../utils/timeConverter");
 const mongoose = require("mongoose");
 
@@ -125,6 +127,12 @@ const formatDocuments = (docs) =>
     createdAt: dayjs(doc.createdAt).fromNow(),
   }));
 
+const formatDate = (docs) =>
+  docs.map((doc) => ({
+    ...doc._doc,
+    donationDate: moment(doc.donationDate).format("DD-MM-YYYY-HH:mm"),
+  }));
+
 const findActivitiesByArticleId = async (postId) =>
   await Activity.find({ articleId: postId }).sort({ createdAt: -1 }).lean();
 
@@ -136,53 +144,66 @@ const getArticle = async (req, res) => {
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
+
+    const imageObjects = post.image.map((imageUrl, index) => ({
+      url: imageUrl,
+      title: `Image ${index + 1}`,
+    }));
+    post.image = imageObjects;
+    const fundraiser = await Fundraiser.aggregate([
+      {
+        $match: { userId: post.userId._id },
+      },
+    ]);
+    post.groupName = fundraiser[0].groupName;
     // tìm tất cả các comment
     const comments = await findCommentsByArticleId(postId);
     post.comments = formatDocuments(comments);
     // tìm tất cả các hoạt động
     const activities = await findActivitiesByArticleId(postId);
     post.activities = formatDocuments(activities);
-    // format lại ngày
-    post.createdAt = dayjs(post.createdAt).fromNow();
-    // trả về top 4 nhà gây quỹ nhiều nhất
-    post.top4Donators = await Donation.aggregate([
-      {
-        $lookup: {
-          from: "users",
-          localField: "donorId",
-          foreignField: "_id",
-          as: "user",
-        },
-      },
-      {
-        $group: {
-          _id: "$donorId",
-          totalDonated: { $sum: "$donationAmount" },
-          username: { $first: { $arrayElemAt: ["$user.username", 0] } },
-          avatar: { $first: { $arrayElemAt: ["$user.avatar", 0] } },
-        },
-      },
-      { $sort: { totalDonated: -1 } },
-      { $limit: 4 },
-      {
-        $project: {
-          _id: 1,
-          username: 1,
-          avatar: 1,
-          donationAmount: "$totalDonated",
-        },
-      },
-    ]);
+
+    const donations = await Donation.find({ articleId: post });
+    post.totalDonations = donations.length;
+    const donorMap = {};
+    donations.forEach((donation) => {
+      const donorId = donation.donorId;
+      if (donorMap[donorId] !== undefined) {
+        donorMap[donorId] = donorMap[donorId] + donation.donationAmount;
+      } else {
+        donorMap[donorId] = 0 + donation.donationAmount;
+      }
+    });
+    const donorList = Object.entries(donorMap).map(
+      ([donorId, totalDonations]) => ({
+        donorId,
+        totalDonations,
+      })
+    );
+    donorList.sort((a, b) => b.totalDonations - a.totalDonations);
+    const top4Donors = donorList.slice(0, Math.min(4, donorList.length));
     // trả về số sao đánh giá
     const totalStars = comments.reduce(
       (acc, comment) => acc + comment.rating,
       0
     );
+    const topDonorsWithDetails = await Promise.all(
+      top4Donors.map(async (donation) => {
+        const userResponse = await Donation.find({ donorId: donation.donorId });
+        return {
+          donorId: donation.donorId,
+          totalDonations: donation.totalDonations,
+          username: userResponse[0].fullnameDonor,
+          anonymous: userResponse[0].anonymous,
+        };
+      })
+    );
+    post.top4Donators = topDonorsWithDetails;
     // Tính trung bình số sao
     post.averageRating = totalStars / comments.length;
     res.status(200).json(post);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Error getting post",
     });
   }
@@ -197,6 +218,14 @@ const getArticles = async (req, res) => {
           localField: "categotyId",
           foreignField: "_id",
           as: "category",
+        },
+      },
+      {
+        $lookup: {
+          from: "fundraisers",
+          localField: "userId",
+          foreignField: "userId",
+          as: "fundraisers",
         },
       },
       {
@@ -233,13 +262,15 @@ const getArticles = async (req, res) => {
           releaseDate: 1,
           amountRaised: 1,
           amountEarned: 1,
-          averageRating: "$comments.averageRating", // Include average rating
+          averageRating: { $arrayElemAt: ["$comments.averageRating", 0] },
+          groupName: { $arrayElemAt: ["$fundraisers.groupName", 0] },
+          type: { $arrayElemAt: ["$fundraisers.type", 0] },
         },
       },
     ];
     // bệnh%20nhân
     if (req.query.q) {
-      pipeline[2].$match.$and.push({
+      pipeline[3].$match.$and.push({
         $or: [
           { articletitle: { $regex: new RegExp(req.query.q, "i") } },
           { body: { $regex: new RegExp(req.query.q, "i") } },
@@ -248,7 +279,7 @@ const getArticles = async (req, res) => {
       });
     }
     if (req.query.category) {
-      pipeline[2].$match.$and.push({
+      pipeline[3].$match.$and.push({
         "category.title": { $regex: new RegExp(req.query.q, "i") },
       });
     }
@@ -283,6 +314,80 @@ const getArticles = async (req, res) => {
   }
 };
 
+const getArticleHighRating = async (req, res) => {
+  try {
+    const pipeline = [
+      {
+        $lookup: {
+          from: "categories",
+          localField: "categotyId",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      {
+        $lookup: {
+          from: "fundraisers",
+          localField: "userId",
+          foreignField: "userId",
+          as: "fundraisers",
+        },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "comments",
+          foreignField: "_id",
+          as: "comments",
+          pipeline: [
+            {
+              $group: {
+                _id: null,
+                averageRating: { $avg: "$rating" },
+              },
+            },
+          ],
+        },
+      },
+      {
+        $match: {
+          $and: [{ published: true }],
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          category: 1,
+          addedBy: 1,
+          createdAt: 1,
+          articletitle: 1,
+          image: 1,
+          state: 1,
+          expireDate: 1,
+          releaseDate: 1,
+          amountRaised: 1,
+          amountEarned: 1,
+          averageRating: { $arrayElemAt: ["$comments.averageRating", 0] }, // Lấy giá trị rating đầu tiên
+          groupName: { $arrayElemAt: ["$fundraisers.groupName", 0] },
+          type: { $arrayElemAt: ["$fundraisers.type", 0] },
+        },
+      },
+      {
+        $sort: { averageRating: -1 }, // Sắp xếp theo averageRating (giảm dần)
+      },
+      {
+        $limit: 4, // Giới hạn 4 kết quả đầu tiên
+      },
+    ];
+    const posts = await Article.aggregate(pipeline);
+    res.status(200).json(posts);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Server Error",
+    });
+  }
+};
+
 const getArticleByUser = async (req, res) => {
   const { userId } = req.body;
   try {
@@ -314,15 +419,20 @@ const getDonorOfArticle = async (req, res) => {
     let donation;
     // neu co name thi tra ve name
     if (req.query.name) {
-      donation = await Donation.find({ articleId: articleId })
-        .populate("donorId", "username")
-        .lean();
+      const searchQuery = {
+        fullnameDonor: {
+          $regex: new RegExp(req.query.name, "i"),
+        },
+        articleId: {
+          $eq: articleId,
+        },
+      };
 
-      donation = donation.filter((donation) =>
-        donation.users.username.includes(req.query.name)
+      donation = await Donation.find(searchQuery).populate(
+        "donorId",
+        "username"
       );
     } else {
-      // neu khong co thi tra ve tat ca
       donation = await Donation.find({ articleId: articleId }).populate(
         "donorId",
         "username"
@@ -333,8 +443,13 @@ const getDonorOfArticle = async (req, res) => {
       donation = donation.slice(parseInt(req.query.skip));
       donation = donation.slice(0, parseInt(req.query.limit));
     }
-    const totalCount = donation.length;
-    res.status(200).json({ totalCount, donation });
+    let formatDonation = [];
+    let totalCount = 0;
+    if (donation !== undefined) {
+      formatDonation = await formatDate(donation);
+      totalCount = donation.length;
+    }
+    res.status(200).json({ totalCount, formatDonation });
   } catch (error) {
     res.status(500).json({ message: "Internal error" });
   }
@@ -489,4 +604,5 @@ module.exports = {
   getCategories,
   upLoadImage,
   getDonorOfArticle,
+  getArticleHighRating,
 };

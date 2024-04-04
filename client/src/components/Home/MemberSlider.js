@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // Import Swiper React components
 import "../../css/member.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
+
+import Loader from "../Loader";
+import { getHighRaiseMember } from "../../redux/api/userAPI";
 
 //Images
 import member1 from "./../../assets/images/avatar/avatar5.jpg";
@@ -46,6 +49,12 @@ const dataBlog = [
 ];
 
 const MemberSlider = () => {
+  const [members, setMembers] = useState([]);
+  useEffect(() => {
+    getHighRaiseMember().then((res) => {
+      setMembers(res);
+    });
+  });
   return (
     <>
       <Swiper
@@ -90,7 +99,7 @@ const MemberSlider = () => {
                 <span className="span_underline">{d.title}</span>
                 <p>Tham gia từ {d.time}</p>
                 <p>Số tiền gây quỹ {d.money}</p>
-                <Link to='/member-detail' >
+                <Link to="/member-detail">
                   <button className="cta">
                     <span>Xem chi tiết</span>
                     <svg width="15px" height="10px" viewBox="0 0 13 10">

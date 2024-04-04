@@ -1,9 +1,10 @@
 [
     {
-        "reviewerId": "660bb6a39ca975cd9ff771a0",
         "articleId": "660ba52d9ca975cd9ff77088",
-        "rating": 4,
-        "comment": "660bb6a39ca975cd9ff771a0",
-        "createdAt": ""
+        "paymentId": "660bb6a39ca975cd9ff771a0",
+        "donorId": "660bb6a39ca975cd9ff771a0",
+        "donationAmount": 120000,
+        "donationDate": "",
+        "anonymous": false
     }
 ]

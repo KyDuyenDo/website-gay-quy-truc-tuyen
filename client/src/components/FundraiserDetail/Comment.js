@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Rating, RoundedStar } from "@smastrom/react-rating";
+import { Rating, Heart } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import ReactPaginate from "react-paginate";
 
@@ -34,6 +34,35 @@ const comments = [
 ];
 
 const ItemComments = ({ currentItemsComment, itemStyles }) => {
+  const color = {
+    A: "rgb(140, 46, 150)",
+    B: "rgb(12, 25, 58)",
+    C: "rgb(42, 44, 76)",
+    D: "rgb(59, 161, 151)",
+    E: "rgb(133, 50, 192)",
+    F: "rgb(158, 147, 61)",
+    G: "rgb(238, 124, 50)",
+    H: "rgb(152, 73, 14)",
+    I: "rgb(239, 243, 43)",
+    J: "rgb(189, 105, 30)",
+    K: "rgb(139, 135, 66)",
+    L: "rgb(171, 160, 82)",
+    M: "rgb(17, 239, 230)",
+    N: "rgb(235, 146, 28)",
+    O: "rgb(68, 129, 97)",
+    P: "rgb(233, 164, 25)",
+    Q: "rgb(94, 7, 4)",
+    R: "rgb(236, 60, 155)",
+    S: "rgb(240, 192, 86)",
+    T: "rgb(170, 238, 208)",
+    U: "rgb(227, 180, 202)",
+    V: "rgb(42, 138, 25)",
+    W: "rgb(2, 215, 213)",
+    X: "rgb(105, 39, 123)",
+    Y: "rgb(71, 226, 208)",
+    Z: "rgb(43, 153, 199)",
+    Đ: "rgb(122, 147, 220)",
+  };
   return (
     <div className="cf-section cf-section--collapse-top">
       {currentItemsComment &&
@@ -50,9 +79,14 @@ const ItemComments = ({ currentItemsComment, itemStyles }) => {
                     <div className="cf-thumb ">
                       <div
                         className="cf-thumb__img cf-thumb__img--proxy"
-                        style={{ backgroundColor: item.color }}
+                        style={{
+                          backgroundColor:
+                            color[
+                              item.reviewerId.username.charAt(0).toUpperCase()
+                            ],
+                        }}
                       >
-                        {item.img}{" "}
+                        {item.reviewerId.username.charAt(0).toUpperCase()}{" "}
                       </div>
                     </div>{" "}
                   </a>
@@ -70,17 +104,17 @@ const ItemComments = ({ currentItemsComment, itemStyles }) => {
                           className="cf-text cf-text-break-word"
                           data-strip-element="bottom"
                         >
-                          {item.author}
+                          {item.reviewerId.username}
                         </h5>
                         <span className="cf-text cf-text--small">
-                          {item.time}
+                          {item.createdAt}
                         </span>
                       </div>
                     </div>
                     <div className="cf-well__content cf-well__content--sm">
                       <Rating
                         style={{ maxWidth: 90 }}
-                        value={parseInt(item.star)}
+                        value={parseInt(item.rating)}
                         itemStyles={itemStyles}
                         readOnly
                       />
@@ -100,12 +134,13 @@ const ItemComments = ({ currentItemsComment, itemStyles }) => {
   );
 };
 
-const Comment = () => {
+const Comment = ({ comments }) => {
+  console.log(comments);
   const [rating, setRating] = useState(5);
 
   const itemStyles = {
-    itemShapes: RoundedStar,
-    activeFillColor: "#FE8D4D",
+    itemShapes: Heart,
+    activeFillColor: "#F63B3B",
     inactiveFillColor: "#CDC8C8",
   };
   const itemsCommentPage = 3;
@@ -115,7 +150,7 @@ const Comment = () => {
   const [itemCommentOffset, setItemCommentOffset] = useState(0);
 
   useEffect(() => {
-    console.log()
+    console.log();
     const endOffset = itemCommentOffset + itemsCommentPage;
     console.log(`Loading items from ${itemCommentOffset} to ${endOffset}`);
     setCurrentItemsComment(comments.slice(itemCommentOffset, endOffset));

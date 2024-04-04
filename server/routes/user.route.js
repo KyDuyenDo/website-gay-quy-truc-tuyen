@@ -14,6 +14,7 @@ const {
   getMemberDetail,
   becomeFundraiser,
   upLoadImageFundraiser,
+  getHighRaiseMember,
 } = require("../controllers/user.controller");
 
 const { sendVerificationEmail } = require("../middleware/users/verifyEmail");
@@ -50,19 +51,12 @@ router.get(
     }
   }
 );
-router.put("/:id", requireAuth, decodeToken, updateInfo);
 
+router.put("/:id", requireAuth, decodeToken, updateInfo);
 router.post("/become/fundraiser", requireAuth, decodeToken, becomeFundraiser);
 router.put("/fund/image", requireAuth, decodeToken, upLoadImageFundraiser);
-router.get("/fundraiser", getAllMember);
+router.get("/get/fundraisers", getAllMember);
 router.get("/fundraiser/:id", getMemberDetail);
-router.get("/fundraiser/get/name", async (req, res) => {
-  const { userId } = req.body;
-  const fund = Fundraiser.findOne({ userId: userId });
-  if (!fund) {
-    return res.status(404).json({ message: "Not Fund" });
-  }
-  res.status(200).json(fund.groupName);
-});
+router.get("/get/fundraiser/high/amount", getHighRaiseMember);
 
 module.exports = router;

@@ -2,233 +2,79 @@ import React, { useState, useEffect } from "react";
 import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { faCoins, faCalendar} from "@fortawesome/free-solid-svg-icons";
+import { faCoins, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//images
-import pic1 from "../../assets/images/project/pic1.jpg";
-import pic2 from "../../assets/images/project/pic2.jpg";
-import pic3 from "../../assets/images/project/pic3.jpg";
-import pic4 from "../../assets/images/project/pic4.jpg";
-import pic5 from "../../assets/images/project/pic5.jpg";
-import pic6 from "../../assets/images/project/pic6.jpg";
-import pic7 from "../../assets/images/project/pic7.jpg";
-import pic8 from "../../assets/images/project/pic8.jpg";
-import pic9 from "../../assets/images/project/pic9.jpg";
-import pic10 from "../../assets/images/project/pic10.jpg";
-import pic11 from "../../assets/images/project/pic11.jpg";
-import pic12 from "../../assets/images/project/pic12.jpg";
 
-import avat1 from "../../assets/images/avatar/avatar1.jpg";
-import avat2 from "../../assets/images/avatar/avatar2.jpg";
-import avat3 from "../../assets/images/avatar/avatar3.jpg";
-import avat4 from "../../assets/images/avatar/avatar4.jpg";
-import avat5 from "../../assets/images/avatar/avatar5.jpg";
-import avat6 from "../../assets/images/avatar/avatar6.jpg";
-import avat7 from "../../assets/images/avatar/avatar7.jpg";
-import avat8 from "../../assets/images/avatar/avatar8.jpg";
-import avat9 from "../../assets/images/avatar/avatar9.jpg";
+import { Rating, RoundedStar, Heart } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+
+import { setDataProjects } from "../../redux/actions/articleAction";
+import { getCategoriesAction } from "../../redux/actions/categoryAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProjectMasonry = () => {
-  const cardData = [
-    {
-      cardid: "3",
-      image: pic1,
-      image2: avat1,
-      progres: "75%",
-      title: "Giáo dục",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "3,542",
-      days: "43",
-    },
-    {
-      cardid: "4",
-      image: pic2,
-      image2: avat2,
-      progres: "85%",
-      title: "Trẻ em",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "35,542",
-      days: "63",
-    },
-    {
-      cardid: "1",
-      image: pic3,
-      image2: avat3,
-      progres: "70%",
-      title: "Môi trường",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: " 2,542",
-      days: "23",
-    },
-    {
-      cardid: "4",
-      image: pic4,
-      image2: avat4,
-      progres: "40%",
-      title: "Sức khỏe",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "6,542",
-      days: "35",
-    },
-    {
-      cardid: "3",
-      image: pic5,
-      image2: avat5,
-      progres: "30%",
-      title: "Xóa nghèo",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "1,542",
-      days: "47",
-    },
-    {
-      cardid: "1",
-      image: pic6,
-      image2: avat6,
-      progres: "50%",
-      title: "Trẻ em",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "8,354",
-      days: "75",
-    },
-    {
-      cardid: "4",
-      image: pic7,
-      image2: avat7,
-      progres: "75%",
-      title: "Giáo dục",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "3,542",
-      days: "43",
-    },
-    {
-      cardid: "1",
-      image: pic8,
-      image2: avat8,
-      progres: "85%",
-      title: "Trẻ em",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "35,542",
-      days: "63",
-    },
-    {
-      cardid: "3",
-      image: pic9,
-      image2: avat9,
-      progres: "70%",
-      title: "Môi trường",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: " 2,542",
-      days: "23",
-    },
-    {
-      cardid: "1",
-      image: pic10,
-      image2: avat4,
-      progres: "40%",
-      title: "Sức khỏe",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "6,542",
-      days: "35",
-    },
-    {
-      cardid: "2",
-      image: pic11,
-      image2: avat3,
-      progres: "30%",
-      title: "Xóa nghèo",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "1,542",
-      days: "47",
-    },
-    {
-      cardid: "1",
-      image: pic12,
-      image2: avat1,
-      progres: "50%",
-      title: "Trẻ em",
-      subtitle: "Một chiến dịch học tập mới",
-      authar: "Nguyễn Thị Hồng",
-      raised: "8,354",
-      days: "75",
-    },
-  ];
+  const dispatch = useDispatch();
   const [dropbtn, setDropbtn] = useState("Mới nhất");
-  const [popular, setPopular] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [activeGenre, setActiveGenre] = useState(0);
-
+  const [selectCategory, setSelectCategory] = useState("Tất cả danh mục")
   useEffect(() => {
-    fetchPopular();
+    const fetchData = async () => {
+      try {
+        dispatch(setDataProjects(""));
+        dispatch(getCategoriesAction());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
   }, []);
-  function fetchPopular() {
-    setPopular(cardData);
-    setFiltered(cardData);
+  const projects = useSelector((state) => state.project.projects);
+  const category = useSelector((state) => state.category.categories);
+  console.log(category);
+  const deadline = (createdAt, expireDate) => {
+    const createdDate = new Date(createdAt);
+    const deadline = new Date(
+      createdDate.setDate(createdDate.getDate() + expireDate + 2)
+    ); // Thêm expireDate + 2 ngày
+    const today = new Date();
+    const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24)); // Chuyển đổi mili giây sang ngày
+
+    return daysLeft;
+  };
+
+  function truncateString(str, num) {
+    const wordCount = str.split(" ").length;
+    if (wordCount <= num) {
+      return str;
+    }
+
+    const truncatedString = str.split(" ").slice(0, num).join(" ");
+    return `${truncatedString}...`;
   }
 
-  useEffect(() => {
-    if (activeGenre === 0) {
-      setFiltered(cardData);
-      return;
-    }
-    const filtered = popular.filter((card) =>
-      card.cardid.includes(activeGenre)
-    );
-    setFiltered(filtered);
-  }, [activeGenre]);
   return (
     <>
       <div className="row m-b30">
         <div className="col-xl-10 col-lg-9">
           <div className="site-filters style-1 clearfix">
             <ul className="filters" data-bs-toggle="buttons">
-              <li className={`btn ${activeGenre === 0 ? "active" : ""}`}>
-                <Link to={"#"} onClick={() => setActiveGenre(0)}>
-                  Tất cả
-                </Link>
-              </li>
-              <li
-                data-filter=".Technology"
-                className={`btn ${activeGenre === 1 ? "active" : ""}`}
-              >
-                <Link to={"#"} onClick={() => setActiveGenre(1)}>
-                  Trẻ em
-                </Link>
-              </li>
-              <li
-                data-filter=".Medical"
-                className={`btn ${activeGenre === 2 ? "active" : ""}`}
-              >
-                <Link to={"#"} onClick={() => setActiveGenre(2)}>
-                  Sức khỏe
-                </Link>
-              </li>
-              <li
-                data-filter=".Business"
-                className={`btn ${activeGenre === 3 ? "active" : ""}`}
-              >
-                <Link to={"#"} onClick={() => setActiveGenre(3)}>
-                  Giáo dục
-                </Link>
-              </li>
-              <li
-                data-filter=".Fashion"
-                className={`btn ${activeGenre === 4 ? "active" : ""}`}
-              >
-                <Link to={"#"} onClick={() => setActiveGenre(4)}>
-                  Môi trường
-                </Link>
-              </li>
+              <Dropdown className="select-drop">
+                <Dropdown.Toggle as="div" className="i-false select-drop-btn">
+                  <span>{selectCategory}</span>
+                  <i className="fa-regular fa-angle-down"></i>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    onClick={() => setSelectCategory("Bệnh hiểm nghèo")}
+                  >
+                    Bệnh hiểm nghèo
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => setSelectCategory("người khuyết tật")}
+                  >
+                    người khuyết tật
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </ul>
           </div>
         </div>
@@ -259,7 +105,7 @@ const ProjectMasonry = () => {
           //transition={{ duration: 0.3 }}
         >
           <AnimatePresence>
-            {filtered.map((item, index) => {
+            {projects.map((data) => {
               return (
                 <motion.li
                   layout
@@ -268,80 +114,95 @@ const ProjectMasonry = () => {
                   exit={{ scale: 0, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   className="card-container col-xl-4 col-lg-6 col-md-6 col-sm-12 Fashion m-b30"
-                  key={index}
+                  key={data._id}
                   //transition={{ duration: 0.5 }}
                 >
-                  <div
-                    className="dz-card style-2 overlay-skew wow fadeInUp"
-                    data-wow-delay="0.2s"
-                  >
-                    <div className="dz-media">
-                      <img src={item.image} alt="" />
-                    </div>
-                    <div className="dz-info">
-                      <ul className="dz-category">
-                        <li>{item.title}</li>
-                      </ul>
-                      <h5 className="dz-title">{item.subtitle}</h5>
-                      <div className="progress-bx style-1">
-                        <div className="progress">
-                          <div
-                            className="progress-bar progress-bar-secondary progress-bar-striped progress-bar-animated"
-                            role="progressbar"
-                            aria-valuenow="75"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                            style={{ width: "75%" }}
-                          ></div>
-                        </div>
-                        <ul className="progress-tag">
-                          <li className="raised">
-                            <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>{" "}
-                            <span>Đã đạt được {item.progres}</span>
-                          </li>
-                          <li className="goal">
-                            <FontAwesomeIcon
-                              icon={faCalendar}
-                            ></FontAwesomeIcon>{" "}
-                            <span>Còn {item.days} Ngày</span>
+                  <Link to={`/article-detail/${data._id}`}>
+                    <div
+                      className="dz-card style-2 overlay-skew wow fadeInUp"
+                      data-wow-delay="0.2s"
+                    >
+                      <div className="dz-media">
+                        <img src={data.image[0]} alt="" />
+                      </div>
+                      <div className="dz-info">
+                        <ul className="dz-category d-flex flex-row justify-content-between align-items-center">
+                          <li>{data.category[0].title}</li>
+                          <li>
+                            <Rating
+                              style={{ maxWidth: 120 }}
+                              value={
+                                data.averageRating != null
+                                  ? parseInt(Math.round(data.averageRating))
+                                  : 0
+                              }
+                              itemStyles={{
+                                itemShapes: Heart,
+                                activeFillColor: "#F63B3B",
+                                inactiveFillColor: "#CDC8C8",
+                              }}
+                              readOnly
+                            />
                           </li>
                         </ul>
-                      </div>
-                      <div className="author-wrappper d-flex">
-                        <div className="author-content">
-                          <h6 className="author-name">{item.authar}</h6>
-                          <div className="author-head d-flex">
-                            <ul className="author-meta d-flex">
-                              <li className="location">Cá nhân</li>
-                            </ul>
-
-                            {/* <ul className="rating-list">
+                        <h5 className="dz-title">
+                          {truncateString(data.articletitle, 12)}
+                        </h5>
+                        <div className="progress-bx style-1">
+                          <div className="progress">
+                            <div
+                              className="progress-bar progress-bar-secondary progress-bar-striped progress-bar-animated"
+                              role="progressbar"
+                              aria-valuenow="75"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                              style={{
+                                width: `${Math.round(
+                                  (data.amountEarned / data.amountRaised) * 100
+                                )}%`,
+                              }}
+                            ></div>
+                          </div>
+                          <ul className="progress-tag">
+                            <li className="raised">
+                              <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>{" "}
+                              <span>
+                                Đã đạt được{" "}
+                                {Math.round(
+                                  (data.amountEarned / data.amountRaised) * 100
+                                )}
+                                %
+                              </span>
+                            </li>
+                            <li className="goal">
                               <FontAwesomeIcon
-                                className="yellow-star"
-                                icon={faStar}
-                              ></FontAwesomeIcon>
-                              <FontAwesomeIcon
-                                className="yellow-star"
-                                icon={faStar}
-                              ></FontAwesomeIcon>
-                              <FontAwesomeIcon
-                                className="yellow-star"
-                                icon={faStar}
-                              ></FontAwesomeIcon>
-                              <FontAwesomeIcon
-                                style={{ color: "#CDC8C8" }}
-                                icon={faStar}
-                              ></FontAwesomeIcon>
-                              <FontAwesomeIcon
-                                style={{ color: "#CDC8C8" }}
-                                icon={faStar}
-                              ></FontAwesomeIcon>
-                            </ul> */}
+                                icon={faCalendar}
+                              ></FontAwesomeIcon>{" "}
+                              <span>
+                                Còn {deadline(data.createdAt, data.expireDate)}{" "}
+                                Ngày
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="author-wrappper d-flex">
+                          <div className="author-content">
+                            <div className="d-flex flex-row justify-content-between align-items-center">
+                              <span
+                                className="location"
+                                style={{ marginRight: "8px" }}
+                              >
+                                {data.type === "only" ? "Cá nhân" : "Tổ chức"}
+                              </span>
+                              <h6 className="author-name">
+                                {truncateString(data.groupName, 6)}
+                              </h6>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </motion.li>
               );
             })}

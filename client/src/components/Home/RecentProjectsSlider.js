@@ -25,41 +25,6 @@ import avt3 from "./../../assets/images/avatar/avatar3.jpg";
 
 //SwiperCore.use([EffectCoverflow,Pagination]);
 
-const dataBlog = [
-  {
-    image: pic1,
-    image2: avt1,
-    fund: "Hội chữ thập đỏ",
-    title: "Gửi quà góp tết",
-    role: "Tổ chức",
-    category: "Người nghèo",
-  },
-  {
-    image: pic2,
-    image2: avt2,
-    fund: "Dự án Nuôi em Mộc Châu",
-    title: "Hỗ trợ 24 em nhỏ mồ côi cha mẹ được nuôi dưỡng...",
-    role: "Cá nhân",
-    category: "Trẻ em, Giáo dục",
-  },
-  {
-    image: pic3,
-    image2: avt3,
-    fund: "Thiện Nguyện Nắng Vàng K3 Tân...",
-    title: "Chiến dịch ủng hộ các con điều trị ung thư tại...",
-    role: "Cá nhân",
-    category: "Bệnh hiểm nghèo",
-  },
-  {
-    image: pic1,
-    image2: avt1,
-    fund: "Hội chữ thập đỏ",
-    title: "Gửi quà góp tết",
-    role: "Tổ chức",
-    category: "Người nghèo",
-  },
-];
-
 const RecentProjectsSlider = () => {
   const [projects, setProjects] = useState([]);
   useEffect(() => {

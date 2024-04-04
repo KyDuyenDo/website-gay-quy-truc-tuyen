@@ -11,8 +11,7 @@ import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import Comment from "../components/FundraiserDetail/Comment";
-import { getArticle, getDonorOfArticle } from "../redux/api/articleAPI";
-import { getUser } from "../redux/api/userAPI";
+import { setDataDetail } from "../redux/actions/detailAction";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setDataDetailDonation,
@@ -23,57 +22,11 @@ const ArticleDetail = () => {
   const [modalDonate, setModalDonate] = useState(false);
   const [referModal, setReferModal] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const [top4Donators, setTop4Donators] = useState([]);
-  const [detailArticle, setDetailArticle] = useState({
-    _id: "",
-    userId: {
-      _id: "",
-      username: "",
-      avatar: "",
-    },
-    categotyI: {
-      _id: "",
-      description: "",
-      icon: "",
-      popular: 0,
-      title: "",
-    },
-    addressId: {
-      _id: "",
-      city: "",
-      street: "",
-      county: "",
-      town: "",
-      detail: "",
-      lat: "",
-      lon: "",
-    },
-    address: "",
-    addedBy: "",
-    articletitle: "",
-    image: [],
-    body: "",
-    state: "pending",
-    expireDate: 0,
-    accountNumber: "",
-    emailPayPal: "",
-    methodPayment: "",
-    bankcode: "",
-    adminApproval: true,
-    published: true,
-    amountRaised: 0,
-    amountEarned: 0,
-    comments: [],
-    activities: [],
-    createdAt: "",
-    groupName: "",
-    totalDonations: 0,
-    top4Donators: [],
-    averageRating: 0,
-  });
   const dispatch = useDispatch();
-  // const [donations, setDonations] = useState([]);
-  const [query, setQuery] = useState("");
+  const detailArticle = useSelector((state) => state.detail.detail);
+  const top4Donators = useSelector(
+    (state) => state.detail.topDonorsWithDetails
+  );
   const params = useParams();
   const handleStepClick = (step) => {
     setActiveStep(step);
@@ -99,22 +52,7 @@ const ArticleDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const articleResponse = await getArticle(params.id);
-        setDetailArticle(articleResponse);
-        const topDonorsWithDetails = await Promise.all(
-          articleResponse.top4Donators.map(async (donation) => {
-            const userResponse = await getUser(donation.donorId);
-            return {
-              donorId: donation.donorId,
-              totalDonations: donation.totalDonations,
-              username: donation.username,
-              anonymous: donation.anonymous,
-              avatar: userResponse.avatar,
-            };
-          })
-        );
-        // console.log(topDonorsWithDetails);
-        setTop4Donators(topDonorsWithDetails);
+        dispatch(setDataDetail(params.id));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -128,13 +66,13 @@ const ArticleDetail = () => {
       try {
         const formData = new FormData();
         formData.append("articleId", params.id);
-        dispatch(setDataDetailDonation(formData, query));
+        dispatch(setDataDetailDonation(formData, ""));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
-  }, [query]);
+  }, []);
   return (
     <>
       <div className="page-content bg-white">
@@ -209,7 +147,7 @@ const ArticleDetail = () => {
                       />
                     )}
                     {activeStep === 3 && (
-                      <Comment comments={detailArticle.comments} />
+                      <Comment articleId={detailArticle._id} />
                     )}
                   </div>
                 </div>

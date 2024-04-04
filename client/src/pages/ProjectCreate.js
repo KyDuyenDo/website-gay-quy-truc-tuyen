@@ -20,11 +20,11 @@ import FourthStep from "../components/AddArticle/FourthStep";
 import { getCategoriesAction } from "../redux/actions/categoryAction";
 import { useDispatch } from "react-redux";
 const schema = yup.object().shape({
-  projectTitle: yup.string().required("Tiêu đề trống"),
-  // .min(10, "Quá ngắn, tối thiểu 10 từ"),
+  projectTitle: yup.string().required("Tiêu đề trống")
+  .min(10, "Quá ngắn, tối thiểu 10 từ"),
   projectCategory: yup.string().required("Chưa chọn danh mục"),
-  projectBody: yup.string().required("Nội dung trống"),
-  // .min(250, "Quá ngắn, tối thiểu 250 từ"),
+  projectBody: yup.string().required("Nội dung trống")
+  .min(250, "Quá ngắn, tối thiểu 250 từ"),
   projectAmount: yup
     .string()
     .matches(/^\d+$/, "Số không hợp lệ")

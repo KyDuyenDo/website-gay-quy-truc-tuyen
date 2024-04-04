@@ -479,7 +479,8 @@ const deleteArticle = async (req, res) => {
 
 const addComment = async (req, res) => {
   try {
-    const { rating, content, postId, userId } = req.body;
+    const { rating, content, postId } = req.body;
+    const userId = req.userId;
     const newComment = new Comment({
       reviewerId: userId,
       articleId: postId,

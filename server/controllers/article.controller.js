@@ -280,7 +280,7 @@ const getArticles = async (req, res) => {
     }
     if (req.query.category) {
       pipeline[3].$match.$and.push({
-        "category.title": { $regex: new RegExp(req.query.q, "i") },
+        "category.title": { $regex: new RegExp(req.query.category, "i") },
       });
     }
     const posts = await Article.aggregate(pipeline);
@@ -389,16 +389,37 @@ const getArticleHighRating = async (req, res) => {
 };
 
 const getArticleByUser = async (req, res) => {
-  const { userId } = req.body;
+  const userId = req.userId;
   try {
     let articles;
     if (req.query.state) {
       if (req.query.state === "fundraising") {
-        articles = await Article.find({ userId: userId, state: "fundraising" });
+        articles = await Article.find({
+          userId: userId, // của người dùng
+          adminApproval: true, // đã đăng và chấp thuận bởi admin
+          $expr: {
+            $lte: [
+              {
+                $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+              },
+              { $add: ["$expireDate", 2] },
+            ],
+          }, // còn hạn
+        });
       } else if (req.query.state === "finished") {
-        articles = await Article.find({ userId: userId, state: "finished" });
+        articles = await Article.find({
+          userId: userId,
+          $expr: {
+            $gt: [
+              {
+                $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+              }, // Chuyển từ mili giây sang số ngày
+              { $add: ["$expireDate", 2] },
+            ],
+          },
+        });
       } else if (req.query.state === "pending") {
-        articles = await Article.find({ userId: userId, state: "pending" });
+        articles = await Article.find({ userId: userId, adminApproval: false });
       }
     } else {
       articles = await Article.find({ userId: userId });
@@ -410,6 +431,36 @@ const getArticleByUser = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const isLimitArticleUp = async (req, res) => {
+  const userId = req.userId;
+  try {
+    // không quá 5 bài kể cả bài yêu cầu và bài đã đăng
+    const articles = await Article.find({
+      userId: userId,
+      $expr: {
+        $lte: [
+          {
+            $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+          },
+          { $add: ["$expireDate", 2] },
+        ],
+      },
+    });
+    if (articles) {
+      return res.status(404).json({ message: "Not Found" });
+    }
+    if (articles.length <= 5) {
+      return res.status(200).json({ success: true });
+    } else {
+      return res.status(200).json({ success: false });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      message: "Server Error",
+    });
   }
 };
 
@@ -590,6 +641,26 @@ const getCategories = async (req, res) => {
   }
 };
 
+const getUserArticleDetail = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const postId = req.params.id;
+    // tìm bài báo
+    const post = await Article.find({ _id: postId, userId: userId })
+      .populate("activities")
+      .populate("categotyId")
+      .lean();
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    res.status(200).json(post);
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   addArticle,
   confirmArticle,
@@ -606,4 +677,6 @@ module.exports = {
   upLoadImage,
   getDonorOfArticle,
   getArticleHighRating,
+  isLimitArticleUp,
+  getUserArticleDetail,
 };

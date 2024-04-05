@@ -1,71 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
+import ShowMoreText from "react-show-more-text";
 import {
   faUpload,
   faFileAlt,
   faImage,
   faTrash,
+  faAdd,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserArticleDetail } from "../../redux/actions/manageAction";
+import { useParams } from "react-router-dom";
 import "../../css/projectEdit.css";
+
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
+const schemaActivity = yup.object().shape({
+  amountSpend: yup.string().required("Số tiền chi trống"),
+  activityImage: yup.string().required("Chưa chọn ảnh"),
+  content: yup.string().required("Chưa nhập nội dung"),
+});
+
 const ProjectEdit = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+    getValues,
+    setValue,
+  } = useForm({ resolver: yupResolver(schemaActivity) });
+  const dispatch = useDispatch();
+  const params = useParams();
+  const [openForm, setOpenForm] = useState(false);
+  const detailArticle = useSelector(
+    (state) => state.management.userArticleDetail
+  );
+  function formatDate(date) {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    return `${month}/${day}/${year.toString().slice(-2)} - ${hours}:${minutes}`;
+  }
+  console.log(params.id);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(getUserArticleDetail(params.id));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  const executeOnClick = (isExpanded) => {
+    console.log(isExpanded);
+  };
   return (
     <div>
-      <div className="wrapper row">
-        <div className="left-contain col-12 col-md-6">
-          <span className="header-title">
-            Tải lên các hình ảnh về chiến dịch
-          </span>
-          <form action="#">
-            <FontAwesomeIcon size="3x" icon={faUpload}></FontAwesomeIcon>
-            <p>Browse File to Upload</p>
-          </form>
-        </div>
-        <div className="right-content col-12 col-md-6">
-          <section className="progress-area">
-            <li className="row-contain">
-              <FontAwesomeIcon size="2x" icon={faImage}></FontAwesomeIcon>
-              <div className="content">
-                <div className="details">
-                  <span className="name">image_1903802.png</span>
-                  <span className="percent">uploading 50%</span>
-                </div>
-                <div className="progress-bar">
-                  <div className="progress"></div>
-                </div>
-              </div>
-            </li>
-          </section>
-          <section className="progress-area">
-            <li className="row-contain">
-              <FontAwesomeIcon size="2x" icon={faImage}></FontAwesomeIcon>
-              <div className="content">
-                <div className="details">
-                  <span className="name">
-                    image_1903802.png &#8226;{" "}
-                    <span style={{ fontSize: "14px" }}>70 KB</span>
-                  </span>
-                </div>
-              </div>
-              <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-            </li>
-          </section>
-          <section className="progress-area">
-            <li className="row-contain">
-              <FontAwesomeIcon size="2x" icon={faImage}></FontAwesomeIcon>
-              <div className="content">
-                <div className="details">
-                  <span className="name">
-                    image_1903802.png &#8226;{" "}
-                    <span style={{ fontSize: "14px" }}>70 KB</span>
-                  </span>
-                </div>
-              </div>
-              <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-            </li>
-          </section>
-        </div>
-      </div>
       <div className="contain-main-content">
         <span className="header-title">Nội dung chính</span>
         <form className="custom-form">
@@ -75,10 +73,12 @@ const ProjectEdit = () => {
                 <label className="form-label" for="form6Example1">
                   Tiêu đề chiến dịch
                 </label>
-                <input
+                <Form.Control
                   type="text"
-                  id="form6Example1"
-                  className="form-control"
+                  aria-label="Disabled input example"
+                  disabled
+                  readOnly
+                  value={detailArticle.articletitle}
                 />
               </div>
             </div>
@@ -92,6 +92,7 @@ const ProjectEdit = () => {
                   aria-label="Disabled input example"
                   disabled
                   readOnly
+                  value={detailArticle.categotyId.title}
                 />
               </div>
             </div>
@@ -106,6 +107,7 @@ const ProjectEdit = () => {
                 aria-label="Disabled input example"
                 disabled
                 readOnly
+                value={detailArticle.address}
               />
             </div>
           </div>
@@ -116,8 +118,10 @@ const ProjectEdit = () => {
             <textarea
               className="form-control"
               id="exampleFormControlTextarea1"
-              rows="3"
-            ></textarea>
+              rows="10"
+              readOnly={true} // Set the readOnly attribute to make it read-only
+              value={detailArticle.body}
+            />
           </div>
           <div className="row mb-4">
             <div className="col">
@@ -130,19 +134,21 @@ const ProjectEdit = () => {
                   aria-label="Disabled input example"
                   disabled
                   readOnly
+                  value={detailArticle.accountNumber}
                 />
               </div>
             </div>
             <div className="col">
               <div data-mdb-input-init className="form-outline">
                 <label className="form-label" for="form6Example2">
-                  Chủ sở hữu tài khoản
+                  email PayPal
                 </label>
                 <Form.Control
                   type="text"
                   aria-label="Disabled input example"
                   disabled
                   readOnly
+                  value={detailArticle.emailPayPal}
                 />
               </div>
             </div>
@@ -158,6 +164,7 @@ const ProjectEdit = () => {
                   aria-label="Disabled input example"
                   disabled
                   readOnly
+                  value={detailArticle.amountRaised}
                 />
               </div>
             </div>
@@ -171,74 +178,24 @@ const ProjectEdit = () => {
                   aria-label="Disabled input example"
                   disabled
                   readOnly
+                  value={detailArticle.expireDate}
                 />
               </div>
             </div>
           </div>
         </form>
-        <span className="header-title">Các hoạt động</span>
-        <div className="list-activity">
-          {/* các hoạt động */}
-          <div className="item-activity">
-            <div className="contain-activity row">
-              <div className="left-contain col-12 col-md-4 ">
-                <div className="s1q0b356 h3797oo">
-                  <div>Ngày đăng: 3/7/2024</div>
-                  <div>Số tiền chi: 50.000 VNĐ</div>
-                  <div>Tài liệu đã đăng</div>
-                  <div className="row-contain">
-                    <FontAwesomeIcon
-                      size="1x"
-                      icon={faFileAlt}
-                    ></FontAwesomeIcon>
-                    <div className="content">
-                      <div className="details">
-                        <span className="name">
-                          time_1903802.dox &#8226;{" "}
-                          <span style={{ fontSize: "14px" }}>70 KB</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="right-contain col-12 col-md-8">
-                <div className="main-text">
-                  <span className="TermText">Nội dung</span>
-                  <p>
-                    Line 173:6: React Hook useEffect has a missing dependency:
-                    'fetchPopular'. Either include it or remove the dependency
-                    array Line 173:6: React Hook useEffect has a missing
-                    dependency: 'fetchPopular'. Either include it or remove the
-                    dependency array
-                  </p>
-                </div>
-                <div className="image-contain">
-                  <div className="ZoomableImage">
-                    <img
-                      alt="Hình ảnh: merchandise (n)"
-                      className="ZoomableImage-rawImage SetPageTerm-image"
-                      height="100"
-                      src="https://quizlet.com/cdn-cgi/image/f=auto,fit=cover,h=100,onerror=redirect,w=120/https://o.quizlet.com/i/OIvl8oaCjYkaZPCYL34VPQ.jpg"
-                      width="120"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* button thêm mới hoặc xem thêm */}
-          <div className="contain-button">
-            <button type="button" className="btn btn-outline-success">
-              Xem thêm
-            </button>
-            <button type="button" className="btn btn-outline-primary">
-              Thêm mới
-            </button>
-          </div>
-          {/* form thêm hoạt động */}
-          <form className="main-contain-up-activity">
+        <div className="d-flex justify-content-between">
+          <span className="header-title">Các hoạt động</span>
+          <a onClick={() => setOpenForm(true)} className="btn-mana-more">
+            <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
+          </a>
+        </div>
+        {openForm === true ? (
+          <form
+            className="main-contain-up-activity"
+            style={{ marginTop: "25px" }}
+            onSubmit={() => {}}
+          >
             <div className="row">
               <div className="col">
                 <div data-mdb-input-init className="form-outline">
@@ -286,14 +243,87 @@ const ProjectEdit = () => {
               </div>
             </div>
             <div className="contain-button">
-              <button type="button" className="btn btn-secondary ml-2">
+              <button
+                type="button"
+                className="btn btn-secondary ml-2"
+                onClick={() => setOpenForm(false)}
+              >
                 Thoát
               </button>
-              <button type="button" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Thêm
               </button>
             </div>
           </form>
+        ) : (
+          ""
+        )}
+        <div className="list-activity">
+          {/* các hoạt động */}
+          {detailArticle.activities.map((data) => {
+            return (
+              <div className="item-activity">
+                <div className="contain-activity row">
+                  <div className="left-contain col-12 col-md-4 ">
+                    <div className="s1q0b356 h3797oo">
+                      <div>
+                        Ngày đăng: {formatDate(new Date(data.createdAt))}
+                      </div>
+                      <div>Số tiền chi: {data.amountSpent} VNĐ</div>
+                      {/* <div>Tài liệu đã đăng</div>
+                      <div className="row-contain">
+                        <FontAwesomeIcon
+                          size="1x"
+                          icon={faFileAlt}
+                        ></FontAwesomeIcon>
+                        <div className="content">
+                          <div className="details">
+                            <span className="name">
+                              time_1903802.dox &#8226;{" "}
+                              <span style={{ fontSize: "14px" }}>70 KB</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div> */}
+                    </div>
+                  </div>
+                  <div className="right-contain col-12 col-md-8">
+                    <div className="main-text">
+                      <span className="TermText">Nội dung</span>
+                      <ShowMoreText
+                        lines={2}
+                        more="Xem thêm"
+                        less="Thu gọn"
+                        className="content-css"
+                        anchorClass="show-more-less-clickable"
+                        onClick={executeOnClick}
+                        expanded={false}
+                        truncatedEndingComponent={"... "}
+                      >
+                        {`${data.body}`}
+                      </ShowMoreText>
+                    </div>
+                    <div className="image-contain">
+                      <div className="ZoomableImage">
+                        <img
+                          alt="Hình ảnh: merchandise (n)"
+                          className="ZoomableImage-rawImage SetPageTerm-image"
+                          style={{
+                            width: "120px",
+                            height: "100px",
+                            objectFit: "contain",
+                          }}
+                          src={data.image}
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+          {/* form thêm hoạt động */}
         </div>
       </div>
     </div>

@@ -1,8 +1,38 @@
-import React from "react";
-import project from "../../assets/images/project/pic1.jpg";
+import React, { useEffect } from "react";
 import { faDashboard, faDonate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getUserDonation } from "../../redux/actions/manageAction";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const ProjectHistory = () => {
+  const dispatch = useDispatch();
+  const history = useSelector((state) => state.management.userdonations);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(getUserDonation());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  function formatDate(date) {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    return `${month}/${day}/${year.toString().slice(-2)} - ${hours}:${minutes}`;
+  }
+  const totalmount = (donations) => {
+    const totalSpent = donations.reduce(
+      (acc, donation) => acc + donation.donationAmount,
+      0
+    );
+    return totalSpent;
+  };
   return (
     <div className="contain_project">
       <div className="header_content">
@@ -10,78 +40,53 @@ const ProjectHistory = () => {
           <li className="total_price">
             <FontAwesomeIcon size="2x" icon={faDonate}></FontAwesomeIcon>
             <p>Số tiền đã ủng hộ</p>
-            <p>50.000 VNĐ</p>
+            <p>{totalmount(history)} VNĐ</p>
           </li>
           <li className="total_project">
             <FontAwesomeIcon size="2x" icon={faDashboard}></FontAwesomeIcon>
-            <p>Số dự án đã ủng hộ</p>
-            <p>50</p>
+            <p>Số lượt đã ủng hộ</p>
+            <p>{history.length}</p>
           </li>
         </ul>
       </div>
       <div className="row contain_donated">
         <span className="label">Các chiến dịch đã ủng hộ</span>
-        {/* <table>
-          <thead>
-            <tr>
-              <th>Ảnh</th>
-              <th>Tên chiến dịch</th>
-              <th>Tiền hỗ trợ</th>
-              <th>Thời gian</th>
-              <th>Ngày</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>
-                <img src={project} />
-              </th>
-              <th className="name">
-                Hỗ trợ những hoc sinh có hoàn cảnh khó khăn ở Tiền Giang
-              </th>
-              <th style={{ color: "#35A2EB" }}>+100.000.000</th>
-              <th>5:54</th>
-              <th>25/02/2024</th>
-            </tr>
-            <tr>
-              <th>
-                <img src={project} />
-              </th>
-              <th className="name">
-                Hỗ trợ những hoc sinh có hoàn cảnh khó khăn ở Tiền Giang
-              </th>
-              <th style={{ color: "#35A2EB" }}>+100.000.000</th>
-              <th>5:54</th>
-              <th>25/02/2024</th>
-            </tr>
-          </tbody>
-        </table> */}
         <div className="table-responsive">
           <table className="table align-middle mb-0 bg-white">
             <thead className="bg-gray">
               <tr>
                 <th scope="col">Dự Án</th>
                 <th>Tiền hỗ trợ</th>
-                <th>Thời gian</th>
-                <th>Ngày</th>
+                <th>Ngày-giờ</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="col-xs-6">
-                  <div className="d-flex align-items-center">
-                    <img src={project} alt="" style={{ width: "100px" }} />
-                    <div className="ms-3">
-                      <p className="text-muted mb-0">
-                        Hỗ trợ những hoc sinh có hoàn cảnh khó khăn ở Tiền Giang
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <th style={{ color: "#35A2EB" }}>+100.000.000</th>
-                <th>5:54</th>
-                <th>25/02/2024</th>
-              </tr>
+              {console.log(history)}
+
+              {history.map((data) => {
+                return (
+                  <tr>
+                    <td className="col-xs-6">
+                      <div className="d-flex align-items-center">
+                        <img
+                          src={data.articleId.image[0]}
+                          alt=""
+                          style={{ width: "100px" }}
+                        />
+                        <div className="ms-3">
+                          <Link to={`/article-detail/${data.articleId._id}`}>
+                            <p className="text-muted mb-0">
+                              {data.articleId.articletitle}
+                            </p>
+                          </Link>
+                        </div>
+                      </div>
+                    </td>
+                    <th style={{ color: "#35A2EB" }}>+{data.donationAmount}</th>
+                    <th>{formatDate(new Date(data.donationDate))}</th>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

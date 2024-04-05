@@ -3,6 +3,8 @@ import * as types from "../constants/projectConstants";
 const initialState = {
   projects: [],
   articleId: null,
+  search: null,
+  userProject: [],
 };
 
 const projectReducer = (state = initialState, action) => {
@@ -12,12 +14,32 @@ const projectReducer = (state = initialState, action) => {
     case types.SET_PROJECTS:
       return {
         ...state,
-        projects: payload ? payload : null,
+        projects: payload ? payload : [],
+      };
+    case types.SET_USER_PROJECTS:
+      return {
+        ...state,
+        userProject: payload ? payload : [],
       };
     case types.SET_ARTICLE_ID:
       return {
         ...state,
-        articleId: payload ? payload : null,
+        articleId: payload ? payload : "",
+      };
+    case types.SET_SEARCH_PROJECTS:
+      return {
+        ...state,
+        search: payload ? payload : "",
+      };
+    case types.CLEAR_SEARCH:
+      return {
+        ...state,
+        search: null,
+      };
+    case types.CLEAR_USER_PROJECTS:
+      return {
+        ...state,
+        userProject: [],
       };
     case types.PROJECT_CLEAR:
       return {

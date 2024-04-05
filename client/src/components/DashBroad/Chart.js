@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,42 +20,43 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Biểu đồ thu chi theo tuần",
-    },
-  },
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Tiền chi',
-      data: [732, -891, 426, -123, 654, -287, 376],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Tiền thu',
-      data: [-564, 895, 267, -345, 608, -719, 826],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
 
 const Chart = () => {
-  return <Line options={options} data={data} />
+  const chart = useSelector((state) => state.management.chart);
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Biểu đồ thu chi theo tuần",
+      },
+    },
+  };
+
+  const labels = chart.labels;
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Tiền chi",
+        data: chart.dataActivityChart,
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "Tiền thu",
+        data: chart.dataDonationChart,
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
+  return <Line options={options} data={data} />;
 };
 
 export default Chart;

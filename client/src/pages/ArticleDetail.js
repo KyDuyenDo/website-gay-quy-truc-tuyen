@@ -87,7 +87,12 @@ const ArticleDetail = () => {
                   <h2 className="title">
                     {detailArticle.articletitle}{" "}
                     <span className="state">
-                      {detailArticle.state === "pending" ? "Đang gây quỹ" : ""}
+                      {deadline(
+                        detailArticle.createdAt,
+                        detailArticle.expireDate
+                      ) > 0
+                        ? "Đang gây quỹ"
+                        : "Đã kết thúc"}
                     </span>
                   </h2>
                   {/* <!--  selection --> */}
@@ -146,42 +151,49 @@ const ArticleDetail = () => {
                         articleId={detailArticle._id}
                       />
                     )}
-                    {activeStep === 3 && (
-                      <Comment articleId={detailArticle._id} />
-                    )}
+                    {activeStep === 3 &&
+                      (detailArticle.published === true ? (
+                        <Comment articleId={detailArticle._id} />
+                      ) : (
+                        ""
+                      ))}
                   </div>
                 </div>
               </div>
               {/* <!--  keep --> */}
               <div className="col-xl-4 col-lg-4">
                 <div>
-                  <div className="widget style-1 widget_donate">
-                    <Link
-                      to="/payment"
-                      className="btn btn-donate btn-primary w-100"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalDonate"
-                    >
-                      <FontAwesomeIcon
-                        style={{ marginRight: "5px" }}
-                        icon={faHeart}
-                      ></FontAwesomeIcon>{" "}
-                      Ủng hộ{" "}
-                    </Link>
-                    <a
-                      href="https://www.facebook.com/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn btn-primary facebook w-100 btn-bottom"
-                    >
-                      <FontAwesomeIcon
-                        style={{ marginRight: "5px" }}
-                        icon={faFacebook}
-                      ></FontAwesomeIcon>{" "}
-                      Chia sẻ Facebook
-                    </a>
-                  </div>
-
+                  {deadline(detailArticle.createdAt, detailArticle.expireDate) >
+                  0 ? (
+                    <div className="widget style-1 widget_donate">
+                      <Link
+                        to="/payment"
+                        className="btn btn-donate btn-primary w-100"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalDonate"
+                      >
+                        <FontAwesomeIcon
+                          style={{ marginRight: "5px" }}
+                          icon={faHeart}
+                        ></FontAwesomeIcon>{" "}
+                        Ủng hộ{" "}
+                      </Link>
+                      <a
+                        href="https://www.facebook.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn btn-primary facebook w-100 btn-bottom"
+                      >
+                        <FontAwesomeIcon
+                          style={{ marginRight: "5px" }}
+                          icon={faFacebook}
+                        ></FontAwesomeIcon>{" "}
+                        Chia sẻ Facebook
+                      </a>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   {/* <!--  Widget Fund --> */}
                   <div className="widget style-1 widget_fund">
                     <div className="content-fund">

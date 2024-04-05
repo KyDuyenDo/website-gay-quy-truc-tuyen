@@ -7,6 +7,7 @@ import { tokenMiddleware } from "../middlewares/tokenMiddleware";
 import { initializeAuth } from "./actions/authActions";
 import donationReducer from "./reducers/donors";
 import detailReducer from "./reducers/detail";
+import manageReducer from "./reducers/management";
 const createAppStore = async () => {
   try {
     const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const createAppStore = async () => {
       project: projectReducer,
       category: categoryReducer,
       donation: donationReducer,
-      detail: detailReducer
+      detail: detailReducer,
+      management: manageReducer
       // Add other reducers here
     });
     const store = configureStore({

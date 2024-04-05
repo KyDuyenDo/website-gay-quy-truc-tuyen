@@ -8,7 +8,7 @@ const initialState = {
       username: "",
       avatar: "",
     },
-    categotyI: {
+    categotyId: {
       _id: "",
       description: "",
       icon: "",
@@ -36,8 +36,8 @@ const initialState = {
     emailPayPal: "",
     methodPayment: "",
     bankcode: "",
-    adminApproval: true,
-    published: true,
+    adminApproval: false,
+    published: false,
     amountRaised: 0,
     amountEarned: 0,
     comments: [],

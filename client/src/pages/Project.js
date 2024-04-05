@@ -5,15 +5,27 @@ import ProjectMasonry from "../components/project/ProjectMasonry";
 import "../css/projectList.css";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// import PageBanner from '../layouts/PageBanner';
-
-// import UpdateBlog from '../components/Home/UpdateBlog';
-
-// import bg from '../assets/images/banner/bnr5.jpg';
-
+import { setDataProjects } from "../redux/actions/articleAction";
+import { useDispatch } from "react-redux";
 const Project = () => {
-  const [dropbtn2, setDropbtn2] = useState("All Category");
+  const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+  const createQuerySearch = (title, sort) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const encodedTitle = title.replace(/ /g, "%20");
+        const query = `?q=${encodedTitle}`;
+        resolve(query);
+      } catch (error) {
+        reject(error); // Handle potential errors
+      }
+    });
+  };
+  const handleSearchSubmit = () => {
+    createQuerySearch(search).then((query) => {
+      dispatch(setDataProjects(query));
+    });
+  };
   return (
     <>
       <div className="page-content bg-white">
@@ -25,10 +37,20 @@ const Project = () => {
                   type="text"
                   className="form-control"
                   placeholder="Tìm kiếm chiến dịch"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      handleSearchSubmit();
+                    }
+                  }}
                 />
                 <div className="input-group-prepend">
-                  <button className="btn">
-                    <FontAwesomeIcon size="lg" icon={faSearch}></FontAwesomeIcon>
+                  <button className="btn" onClick={handleSearchSubmit}>
+                    <FontAwesomeIcon
+                      size="lg"
+                      icon={faSearch}
+                    ></FontAwesomeIcon>
                   </button>
                 </div>
               </div>

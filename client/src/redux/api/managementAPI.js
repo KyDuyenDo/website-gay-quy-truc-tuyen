@@ -21,6 +21,7 @@ export const getUserDonation = async () => {
 export const getNotify = async () => {
   try {
     const { data } = await API.get("manage/notify");
+    console.log(data);
     return data;
   } catch (error) {
     return handleApiError(error);
@@ -29,7 +30,38 @@ export const getNotify = async () => {
 
 export const delNotify = async (formData) => {
   try {
-    const { data } = await API.post("manage/del/notify", formData);
+    const { data } = await API.post("manage/del/notify", formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const getDataUserProject = async () => {
+  try {
+    const { data } = await API.get("manage/get/detail/user");
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const getDataFundraising = async () => {
+  try {
+    const { data } = await API.get("manage/get/user/fundraising");
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const getUserArticleDetail = async (articleId) => {
+  try {
+    const { data } = await API.get(`article/user/only/article/${articleId}`);
     return data;
   } catch (error) {
     return handleApiError(error);

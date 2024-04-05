@@ -83,7 +83,7 @@ function Index() {
                 element={<ManagementProject />}
               />
               <Route
-                path="/management/management_project/1"
+                path="/management/management_project/:id"
                 exact
                 element={<ProjectEdit />}
               />

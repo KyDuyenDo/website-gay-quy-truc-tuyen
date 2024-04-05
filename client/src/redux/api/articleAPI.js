@@ -60,6 +60,15 @@ export const getArticleByUser = async (query) => {
   }
 };
 
+export const getLimitArticle = async () => {
+  try {
+    const { data } = await API.get(`/article/check/limt/post`);
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
 export const getDonorOfArticle = async (formData, query) => {
   try {
     const { data } = await API.post(`/article/donors/get${query}`, formData, {

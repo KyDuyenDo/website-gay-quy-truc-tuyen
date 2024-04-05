@@ -132,3 +132,8 @@ a:hover {
     padding-left: 30px;
     box-shadow: none !important;
 }
+
+.filters .select-drop .dropdown-menu {
+  max-height: 200px !important; /* Adjust as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+}

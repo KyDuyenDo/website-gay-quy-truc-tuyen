@@ -27,6 +27,7 @@ import {
   clearMessage,
   logoutAction,
 } from "../redux/actions/authActions";
+import { setSearchProject } from "../redux/actions/articleAction";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -267,7 +268,17 @@ const Header = () => {
                             type="search"
                             aria-label="Search"
                             className="form-control me-2"
-                            placeholder="Tìm kiếm tên chiến dịch"
+                            placeholder="Tìm kiếm chiến dịch"
+                            onKeyUp={(event) => {
+                              if (event.key === "Enter") {
+                                const query = event.target.value.replace(
+                                  / /g,
+                                  "%20"
+                                );
+                                dispatch(setSearchProject(query));
+                                navigate("/project");
+                              }
+                            }}
                           />
                         </div>
                       </div>

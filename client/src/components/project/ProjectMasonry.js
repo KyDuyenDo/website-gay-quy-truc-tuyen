@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { faCoins, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,18 +8,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Rating, RoundedStar, Heart } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
-import { setDataProjects } from "../../redux/actions/articleAction";
+import {
+  setDataProjects,
+  setSearchClear,
+} from "../../redux/actions/articleAction";
 import { getCategoriesAction } from "../../redux/actions/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProjectMasonry = () => {
   const dispatch = useDispatch();
-  const [dropbtn, setDropbtn] = useState("Mới nhất");
-  const [selectCategory, setSelectCategory] = useState("Tất cả danh mục")
+  const [dropbtn, setDropbtn] = useState("Trạng thái");
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+  const [sort, setSort] = useState("new");
+  const [selectCategory, setSelectCategory] = useState("Chọn danh mục");
+  const projects = useSelector((state) => state.project.projects);
+  const category = useSelector((state) => state.category.categories);
+  const searchhead = useSelector((state) => state.project.search);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        dispatch(setDataProjects(""));
+        if (searchhead !== null) {
+          await dispatch(setDataProjects(`?q=${searchhead}`));
+          await dispatch(setSearchClear());
+        } else {
+          dispatch(setDataProjects(""));
+        }
         dispatch(getCategoriesAction());
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -27,9 +41,7 @@ const ProjectMasonry = () => {
     };
     fetchData();
   }, []);
-  const projects = useSelector((state) => state.project.projects);
-  const category = useSelector((state) => state.category.categories);
-  console.log(category);
+
   const deadline = (createdAt, expireDate) => {
     const createdDate = new Date(createdAt);
     const deadline = new Date(
@@ -51,6 +63,17 @@ const ProjectMasonry = () => {
     return `${truncatedString}...`;
   }
 
+  const createQueryString = (title, sort) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const encodedTitle = title.replace(/ /g, "%20");
+        const query = `?category=${encodedTitle}&sort=${sort}`;
+        resolve(query);
+      } catch (error) {
+        reject(error); // Handle potential errors
+      }
+    });
+  };
   return (
     <>
       <div className="row m-b30">
@@ -64,15 +87,36 @@ const ProjectMasonry = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item
-                    onClick={() => setSelectCategory("Bệnh hiểm nghèo")}
+                    onClick={() => {
+                      setFilter("");
+                      dispatch(setDataProjects(""));
+                      setSelectCategory("Tất cả danh mục");
+                    }}
                   >
-                    Bệnh hiểm nghèo
+                    Tất cả danh mục
                   </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() => setSelectCategory("người khuyết tật")}
-                  >
-                    người khuyết tật
-                  </Dropdown.Item>
+                  {category.map((item) => {
+                    return (
+                      <Dropdown.Item
+                        onClick={() => {
+                          createQueryString(item.title, sort)
+                            .then((query) => {
+                              setFilter(item.title);
+                              dispatch(setDataProjects(query));
+                              setSelectCategory(item.title);
+                            })
+                            .catch((error) => {
+                              console.error(
+                                "Error creating query string:",
+                                error
+                              );
+                            });
+                        }}
+                      >
+                        {item.title}
+                      </Dropdown.Item>
+                    );
+                  })}
                 </Dropdown.Menu>
               </Dropdown>
             </ul>
@@ -86,10 +130,34 @@ const ProjectMasonry = () => {
               <i className="fa-regular fa-angle-down"></i>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setDropbtn("Mới nhất")}>
+              <Dropdown.Item
+                onClick={() => {
+                  createQueryString(filter, "new")
+                    .then((query) => {
+                      setSort("new");
+                      dispatch(setDataProjects(query));
+                      setDropbtn("Mới nhất");
+                    })
+                    .catch((error) => {
+                      console.error("Error creating query string:", error);
+                    });
+                }}
+              >
                 Mới nhất
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => setDropbtn("Đã cũ")}>
+              <Dropdown.Item
+                onClick={() => {
+                  createQueryString(filter, "old")
+                    .then((query) => {
+                      setSort("old");
+                      dispatch(setDataProjects(query));
+                      setDropbtn("Đã cũ");
+                    })
+                    .catch((error) => {
+                      console.error("Error creating query string:", error);
+                    });
+                }}
+              >
                 Đã cũ
               </Dropdown.Item>
             </Dropdown.Menu>

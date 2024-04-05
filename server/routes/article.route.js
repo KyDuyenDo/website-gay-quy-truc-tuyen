@@ -20,6 +20,8 @@ const {
   upLoadImage,
   getDonorOfArticle,
   getArticleHighRating,
+  isLimitArticleUp,
+  getUserArticleDetail,
 } = require("../controllers/article.controller");
 
 const {
@@ -37,8 +39,20 @@ router.post("/reject/:postId", requireAuth, requireAdminAuth, rejectArticle);
 router.get("/get/:id", getArticle);
 router.get("/get", getArticles);
 router.get("/get/high/rating", getArticleHighRating);
-router.get("/user/get", getArticleByUser);
+router.get(
+  "/check/limt/post",
+  requireAuth,
+  requireFundraiserAuth,
+  isLimitArticleUp
+);
+router.get("/user/get", requireAuth, requireFundraiserAuth, getArticleByUser);
 router.post("/donors/get", getDonorOfArticle);
+router.get(
+  "/user/only/article/:id",
+  requireAuth,
+  requireFundraiserAuth,
+  getUserArticleDetail
+);
 router.post(
   "/add/comment",
   requireAuth,
@@ -53,4 +67,3 @@ router.post("/add/category", requireAuth, requireAdminAuth, addCategory);
 router.get("/all/categories", getCategories);
 
 module.exports = router;
-

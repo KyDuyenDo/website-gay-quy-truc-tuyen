@@ -16,7 +16,7 @@ const createAppStore = async () => {
       category: categoryReducer,
       donation: donationReducer,
       detail: detailReducer,
-      management: manageReducer
+      management: manageReducer,
       // Add other reducers here
     });
     const store = configureStore({
@@ -25,7 +25,7 @@ const createAppStore = async () => {
         getDefaultMiddleware().concat([thunk, tokenMiddleware]),
     });
     await store.dispatch(initializeAuth()); // lấy dữ liệu từ localstorage
-    
+
     return store;
   } catch (err) {
     console.log(err);

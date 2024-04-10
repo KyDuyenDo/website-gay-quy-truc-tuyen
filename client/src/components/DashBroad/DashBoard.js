@@ -119,6 +119,7 @@ const DashBoard = () => {
             <thead className="bg-gray">
               <tr>
                 <th scope="col">Dự Án</th>
+                <th scope="col">Tiền kêu gọi</th>
                 <th scope="col">Tiền thu</th>
                 <th scope="col">Tiền chi</th>
               </tr>
@@ -139,6 +140,7 @@ const DashBoard = () => {
                         </div>
                       </div>
                     </td>
+                    <td style={{ color: "#35A2EB" }}>{data.amountRaised}</td>
                     <td style={{ color: "#35A2EB" }}>+{data.amountEarned}</td>
                     <td style={{ color: "#FF6384" }}>-{data.totalSpent}</td>
                   </tr>

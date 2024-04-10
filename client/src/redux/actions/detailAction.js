@@ -5,25 +5,26 @@ import { getUser } from "../api/userAPI";
 export const setDataDetail = (articleId) => async (dispatch) => {
   try {
     const data = await api.getArticle(articleId);
-    const topDonorsWithDetails = await Promise.all(
-      data.top4Donators.map(async (donation) => {
+
+    // Filter top donors (assuming top4Donators is an array)
+    const topDonorsWithDetails = data.top4Donators
+      ?.filter((donation) => !donation.anonymous)
+      .map(async (donation) => {
         const userResponse = await getUser(donation.donorId);
         return {
           donorId: donation.donorId,
           totalDonations: donation.totalDonations,
-          username: donation.username,
+          username: donation.anonymous ? "" : donation.username, // Set username to empty string if anonymous
           anonymous: donation.anonymous,
           avatar: userResponse.avatar,
         };
-      })
-    );
+      });
+
+    const resolvedDonors = await Promise.all(topDonorsWithDetails); // Wait for all async operations to finish
     await dispatch({ type: types.DETAIL_SET, payload: data });
-    await dispatch({
-      type: types.TOPDONORS_SET,
-      payload: topDonorsWithDetails,
-    });
+    await dispatch({ type: types.TOPDONORS_SET, payload: resolvedDonors });
   } catch (error) {
-    console.log(error);
+    console.error(error); // Use console.error for errors
   }
 };
 export const clearDetail = () => async (dispatch) => {

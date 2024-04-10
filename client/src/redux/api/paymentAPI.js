@@ -17,3 +17,17 @@ export const capturerderPayPal = async (orderID) => {
   });
   return order;
 };
+
+export const createPayment = async (formData) => {
+  try {
+    const { data } = await API.post(`/payment/create`, formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};

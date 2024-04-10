@@ -7,17 +7,8 @@ export const setPayerName = (payerName) => async (dispatch) => {
   dispatch({ type: types.SET_PAYER_NAME, payload: payerName });
 };
 
-export const setPayAccount = (payAccount) => async (dispatch) => {
-    //cần API truy cập vào bài viết và lấy về số tài khoản trả
-  dispatch({ type: types.SET_PAY_ACCOUNT, payload: payAccount });
-};
-
-export const setAmount = (amount) => async (dispatch) => {
+export const setAmountAction = (amount) => async (dispatch) => {
   dispatch({ type: types.SET_AMOUNT, payload: amount });
-};
-
-export const setAmountTip = (amountTip) => async (dispatch) => {
-  dispatch({ type: types.SET_AMOUNT_TIP, payload: amountTip });
 };
 
 export const setAnonymous = (anonymous) => async (dispatch) => {

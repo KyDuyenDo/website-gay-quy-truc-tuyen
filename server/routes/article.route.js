@@ -22,6 +22,7 @@ const {
   getArticleHighRating,
   isLimitArticleUp,
   getUserArticleDetail,
+  articleRaiseAmount,
 } = require("../controllers/article.controller");
 
 const {
@@ -39,6 +40,7 @@ router.post("/reject/:postId", requireAuth, requireAdminAuth, rejectArticle);
 router.get("/get/:id", getArticle);
 router.get("/get", getArticles);
 router.get("/get/high/rating", getArticleHighRating);
+router.put("/raise/amount", articleRaiseAmount);
 router.get(
   "/check/limt/post",
   requireAuth,

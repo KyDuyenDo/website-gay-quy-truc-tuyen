@@ -35,12 +35,14 @@ import ProjectEdit from "../components/DashBroad/ProjectEdit";
 import VerifyEmail from "./VerifyEmail";
 import EmailVerifiedMessage from "./EmailVerifiedMessage";
 import ProjectCreate from "./ProjectCreate";
+import AdminDashBoard from "./Admin/AdminDashBoard";
 function Index() {
   return (
     <>
       <Router>
         <Routes>
           <Route path="/auth/verify" exact element={<VerifyEmail />} />
+          <Route path="/admin/dashboar" exact element={<AdminDashBoard />} />
           <Route
             path="/email-verified"
             exact
@@ -48,7 +50,7 @@ function Index() {
           />
           <Route element={<MainLayout />}>
             <Route path="/" exact element={<Home />} />
-            <Route path="/payment" exact element={<Payment />} />
+            <Route path="/payment/:id" exact element={<Payment />} />
             <Route
               path="/become-a-fundraiser"
               exact

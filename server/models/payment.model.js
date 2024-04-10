@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const PaymentSchema = new Schema({
   // _id
-  donationId: { type: Schema.Types.ObjectId, ref: "donations", required: true },
   payerName: { type: String },
   payerEmail: { type: String },
   TradingCode: { type: String },

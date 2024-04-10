@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../css/payment.css";
 import paypal from "../assets/logo/paypal.png";
 import vnpay from "../assets/logo/vnpay.png";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { getConfig } from "../redux/api/paymentAPI";
 import PayPalPayment from "../components/PayPalPayment";
-
+import { useParams } from "react-router-dom";
 const Payment = () => {
   const progress = [
     {
@@ -64,28 +64,35 @@ const Payment = () => {
       },
     },
   ];
+  const params = useParams();
+  const [isMounted, setIsMounted] = useState(true);
   const [tip, setTip] = useState(0);
+  const [fullname, setFullname] = useState("");
   const [methodpay, setMethodpay] = useState("");
   const [amount, setAmount] = useState(10000);
   const matTip = amount * (parseInt(progress[tip].va) / 100);
   const [amountTip, setAmountTip] = useState(matTip);
   const [config, setConfig] = useState("");
   const [anonymous, setAnonymous] = useState(false);
-  const [total, setTotal] = useState(
-    ((parseInt(amount) + parseInt(amountTip)) / 24000).toFixed(2)
-  );
-
+  const [errorText, setErrorText] = useState(true);
   useEffect(() => {
     setAmountTip(amount * (parseInt(progress[tip].va) / 100));
   }, [tip, amount]);
-
+  useEffect(() => {
+    if (anonymous === true && fullname === "") {
+      setErrorText(false);
+    } else if (anonymous !== true && fullname !== "") {
+      setErrorText(false);
+    } else {
+      setErrorText(true);
+    }
+  }, [anonymous, fullname]);
   const addPayPal = async () => {
     const data = await getConfig();
     setConfig(data);
   };
   useEffect(() => {
     addPayPal();
-    console.log(total);
   }, []);
 
   const initialOptions = {
@@ -93,7 +100,7 @@ const Payment = () => {
     currency: "USD",
     intent: "capture",
   };
-
+  console.log(isMounted);
   return (
     <section
       style={{
@@ -118,7 +125,16 @@ const Payment = () => {
                     className="cf-form__input "
                     placeholder="Tên đầy đủ"
                     type="text"
+                    value={fullname}
+                    onChange={(event) => setFullname(event.target.value)}
                   />
+                  {errorText === true ? (
+                    <small className="text-warning m-1 p-0">
+                      Nếu chọn ẩn danh thì không cần nhập tên và ngược lại!
+                    </small>
+                  ) : (
+                    ""
+                  )}
                 </div>
 
                 <br />
@@ -127,7 +143,10 @@ const Payment = () => {
                 </h4>
                 <div data-stripe-type="payment">
                   <div className="cf-form__error-box">
-                    <div className="cf-form__error-text" data-error="true"></div>
+                    <div
+                      className="cf-form__error-text"
+                      data-error="true"
+                    ></div>
                   </div>
                   <div data-stripe-element="payment" className="StripeElement">
                     <div
@@ -214,10 +233,17 @@ const Payment = () => {
                     for="checkout_type_neu_anonymous"
                   >
                     <div className="round">
-                      <input type="checkbox" id="checkbox-18" />
+                      <input
+                        onChange={() => setAnonymous(!anonymous)}
+                        type="checkbox"
+                        id="checkbox-18"
+                      />
                       <label for="checkbox-18"></label>
                     </div>
-                    <span className="cf-form__label-text" data-input-label="true">
+                    <span
+                      className="cf-form__label-text"
+                      data-input-label="true"
+                    >
                       Không hiển thị tên của tôi
                     </span>
                   </label>
@@ -240,13 +266,19 @@ const Payment = () => {
               </div>
             </div>
             <div className="cf-checkout__summary">
-              <div className="js-sticky-dummy" style={{ minHeight: "0px" }}></div>
+              <div
+                className="js-sticky-dummy"
+                style={{ minHeight: "0px" }}
+              ></div>
               <div className="cf-form__section">
                 <h3 className="cf-form__section-title">Tổng Kết</h3>
                 <h4 className="cf-form__section-secondary-title">
                   Giúp nhà máy chưng cất Silver Circle di dời
                 </h4>
-                <div className="cf-form__layout" data-form-layout-padded="bottom">
+                <div
+                  className="cf-form__layout"
+                  data-form-layout-padded="bottom"
+                >
                   <a
                     href="/checkout/help-silver-circle-distillery-to-relocate/start"
                     className="cf-form__anchor"
@@ -262,9 +294,19 @@ const Payment = () => {
                   >
                     Số tiền quyên góp
                   </label>
-                  <div className="cf-form__group" data-icon="" data-currency="VNĐ">
+                  <div
+                    className="cf-form__group"
+                    data-icon=""
+                    data-currency="VNĐ"
+                  >
                     <input
-                      onChange={(event) => setAmount(event.target.value)}
+                      onChange={(event) => {
+                        setAmount(event.target.value);
+                        setIsMounted(false);
+                      }}
+                      onBlur={() => {
+                        setIsMounted(true);
+                      }}
                       className="cf-form__input"
                       value={amount}
                       step="1000"
@@ -274,7 +316,10 @@ const Payment = () => {
                   </div>
                 </div>
                 <div data-checkout-tip="true">
-                  <div className="cf-form__layout" data-form-layout="twin small">
+                  <div
+                    className="cf-form__layout"
+                    data-form-layout="twin small"
+                  >
                     <span className="cf-form__general-text">Tiền tip</span>
                     <span className="cf-form__general-text cf-text--break-word">
                       <span data-checkout-tip-amount="true">
@@ -327,7 +372,10 @@ const Payment = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="cf-checkout__tiprange" data-tiprange="true">
+                      <div
+                        className="cf-checkout__tiprange"
+                        data-tiprange="true"
+                      >
                         <input
                           className="cf-form__input "
                           type="range"
@@ -369,7 +417,10 @@ const Payment = () => {
                   </div>
                 </div>
                 <div className="cf-form__highlight-box">
-                  <div className="cf-form__layout" data-form-layout="twin small">
+                  <div
+                    className="cf-form__layout"
+                    data-form-layout="twin small"
+                  >
                     <span className="cf-form__general-text">
                       <strong>Tổng cộng:</strong>
                     </span>
@@ -444,30 +495,33 @@ const Payment = () => {
                     Privacy policy
                   </a>
                 </p>
-                {methodpay === "" ? (
+                {methodpay === "" || errorText === true ? (
+                  ""
+                ) : isMounted === false ? (
                   ""
                 ) : (
-                  <div className="cf-form__group" data-form-layout-padded="bottom">
+                  <div
+                    className="cf-form__group"
+                    data-form-layout-padded="bottom"
+                  >
                     <PayPalScriptProvider options={initialOptions}>
                       <PayPalPayment
-                        amount={total}
+                        amountTip={amountTip}
+                        anonymous={anonymous}
+                        fullname={fullname}
+                        methodpay={methodpay}
+                        amount={amount}
+                        articleId={params.id}
                         customStyle={{
                           layout: "horizontal",
                           tagline: false,
                           color: "white",
                         }}
                       />
-                      {/* <PayPalButtons
-                          style={{
-                            layout: "horizontal",
-                            tagline: false,
-                            color: "white",
-                          }}
-                        /> */}
                     </PayPalScriptProvider>
                   </div>
                 )}
-                {methodpay === "" ? (
+                {methodpay === "" || errorText === true ? (
                   ""
                 ) : (
                   <p className="cf-text cf-text--small cf-text--light cf-text--center">

@@ -27,6 +27,9 @@ const ArticleDetail = () => {
   const top4Donators = useSelector(
     (state) => state.detail.topDonorsWithDetails
   );
+  // console.log(
+  //   ((detailArticle.amountEarned / detailArticle.amountRaised) * 100).toFixed(2)
+  // );
   const params = useParams();
   const handleStepClick = (step) => {
     setActiveStep(step);
@@ -167,7 +170,7 @@ const ArticleDetail = () => {
                   0 ? (
                     <div className="widget style-1 widget_donate">
                       <Link
-                        to="/payment"
+                        to={`/payment/${params.id}`}
                         className="btn btn-donate btn-primary w-100"
                         data-bs-toggle="modal"
                         data-bs-target="#modalDonate"
@@ -247,7 +250,7 @@ const ArticleDetail = () => {
                               (detailArticle.amountEarned /
                                 detailArticle.amountRaised) *
                                 100
-                            )}%`,
+                            ).toFixed(2)}%`,
                           }}
                         ></div>
                       </div>

@@ -11,6 +11,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserArticleDetail } from "../../redux/actions/manageAction";
+import { addActivity } from "../../redux/api/articleAPI";
+import { upLoadImage } from "../../redux/api/uploadAPI";
 import { useParams } from "react-router-dom";
 import "../../css/projectEdit.css";
 
@@ -20,7 +22,7 @@ import { useForm } from "react-hook-form";
 
 const schemaActivity = yup.object().shape({
   amountSpend: yup.string().required("Số tiền chi trống"),
-  activityImage: yup.string().required("Chưa chọn ảnh"),
+  activityImage: yup.mixed().required("Chưa chọn ảnh"),
   content: yup.string().required("Chưa nhập nội dung"),
 });
 
@@ -48,7 +50,6 @@ const ProjectEdit = () => {
 
     return `${month}/${day}/${year.toString().slice(-2)} - ${hours}:${minutes}`;
   }
-  console.log(params.id);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -194,7 +195,28 @@ const ProjectEdit = () => {
           <form
             className="main-contain-up-activity"
             style={{ marginTop: "25px" }}
-            onSubmit={() => {}}
+            onSubmit={handleSubmit(async (data) => {
+              console.log(data);
+              const formData = new FormData();
+              const formImage = new FormData();
+              formImage.append("file", data.activityImage[0]);
+
+              try {
+                const image = await upLoadImage("activity", formImage);
+                console.log(image);
+                formData.append("image", image.imageURL);
+                formData.append("content", data.content);
+                formData.append("amountSpent", data.amountSpend);
+                formData.append("postId", params.id);
+                addActivity(formData).then(() => {
+                  dispatch(getUserArticleDetail(params.id));
+                  setOpenForm(false);
+                  reset();
+                });
+              } catch (error) {
+                console.error("Error uploading image:", error);
+              }
+            })}
           >
             <div className="row">
               <div className="col">
@@ -204,30 +226,33 @@ const ProjectEdit = () => {
                   </label>
                   <input
                     type="text"
-                    id="form6Example1"
+                    id="amountSpend"
+                    name="amountSpend"
                     className="form-control"
+                    {...register("amountSpend")}
                   />
                 </div>
-                <div className="contain-upload row">
-                  <div className="col-3">
-                    <div className="upload-item">
-                      <FontAwesomeIcon
-                        size="1x"
-                        icon={faImage}
-                      ></FontAwesomeIcon>
-                      <p>HÌNH ẢNH</p>
-                      <button className="d-none"></button>
+                {errors.amountSpend && (
+                  <small className="text-danger m-1 p-0">
+                    {errors.amountSpend.message}
+                  </small>
+                )}
+                <div style={{ marginTop: "20px" }} className="row">
+                  <div>
+                    <div className="input-group">
+                      <input
+                        type="file"
+                        className="form-control"
+                        {...register("activityImage")}
+                        id="activityImage"
+                        name="activityImage"
+                      />
                     </div>
-                  </div>
-                  <div className="col-3">
-                    <div className="upload-item">
-                      <FontAwesomeIcon
-                        size="1x"
-                        icon={faFileAlt}
-                      ></FontAwesomeIcon>
-                      <p>TÀI LIỆU</p>
-                      <button className="d-none"></button>
-                    </div>
+                    {errors.activityImage && (
+                      <small className="text-danger m-1 p-0">
+                        {errors.activityImage.message}
+                      </small>
+                    )}
                   </div>
                 </div>
               </div>
@@ -237,16 +262,26 @@ const ProjectEdit = () => {
                 </label>
                 <textarea
                   className="form-control"
-                  id="exampleFormControlTextarea1"
+                  id="content"
+                  name="content"
                   rows="4"
+                  {...register("content")}
                 ></textarea>
+                {errors.content && (
+                  <small className="text-danger m-1 p-0">
+                    {errors.content.message}
+                  </small>
+                )}
               </div>
             </div>
-            <div className="contain-button">
+            <div className="contain-button" style={{ marginTop: "20px" }}>
               <button
                 type="button"
                 className="btn btn-secondary ml-2"
-                onClick={() => setOpenForm(false)}
+                onClick={() => {
+                  reset();
+                  setOpenForm(false);
+                }}
               >
                 Thoát
               </button>
@@ -295,7 +330,7 @@ const ProjectEdit = () => {
                         more="Xem thêm"
                         less="Thu gọn"
                         className="content-css"
-                        anchorClass="show-more-less-clickable"
+                        anchorClassNclassName="show-more-less-clickable"
                         onClick={executeOnClick}
                         expanded={false}
                         truncatedEndingComponent={"... "}

@@ -33,6 +33,19 @@ export const getArticle = async (idArticle) => {
   }
 };
 
+export const raiseAmountEarn = async (formData) => {
+  try {
+    const { data } = await API.put(`/article/raise/amount`, formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
 export const getArticles = async (query) => {
   try {
     const { data } = await API.get(`/article/get${query}`);
@@ -103,7 +116,7 @@ export const addActivity = async (formData) => {
         "Content-Type": "application/json",
       },
     });
-    return { error: null, data };
+    return data;
   } catch (error) {
     return handleApiError(error);
   }

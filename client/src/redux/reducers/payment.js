@@ -3,8 +3,8 @@ import * as types from "../constants/paymentConstants";
 const initialState = {
   payername: null,
   payerEmail: null,
-  amount: null,
-  amountTip: null,
+  amount: 10000,
+  amountTip: 0,
   anonymous: null,
   status: null,
   payMethod: null,
@@ -27,7 +27,7 @@ const paymentReducer = (state = initialState, action) => {
     case types.SET_AMOUNT:
       return {
         ...state,
-        amount: payload ? payload : null,
+        amount: payload ? payload : 0,
       };
 
     case types.SET_MOUNT_TIP:

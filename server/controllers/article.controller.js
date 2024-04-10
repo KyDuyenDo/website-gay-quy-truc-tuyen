@@ -559,29 +559,17 @@ const addComment = async (req, res) => {
   }
 };
 
-const updateArticle = async (req, res) => {};
-
 const addActivity = async (req, res) => {
   try {
-    const {
-      image,
-      state,
-      content,
-      title,
-      amountSpent,
-      document,
-      postId,
-      userId,
-    } = req.body;
+    const { image, content, amountSpent, postId } = req.body;
+    const userId = req.userId;
     const newActivity = new Activity({
       addedBy: userId,
       articleId: postId,
       image: image,
-      state: state,
+      state: "",
       body: content,
-      title: title,
       amountSpent: amountSpent,
-      document: document,
     });
     await newActivity.save();
     await Article.findOneAndUpdate(
@@ -661,6 +649,22 @@ const getUserArticleDetail = async (req, res) => {
   }
 };
 
+const articleRaiseAmount = async (req, res) => {
+  const { postId, amount } = req.body;
+  try {
+    const article = await Article.findById(postId);
+    if (!article) {
+      return res.status(404).json({ message: "Not Fund" });
+    }
+    article.amountEarned = parseInt(article.amountEarned) + parseInt(amount);
+    article.save();
+    return res.status(200).json({ message: "Successfully" });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 module.exports = {
   addArticle,
   confirmArticle,
@@ -670,7 +674,6 @@ module.exports = {
   getArticleByUser, // tra ve bai bao cua nguoi dung, co loc theo state theo query
   deleteArticle,
   addComment,
-  updateArticle,
   addActivity,
   addCategory,
   getCategories,
@@ -679,4 +682,5 @@ module.exports = {
   getArticleHighRating,
   isLimitArticleUp,
   getUserArticleDetail,
+  articleRaiseAmount,
 };

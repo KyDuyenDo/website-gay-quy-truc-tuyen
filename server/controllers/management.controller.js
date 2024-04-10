@@ -88,10 +88,21 @@ function getDailyTotals(data, weekDays) {
 // trả về mảng danh số chi trong tuần được tổng hợp từ các activity và các donation
 const getChartData = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const userId = req.userId;
     const week = getWeekDays();
 
-    const articlesByUser = await Article.find({ userId: userId }).exec();
+    const articlesByUser = await Article.find({
+      userId: userId,
+      adminApproval: true,
+      $expr: {
+        $lte: [
+          {
+            $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+          },
+          { $add: ["$expireDate", 2] },
+        ],
+      },
+    }).exec();
     if (!articlesByUser) {
       res.status(404).json({ message: "Not Found" });
     }

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const Payment = require("../models/payment.model");
 
 router.get("/config", async (req, res) => {
   return res.status(200).json({
@@ -11,7 +12,6 @@ router.get("/config", async (req, res) => {
 router.post("/create", async (req, res) => {
   try {
     const {
-      donationId,
       payerName,
       payerEmail,
       TradingCode,
@@ -20,9 +20,21 @@ router.post("/create", async (req, res) => {
       amount,
       tip,
     } = req.body;
-
+    const newPayment = new Payment({
+      payerName: payerName,
+      payerEmail: payerEmail,
+      TradingCode: TradingCode,
+      method: method,
+      status: status,
+      amount: amount,
+      tip: tip,
+    });
+    newPayment.save();
+    return res.status(200).json(newPayment);
   } catch (error) {
-    
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
   }
 });
 

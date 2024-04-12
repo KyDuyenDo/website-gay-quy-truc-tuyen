@@ -15,6 +15,7 @@ const {
   becomeFundraiser,
   upLoadImageFundraiser,
   getHighRaiseMember,
+  getDetailFundraiser,
 } = require("../controllers/user.controller");
 
 const { sendVerificationEmail } = require("../middleware/users/verifyEmail");
@@ -56,6 +57,12 @@ router.put("/:id", requireAuth, decodeToken, updateInfo);
 router.post("/become/fundraiser", requireAuth, decodeToken, becomeFundraiser);
 router.put("/fund/image", requireAuth, decodeToken, upLoadImageFundraiser);
 router.get("/get/fundraisers", getAllMember);
+router.get(
+  "/only/fundraiser",
+  requireAuth,
+  requireFundraiserAuth,
+  getDetailFundraiser
+);
 router.get("/fundraiser/:id", getMemberDetail);
 router.get("/get/fundraiser/high/amount", getHighRaiseMember);
 

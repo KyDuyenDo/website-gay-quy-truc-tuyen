@@ -11,7 +11,7 @@ export const getUser = async (id) => {
 
 export const isFundraiser = async () => {
   try {
-    const { data } = await API.get(`users/protected/isFundraiserAuth`);
+    const { data } = await API.get(`/users/protected/isFundraiserAuth`);
     return data.success;
   } catch (error) {
     return handleApiError(error);
@@ -20,7 +20,7 @@ export const isFundraiser = async () => {
 
 export const isProtected = async () => {
   try {
-    const { data } = await API.post(`users/protected`);
+    const { data } = await API.post(`/users/protected`);
     return data.success;
   } catch (error) {
     return handleApiError(error);
@@ -68,16 +68,16 @@ export const upLoadImageFundraiser = async (formData) => {
 
 export const getAllMember = async (query) => {
   try {
-    const { data } = await API.get(`users/fundraiser${query}`);
+    const { data } = await API.get(`/users/get/fundraisers${query}`);
     return data;
   } catch (error) {
     return handleApiError(error);
   }
 };
 
-export const getHighRaiseMember = async (query) => {
+export const getHighRaiseMember = async () => {
   try {
-    const { data } = await API.get(`users/get/fundraiser/high/amount`);
+    const { data } = await API.get(`/users/get/fundraiser/high/amount`);
     return data;
   } catch (error) {
     return handleApiError(error);
@@ -86,7 +86,16 @@ export const getHighRaiseMember = async (query) => {
 
 export const getMemberDetail = async (id) => {
   try {
-    const { data } = await API.get(`users/fundraiser/${id}`);
+    const { data } = await API.get(`/users/fundraiser/${id}`);
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const getFundraiserDetail = async () => {
+  try {
+    const { data } = await API.get(`/users/only/fundraiser`);
     return data;
   } catch (error) {
     return handleApiError(error);

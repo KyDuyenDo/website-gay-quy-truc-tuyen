@@ -13,6 +13,15 @@ export const upLoadImage = async (type, formData) => {
   }
 };
 
+export const getImage = async (type, filename) => {
+  try {
+    const { data } = await API.get(`/image/data/${type}/${filename}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const delImage = async (type, id) => {
   try {
     await API.post(`image/${type}/del/${id}`);

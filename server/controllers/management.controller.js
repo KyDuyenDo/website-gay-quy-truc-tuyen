@@ -36,7 +36,6 @@ const delNotify = async (req, res) => {
   const { notifyId } = req.body;
   try {
     const notify = await Notify.findByIdAndDelete(notifyId);
-    console.log(notify);
     if (!notify) {
       return res.status(404).json({
         message: "Notify not found.",

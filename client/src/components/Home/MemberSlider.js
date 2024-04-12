@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 // Import Swiper React components
 import "../../css/member.css";
@@ -6,55 +6,42 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 
-import Loader from "../Loader";
-import { getHighRaiseMember } from "../../redux/api/userAPI";
-
-//Images
-import member1 from "./../../assets/images/avatar/avatar5.jpg";
-import member2 from "./../../assets/images/avatar/avatar6.jpg";
-import member3 from "./../../assets/images/avatar/avatar7.jpg";
-import member4 from "./../../assets/images/avatar/avatar8.jpg";
-import member5 from "./../../assets/images/avatar/avatar9.jpg";
-import pattren5 from "./../../assets/constant/pattren5.png";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getHighRaiseMember } from "../../redux/actions/memberAction";
 // import Swiper core and required modules
 import { Autoplay } from "swiper/modules";
 
 //SwiperCore.use([EffectCoverflow,Pagination]);
 
-const dataBlog = [
-  {
-    image: member1,
-    title: "Tấn công Sa",
-    subtitle: "@gmail.com",
-    time: "12/2023",
-    money: "4.119.305.712 VND",
-  },
-  {
-    image: member2,
-    title: "Nguyễn Thị Hiếu",
-    subtitle: "@gmail.com",
-    time: "03/2023",
-    money: "4.119.305.712 VND",
-  },
-  {
-    image: member3,
-    title: "Linh Ngọc Đàm",
-    subtitle: "@gmail.com",
-    time: "01/2023",
-    money: "4.119.305.712 VND",
-  },
-  // {image: member4, title:'Hoàng Hoa Trung', subtitle:'@gmail.com', time:'Tham gia từ: 08/2023', money:'4.119.305.712 VND'},
-  // {image: member5, title:'Đỗ Thị Nga', subtitle:'10.119.305.712 VND',time:'Tham gia từ: 01/2023'}
-];
-
 const MemberSlider = () => {
-  const [members, setMembers] = useState([]);
+  const dispatch = useDispatch();
+  const members = useSelector((state) => state.member.members);
   useEffect(() => {
-    getHighRaiseMember().then((res) => {
-      setMembers(res);
-    });
-  });
+    const fetchData = async () => {
+      try {
+        dispatch(getHighRaiseMember());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  function truncateString(str, num) {
+    const wordCount = str.split(" ").length;
+    if (wordCount <= num) {
+      return str;
+    }
+
+    const truncatedString = str.split(" ").slice(0, num).join(" ");
+    return `${truncatedString}...`;
+  }
   return (
     <>
       <Swiper
@@ -81,12 +68,12 @@ const MemberSlider = () => {
           },
         }}
       >
-        {dataBlog.map((d, i) => (
-          <SwiperSlide key={i}>
+        {members.map((d) => (
+          <SwiperSlide key={d._id}>
             <div className="member d-flex flex-row">
               <div className="">
                 <img
-                  src={d.image}
+                  src={d.user[0].avatar}
                   style={{
                     width: "110px",
                     borderRadius: "50%",
@@ -96,10 +83,12 @@ const MemberSlider = () => {
                 />
               </div>
               <div className="member-info">
-                <span className="span_underline">{d.title}</span>
-                <p>Tham gia từ {d.time}</p>
-                <p>Số tiền gây quỹ {d.money}</p>
-                <Link to="/member-detail">
+                <span className="span_underline">
+                  {truncateString(d.groupName, 3)}
+                </span>
+                <p>Tham gia từ {formatDate(d.approvaldate)}</p>
+                <p>Số tiền gây quỹ {d.totalAmountRaised}</p>
+                <Link to={`/member-detail/${d.userId}`}>
                   <button className="cta">
                     <span>Xem chi tiết</span>
                     <svg width="15px" height="10px" viewBox="0 0 13 10">

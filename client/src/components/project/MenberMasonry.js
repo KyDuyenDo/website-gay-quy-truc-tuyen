@@ -1,79 +1,83 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { faCoins, faCalendar, faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import member1 from "./../../assets/images/avatar/avatar5.jpg";
-import member2 from "./../../assets/images/avatar/avatar6.jpg";
-import member3 from "./../../assets/images/avatar/avatar7.jpg";
+import ReactPaginate from "react-paginate";
+import {
+  getAllMember,
+  setSearchClear,
+  setSearch,
+} from "../../redux/actions/memberAction";
+import { useDispatch, useSelector } from "react-redux";
 const MenberMasonry = () => {
-  const cardData = [
-    {
-      cardid: "1",
-      image: member1,
-      title: "Tấn công Sa",
-      subtitle: "@gmail.com",
-      time: "12/2023",
-      money: "4.119.305.712 VND",
-    },
-    {
-      cardid: "2",
-      image: member2,
-      title: "Nguyễn Thị Hiếu",
-      subtitle: "@gmail.com",
-      time: "03/2023",
-      money: "4.119.305.712 VND",
-    },
-    {
-      cardid: "3",
-      image: member3,
-      title: "Linh Ngọc Đàm",
-      subtitle: "@gmail.com",
-      time: "01/2023",
-      money: "4.119.305.712 VND",
-    },
-    {
-      cardid: "4",
-      image: member3,
-      title: "Linh Ngọc Đàm",
-      subtitle: "@gmail.com",
-      time: "01/2023",
-      money: "4.119.305.712 VND",
-    },
-    {
-      cardid: "5",
-      image: member3,
-      title: "Linh Ngọc Đàm",
-      subtitle: "@gmail.com",
-      time: "01/2023",
-      money: "4.119.305.712 VND",
-    },
-    // {image: member4, title:'Hoàng Hoa Trung', subtitle:'@gmail.com', time:'Tham gia từ: 08/2023', money:'4.119.305.712 VND'},
-    // {image: member5, title:'Đỗ Thị Nga', subtitle:'10.119.305.712 VND',time:'Tham gia từ: 01/2023'}
-  ];
-  const [dropbtn, setDropbtn] = useState("Newest");
-  const [popular, setPopular] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [activeGenre, setActiveGenre] = useState(0);
+  const dispatch = useDispatch();
+  const allmember = useSelector((state) => state.member.memberList);
+  const search = useSelector((state) => state.member.search);
+  console.log(search);
   useEffect(() => {
-    fetchPopular();
+    const fetchData = async () => {
+      try {
+        if (search !== "") {
+          await dispatch(getAllMember(`?q=${search}`));
+          await dispatch(setSearchClear());
+        } else {
+          dispatch(getAllMember(""));
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
   }, []);
-  function fetchPopular() {
-    setPopular(cardData);
-    setFiltered(cardData);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  function truncateString(str, num) {
+    const wordCount = str.split(" ").length;
+    if (wordCount <= num) {
+      return str;
+    }
+
+    const truncatedString = str.split(" ").slice(0, num).join(" ");
+    return `${truncatedString}...`;
   }
+  const createQueryString = (title, sort) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const encodedTitle = title.replace(/ /g, "%20");
+        const query = `?category=${encodedTitle}&sort=${sort}`;
+        resolve(query);
+      } catch (error) {
+        reject(error); // Handle potential errors
+      }
+    });
+  };
+
+  const itemsMemberPage = 9;
+  const [activeGenre, setActiveGenre] = useState(0);
+  const [currentItemsMember, setCurrentItemsMember] = useState(null);
+  const [pageCountMember, setPageCountMember] = useState(0);
+
+  const [itemMemberOffset, setItemMemberOffset] = useState(0);
 
   useEffect(() => {
-    if (activeGenre === 0) {
-      setFiltered(cardData);
-      return;
-    }
-    const filtered = popular.filter((card) =>
-      card.cardid.includes(activeGenre)
+    const endOffset = itemMemberOffset + itemsMemberPage;
+    console.log(`Loading items from ${itemMemberOffset} to ${endOffset}`);
+    setCurrentItemsMember(allmember.slice(itemMemberOffset, endOffset));
+    setPageCountMember(Math.ceil(allmember.length / itemsMemberPage));
+  }, [itemMemberOffset, itemsMemberPage, allmember]);
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsMemberPage) % allmember.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
-    setFiltered(filtered);
-  }, [activeGenre]);
+    setItemMemberOffset(newOffset);
+  };
+
   return (
     <>
       <div className="row m-b30">
@@ -81,7 +85,13 @@ const MenberMasonry = () => {
           <div className="site-filters style-1 clearfix">
             <ul className="filters" data-bs-toggle="buttons">
               <li className={`btn ${activeGenre === 0 ? "active" : ""}`}>
-                <Link to={"#"} onClick={() => setActiveGenre(0)}>
+                <Link
+                  to={"#"}
+                  onClick={() => {
+                    dispatch(getAllMember(""));
+                    setActiveGenre(0);
+                  }}
+                >
                   Tất cả
                 </Link>
               </li>
@@ -89,7 +99,13 @@ const MenberMasonry = () => {
                 data-filter=".Technology"
                 className={`btn ${activeGenre === 1 ? "active" : ""}`}
               >
-                <Link to={"#"} onClick={() => setActiveGenre(1)}>
+                <Link
+                  to={"#"}
+                  onClick={() => {
+                    dispatch(getAllMember(`?type=only`));
+                    setActiveGenre(1);
+                  }}
+                >
                   Cá nhân
                 </Link>
               </li>
@@ -97,7 +113,13 @@ const MenberMasonry = () => {
                 data-filter=".Medical"
                 className={`btn ${activeGenre === 2 ? "active" : ""}`}
               >
-                <Link to={"#"} onClick={() => setActiveGenre(2)}>
+                <Link
+                  to={"#"}
+                  onClick={() => {
+                    dispatch(getAllMember(`?type=group`));
+                    setActiveGenre(2);
+                  }}
+                >
                   Tổ chức
                 </Link>
               </li>
@@ -114,88 +136,79 @@ const MenberMasonry = () => {
           //transition={{ duration: 0.3 }}
         >
           <AnimatePresence>
-            {filtered.map((item, index) => {
-              return (
-                <motion.li
-                  layout
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="card-container col-xl-4 col-lg-6 col-md-6 col-sm-12 Fashion m-b30"
-                  key={index}
-                  //transition={{ duration: 0.5 }}
-                >
-                  <div className="member d-flex flex-row">
-                    <div className="">
-                      <img
-                        src={item.image}
-                        style={{
-                          width: "110px",
-                          borderRadius: "50%",
-                          border: "2px solid #B1DAE7",
-                        }}
-                        alt=""
-                      />
+            {currentItemsMember &&
+              currentItemsMember.map((item) => {
+                return (
+                  <motion.li
+                    layout
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="card-container col-xl-4 col-lg-6 col-md-6 col-sm-12 Fashion m-b30"
+                    key={item._id}
+                    //transition={{ duration: 0.5 }}
+                  >
+                    <div className="member d-flex flex-row">
+                      <div className="">
+                        <img
+                          src={item.user[0].avatar}
+                          style={{
+                            width: "110px",
+                            borderRadius: "50%",
+                            border: "2px solid #B1DAE7",
+                          }}
+                          alt=""
+                        />
+                      </div>
+                      <div className="member-info">
+                        <span className="span_underline">
+                          {truncateString(item.groupName, 3)}
+                        </span>
+                        <p>Tham gia từ {formatDate(item.approvaldate)}</p>
+                        <p>Số tiền gây quỹ {item.totalAmountRaised}</p>
+                        <Link to={`/member-detail/${item.userId}`}>
+                          <button className="cta">
+                            <span>Xem chi tiết</span>
+                            <svg width="15px" height="10px" viewBox="0 0 13 10">
+                              <path d="M1,5 L11,5"></path>
+                              <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                          </button>
+                        </Link>
+                      </div>
                     </div>
-                    <div className="member-info">
-                      <span className="span_underline">{item.title}</span>
-                      <p>Tham gia từ {item.time}</p>
-                      <p>Số tiền gây quỹ {item.money}</p>
-                      <Link to="/member-detail">
-                        <button className="cta">
-                          <span>Xem chi tiết</span>
-                          <svg width="15px" height="10px" viewBox="0 0 13 10">
-                            <path d="M1,5 L11,5"></path>
-                            <polyline points="8 1 12 5 8 9"></polyline>
-                          </svg>
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </motion.li>
-              );
-            })}
+                  </motion.li>
+                );
+              })}
           </AnimatePresence>
         </ul>
       </div>
       {/* more */}
       <div className="row">
         <div className="col-12 m-sm-t0 m-t30">
-          <nav className="pagination-bx">
-            <div className="page-item">
-              <Link to={"#"} className="page-link prev">
-                <i className="fas fa-chevron-left"></i>
-              </Link>
-            </div>
-            <ul className="pagination">
-              <li className="page-item">
-                <Link to={"#"} className="page-link">
-                  1
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link to={"#"} className="page-link active">
-                  2
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link to={"#"} className="page-link">
-                  3
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link to={"#"} className="page-link">
-                  4
-                </Link>
-              </li>
-            </ul>
-            <div className="page-item">
-              <Link to={"#"} className="page-link next">
-                <i className="fas fa-chevron-right"></i>
-              </Link>
-            </div>
-          </nav>
+          <div className="contain-paginate">
+            <ReactPaginate
+              nextLabel=">"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              pageCount={pageCountMember}
+              previousLabel="<"
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              breakLabel="..."
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+              containerClassName="pagination"
+              activeClassName="active"
+              renderOnZeroPageCount={null}
+            />
+          </div>
         </div>
       </div>
     </>

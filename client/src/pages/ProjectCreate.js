@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 
 import Loader from "../components/Loader";
 import { addArticle, upDateImage } from "../redux/api/articleAPI";
+import { getImage } from "../redux/api/uploadAPI";
+import { getFundraiserDetail } from "../redux/api/userAPI";
 import { upLoadImage } from "../redux/api/uploadAPI";
 //images
 import bg from "../assets/images/bg7.jpeg";
@@ -18,13 +20,18 @@ import SecondStep from "../components/AddArticle/SecondStep";
 import ThirdStep from "../components/AddArticle/ThirdStep";
 import FourthStep from "../components/AddArticle/FourthStep";
 import { getCategoriesAction } from "../redux/actions/categoryAction";
+import { comparisonFace } from "../redux/api/modelAPI";
 import { useDispatch } from "react-redux";
 const schema = yup.object().shape({
-  projectTitle: yup.string().required("Tiêu đề trống")
-  .min(10, "Quá ngắn, tối thiểu 10 từ"),
+  projectTitle: yup
+    .string()
+    .required("Tiêu đề trống")
+    .min(10, "Quá ngắn, tối thiểu 10 từ"),
   projectCategory: yup.string().required("Chưa chọn danh mục"),
-  projectBody: yup.string().required("Nội dung trống")
-  .min(250, "Quá ngắn, tối thiểu 250 từ"),
+  projectBody: yup
+    .string()
+    .required("Nội dung trống")
+    .min(250, "Quá ngắn, tối thiểu 250 từ"),
   projectAmount: yup
     .string()
     .matches(/^\d+$/, "Số không hợp lệ")
@@ -82,6 +89,7 @@ const ProjectCreate = () => {
   } = useForm({ resolver: yupResolver(schema) });
   const dispatch = useDispatch();
   const [goSteps, setGoSteps] = useState(0);
+  const [erroravt, setErroravt] = useState("");
   const [errorImage, setErrorImage] = useState("");
   const [loading, setLoading] = useState(false);
   const [notifyAdd, setNotifyAdd] = useState(false);
@@ -138,11 +146,32 @@ const ProjectCreate = () => {
                     </Stepper>
                     {goSteps === 0 && (
                       <>
-                        <FirstStep />
+                        <FirstStep
+                          erroravt={erroravt}
+                          setValue={setValue}
+                          errors={errors}
+                        />
                         <div className="text-end toolbar toolbar-bottom p-2">
                           <button
                             className="btn sw-btn-next sw-btn ms-1npm"
-                            onClick={() => setGoSteps(1)}
+                            onClick={() => {
+                              if (getValues("image") === undefined) {
+                                setErroravt("Chưa chụp ảnh nhận dạng");
+                              } else {
+                                setErroravt("");
+                                const formData = new FormData();
+                                formData.append("image1", getValues("image"));
+                                getFundraiserDetail().then((detail) => {
+                                  getImage(
+                                    "identifyAvatar",
+                                    detail.identificationImage
+                                  ).then((res) => {
+                                    formData.append("image2", res);
+                                    comparisonFace(formData);
+                                  });
+                                });
+                              }
+                            }}
                           >
                             Xác thực
                           </button>

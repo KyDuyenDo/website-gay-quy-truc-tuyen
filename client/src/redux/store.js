@@ -8,6 +8,7 @@ import { initializeAuth } from "./actions/authActions";
 import donationReducer from "./reducers/donors";
 import detailReducer from "./reducers/detail";
 import manageReducer from "./reducers/management";
+import memberReducer from "./reducers/member";
 const createAppStore = async () => {
   try {
     const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const createAppStore = async () => {
       donation: donationReducer,
       detail: detailReducer,
       management: manageReducer,
+      member: memberReducer,
       // Add other reducers here
     });
     const store = configureStore({

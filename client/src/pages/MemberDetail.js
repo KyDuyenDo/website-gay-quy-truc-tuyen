@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/memberDetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
+import { getMemberDetail } from "../redux/actions/memberAction";
+import { useParams } from "react-router-dom";
 import {
   faFacebook,
   faTiktok,
   faYoutube,
-  faMailchimp,
 } from "@fortawesome/free-brands-svg-icons";
 const MemberDetail = () => {
+  const params = useParams();
+  const dispatch = useDispatch();
+  const memberDetail = useSelector((state) => state.member.memberDetail);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(getMemberDetail(params.id));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
   return (
     <div className="user-page bg-white">
       <div className="user-header-section">
@@ -16,7 +38,7 @@ const MemberDetail = () => {
             <div className="col-3  py-5">
               <div className="user-avatar d-flex justify-content-end flex-shrink-0 flex-basis-0 ">
                 <img
-                  src="https://static.thiennguyen.app/public/user/profile/2023/3/7/6df16864-27cb-4ada-8e90-cb7cfdc55015.jpg"
+                  src={memberDetail.userId.avatar}
                   alt="Như chưa hề có cuộc chia ly"
                 />
               </div>
@@ -27,18 +49,20 @@ const MemberDetail = () => {
                   <div className="d-flex flex-row flex-wrap">
                     <div className="username-row flex-fill d-flex flex-column flex-shrink-1">
                       <h2 className="text-single-line text-dark text-bold font-size-20 font-size-md-24 mt-2 mb-0">
-                        Như chưa hề có cuộc chia ly
+                        {memberDetail.groupName}
                       </h2>
-                      <div className="mt-2 text-gray-900">@nchcccl</div>
+                      <div className="mt-2 text-gray-900">
+                        {memberDetail.emailContact}
+                      </div>
                       <div className="mt-2 font-size-15 font-size-md-16">
-                        Tham gia từ: 3/2023
+                        Tham gia từ: {formatDate(memberDetail.approvaldate)}
                       </div>
                     </div>
                     <div className="counter-row d-none d-md-block">
                       <ul className="user-counters d-flex flex-row list-unstyled mb-0">
                         <li className="counter-item d-flex flex-column align-items-center">
                           <div className="text-bold text-dark font-size-20">
-                            0 VND
+                            {memberDetail.totalAmountDonate} VND
                           </div>
                           <div className="text-gray-800 font-size-12 font-size-md-16">
                             Số tiền ủng hộ
@@ -46,18 +70,18 @@ const MemberDetail = () => {
                         </li>
                         <li className="counter-item d-flex flex-column align-items-center">
                           <div className="text-bold text-dark font-size-20">
-                            <span>0</span>
+                            <span>{memberDetail.totalAmountEarned} VNĐ</span>
                           </div>
                           <div className="text-gray-800 font-size-12 font-size-md-16">
-                            Lượt ủng hộ
+                            Số tiền đã gây quỹ
                           </div>
                         </li>
                         <li className="counter-item d-flex flex-column align-items-center">
                           <div className="text-bold text-dark font-size-20">
-                            <span>5 sao</span>
+                            <span>{memberDetail.totalDonation}</span>
                           </div>
                           <div className="text-gray-800 font-size-12 font-size-md-16">
-                            Đánh giá uy tín
+                            Lượt được ủng hộ
                           </div>
                         </li>
                       </ul>
@@ -65,9 +89,7 @@ const MemberDetail = () => {
                   </div>
                   <div className="bio-row flex-shrink-0 d-none d-md-block mt-3">
                     <span className="text-gray-800 font-size-15 font-size-md-18">
-                      “Hoạt động Nhân đạo Tìm kiếm &amp; Đoàn tụ người thân Như
-                      chưa hề có cuộc chia ly hoàn toàn miễn phí; do công ty xã
-                      hội Nối Thân Thương (WeConnect) chủ trì.”
+                      {memberDetail.describe}
                     </span>
                   </div>
                   <div className="mt-2 font-size-15 font-size-md-16">

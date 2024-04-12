@@ -3,6 +3,7 @@ const router = express.Router();
 const formidable = require("formidable");
 const fs = require("fs");
 const MongoDB = require("../utils/mongodb.util");
+const base64 = require("base-64");
 
 router.post("/upload/:type", async function (request, result) {
   const type = request.params.type;
@@ -53,6 +54,39 @@ router.get("/:type/:filename", async function (request, result) {
     });
   }
   bucket.openDownloadStreamByName(filename).pipe(result);
+});
+
+router.get("/data/:type/:filename", async function (request, response) {
+  const { filename, type } = request.params;
+  const bucket = MongoDB.bucket(type);
+
+  try {
+    const [file] = await bucket.find({ filename }).toArray();
+    if (!file) {
+      return response.status(404).json({ error: "File does not exist." });
+    }
+    const chunks = [];
+    let completeData; // Declare completeData outside the Promise
+
+    const downloadStream = bucket.openDownloadStreamByName(filename);
+    // Buffer
+    downloadStream.on("data", (chunk) => {
+      chunks.push(chunk);
+    });
+    downloadStream.on("error", (error) => {
+      console.error("Error downloading file:", error);
+      return response.status(500).json({ error: "Internal server error." });
+    });
+
+    downloadStream.on("end", () => {
+      completeData = Buffer.concat(chunks);
+      const imageBase64 = completeData.toString("base64");
+      response.status(200).json(imageBase64);
+    });
+  } catch (error) {
+    console.error("Error retrieving file:", error);
+    return response.status(500).json({ error: "Internal server error." });
+  }
 });
 
 router.post("/:type/del/:_id", async function (request, result) {

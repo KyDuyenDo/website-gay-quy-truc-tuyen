@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVideo, faVideoSlash } from "@fortawesome/free-solid-svg-icons";
 
-const FirstStep = () => {
+const FirstStep = ({ setValue, errors, erroravt }) => {
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [img, setImg] = useState(null);
@@ -28,19 +28,11 @@ const FirstStep = () => {
     lineHeight: "22px",
     width: "110px",
   };
-  function dataURItoBlob(dataURI) {
-    const byteString = atob(dataURI.split(",")[1]);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const uint8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      uint8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([uint8Array], { type: "image/jpeg" });
-    return blob;
-  }
-  const capture = useCallback(() => {
+  const capture = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImg(imageSrc);
+    const imageData = imageSrc.split(",")[1];
+    setValue("image", [imageData]);
   }, [webcamRef]);
   useEffect(() => {
     if (isCameraOn) {
@@ -58,9 +50,9 @@ const FirstStep = () => {
         </p>
         <div className="row sp15">
           <div className="camera-controls">
-            <button
+            <a
               style={{ backgroundColor: "#FF5F52", border: "none" }}
-              className="btn btn-primary"
+              className="btn btn-primary buttons"
               onClick={() => {
                 setIsCameraOn(!isCameraOn);
                 if (isCameraOn) {
@@ -79,7 +71,12 @@ const FirstStep = () => {
                   <FontAwesomeIcon icon={faVideo} /> Bật camera
                 </>
               )}
-            </button>
+            </a>
+            {erroravt === "" ? (
+              ""
+            ) : (
+              <small className="text-danger m-1 p-0">{erroravt}</small>
+            )}
           </div>
           {isCameraOn &&
             isCameraActive &&

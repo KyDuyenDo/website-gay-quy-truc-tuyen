@@ -23,7 +23,11 @@ export const getChartData = () => async (dispatch) => {
 export const getDataFundraising = () => async (dispatch) => {
   try {
     const data = await api.getDataFundraising();
-    dispatch({ type: types.SET_LIST_EARN, payload: data });
+    if (data && data.error === undefined) {
+      dispatch({ type: types.SET_LIST_EARN, payload: data });
+    } else {
+      dispatch({ type: types.SET_LIST_EARN, payload: [] });
+    }
   } catch (error) {
     console.log(error);
   }
@@ -32,7 +36,11 @@ export const getDataFundraising = () => async (dispatch) => {
 export const getDataUserProject = () => async (dispatch) => {
   try {
     const data = await api.getDataUserProject();
-    dispatch({ type: types.SET_TOTAL_PROJECT, payload: data });
+    if (data && data.error === undefined) {
+      dispatch({ type: types.SET_TOTAL_PROJECT, payload: data });
+    } else {
+      dispatch({ type: types.SET_TOTAL_PROJECT, payload: [] });
+    }
   } catch (error) {
     console.log(error);
   }
@@ -41,7 +49,11 @@ export const getDataUserProject = () => async (dispatch) => {
 export const getUserDonation = () => async (dispatch) => {
   try {
     const data = await api.getUserDonation();
-    dispatch({ type: types.SET_USER_DONATIONS, payload: data });
+    if (data && data.error === undefined) {
+      dispatch({ type: types.SET_USER_DONATIONS, payload: data });
+    } else {
+      dispatch({ type: types.SET_USER_DONATIONS, payload: [] });
+    }
   } catch (error) {
     console.log(error);
   }
@@ -50,8 +62,12 @@ export const getUserDonation = () => async (dispatch) => {
 export const getNotify = () => async (dispatch) => {
   try {
     const data = await api.getNotify();
-    console.log(data);
-    dispatch({ type: types.SET_NOTIFY, payload: data });
+    console.log(data.data);
+    if (data && data.error === undefined) {
+      dispatch({ type: types.SET_NOTIFY, payload: data });
+    } else {
+      dispatch({ type: types.SET_NOTIFY, payload: [] });
+    }
   } catch (error) {
     console.log(error);
   }

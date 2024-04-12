@@ -69,7 +69,7 @@ function Index() {
               exact
               element={<ProjectCategories />}
             />
-            <Route path="/member-detail" exact element={<MemberDetail />} />
+            <Route path="/member-detail/:id" exact element={<MemberDetail />} />
             <Route path="/map" exact element={<Map />} />
             <Route path="/management" exact element={<Management />}>
               <Route path="/management" exact element={<DashBoard />} />

@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 const Fundraiser = require("../models/fundraiser.model");
+const Article = require("../models/article.model");
+const Donation = require("../models/donation.model");
 
 const jwt = require("jsonwebtoken");
 const Token = require("../models/token.model");
@@ -101,7 +103,28 @@ const getUser = async (req, res, next) => {
     return res.status(500).json({ message: "server error" });
   }
 };
-
+const getDetailFundraiser = async (req, res) => {
+  try {
+    const user = await Fundraiser.findOne({ userId: req.userId })
+      .select(
+        "-identificationCard -identificationNumber -expirationDate -achievements -adminApproval"
+      )
+      .populate(
+        "userId",
+        "email username joindate youtubeUrl facebookUrl tiktokUrk avatar"
+      )
+      .lean();
+    if (!user) {
+      return res.status(404).json({ message: "Not Found" });
+    }
+    const parts = user.identificationImage.split("/");
+    const filename = parts[parts.length - 1];
+    user.identificationImage = filename;
+    res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json({ message: "server error" });
+  }
+};
 const getAllMember = async (req, res) => {
   try {
     const pipeline = [
@@ -111,6 +134,30 @@ const getAllMember = async (req, res) => {
           localField: "userId",
           foreignField: "_id",
           as: "user",
+        },
+      },
+      {
+        $lookup: {
+          from: "articles",
+          localField: "userId",
+          foreignField: "userId",
+          as: "articles",
+          pipeline: [
+            {
+              $group: {
+                _id: null,
+                totalAmountRaised: {
+                  $sum: {
+                    $cond: [
+                      { $eq: ["$amountEarned", null] },
+                      0,
+                      "$amountEarned",
+                    ],
+                  },
+                }, // Handle missing or non-numeric values
+              },
+            },
+          ],
         },
       },
       {
@@ -125,17 +172,21 @@ const getAllMember = async (req, res) => {
           "user.avatar": 1,
           groupName: 1,
           type: 1,
+          articles: 1,
           approvaldate: 1,
+          totalAmountRaised: {
+            $arrayElemAt: ["$articles.totalAmountRaised", 0],
+          },
         },
       },
     ];
     if (req.query.type) {
-      pipeline[1].$match.$and.push({
+      pipeline[2].$match.$and.push({
         $or: [{ type: { $regex: new RegExp(req.query.type, "i") } }],
       });
     }
     if (req.query.q) {
-      pipeline[1].$match.$and.push({
+      pipeline[2].$match.$and.push({
         $or: [{ groupName: { $regex: new RegExp(req.query.q, "i") } }],
       });
     }
@@ -146,8 +197,7 @@ const getAllMember = async (req, res) => {
       const limit = parseInt(req.query.limit);
       limitMember = limitMember.slice(skip, skip + limit);
     }
-    const totalCount = limitMember.length;
-    res.status(200).json({ limitMember, totalCount });
+    res.status(200).json(limitMember);
   } catch (error) {
     return res.status(500).json({ message: "An error occurred" });
   }
@@ -229,23 +279,38 @@ const getMemberDetail = async (req, res) => {
       )
       .populate(
         "userId",
-        "email username joindate youtubeUrl facebookUrl tiktokUrk"
+        "email username joindate youtubeUrl facebookUrl tiktokUrk avatar"
       )
       .lean();
-    const starEvalution = await Comment.aggregate([
-      {
-        $match: {
-          evaluatee: req.params.id,
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          averageRating: { $avg: "$rating" },
-        },
-      },
-    ]);
-    user.starEvalution = starEvalution[0].averageRating;
+    if (!user) {
+      return res.status(404).json({ message: "Not Found" });
+    }
+    const articles = await Article.find({
+      userId: req.params.id,
+    });
+    if (articles) {
+      const totalAmountEarned = articles.reduce((acc, article) => {
+        return acc + article.amountEarned;
+      }, 0);
+      // user.totalAmountEarned = totalAmountEarned;
+      let totalDonation = 0;
+      for (const article of articles) {
+        const donations = await Donation.find({ articleId: article._id });
+        totalDonation += donations.length;
+      }
+      user.totalDonation = totalDonation;
+    }
+    const donation = await Donation.find(
+      { donorId: req.params.id },
+      "donationAmount"
+    );
+    if (donation) {
+      const totalAmountDonate = donation.reduce((acc, donation) => {
+        return acc + donation.donationAmount;
+      }, 0);
+      user.totalAmountDonate = totalAmountDonate;
+    }
+
     res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: "server error" });
@@ -454,4 +519,5 @@ module.exports = {
   becomeFundraiser,
   upLoadImageFundraiser,
   getHighRaiseMember,
+  getDetailFundraiser,
 };

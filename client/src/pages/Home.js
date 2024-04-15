@@ -11,12 +11,13 @@ import shape4 from "./../assets/constant/shape4.png";
 import CategoriesSlider from "../components/Home/CategoriesSlider";
 import RecentProjectsSlider from "../components/Home/RecentProjectsSlider";
 import MemberSlider from "../components/Home/MemberSlider";
-import { isProtected } from "../redux/api/userAPI";
+import { isProtected, isFundraiser } from "../redux/api/userAPI";
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 
 const Home = () => {
   const [notifyAdd, setNotifyAdd] = useState(false);
+  const [textNoti, setTextNoti] = useState("");
   const navigate = useNavigate();
   return (
     <>
@@ -310,8 +311,15 @@ const Home = () => {
                   className="cf-button cf-button--hollow cf-button--small"
                   onClick={async () => {
                     const res = await isProtected();
+                    const isFund = await isFundraiser();
                     if (res !== true) {
                       setNotifyAdd(true);
+                      setTextNoti(
+                        "Bạn cần đăng nhập để đăng ký trở thành nhà gây quỹ"
+                      );
+                    } else if (isFund === true) {
+                      setNotifyAdd(true);
+                      setTextNoti("Bạn đã là nhà gây quỹ");
                     } else {
                       navigate("/become-a-fundraiser");
                     }
@@ -331,10 +339,10 @@ const Home = () => {
         centered
       >
         <div style={{ textAlign: "center" }}>
-          <h2 className="title" style={{backgroundColor:"#F79E00"}}>Cảnh báo</h2>
-          <h6 className="m-0">
-            Bạn cần đăng nhập để đăng ký trở thành nhà gây quỹ
-          </h6>
+          <h2 className="title" style={{ backgroundColor: "#F79E00" }}>
+            Cảnh báo
+          </h2>
+          <h6 className="m-0">{textNoti}</h6>
           <a
             className="sign-text d-block"
             data-bs-toggle="collapse"

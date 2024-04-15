@@ -22,9 +22,9 @@ export const getImage = async (type, filename) => {
   }
 };
 
-export const delImage = async (type, id) => {
+export const delImage = async (type, filename) => {
   try {
-    await API.post(`image/${type}/del/${id}`);
+    await API.post(`image/${type}/del/${filename}`);
   } catch (error) {
     console.log(error);
   }

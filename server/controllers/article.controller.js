@@ -163,15 +163,19 @@ const getArticle = async (req, res) => {
     const activities = await findActivitiesByArticleId(postId);
     post.activities = formatDocuments(activities);
 
-    const donations = await Donation.find({ articleId: post });
+    const donations = await Donation.find({
+      articleId: post,
+    });
     post.totalDonations = donations.length;
     const donorMap = {};
     donations.forEach((donation) => {
-      const donorId = donation.donorId;
-      if (donorMap[donorId] !== undefined) {
-        donorMap[donorId] = donorMap[donorId] + donation.donationAmount;
-      } else {
-        donorMap[donorId] = 0 + donation.donationAmount;
+      if (donation.anonymous === false) {
+        const donorId = donation.donorId;
+        if (donorMap[donorId] !== undefined) {
+          donorMap[donorId] = donorMap[donorId] + donation.donationAmount;
+        } else {
+          donorMap[donorId] = 0 + donation.donationAmount;
+        }
       }
     });
     const donorList = Object.entries(donorMap).map(
@@ -208,7 +212,7 @@ const getArticle = async (req, res) => {
     });
   }
 };
-
+// lấy tất cả bài báo bao gồm đã kết thúc
 const getArticles = async (req, res) => {
   try {
     const pipeline = [
@@ -218,6 +222,14 @@ const getArticles = async (req, res) => {
           localField: "categotyId",
           foreignField: "_id",
           as: "category",
+        },
+      },
+      {
+        $lookup: {
+          from: "addresses",
+          localField: "addressId",
+          foreignField: "_id",
+          as: "address",
         },
       },
       {
@@ -256,6 +268,7 @@ const getArticles = async (req, res) => {
           addedBy: 1,
           createdAt: 1,
           articletitle: 1,
+          address: 1,
           image: 1,
           state: 1,
           expireDate: 1,
@@ -270,7 +283,7 @@ const getArticles = async (req, res) => {
     ];
     // bệnh%20nhân
     if (req.query.q) {
-      pipeline[3].$match.$and.push({
+      pipeline[4].$match.$and.push({
         $or: [
           { articletitle: { $regex: new RegExp(req.query.q, "i") } },
           { body: { $regex: new RegExp(req.query.q, "i") } },
@@ -279,7 +292,7 @@ const getArticles = async (req, res) => {
       });
     }
     if (req.query.category) {
-      pipeline[3].$match.$and.push({
+      pipeline[4].$match.$and.push({
         "category.title": { $regex: new RegExp(req.query.category, "i") },
       });
     }

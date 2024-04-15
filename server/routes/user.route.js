@@ -53,7 +53,7 @@ router.get(
   }
 );
 
-router.put("/:id", requireAuth, decodeToken, updateInfo);
+router.put("/update/info", requireAuth, decodeToken, updateInfo);
 router.post("/become/fundraiser", requireAuth, decodeToken, becomeFundraiser);
 router.put("/fund/image", requireAuth, decodeToken, upLoadImageFundraiser);
 router.get("/get/fundraisers", getAllMember);

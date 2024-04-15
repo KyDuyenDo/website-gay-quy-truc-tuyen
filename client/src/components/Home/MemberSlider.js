@@ -87,7 +87,7 @@ const MemberSlider = () => {
                   {truncateString(d.groupName, 3)}
                 </span>
                 <p>Tham gia từ {formatDate(d.approvaldate)}</p>
-                <p>Số tiền gây quỹ {d.totalAmountRaised}</p>
+                <p>Số tiền gây quỹ <br/> {d.totalAmountRaised} VNĐ</p>
                 <Link to={`/member-detail/${d.userId}`}>
                   <button className="cta">
                     <span>Xem chi tiết</span>

@@ -212,7 +212,7 @@ const ArticleDetail = () => {
                     </div>
                     <hr className="horizontalLines" />
 
-                    <div className="ranking">
+                    {/* <div className="ranking">
                       <span style={{ color: "#8d8d8d" }}>
                         Đánh giá chiến dịch{" "}
                       </span>
@@ -236,7 +236,7 @@ const ArticleDetail = () => {
                         className="yellow-star"
                         icon={faStar}
                       ></FontAwesomeIcon>
-                    </div>
+                    </div> */}
                     <h3 className="title" style={{ color: "#1b8271" }}>
                       {toDecimal(detailArticle.amountEarned)} VNĐ
                     </h3>

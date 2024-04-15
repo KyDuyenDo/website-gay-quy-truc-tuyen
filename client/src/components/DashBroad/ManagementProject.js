@@ -218,7 +218,6 @@ const ManagementProject = () => {
             data-bs-toggle="collapse"
             onClick={() => {
               setNotifyAdd(false);
-              navigate("/become-a-fundraiser");
             }}
           >
             Đăng ký ngay

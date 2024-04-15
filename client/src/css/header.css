@@ -257,7 +257,8 @@
   }
 }
 .user_contain .avatar {
-  width: 43px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--secondary);
@@ -267,7 +268,7 @@
   position: relative;
 }
 .sub-menu {
-  z-index: 10 !important;
+  z-index: 1000 !important;
   position: absolute;
   background-color: #fff;
   border-radius: 6px;
@@ -343,7 +344,7 @@
 }
 .notifies {
   position: absolute;
-  z-index: 10 !important;
+  z-index: 1000 !important;
   position: absolute;
   background-color: #fff;
   border-radius: 6px;

@@ -21,6 +21,7 @@ import logo from "./logo.png";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setUserClear } from "../redux/actions/userAction";
 import {
   signInAction,
   signUpAction,
@@ -376,9 +377,9 @@ const Header = () => {
                               className="sub-menu"
                               id="sub-menu"
                             >
-                              <Link to="/management">
+                              <Link to="/profile">
                                 <li onClick={MenuToggle} className="link-item">
-                                  <span>Trang cá nhân</span>
+                                  <span>Sửa thông tin</span>
                                   <FontAwesomeIcon
                                     icon={faAngleRight}
                                   ></FontAwesomeIcon>
@@ -392,7 +393,14 @@ const Header = () => {
                                   ></FontAwesomeIcon>
                                 </li>
                               </Link>
-                              <li onClick={LogOut} className="link-item">
+                              <li
+                                onClick={() => {
+                                  LogOut();
+                                  dispatch(setUserClear());
+                                  navigate("/");
+                                }}
+                                className="link-item"
+                              >
                                 <span>Đăng xuất</span>
                                 <FontAwesomeIcon
                                   icon={faAngleRight}

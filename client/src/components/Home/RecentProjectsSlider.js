@@ -3,25 +3,16 @@ import { Link } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { faCoins, faCalendar, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCoins, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Rating, RoundedStar, Heart } from "@smastrom/react-rating";
+import { Rating, Heart } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
-import Loader from "../Loader";
 import { getArticleHighRating } from "../../redux/api/articleAPI";
 
 import "../../css/project.css";
 // Import Swiper styles
 import "swiper/css";
-
-//Images
-import pic1 from "./../../assets/images/project/pic1.jpg";
-import pic2 from "./../../assets/images/project/pic2.jpg";
-import pic3 from "./../../assets/images/project/pic3.jpg";
-import avt1 from "./../../assets/images/avatar/avatar1.jpg";
-import avt2 from "./../../assets/images/avatar/avatar2.jpg";
-import avt3 from "./../../assets/images/avatar/avatar3.jpg";
 
 //SwiperCore.use([EffectCoverflow,Pagination]);
 

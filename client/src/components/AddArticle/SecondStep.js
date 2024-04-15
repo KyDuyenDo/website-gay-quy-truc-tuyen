@@ -79,13 +79,14 @@ const SecondStep = ({ register, errors }) => {
                   <option value="" selected>
                     Chọn danh mục
                   </option>
-                  {listCategory?.map((item) => {
-                    return (
-                      <option key={item._id} value={item._id}>
-                        {item.title}
-                      </option>
-                    );
-                  })}
+                  {listCategory &&
+                    listCategory.map((item) => {
+                      return (
+                        <option key={item._id} value={item._id}>
+                          {item.title}
+                        </option>
+                      );
+                    })}
                 </select>
                 {errors.projectCategory && (
                   <small className="text-danger m-1 p-0">

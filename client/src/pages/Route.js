@@ -36,6 +36,7 @@ import VerifyEmail from "./VerifyEmail";
 import EmailVerifiedMessage from "./EmailVerifiedMessage";
 import ProjectCreate from "./ProjectCreate";
 import AdminDashBoard from "./Admin/AdminDashBoard";
+import EidtProfile from "./EidtProfile";
 function Index() {
   return (
     <>
@@ -70,6 +71,7 @@ function Index() {
               element={<ProjectCategories />}
             />
             <Route path="/member-detail/:id" exact element={<MemberDetail />} />
+            <Route path="/profile" exact element={<EidtProfile />} />
             <Route path="/map" exact element={<Map />} />
             <Route path="/management" exact element={<Management />}>
               <Route path="/management" exact element={<DashBoard />} />

@@ -51,14 +51,19 @@ const delNotify = async (req, res) => {
 
 function getWeekDays() {
   const today = new Date();
-  const weekDays = [];
-
-  for (let i = 0; i < 7; i++) {
-    const day = new Date(today.getTime() + i * 1000 * 60 * 60 * 24);
-    weekDays.push(day);
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(
+    startOfWeek.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1)
+  );
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(endOfWeek.getDate() + 6);
+  const daysOfWeek = [];
+  for (let i = 0; i <= 6; i++) {
+    const currentDate = new Date(startOfWeek);
+    currentDate.setDate(currentDate.getDate() + i);
+    daysOfWeek.push(currentDate);
   }
-
-  return weekDays;
+  return daysOfWeek;
 }
 function getDailyTotals(data, weekDays) {
   const dailyTotals = {}; // Object to store daily totals

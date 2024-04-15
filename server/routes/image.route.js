@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const formidable = require("formidable");
 const fs = require("fs");
+const { ObjectId } = require("mongodb");
 const MongoDB = require("../utils/mongodb.util");
-const base64 = require("base-64");
 
 router.post("/upload/:type", async function (request, result) {
   const type = request.params.type;
@@ -89,10 +89,16 @@ router.get("/data/:type/:filename", async function (request, response) {
   }
 });
 
-router.post("/:type/del/:_id", async function (request, result) {
-  const { _id, type } = request.params;
+router.post("/:type/del/:filename", async function (request, result) {
+  const { filename, type } = request.params;
+
   const bucket = MongoDB.bucket(type);
-  const objectId = new ObjectId(_id);
+  const file = await bucket
+    .find({
+      filename: filename,
+    })
+    .toArray();
+  const objectId = new ObjectId(file[0]._id);
   await bucket.delete(objectId);
   //return response
   return result.status(200).json({ message: "File has been deleted." });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stepper, Step } from "react-form-stepper";
 import { Modal } from "react-bootstrap";
 import "../css/fund.css";
@@ -8,9 +8,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 import Loader from "../components/Loader";
-import { becomeFundraiser, upLoadImageFundraiser } from "../redux/api/userAPI";
+import {
+  becomeFundraiser,
+  upLoadImageFundraiser,
+  isProtected,
+  isFundraiser,
+} from "../redux/api/userAPI";
 import { upLoadImage } from "../redux/api/uploadAPI";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 //images
 import bg from "../assets/images/bg7.jpeg";
 import FirstRaiserStep from "../components/AddFundraiser/FirstRaiserStep";
@@ -41,6 +47,14 @@ const schemaFundRaiser = yup.object().shape({
 });
 
 const BecomeFundraiser = () => {
+  const navigate = useNavigate();
+  useEffect(async () => {
+    const res = await isProtected();
+    const isFund = await isFundraiser();
+    if (res !== true || isFund === true) {
+      navigate(-1);
+    }
+  }, []);
   const {
     register,
     formState: { errors },

@@ -166,7 +166,7 @@ const MenberMasonry = () => {
                           {truncateString(item.groupName, 3)}
                         </span>
                         <p>Tham gia từ {formatDate(item.approvaldate)}</p>
-                        <p>Số tiền gây quỹ {item.totalAmountRaised}</p>
+                        <p>Số tiền gây quỹ <br/> {item.totalAmountRaised} VNĐ</p>
                         <Link to={`/member-detail/${item.userId}`}>
                           <button className="cta">
                             <span>Xem chi tiết</span>

@@ -15,7 +15,7 @@ const UserSchema = new Schema({
   birthday: { type: String, default: "" },
   youtubeUrl: { type: String, default: "" },
   facebookUrl: { type: String, default: "" },
-  tiktokUrk: { type: String, default: "" },
+  tiktokUrl: { type: String, default: "" },
   intro: { type: String, default: "" },
   isEmailVerified: {
     type: Boolean,

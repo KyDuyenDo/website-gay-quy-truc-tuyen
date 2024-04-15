@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/management.css";
 import {
   faChartLine,
@@ -16,7 +16,6 @@ const Management = () => {
   const handleItemClick = (step) => {
     setActiveItem(step);
   };
-
   return (
     <div className="contain-bg">
       <div className="container-fluid contain-main">

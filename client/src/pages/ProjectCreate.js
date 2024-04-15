@@ -9,12 +9,12 @@ import { useForm } from "react-hook-form";
 import Loader from "../components/Loader";
 import { addArticle, upDateImage } from "../redux/api/articleAPI";
 import { getImage } from "../redux/api/uploadAPI";
-import { getFundraiserDetail } from "../redux/api/userAPI";
+import { getFundraiserDetail, isFundraiser } from "../redux/api/userAPI";
 import { upLoadImage } from "../redux/api/uploadAPI";
 //images
 import bg from "../assets/images/bg7.jpeg";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FirstStep from "../components/AddArticle/FirstStep";
 import SecondStep from "../components/AddArticle/SecondStep";
 import ThirdStep from "../components/AddArticle/ThirdStep";
@@ -77,6 +77,7 @@ const schema = yup.object().shape({
 });
 
 const ProjectCreate = () => {
+  const navigate = useNavigate();
   const [lackAddMess, setLackAddMess] = useState("");
   const [success, setSuccess] = useState(true);
   const {
@@ -96,6 +97,11 @@ const ProjectCreate = () => {
   const [notifyMess, setNotifyMess] = useState("");
 
   useEffect(() => {
+    isFundraiser().then((res) => {
+      if (res !== true) {
+        navigate(-1);
+      }
+    });
     dispatch(getCategoriesAction());
   }, []);
   const uploadImages = async (files) => {
@@ -167,7 +173,15 @@ const ProjectCreate = () => {
                                     detail.identificationImage
                                   ).then((res) => {
                                     formData.append("image2", res);
-                                    comparisonFace(formData);
+                                    comparisonFace(formData).then((result) => {
+                                      if (result.prediction === true) {
+                                        setGoSteps(1);
+                                      } else {
+                                        setErroravt(
+                                          "Nhận dạng sai với hồ sơ đã cung cấp, hãy thử lại!"
+                                        );
+                                      }
+                                    });
                                   });
                                 });
                               }

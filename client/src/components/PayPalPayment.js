@@ -49,7 +49,7 @@ const PayPalPayment = ({
           formPayment.append("TradingCode", details.id);
           formPayment.append("method", methodpay);
           formPayment.append("status", details.status);
-          formPayment.append("amount", amount + amountTip);
+          formPayment.append("amount", parseInt(amount) + parseInt(amountTip));
           formPayment.append("tip", amountTip);
           if (res === true) {
             console.log("true");
@@ -57,7 +57,7 @@ const PayPalPayment = ({
               formData.append("articleId", articleId);
               formData.append("paymentId", payment._id);
               formData.append("fullnameDonor", fullname);
-              formData.append("donationAmount", payment.amount);
+              formData.append("donationAmount", parseInt(amount));
               formData.append("anonymous", anonymous);
               formRaiseAmount.append("postId", articleId);
               formRaiseAmount.append("amount", amount);

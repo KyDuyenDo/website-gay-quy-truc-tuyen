@@ -2,22 +2,27 @@ import React, { useEffect } from "react";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Chart from "../../components/DashBroad/Chart";
-import project from "../../assets/images/project/pic1.jpg";
+import { isProtected } from "../../redux/api/userAPI";
 import {
   getDataUserProject,
   getDataFundraising,
   getChartData,
-  getUserDonation,
 } from "../../redux/actions/manageAction";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const totalProject = useSelector((state) => state.management.totalProject);
   const listEarn = useSelector((state) => state.management.listEarn);
   const notify = useSelector((state) => state.management.notify);
   useEffect(() => {
     const fetchData = async () => {
+      const res = await isProtected();
+      if (res !== true) {
+        navigate(-1);
+      }
       try {
         dispatch(getDataUserProject());
         dispatch(getDataFundraising());

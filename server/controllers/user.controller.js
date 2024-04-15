@@ -84,6 +84,9 @@ const signin = async (req, res) => {
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).select("-password").lean();
+    if (!user) {
+      return res.status(404).json({ message: "Not Fund" });
+    }
     // const starEvalution = await Comment.aggregate([
     //   {
     //     $match: {
@@ -111,7 +114,7 @@ const getDetailFundraiser = async (req, res) => {
       )
       .populate(
         "userId",
-        "email username joindate youtubeUrl facebookUrl tiktokUrk avatar"
+        "email username joindate youtubeUrl facebookUrl tiktokUrl avatar"
       )
       .lean();
     if (!user) {
@@ -279,7 +282,7 @@ const getMemberDetail = async (req, res) => {
       )
       .populate(
         "userId",
-        "email username joindate youtubeUrl facebookUrl tiktokUrk avatar"
+        "email username joindate youtubeUrl facebookUrl tiktokUrl avatar"
       )
       .lean();
     if (!user) {
@@ -504,7 +507,49 @@ const refreshToken = async (req, res) => {
   }
 };
 
-const updateInfo = async (req, res) => {};
+const updateInfo = async (req, res) => {
+  const userId = req.userId;
+  const {
+    username,
+    gender,
+    birthday,
+    phone,
+    youtubeUrl,
+    facebookUrl,
+    tiktokUrl,
+    intro,
+    avatar,
+  } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        username: username,
+        gender: gender,
+        birthday: birthday,
+        phone: phone,
+        youtubeUrl: youtubeUrl,
+        facebookUrl: facebookUrl,
+        tiktokUrl: tiktokUrl,
+        intro: intro,
+        avatar: avatar,
+      },
+      { new: true }
+    )
+      .select("-password -isEmailVerified -joindate -role -state")
+      .lean();
+    if (!user) {
+      return res.status(404).json({
+        message: "Cant update",
+      });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
 
 module.exports = {
   addUser,

@@ -44,7 +44,7 @@ const Member = () => {
                   }}
                 />
                 <div className="input-group-prepend">
-                  <button className="btn" onClick={handleSearchSubmit()}>
+                  <button className="btn" onClick={handleSearchSubmit}>
                     <FontAwesomeIcon
                       size="lg"
                       icon={faSearch}

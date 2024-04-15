@@ -27,14 +27,14 @@ export const isProtected = async () => {
   }
 };
 
-export const updateUser = async (id, formData) => {
+export const updateUser = async (formData) => {
   try {
-    const { data } = await API.put(`/users/${id}`, formData, {
+    const { data } = await API.put(`/users/update/info`, formData, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    return { error: null, data };
+    return data;
   } catch (error) {
     return handleApiError(error);
   }

@@ -55,6 +55,19 @@ export const getArticles = async (query) => {
   }
 };
 
+export const getArticlesByLocation = async (formData) => {
+  try {
+    const { data } = await API.post(`/article/get/by/location`, formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
 export const getArticleHighRating = async () => {
   try {
     const { data } = await API.get(`/article/get/high/rating`);

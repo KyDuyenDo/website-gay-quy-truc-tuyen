@@ -23,6 +23,7 @@ const {
   isLimitArticleUp,
   getUserArticleDetail,
   articleRaiseAmount,
+  getArticleByLocation,
 } = require("../controllers/article.controller");
 
 const {
@@ -39,6 +40,7 @@ router.post("/reject/:postId", requireAuth, requireAdminAuth, rejectArticle);
 
 router.get("/get/:id", getArticle);
 router.get("/get", getArticles);
+router.post("/get/by/location", getArticleByLocation);
 router.get("/get/high/rating", getArticleHighRating);
 router.put("/raise/amount", articleRaiseAmount);
 router.get(

@@ -1,7 +1,5 @@
 import React from "react";
 import ShowMoreText from "react-show-more-text";
-import avatar from "../../assets/images/avatar/avatar7.jpg";
-import project from "../../assets/images/project/pic1.jpg";
 const Activity = ({ activities, avatar, username }) => {
   const executeOnClick = (isExpanded) => {
     console.log(isExpanded);

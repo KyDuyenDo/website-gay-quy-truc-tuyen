@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Dropdown } from "react-bootstrap";
 import ProjectMasonry from "../components/project/ProjectMasonry";
 import "../css/projectList.css";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";

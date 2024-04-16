@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import L from "leaflet";
 import useSuperCluster from "use-supercluster";
 import iconImage from "../../assets/icon.svg";
-import { Marker, useMap, Popup } from "react-leaflet";
+import { Marker, useMap } from "react-leaflet";
 import { useSelector } from "react-redux";
 const icons = {};
 
@@ -22,8 +22,8 @@ const icon = L.icon({
   iconSize: [38, 38],
 });
 
-const ShowMap = ({ data, setSelectProject }) => {
-  // const data = useSelector((state) => state.project.projects);
+const ShowMap = ({ setSelectProject, selectProject }) => {
+  const data = useSelector((state) => state.project.projects);
   const maxZoom = 22;
   const [bounds, setBounds] = useState(null);
   const [zoom, setZoom] = useState(12);
@@ -59,14 +59,14 @@ const ShowMap = ({ data, setSelectProject }) => {
     type: "Feature",
     properties: {
       cluster: false,
-      postId: post.id,
-      category: post.category,
+      postId: post._id,
+      category: post.category[0].title,
     },
     geometry: {
       type: "Point",
       coordinates: [
-        parseFloat(post.location.longitude),
-        parseFloat(post.location.latitude),
+        parseFloat(post.address[0].lon),
+        parseFloat(post.address[0].lat),
       ],
     },
   }));
@@ -113,15 +113,18 @@ const ShowMap = ({ data, setSelectProject }) => {
             icon={icon}
             eventHandlers={{
               click: () => {
-                setSelectProject({
-                  lon: longitude,
-                  lat: latitude,
+                if (
+                  selectProject[0] !== latitude &&
+                  selectProject[1] !== longitude
+                ) {
+                  setSelectProject([latitude, longitude]);
+                }
+                map.setView([latitude, longitude], maxZoom, {
+                  animate: true,
                 });
               },
             }}
-          >
-            <Popup>{"lon=" + longitude + " lat=" + latitude}</Popup>
-          </Marker>
+          />
         );
       })}
     </>

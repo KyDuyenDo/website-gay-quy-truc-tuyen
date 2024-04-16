@@ -12,7 +12,7 @@ import CategoriesSlider from "../components/Home/CategoriesSlider";
 import RecentProjectsSlider from "../components/Home/RecentProjectsSlider";
 import MemberSlider from "../components/Home/MemberSlider";
 import { isProtected, isFundraiser } from "../redux/api/userAPI";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 
 const Home = () => {

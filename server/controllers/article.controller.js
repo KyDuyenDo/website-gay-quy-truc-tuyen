@@ -212,6 +212,87 @@ const getArticle = async (req, res) => {
     });
   }
 };
+
+const getArticleByLocation = async (req, res) => {
+  const { lon, lat } = req.body;
+  try {
+    const pipeline = [
+      {
+        $lookup: {
+          from: "categories",
+          localField: "categotyId",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      {
+        $lookup: {
+          from: "addresses",
+          localField: "addressId",
+          foreignField: "_id",
+          as: "address",
+        },
+      },
+      {
+        $lookup: {
+          from: "fundraisers",
+          localField: "userId",
+          foreignField: "userId",
+          as: "fundraisers",
+        },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "comments",
+          foreignField: "_id",
+          as: "comments",
+          pipeline: [
+            {
+              $group: {
+                _id: null,
+                averageRating: { $avg: "$rating" },
+              },
+            },
+          ],
+        },
+      },
+      {
+        $match: {
+          $and: [
+            { published: true },
+            { "address.lon": lon },
+            { "address.lat": lat },
+          ],
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          category: 1,
+          addedBy: 1,
+          createdAt: 1,
+          articletitle: 1,
+          address: 1,
+          image: 1,
+          state: 1,
+          expireDate: 1,
+          releaseDate: 1,
+          amountRaised: 1,
+          amountEarned: 1,
+          averageRating: { $arrayElemAt: ["$comments.averageRating", 0] },
+          groupName: { $arrayElemAt: ["$fundraisers.groupName", 0] },
+          type: { $arrayElemAt: ["$fundraisers.type", 0] },
+        },
+      },
+    ];
+    const posts = await Article.aggregate(pipeline);
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred" });
+  }
+};
+
 // lấy tất cả bài báo bao gồm đã kết thúc
 const getArticles = async (req, res) => {
   try {
@@ -696,4 +777,5 @@ module.exports = {
   isLimitArticleUp,
   getUserArticleDetail,
   articleRaiseAmount,
+  getArticleByLocation
 };

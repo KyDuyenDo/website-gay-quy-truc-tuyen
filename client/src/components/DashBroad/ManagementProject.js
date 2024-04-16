@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { faPen, faSearch, faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import project from "../../assets/images/project/pic1.jpg";
 import { isFundraiser } from "../../redux/api/userAPI";
 import { Link, useNavigate } from "react-router-dom";
 import { getUserProject } from "../../redux/actions/articleAction";

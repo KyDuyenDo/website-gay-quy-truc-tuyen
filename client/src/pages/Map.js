@@ -1,420 +1,144 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import L from "leaflet";
 import ShowMap from "../components/Map/ShowMap";
 import {
   faSearch,
   faBullseye,
   faStopwatch,
-  faLocation,
   faLocationDot,
+  faFileCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { getArticlesByLocation } from "../redux/api/articleAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setDataProjects } from "../redux/actions/articleAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "leaflet/dist/leaflet.css";
 import iconImage from "../assets/icon.svg";
-import { useQuery } from "react-query";
-
+import LocationiconImage from "../assets/locationIcon.svg";
 import "../css/cluster.css";
+import { Link } from "react-router-dom";
+
+function ResetCenterView(props) {
+  const { position } = props;
+  const map = useMap();
+
+  useEffect(() => {
+    if (position) {
+      map.setView(L.latLng(position[0], position[1]), map.getZoom(), {
+        animate: true,
+      });
+    }
+  }, [position]);
+
+  return null;
+}
 
 const Map = () => {
-  const [isSearch, setIsSearch] = useState(false);
+  const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
+  const project = useSelector((state) => state.project.projects);
+  const [isSearch, setIsSearch] = useState(true);
   const [isShrink, setIsShrink] = useState(false);
-  const [selectProject, setSelectProject] = useState({
-    lon: "",
-    lat: "",
-  });
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       await dispatch(setDataProjects(""));
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-  const data = [
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.633318",
-        street: {
-          id: 1738276,
-          name: "On or near Nightclub",
-        },
-        longitude: "-1.134798",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117052825,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.632743",
-        street: {
-          id: 1737208,
-          name: "On or near Stretton Road",
-        },
-        longitude: "-1.153471",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053169,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.631302",
-        street: {
-          id: 1738955,
-          name: "On or near Lincoln Street",
-        },
-        longitude: "-1.120978",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053170,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.635488",
-        street: {
-          id: 1738121,
-          name: "On or near Carts Lane",
-        },
-        longitude: "-1.136395",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053171,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.635401",
-        street: {
-          id: 1738659,
-          name: "On or near Parking Area",
-        },
-        longitude: "-1.128314",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053187,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.631409",
-        street: {
-          id: 1738709,
-          name: "On or near East Street",
-        },
-        longitude: "-1.127034",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053188,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.635399",
-        street: {
-          id: 1738303,
-          name: "On or near Shopping Area",
-        },
-        longitude: "-1.134107",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053191,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.636857",
-        street: {
-          id: 1738642,
-          name: "On or near St James Street",
-        },
-        longitude: "-1.128211",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053197,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.634787",
-        street: {
-          id: 1737952,
-          name: "On or near Parking Area",
-        },
-        longitude: "-1.139010",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053205,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.633897",
-        street: {
-          id: 1738339,
-          name: "On or near Shopping Area",
-        },
-        longitude: "-1.133974",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117052565,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.631154",
-        street: {
-          id: 1738689,
-          name: "On or near Parking Area",
-        },
-        longitude: "-1.127689",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053206,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.617006",
-        street: {
-          id: 1739022,
-          name: "On or near Hartopp Road",
-        },
-        longitude: "-1.120777",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053209,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.636623",
-        street: {
-          id: 1737784,
-          name: "On or near Ruding Street",
-        },
-        longitude: "-1.142978",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053211,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.617006",
-        street: {
-          id: 1739022,
-          name: "On or near Hartopp Road",
-        },
-        longitude: "-1.120777",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053212,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.628421",
-        street: {
-          id: 1739436,
-          name: "On or near Chandos Street",
-        },
-        longitude: "-1.111994",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117052763,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.624479",
-        street: {
-          id: 1737381,
-          name: "On or near Stuart Street",
-        },
-        longitude: "-1.150676",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117053223,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.618158",
-        street: {
-          id: 1738119,
-          name: "On or near Putney Road West",
-        },
-        longitude: "-1.135525",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117052877,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.642049",
-        street: {
-          id: 1738480,
-          name: "On or near Navigation Street",
-        },
-        longitude: "-1.131256",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117052760,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.635528",
-        street: {
-          id: 1738700,
-          name: "On or near Theatre/concert Hall",
-        },
-        longitude: "-1.127553",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117052843,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.636557",
-        street: {
-          id: 1737701,
-          name: "On or near All Saints Road",
-        },
-        longitude: "-1.143748",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117052759,
-      location_subtype: "",
-      month: "2024-02",
-    },
-    {
-      category: "anti-social-behaviour",
-      location_type: "Force",
-      location: {
-        latitude: "52.637627",
-        street: {
-          id: 1738668,
-          name: "On or near Eldon Street",
-        },
-        longitude: "-1.127782",
-      },
-      context: "",
-      outcome_status: null,
-      persistent_id: "",
-      id: 117052808,
-      location_subtype: "",
-      month: "2024-02",
-    },
-  ];
+  const [searchList, setSearchList] = useState([]);
+  const [locationList, setLocationList] = useState([]);
+  const [selectProject, setSelectProject] = useState([9.9265804, 105.7256381]);
+  const [detailProject, setDetailProject] = useState([]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(setDataProjects(""));
+        setSearchList([]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  const createQuerySearch = (title) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const encodedTitle = title.replace(/ /g, "%20");
+        const query = `?q=${encodedTitle}`;
+        resolve(query);
+      } catch (error) {
+        reject(error); // Handle potential errors
+      }
+    });
+  };
+  const handleSearchSubmit = async (search) => {
+    createQuerySearch(search).then((query) => {
+      dispatch(setDataProjects(query));
+    });
+    if (search != "") {
+      const params = {
+        q: search,
+        format: "json",
+        addressdetails: 1,
+        polygon_geojson: 0,
+      };
+      const queryString = new URLSearchParams(params).toString();
+      const requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+      fetch(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions)
+        .then((res) => {
+          if (res.status !== 400) {
+            return res.text().then((result) => {
+              console.log(JSON.parse(result));
+              setLocationList(JSON.parse(result));
+            });
+          } else {
+            throw new Error("Bad request");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+  useEffect(() => {
+    const combinedList = [...project, ...locationList];
+    setSearchList(combinedList);
+  }, [project, locationList]);
+
+  useEffect(() => {
+    if (!selectProject || selectProject.length !== 2) {
+      return; // Do nothing if selectProject is undefined or not an array of length 2
+    }
+    const fetchData = async () => {
+      const formData = new FormData();
+      formData.append("lon", selectProject[1]);
+      formData.append("lat", selectProject[0]);
+      try {
+        const res = await getArticlesByLocation(formData);
+        setDetailProject(res);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      }
+    };
+    fetchData();
+  }, [selectProject]);
+
+  const deadline = (createdAt, expireDate) => {
+    const createdDate = new Date(createdAt);
+    const deadline = new Date(
+      createdDate.setDate(createdDate.getDate() + expireDate + 2)
+    ); // Thêm expireDate + 2 ngày
+    const today = new Date();
+    const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24)); // Chuyển đổi mili giây sang ngày
+
+    return daysLeft;
+  };
+
+  function toDecimal(number) {
+    if (typeof number !== "number") {
+      return 0;
+    }
+    let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
+    return formattedNumber;
+  }
 
   const API_MAPBOX =
     "https://api.mapbox.com/styles/v1/keva2133/clu3sx8ok006h01qr1oxzbd6i/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoia2V2YTIxMzMiLCJhIjoiY2x1M3NyNjd3MTlzNDJrbnlqenRxeXdqbSJ9.zWd3NeTbrQ_waGdE47ovLA";
@@ -439,7 +163,11 @@ const Map = () => {
             placeholder="Tìm kiếm theo tên chiến dịch, địa điểm"
             onKeyDown={(event) => {
               if (event.key === "Enter") {
-                // dispatch tim kiem o day
+                if (event.target.value !== "") {
+                  handleSearchSubmit(event.target.value);
+                } else {
+                  setSearchList([]);
+                }
                 setIsSearch(true);
               }
             }}
@@ -456,56 +184,63 @@ const Map = () => {
               Kết quả tìm kiếm
             </span>
             <div className={"results " + (isShrink === true ? "d-none" : "")}>
-              <div className="results-content">
-                <div className="result-item">
-                  <div className="image">
-                    <img src={iconImage} />
-                  </div>
-                  <div>
-                    <p className="name">Vận động 1000 tấm Bản Đồ Việt Nam</p>
-                    <p className="address">
-                      Làng Trẻ Em Sos Bến Tre,Phường 6,Thành phố Bến Tre,Tỉnh
-                      Bến Tre
-                    </p>
-                  </div>
+              {searchList.length === 0 ? (
+                <div className="no-result">
+                  <FontAwesomeIcon size="1x" icon={faFileCircleXmark} />
+                  <div>Không tìm thấy kết quả phù hợp</div>
+                  <p>Hãy thử tìm kiếm nội dung khác hoặc tìm 1 khu vực khác</p>
                 </div>
-                <div className="result-item">
-                  <div className="image">
-                    <img src={iconImage} />
-                  </div>
-                  <div>
-                    <p className="name">Vận động 1000 tấm Bản Đồ Việt Nam</p>
-                    <p className="address">
-                      Làng Trẻ Em Sos Bến Tre,Phường 6,Thành phố Bến Tre,Tỉnh
-                      Bến Tre
-                    </p>
-                  </div>
+              ) : (
+                <div className="results-content">
+                  {searchList?.map((item) => {
+                    if (item.licence) {
+                      return (
+                        <div key={item.osm_id} className="result-item">
+                          <div className="image">
+                            <img src={LocationiconImage} />
+                          </div>
+                          <div>
+                            <p
+                              onClick={() => {
+                                setIsSearch(false);
+                                setSelectProject([
+                                  parseFloat(item.lat),
+                                  parseFloat(item.lon),
+                                ]);
+                              }}
+                              className="name"
+                            >
+                              {item.display_name}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    }
+                    return (
+                      <div key={item._id} className="result-item">
+                        <div className="image">
+                          <img src={iconImage} />
+                        </div>
+                        <div>
+                          <p
+                            onClick={() => {
+                              setIsSearch(false);
+                              setSelectProject([
+                                parseFloat(item.address[0].lat),
+                                parseFloat(item.address[0].lon),
+                              ]);
+                            }}
+                            className="name"
+                          >
+                            {item.articletitle}
+                          </p>
+                          <p className="address">{item.address[0].detail}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-                <div className="result-item">
-                  <div className="image">
-                    <img src={iconImage} />
-                  </div>
-                  <div>
-                    <p className="name">Vận động 1000 tấm Bản Đồ Việt Nam</p>
-                    <p className="address">
-                      Làng Trẻ Em Sos Bến Tre,Phường 6,Thành phố Bến Tre,Tỉnh
-                      Bến Tre
-                    </p>
-                  </div>
-                </div>
-                <div className="result-item">
-                  <div className="image">
-                    <img src={iconImage} />
-                  </div>
-                  <div>
-                    <p className="name">Vận động 1000 tấm Bản Đồ Việt Nam</p>
-                    <p className="address">
-                      Làng Trẻ Em Sos Bến Tre,Phường 6,Thành phố Bến Tre,Tỉnh
-                      Bến Tre
-                    </p>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </>
         ) : (
@@ -522,52 +257,56 @@ const Map = () => {
                 "campaign-detail-content " + (isShrink === true ? "d-none" : "")
               }
             >
-              <div>
-                <div className="image">
-                  <img
-                    alt=""
-                    src="https://static.thiennguyen.app/public/donate-target/photo/2024/2/26/d929e302-313e-483d-9ac4-c084f6965f01.jpg"
-                  />
-                  <div className="categoryName">
-                    <span>Người nghèo</span>
-                  </div>
-                </div>
-                <h3>XUÂN YÊU THƯƠNG - 100 CẢ MỔ TÌM LẠI ÁNH SÁNG</h3>
-                <div className="address">
-                  <FontAwesomeIcon icon={faLocationDot} />
-                  <span>
-                    190 Lê Cơ,Phường An Lạc,Quận Bình Tân,Thành phố Hồ Chí Minh
-                  </span>
-                </div>
-                <div className="create-by">
-                  Tạo bởi <span>Nguyen Huy Phat</span>{" "}
-                </div>
-                <div className="row donate-target">
-                  <div className="col-6 donate-target-item">
-                    <FontAwesomeIcon icon={faBullseye} />
-                    <div>
-                      <div>Mục tiêu chiến dịch</div>
-                      <div className="number">
-                        <span>100.000.000 VND</span>
+              {detailProject?.map((project) => {
+                return (
+                  <div key={project._id}>
+                    <div className="image">
+                      <img alt="" src={project.image[0]} />
+                      <div className="categoryName">
+                        <span>{project.category[0].title}</span>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-6 donate-target-item">
-                    <FontAwesomeIcon icon={faStopwatch} />
-                    <div>
-                      <div>Thời gian còn lại</div>
-                      <span className="remain-time">Đã kết thúc</span>
+                    <Link to={`/article-detail/${project._id}`}>
+                      <h3>{project.articletitle}</h3>
+                    </Link>
+                    <div className="address">
+                      <FontAwesomeIcon icon={faLocationDot} />
+                      <span>{project.address[0].detail}</span>
                     </div>
+                    <div className="create-by">
+                      Tạo bởi <span>{project.groupName}</span>{" "}
+                    </div>
+                    <div className="row donate-target">
+                      <div className="col-6 donate-target-item">
+                        <FontAwesomeIcon icon={faBullseye} />
+                        <div>
+                          <div>Mục tiêu chiến dịch</div>
+                          <div className="number">
+                            <span>{toDecimal(project.amountRaised)} VND</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-6 donate-target-item">
+                        <FontAwesomeIcon icon={faStopwatch} />
+                        <div>
+                          <div>Thời gian còn lại</div>
+                          <span className="remain-time">
+                            {deadline(project.createdAt, project.expireDate)}{" "}
+                            ngày
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="horizontalLines" />
                   </div>
-                </div>
-              </div>
-              <hr className="horizontalLines" />
+                );
+              })}
             </div>
           </>
         )}
       </div>
       <MapContainer
-        center={[52.629729, -1.131592]}
+        center={selectProject}
         zoom={13}
         style={{ height: "100vh" }}
         zoomControl={false}
@@ -576,7 +315,11 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url={API_MAPBOX}
         />
-        <ShowMap data={data} setSelectProject={setSelectProject} />
+        <ShowMap
+          selectProject={selectProject}
+          setSelectProject={setSelectProject}
+        />
+        <ResetCenterView position={selectProject} />
       </MapContainer>
     </div>
   );

@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import ShowMoreText from "react-show-more-text";
-import {
-  faUpload,
-  faFileAlt,
-  faImage,
-  faTrash,
-  faAdd,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserArticleDetail } from "../../redux/actions/manageAction";

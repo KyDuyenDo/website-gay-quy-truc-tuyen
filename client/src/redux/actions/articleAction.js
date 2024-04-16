@@ -6,7 +6,6 @@ export const setDataProjects = (query) => async (dispatch) => {
     console.log(query);
     const data = await api.getArticles(query);
     dispatch({ type: types.SET_PROJECTS, payload: data.limitedPosts });
-    console.log(data);
   } catch (error) {
     console.log(error);
   }

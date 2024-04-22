@@ -87,20 +87,6 @@ const getUser = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "Not Fund" });
     }
-    // const starEvalution = await Comment.aggregate([
-    //   {
-    //     $match: {
-    //       evaluatee: req.params.id,
-    //     },
-    //   },
-    //   {
-    //     $group: {
-    //       _id: null,
-    //       averageRating: { $avg: "$rating" },
-    //     },
-    //   },
-    // ]);
-    // user.starEvalution = starEvalution[0].averageRating;
     res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: "server error" });

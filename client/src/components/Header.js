@@ -25,11 +25,10 @@ import { setUserClear } from "../redux/actions/userAction";
 import {
   signInAction,
   signUpAction,
-  clearMessage,
   logoutAction,
 } from "../redux/actions/authActions";
 import { setSearchProject } from "../redux/actions/articleAction";
-
+import { signInActionAdmin } from "../redux/actions/adminAction";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -37,10 +36,14 @@ import Loader from "./Loader";
 
 // use form
 const schema = yup.object().shape({
-  email: yup
+  email: yup.string().required("chưa nhập email"),
+  password: yup
     .string()
-    .email("email không thích hợp")
-    .required("chưa nhập email"),
+    .required("Mật khẩu không được bỏ trống")
+    .min(8, "Mật khẩu phải có ít nhất 8 ký tự"),
+});
+const schema1 = yup.object().shape({
+  username: yup.string().required("chưa nhập tên admin"),
   password: yup
     .string()
     .required("Mật khẩu không được bỏ trống")
@@ -80,6 +83,12 @@ const Header = () => {
     handleSubmit,
     reset,
   } = useForm({ resolver: yupResolver(schema) });
+  const {
+    register: registerForm1,
+    formState: { errors: errors1 },
+    handleSubmit: handleSubmitForm1,
+    reset: reset1,
+  } = useForm({ resolver: yupResolver(schema1) });
   const {
     register: registerForm2,
     formState: { errors: errors2 },
@@ -147,9 +156,11 @@ const Header = () => {
   const [resetModal, setResetModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [notifySuccess, setNotifySuccess] = useState(false);
+  const [adminModel, setAdminModel] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isConsentGiven, setIsConsentGiven] = useState(true);
   const authData = useSelector((state) => state.auth);
+  const adminAuth = useSelector((state) => state.admin.signInError);
   //Modals end
   useEffect(() => {
     if (!loginModal) {
@@ -450,7 +461,7 @@ const Header = () => {
         >
           <div className="form-group">
             <input
-              type="email"
+              type="text"
               name="email"
               className="form-control"
               placeholder=" Nhập địa chỉ email"
@@ -505,6 +516,97 @@ const Header = () => {
               >
                 {" "}
                 Đăng ký ngay
+              </a>{" "}
+              - bạn là
+              <a
+                className="btn-link collapsed"
+                style={{ paddingTop: "5px" }}
+                onClick={() => (setAdminModel(true), setloginModal(false))}
+              >
+                {" "}
+                admin
+              </a>
+              ?
+            </span>
+          </div>
+        </form>
+      </Modal>
+      <Modal
+        className="fade modal-wrapper auth-modal"
+        id="modalLogin"
+        show={adminModel}
+        onHide={setAdminModel}
+        centered
+      >
+        <h2 className="title">Đăng nhập tài khoản Admin</h2>
+        <div
+          className={
+            "d-flex justify-content-center" +
+            (loading === true ? "" : " d-none")
+          }
+        >
+          <Loader />
+        </div>
+        <form
+          className={loading === true ? "d-none" : ""}
+          onSubmit={handleSubmitForm1(async (data) => {
+            setLoading(true);
+            const formData = new FormData();
+            console.log(data.username, data.password);
+            formData.append("username", data.username);
+            formData.append("password", data.password);
+            await dispatch(signInActionAdmin(formData));
+            if (localStorage.getItem("admin")) {
+              setloginModal(false);
+              navigate("/admin/dashboar");
+            }
+          })}
+        >
+          <div className="form-group">
+            <input
+              type="text"
+              name="username"
+              className="form-control"
+              placeholder=" username"
+              {...registerForm1("username")}
+            />
+            {errors1.username && (
+              <small className="text-danger m-1 p-0">
+                {errors1.username.message}
+              </small>
+            )}
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              placeholder="Nhập mật khẩu"
+              {...registerForm1("password")}
+            />
+            {(errors1.password && (
+              <small className="text-danger m-1 p-0">
+                {errors1.password.message}
+              </small>
+            )) ||
+              (adminAuth !== null && (
+                <small className="text-danger m-1 p-0">{adminAuth}</small>
+              ))}
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-outline-primary btn-block">
+              Đăng nhập
+            </button>
+          </div>
+
+          <div className="sign-text">
+            <span>
+              <a
+                className="btn-link collapsed"
+                onClick={() => (setloginModal(true), setAdminModel(false))}
+              >
+                {" "}
+                Người dùng
               </a>
             </span>
           </div>

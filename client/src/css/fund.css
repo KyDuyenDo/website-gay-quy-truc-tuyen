@@ -351,3 +351,18 @@
 .cusbtn:hover {
   color: #ffff !important;
 }
+.frame {
+  position: relative;
+}
+.frame::before {
+  content: "";
+  width: 180px;
+  height: 220px;
+  position: absolute;
+  background-color: none;
+  border: 2px dashed #fff;
+  border-radius: 50%;
+  top: 17%;
+  left: 17%;
+  z-index: 1000;
+}

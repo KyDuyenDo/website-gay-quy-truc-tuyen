@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Modal } from "react-bootstrap";
 
 import OverView from "../components/FundraiserDetail/OverView";
 import Activity from "../components/FundraiserDetail/Activity";
 import DonorList from "../components/FundraiserDetail/DonorList";
 import "../css/fundraiserDetail.css";
 import GallerySlider from "../components/FundraiserDetail/GallerySlider";
-import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import Comment from "../components/FundraiserDetail/Comment";
@@ -15,12 +14,9 @@ import { setDataDetail } from "../redux/actions/detailAction";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setDataDetailDonation,
-  clearDonation,
 } from "../redux/actions/donorsAction";
 
 const ArticleDetail = () => {
-  const [modalDonate, setModalDonate] = useState(false);
-  const [referModal, setReferModal] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
   const detailArticle = useSelector((state) => state.detail.detail);
@@ -44,7 +40,7 @@ const ArticleDetail = () => {
   const deadline = (createdAt, expireDate) => {
     const createdDate = new Date(createdAt);
     const deadline = new Date(
-      createdDate.setDate(createdDate.getDate() + expireDate + 2)
+      createdDate.setDate(createdDate.getDate() + expireDate)
     ); // Thêm expireDate + 2 ngày
     const today = new Date();
     const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24)); // Chuyển đổi mili giây sang ngày
@@ -91,9 +87,9 @@ const ArticleDetail = () => {
                     {detailArticle.articletitle}{" "}
                     <span className="state">
                       {deadline(
-                        detailArticle.createdAt,
+                        detailArticle.releaseDate,
                         detailArticle.expireDate
-                      ) > 0
+                      ) >= 0
                         ? "Đang gây quỹ"
                         : "Đã kết thúc"}
                     </span>
@@ -166,7 +162,7 @@ const ArticleDetail = () => {
               {/* <!--  keep --> */}
               <div className="col-xl-4 col-lg-4">
                 <div>
-                  {deadline(detailArticle.createdAt, detailArticle.expireDate) >
+                  {deadline(detailArticle.releaseDate, detailArticle.expireDate) >
                   0 ? (
                     <div className="widget style-1 widget_donate">
                       <Link
@@ -271,7 +267,7 @@ const ArticleDetail = () => {
                       <li className="d-flex">
                         <h5>
                           {deadline(
-                            detailArticle.createdAt,
+                            detailArticle.releaseDate,
                             detailArticle.expireDate
                           )}
                         </h5>

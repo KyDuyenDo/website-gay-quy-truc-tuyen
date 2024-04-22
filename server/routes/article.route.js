@@ -35,8 +35,6 @@ const router = express.Router();
 
 router.post("/create", requireAuth, requireFundraiserAuth, addArticle);
 router.put("/up_image", requireAuth, upLoadImage);
-router.post("/confirm/:postId", requireAuth, requireAdminAuth, confirmArticle);
-router.post("/reject/:postId", requireAuth, requireAdminAuth, rejectArticle);
 
 router.get("/get/:id", getArticle);
 router.get("/get", getArticles);

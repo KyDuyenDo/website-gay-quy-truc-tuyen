@@ -37,13 +37,21 @@ import EmailVerifiedMessage from "./EmailVerifiedMessage";
 import ProjectCreate from "./ProjectCreate";
 import AdminDashBoard from "./Admin/AdminDashBoard";
 import EidtProfile from "./EidtProfile";
+import AdDashBoard from "../components/Admin/AdDashBoard";
+import AdRequest from "../components/Admin/AdRequest";
+import AdProject from "../components/Admin/AdProject";
+
 function Index() {
   return (
     <>
       <Router>
         <Routes>
           <Route path="/auth/verify" exact element={<VerifyEmail />} />
-          <Route path="/admin/dashboar" exact element={<AdminDashBoard />} />
+          <Route path="/admin" exact element={<AdminDashBoard />}>
+            <Route path="/admin/dashboar" element={<AdDashBoard />} />
+            <Route path="/admin/request" element={<AdRequest />} />
+            <Route path="/admin/project" element={<AdProject />} />
+          </Route>
           <Route
             path="/email-verified"
             exact

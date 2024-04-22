@@ -16,6 +16,7 @@ const FundraiserSchema = new Schema({
   describe: { type: String, required: true },
   introLink: { type: String, required: true },
   approvaldate: { type: Date, default: null },
+  createdAt: { type: Date, default: Date.now, required: true },
 });
 
 module.exports = mongoose.model("fundraisers", FundraiserSchema);

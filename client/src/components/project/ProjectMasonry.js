@@ -45,7 +45,7 @@ const ProjectMasonry = () => {
   const deadline = (createdAt, expireDate) => {
     const createdDate = new Date(createdAt);
     const deadline = new Date(
-      createdDate.setDate(createdDate.getDate() + expireDate + 2)
+      createdDate.setDate(createdDate.getDate() + expireDate)
     ); // Thêm expireDate + 2 ngày
     const today = new Date();
     const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24)); // Chuyển đổi mili giây sang ngày
@@ -274,7 +274,7 @@ const ProjectMasonry = () => {
                                 ></FontAwesomeIcon>{" "}
                                 <span>
                                   Còn{" "}
-                                  {deadline(data.createdAt, data.expireDate)}{" "}
+                                  {deadline(data.releaseDate, data.expireDate)}{" "}
                                   Ngày
                                 </span>
                               </li>

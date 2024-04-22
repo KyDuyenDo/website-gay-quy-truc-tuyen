@@ -72,7 +72,7 @@ const PayPalPayment = ({
               formData.append("articleId", articleId);
               formData.append("paymentId", payment._id);
               formData.append("fullnameDonor", fullname);
-              formData.append("donationAmount", payment.amount);
+              formData.append("donationAmount", amount);
               formData.append("anonymous", anonymous);
               formRaiseAmount.append("postId", articleId);
               formRaiseAmount.append("amount", amount);

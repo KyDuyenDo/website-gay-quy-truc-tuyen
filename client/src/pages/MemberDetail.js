@@ -40,6 +40,11 @@ const MemberDetail = () => {
                 <img
                   src={memberDetail.userId.avatar}
                   alt="Như chưa hề có cuộc chia ly"
+                  style={{
+                    height: "152px",
+                    width: "152px",
+                    objectFit: "cover",
+                  }}
                 />
               </div>
             </div>

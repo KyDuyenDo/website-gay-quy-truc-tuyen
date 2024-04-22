@@ -8,6 +8,7 @@ const articleRoutes = require("./routes/article.route");
 const imageRoutes = require("./routes/image.route");
 const managementRoutes = require("./routes/management.route");
 const donationRoutes = require("./routes/donation.route");
+const adminRoutes = require("./routes/admin.route");
 const cookieParser = require("cookie-parser");
 const MongoDB = require("./utils/mongodb.util");
 const decodeToken = require("./middleware/decodeToken");
@@ -40,6 +41,7 @@ app.use("/article", articleRoutes);
 app.use("/image", imageRoutes);
 app.use("/manage", managementRoutes);
 app.use("/donation", donationRoutes);
+app.use("/admin", adminRoutes);
 
 //start server
 const PORT = 5000;

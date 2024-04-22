@@ -29,7 +29,7 @@ const RecentProjectsSlider = () => {
   const deadline = (createdAt, expireDate) => {
     const createdDate = new Date(createdAt);
     const deadline = new Date(
-      createdDate.setDate(createdDate.getDate() + expireDate + 2)
+      createdDate.setDate(createdDate.getDate() + expireDate)
     ); // Thêm expireDate + 2 ngày
     const today = new Date();
     const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24)); // Chuyển đổi mili giây sang ngày
@@ -133,7 +133,7 @@ const RecentProjectsSlider = () => {
                       <li className="goal">
                         <FontAwesomeIcon icon={faCalendar}></FontAwesomeIcon>{" "}
                         <span>
-                          Còn {deadline(data.createdAt, data.expireDate)} Ngày
+                          Còn {deadline(data.releaseDate, data.expireDate)} Ngày
                         </span>
                       </li>
                     </ul>

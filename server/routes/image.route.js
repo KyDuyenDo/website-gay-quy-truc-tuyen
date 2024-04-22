@@ -66,10 +66,10 @@ router.get("/data/:type/:filename", async function (request, response) {
       return response.status(404).json({ error: "File does not exist." });
     }
     const chunks = [];
-    let completeData; // Declare completeData outside the Promise
+    let completeData; 
 
     const downloadStream = bucket.openDownloadStreamByName(filename);
-    // Buffer
+   
     downloadStream.on("data", (chunk) => {
       chunks.push(chunk);
     });

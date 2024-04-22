@@ -48,12 +48,15 @@ const schemaFundRaiser = yup.object().shape({
 
 const BecomeFundraiser = () => {
   const navigate = useNavigate();
-  useEffect(async () => {
-    const res = await isProtected();
-    const isFund = await isFundraiser();
-    if (res !== true || isFund === true) {
-      navigate(-1);
+  useEffect(() => {
+    async function fetchData() {
+      const res = await isProtected();
+      const isFund = await isFundraiser();
+      if (res !== true || isFund === true) {
+        navigate(-1);
+      }
     }
+    fetchData();
   }, []);
   const {
     register,

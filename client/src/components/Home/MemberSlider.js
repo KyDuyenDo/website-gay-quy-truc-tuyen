@@ -76,7 +76,9 @@ const MemberSlider = () => {
                   src={d.user[0].avatar}
                   style={{
                     width: "110px",
+                    height: "110px",
                     borderRadius: "50%",
+                    objectFit: "cover",
                     border: "2px solid #B1DAE7",
                   }}
                   alt=""
@@ -87,7 +89,9 @@ const MemberSlider = () => {
                   {truncateString(d.groupName, 3)}
                 </span>
                 <p>Tham gia từ {formatDate(d.approvaldate)}</p>
-                <p>Số tiền gây quỹ <br/> {d.totalAmountRaised} VNĐ</p>
+                <p>
+                  Số tiền gây quỹ <br /> {d.totalAmountRaised} VNĐ
+                </p>
                 <Link to={`/member-detail/${d.userId}`}>
                   <button className="cta">
                     <span>Xem chi tiết</span>

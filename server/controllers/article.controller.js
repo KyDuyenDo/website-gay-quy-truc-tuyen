@@ -77,7 +77,7 @@ const addArticle = async (req, res) => {
       adminApproval: false,
       published: false,
       amountRaised: amountRaised,
-      amountEarned: "0",
+      amountEarned: 0,
     });
 
     await newArticle.save();
@@ -104,9 +104,6 @@ const upLoadImage = async (req, res) => {
     });
   }
 };
-const confirmArticle = async (req, res) => {};
-
-const rejectArticle = async (req, res) => {};
 
 const findArticleById = async (postId) =>
   await Article.findOne({ _id: postId, published: true })
@@ -382,14 +379,14 @@ const getArticles = async (req, res) => {
 
     if (req.query.sort === "new") {
       sortedPosts.sort((a, b) => {
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
+        const dateA = new Date(a.releaseDate);
+        const dateB = new Date(b.releaseDate);
         return dateB - dateA;
       });
     } else if (req.query.sort === "old") {
       sortedPosts.sort((a, b) => {
-        const dateA = new Date(a.createdAt);
-        const dateB = new Date(b.createdAt);
+        const dateA = new Date(a.releaseDate);
+        const dateB = new Date(b.releaseDate);
         return dateA - dateB;
       });
     }
@@ -494,9 +491,12 @@ const getArticleByUser = async (req, res) => {
           $expr: {
             $lte: [
               {
-                $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+                $divide: [
+                  { $subtract: [new Date(), "$releaseDate"] },
+                  86400000,
+                ],
               },
-              { $add: ["$expireDate", 2] },
+              "$expireDate",
             ],
           }, // còn hạn
         });
@@ -506,9 +506,12 @@ const getArticleByUser = async (req, res) => {
           $expr: {
             $gt: [
               {
-                $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+                $divide: [
+                  { $subtract: [new Date(), "$releaseDate"] },
+                  86400000,
+                ],
               }, // Chuyển từ mili giây sang số ngày
-              { $add: ["$expireDate", 2] },
+              "$expireDate",
             ],
           },
         });
@@ -537,9 +540,9 @@ const isLimitArticleUp = async (req, res) => {
       $expr: {
         $lte: [
           {
-            $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+            $divide: [{ $subtract: [new Date(), "$releaseDate"] }, 86400000],
           },
-          { $add: ["$expireDate", 2] },
+          "$expireDate",
         ],
       },
     });
@@ -761,8 +764,6 @@ const articleRaiseAmount = async (req, res) => {
 
 module.exports = {
   addArticle,
-  confirmArticle,
-  rejectArticle,
   getArticle,
   getArticles, // loc, tim kiem luon theo query, or tra ve tat ca
   getArticleByUser, // tra ve bai bao cua nguoi dung, co loc theo state theo query
@@ -777,5 +778,5 @@ module.exports = {
   isLimitArticleUp,
   getUserArticleDetail,
   articleRaiseAmount,
-  getArticleByLocation
+  getArticleByLocation,
 };

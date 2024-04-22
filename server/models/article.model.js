@@ -39,6 +39,12 @@ const ArticleSchema = new Schema({
       ref: "activities",
     },
   ],
+  disbursements: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "disbursements",
+    },
+  ],
 });
 
 module.exports = mongoose.model("articles", ArticleSchema);

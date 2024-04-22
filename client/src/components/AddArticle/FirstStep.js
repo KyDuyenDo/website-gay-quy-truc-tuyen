@@ -14,6 +14,7 @@ const FirstStep = ({ setValue, errors, erroravt }) => {
     height: 300,
     facingMode: "user",
   };
+
   const custom = {
     display: "inline-block",
     outline: " 0",
@@ -32,6 +33,7 @@ const FirstStep = ({ setValue, errors, erroravt }) => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImg(imageSrc);
     const imageData = imageSrc.split(",")[1];
+    console.log(imageData);
     setValue("image", [imageData]);
   }, [webcamRef]);
   useEffect(() => {
@@ -86,15 +88,17 @@ const FirstStep = ({ setValue, errors, erroravt }) => {
                   className="d-flex justify-content-center"
                   style={{ margin: "10px", marginTop: "20px" }}
                 >
-                  <Webcam
-                    audio={false}
-                    mirrored={true}
-                    height={300}
-                    width={300}
-                    ref={webcamRef}
-                    screenshotFormat="image/jpeg"
-                    videoConstraints={videoConstraints}
-                  />
+                  <div className="frame">
+                    <Webcam
+                      audio={false}
+                      mirrored={true}
+                      height={300}
+                      width={300}
+                      ref={webcamRef}
+                      screenshotFormat="image/jpeg"
+                      videoConstraints={videoConstraints}
+                    />
+                  </div>
                 </div>
                 <div className="d-flex justify-content-center">
                   <button style={custom} onClick={capture}>

@@ -155,7 +155,9 @@ const MenberMasonry = () => {
                           src={item.user[0].avatar}
                           style={{
                             width: "110px",
+                            height:"110px",
                             borderRadius: "50%",
+                            objectFit:"cover",
                             border: "2px solid #B1DAE7",
                           }}
                           alt=""

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import "react-medium-image-zoom/dist/styles.css";
 import { setRequestArticle } from "../../redux/actions/adminAction";
-import { getDetaiArticleByAdmin } from "../../redux/api/adminAPI";
+import {
+  getDetaiArticleByAdmin,
+  sendNotify,
+  deleteArticle,
+  confirmArticle,
+} from "../../redux/api/adminAPI";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -292,12 +297,16 @@ const AdRequestArticle = () => {
                       <Button
                         variant="secondary"
                         onClick={() => {
-                          // const formData = new FormData();
-                          // formData.append("userId", userData?._id);
-                          // rejectFundraiser(formData).then(() => {
-                          //   dispatch(setRequestMember());
-                          //   setloginModal(false);
-                          // });
+                          const message = `Yêu cầu đăng bài gây quỹ cho chiến dịch ${articleData?.articletitle}, của bạn đã bị từ chối, do hồ sơ của bản không đáp ứng đủ yêu cầu. Nếu có bất kì câu hỏi nào hãy liên hệ với chúng tôi qua địa chỉ hỗ trợ.`;
+                          const formData = new FormData();
+                          formData.append("userId", articleData?.userId?._id);
+                          formData.append("message", message);
+                          formData.append("state", "error");
+                          formData.append("articleId", articleData._id);
+                          deleteArticle(formData).then(() => {
+                            sendNotify(formData);
+                            setloginModal(false);
+                          });
                         }}
                       >
                         Từ chối
@@ -305,12 +314,16 @@ const AdRequestArticle = () => {
                       <Button
                         style={{ marginLeft: "10px" }}
                         onClick={() => {
-                          // const formData = new FormData();
-                          // formData.append("userId", userData?._id);
-                          // acceptFundraiser(formData).then(() => {
-                          //   dispatch(setRequestMember());
-                          //   setloginModal(false);
-                          // });
+                          const message = `Yêu cầu đăng bài cho chiến dịch ${articleData?.articletitle} của bạn đã được chấp nhận. Nếu có bất kì câu hỏi nào hãy liên hệ với chúng tôi qua địa chỉ hỗ trợ.`;
+                          const formData = new FormData();
+                          formData.append("articleId", articleData._id);
+                          formData.append("userId", articleData?.userId?._id);
+                          formData.append("message", message);
+                          formData.append("state", "success");
+                          confirmArticle(formData).then(() => {
+                            sendNotify(formData);
+                            setloginModal(false);
+                          });
                         }}
                         variant="primary"
                       >

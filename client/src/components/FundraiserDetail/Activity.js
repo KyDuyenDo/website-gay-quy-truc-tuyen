@@ -25,7 +25,7 @@ const Activity = ({ activities, avatar, username }) => {
                 more="Xem thêm"
                 less="Thu gọn"
                 className="content-css"
-                anchorClass="show-more-less-clickable"
+                anchorClassNclassName="show-more-less-clickable"
                 onClick={executeOnClick}
                 expanded={false}
                 truncatedEndingComponent={"... "}
@@ -41,6 +41,29 @@ const Activity = ({ activities, avatar, username }) => {
           </div>
         );
       })}
+      {activities?.length === 0 ? (
+        <div
+          role="tabpanel"
+          id="simple-tabpanel-2"
+          aria-labelledby="simple-tab-2"
+        >
+          <div className="css-127g5zj">
+            <div className="containerPostCampaign">
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ marginTop: "13%", opacity: "0.6" }}
+              >
+                Chiến dịch chưa có hoạt động
+              </div>
+              <div className="row mb-3">
+                <div className="col-12 text-center pb-4 pb-lg-5 pt-4 pt-lg-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

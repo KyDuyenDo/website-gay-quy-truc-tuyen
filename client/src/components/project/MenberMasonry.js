@@ -5,9 +5,9 @@ import ReactPaginate from "react-paginate";
 import {
   getAllMember,
   setSearchClear,
-  setSearch,
 } from "../../redux/actions/memberAction";
 import { useDispatch, useSelector } from "react-redux";
+import nothing from "../../assets/no_result.png";
 const MenberMasonry = () => {
   const dispatch = useDispatch();
   const allmember = useSelector((state) => state.member.memberList);
@@ -45,24 +45,21 @@ const MenberMasonry = () => {
     const truncatedString = str.split(" ").slice(0, num).join(" ");
     return `${truncatedString}...`;
   }
-  const createQueryString = (title, sort) => {
-    return new Promise((resolve, reject) => {
-      try {
-        const encodedTitle = title.replace(/ /g, "%20");
-        const query = `?category=${encodedTitle}&sort=${sort}`;
-        resolve(query);
-      } catch (error) {
-        reject(error); // Handle potential errors
-      }
-    });
-  };
-
   const itemsMemberPage = 9;
   const [activeGenre, setActiveGenre] = useState(0);
+  const [searchResult, setSearchResult] = useState(true);
   const [currentItemsMember, setCurrentItemsMember] = useState(null);
   const [pageCountMember, setPageCountMember] = useState(0);
 
   const [itemMemberOffset, setItemMemberOffset] = useState(0);
+
+  useEffect(() => {
+    if (allmember?.length === 0) {
+      setSearchResult(false);
+    } else {
+      setSearchResult(true);
+    }
+  }, [allmember]);
 
   useEffect(() => {
     const endOffset = itemMemberOffset + itemsMemberPage;
@@ -155,9 +152,9 @@ const MenberMasonry = () => {
                           src={item.user[0].avatar}
                           style={{
                             width: "110px",
-                            height:"110px",
+                            height: "110px",
                             borderRadius: "50%",
-                            objectFit:"cover",
+                            objectFit: "cover",
                             border: "2px solid #B1DAE7",
                           }}
                           alt=""
@@ -168,7 +165,9 @@ const MenberMasonry = () => {
                           {truncateString(item.groupName, 3)}
                         </span>
                         <p>Tham gia từ {formatDate(item.approvaldate)}</p>
-                        <p>Số tiền gây quỹ <br/> {item.totalAmountRaised} VNĐ</p>
+                        <p>
+                          Số tiền gây quỹ <br /> {item.totalAmountRaised} VNĐ
+                        </p>
                         <Link to={`/member-detail/${item.userId}`}>
                           <button className="cta">
                             <span>Xem chi tiết</span>
@@ -184,6 +183,19 @@ const MenberMasonry = () => {
                 );
               })}
           </AnimatePresence>
+          {searchResult !== true ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "14%",
+              }}
+            >
+              <img style={{ width: "400px" }} src={nothing} />
+            </div>
+          ) : (
+            ""
+          )}
         </ul>
       </div>
       {/* more */}

@@ -13,6 +13,7 @@ const Category = require("../models/category.model");
 const Fundraiser = require("../models/fundraiser.model");
 const formatCreatedAt = require("../utils/timeConverter");
 const mongoose = require("mongoose");
+const { ObjectId } = require("mongodb");
 
 const addArticle = async (req, res) => {
   try {
@@ -531,6 +532,72 @@ const getArticleByUser = async (req, res) => {
   }
 };
 
+const getArticleByQuest = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    let articles;
+    if (req.query.state) {
+      if (req.query.state === "fundraising") {
+        articles = await Article.find({
+          userId: userId, // của người dùng
+          adminApproval: true, // đã đăng và chấp thuận bởi admin
+          $expr: {
+            $lte: [
+              {
+                $divide: [
+                  { $subtract: [new Date(), "$releaseDate"] },
+                  86400000,
+                ],
+              },
+              "$expireDate",
+            ],
+          }, // còn hạn
+        });
+      } else if (req.query.state === "finished") {
+        articles = await Article.find({
+          userId: userId,
+          $expr: {
+            $gt: [
+              {
+                $divide: [
+                  { $subtract: [new Date(), "$releaseDate"] },
+                  86400000,
+                ],
+              }, // Chuyển từ mili giây sang số ngày
+              "$expireDate",
+            ],
+          },
+        });
+      } else if (req.query.state === "pending") {
+        articles = await Article.find({ userId: userId, adminApproval: false });
+      }
+    } else {
+      articles = await Article.find({ userId: userId });
+    }
+    const distinctArticleIds = await Donation.aggregate([
+      { $match: { donorId: new ObjectId(userId) } },
+      {
+        $group: {
+          _id: null, // No grouping needed, just project distinct articleIds
+          articleIds: { $addToSet: "$articleId" }, // Accumulate unique articleIds
+        },
+      },
+      { $project: { articleIds: 1 } }, // Only include the 'articleIds' field
+    ]);
+    let articleDonate = [];
+    if (distinctArticleIds.length !== 0) {
+      articleDonate = await Article.find({
+        _id: { $in: distinctArticleIds[0].articleIds },
+      });
+    }
+    res
+      .status(200)
+      .json({ articleRaise: articles, articleDonate: articleDonate });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const isLimitArticleUp = async (req, res) => {
   const userId = req.userId;
   try {
@@ -779,4 +846,5 @@ module.exports = {
   getUserArticleDetail,
   articleRaiseAmount,
   getArticleByLocation,
+  getArticleByQuest,
 };

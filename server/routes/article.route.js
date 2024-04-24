@@ -24,6 +24,7 @@ const {
   getUserArticleDetail,
   articleRaiseAmount,
   getArticleByLocation,
+  getArticleByQuest,
 } = require("../controllers/article.controller");
 
 const {
@@ -41,6 +42,7 @@ router.get("/get", getArticles);
 router.post("/get/by/location", getArticleByLocation);
 router.get("/get/high/rating", getArticleHighRating);
 router.put("/raise/amount", articleRaiseAmount);
+router.get("/get/by/quest/:id", getArticleByQuest);
 router.get(
   "/check/limt/post",
   requireAuth,

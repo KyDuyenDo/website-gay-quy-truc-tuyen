@@ -198,6 +198,21 @@ export const returnRequestMember = async () => {
     return handleApiError(error);
   }
 };
+// getAllFund
+export const getAllFund = async (query) => {
+  try {
+    if (query) {
+      const { data } = await ADMIN_API.get(`/admin/get/all/fund${query}`);
+      console.log(data);
+      return data;
+    } else {
+      const { data } = await ADMIN_API.get(`/admin/get/all/fund`);
+      return data;
+    }
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
 // returnRequestArticle
 export const returnRequestArticle = async () => {
   try {
@@ -217,10 +232,15 @@ export const getArticlesByAdmin = async (query) => {
   }
 };
 //getAllUsers
-export const getAllUsers = async () => {
+export const getAllUsers = async (query) => {
   try {
-    const { data } = await ADMIN_API.get(`/admin/all/users`);
-    return data;
+    if (query) {
+      const { data } = await ADMIN_API.get(`/admin/all/users${query}`);
+      return data;
+    } else {
+      const { data } = await ADMIN_API.get(`/admin/all/users`);
+      return data;
+    }
   } catch (error) {
     return handleApiError(error);
   }
@@ -230,6 +250,32 @@ export const getAllUsers = async () => {
 export const getDetaiArticleByAdmin = async (idArticle) => {
   try {
     const { data } = await ADMIN_API.get(`/admin/get/article/${idArticle}`);
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+// createDisbursement
+export const createDisbursement = async (credential) => {
+  try {
+    const { data } = await ADMIN_API.post(
+      "/admin/create/disbursement",
+      credential,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+// /user/detail
+export const getUserDetail = async (id) => {
+  try {
+    const { data } = await ADMIN_API.get(`/admin/user/detail/${id}`);
     return data;
   } catch (error) {
     return handleApiError(error);

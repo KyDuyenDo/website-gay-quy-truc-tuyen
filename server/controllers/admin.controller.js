@@ -7,8 +7,11 @@ const Article = require("../models/article.model");
 const Notify = require("../models/notify.model");
 const Fundraiser = require("../models/fundraiser.model");
 const Disbursement = require("../models/disbursement");
+const Donation = require("../models/donation.model");
+const Comment = require("../models/commentAndEvaluation.model");
 const MongoDB = require("../utils/mongodb.util");
 const { ObjectId } = require("mongodb");
+const mongoose = require("mongoose");
 
 const signin = async (req, res) => {
   try {
@@ -187,9 +190,10 @@ const rejectFundraiser = async (req, res) => {
   const { userId } = req.body;
   try {
     const fund = await Fundraiser.findById(userId);
-    // xoa anh
+    // xoa anh đại diện
     const urlParts = fund.identificationImage.split("/");
     const bucket = MongoDB.bucket("identifyAvatar");
+    const bucket_card = MongoDB.bucket("identifyCard");
     const file = await bucket
       .find({
         filename: urlParts[urlParts.length - 1],
@@ -197,6 +201,17 @@ const rejectFundraiser = async (req, res) => {
       .toArray();
     const objectId = new ObjectId(file[0]._id);
     await bucket.delete(objectId);
+    // xoa anh dinh danh
+    fund.identificationCard.forEach(async (img) => {
+      const urlParts_card = img.split("/");
+      const file_card = await bucket_card
+        .find({
+          filename: urlParts_card[urlParts_card.length - 1],
+        })
+        .toArray();
+      const objectId_card = new ObjectId(file_card[0]._id);
+      await bucket_card.delete(objectId_card);
+    });
     // xoa yeu cau
     await Fundraiser.findByIdAndDelete(userId);
     res.status(200).json({ message: "successfully" });
@@ -281,51 +296,42 @@ const disbursement = async (req, res) => {
         },
       },
       {
-        $project: {
-          _id: 1,
-          image: 1,
-          articletitle: 1,
-          amountEarned: 1,
-          releaseDate: 1,
-          expireDate: 1,
-          disbursements: 1,
-          daysPassed: 1,
-        },
-      },
-      {
         $match: {
           $expr: {
             $or: [
               {
                 $and: [
                   {
-                    $gt: [
+                    $and: [
                       {
-                        $add: [
+                        $gte: [
+                          "$daysPassed",
                           { $multiply: ["$expireDate", 0.3] },
-                          { $multiply: ["$expireDate", 0.5] },
                         ],
                       },
-                      "$daysPassed",
+                      {
+                        $gt: [
+                          { $multiply: ["$expireDate", 0.5] },
+                          "$daysPassed",
+                        ],
+                      },
                     ],
-                  },
-                  {
-                    $gte: ["$daysPassed", { $multiply: ["$expireDate", 0.3] }],
                   },
                   { $eq: [{ $size: "$disbursements" }, 0] },
                 ],
               },
               {
                 $and: [
-                  { $gt: ["$expireDate", "$daysPassed"] },
                   {
-                    $gte: [
-                      "$daysPassed",
+                    $and: [
                       {
-                        $add: [
-                          { $multiply: ["$expireDate", 0.3] },
+                        $gte: [
+                          "$daysPassed",
                           { $multiply: ["$expireDate", 0.5] },
                         ],
+                      },
+                      {
+                        $gt: ["$expireDate", "$daysPassed"],
                       },
                     ],
                   },
@@ -344,7 +350,33 @@ const disbursement = async (req, res) => {
       },
     ];
     const articles = await Article.aggregate(aggregationPipeline);
+
     res.status(200).json(articles);
+  } catch (error) {
+    res.status(500).json({ message: "server error" });
+  }
+};
+
+const createDisbursement = async (req, res) => {
+  const { articleId, amountDisburse, step } = req.body;
+  try {
+    const disbursement = await new Disbursement({
+      articleId: articleId,
+      amountDisburse: amountDisburse,
+      step: step,
+    });
+    disbursement.save();
+    await Article.findOneAndUpdate(
+      {
+        _id: { $eq: articleId },
+      },
+      {
+        $addToSet: {
+          disbursements: disbursement._id,
+        },
+      }
+    );
+    res.status(200).json(disbursement);
   } catch (error) {
     res.status(500).json({ message: "server error" });
   }
@@ -415,6 +447,77 @@ const returnRequestMember = async (req, res) => {
     return res.status(500).json({ message: "server error" });
   }
 };
+
+const getAllFund = async (req, res) => {
+  let pipeline;
+  try {
+    if (req.query.id && mongoose.Types.ObjectId.isValid(req.query.id)) {
+      pipeline = [
+        {
+          $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        {
+          $match: {
+            $and: [
+              { adminApproval: true }, // Ensure this condition applies
+              { userId: new ObjectId(req.query.id) }, // Use ObjectId type for req.query.id
+            ],
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            userId: 1,
+            "user.avatar": 1,
+            "user.username": 1,
+            groupName: 1,
+            type: 1,
+            approvaldate: 1,
+            createdAt: 1,
+          },
+        },
+      ];
+    } else {
+      pipeline = [
+        {
+          $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        {
+          $match: {
+            $and: [{ adminApproval: true }],
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            userId: 1,
+            "user.avatar": 1,
+            "user.username": 1,
+            groupName: 1,
+            type: 1,
+            approvaldate: 1,
+            createdAt: 1,
+          },
+        },
+      ];
+    }
+    const members = await Fundraiser.aggregate(pipeline);
+    res.status(200).json(members);
+  } catch (error) {
+    return res.status(500).json({ message: "server error" });
+  }
+};
+
 const returnRequestArticle = async (req, res) => {
   try {
     const pipeline = [
@@ -508,14 +611,20 @@ const getArticlesByAdmin = async (req, res) => {
           },
         });
       }
+    } else if (req.query.q && mongoose.Types.ObjectId.isValid(req.query.q)) {
+      articles = await Article.find({
+        adminApproval: true,
+        _id: req.query.q,
+      });
+    } else if (req.query.q) {
+      articles = await Article.find({
+        adminApproval: true,
+        articletitle: { $regex: new RegExp(req.query.q, "i") },
+      });
     } else {
       articles = await Article.find({ adminApproval: true });
     }
-    if (articles.length === 0) {
-      res.status(404).json({ message: "No articles found" });
-    } else {
-      res.status(200).json(articles);
-    }
+    res.status(200).json(articles);
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
@@ -523,7 +632,12 @@ const getArticlesByAdmin = async (req, res) => {
 
 const getAllUsers = async (req, res, next) => {
   try {
-    const user = await User.find({}).select("-password").lean();
+    let user;
+    if (req.query.id && mongoose.Types.ObjectId.isValid(req.query.id)) {
+      user = await User.find({ _id: req.query.id }).select("-password").lean();
+    } else {
+      user = await User.find({}).select("-password").lean();
+    }
     if (!user) {
       return res.status(404).json({ message: "Not Fund" });
     }
@@ -540,6 +654,7 @@ const getArticleByAdmin = async (req, res) => {
       .populate("userId", "username avatar")
       .populate("addressId")
       .populate("categotyId")
+      .populate("activities")
       .lean();
     if (!article) {
       return res.status(404).json({ message: "Not Fund" });
@@ -549,7 +664,37 @@ const getArticleByAdmin = async (req, res) => {
       return res.status(404).json({ message: "Not Fund" });
     }
     article.fundraiser = fund;
+    const donations = await Donation.find({
+      articleId: postId,
+    });
+    const comments = await Comment.find({ articleId: postId });
+    article.totalDonations = donations.length;
+    const totalStars = comments.reduce(
+      (acc, comment) => acc + comment.rating,
+      0
+    );
+    article.averageRating = totalStars / comments.length;
+    const totalSpend = article.activities?.reduce(
+      (acc, activity) => acc + activity.amountSpent,
+      0
+    );
+    article.totalSpend = totalSpend;
+    article.totalComment = comments.length;
     res.status(200).json(article);
+  } catch (error) {
+    return res.status(500).json({ message: "server error" });
+  }
+};
+
+const getDetailUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id })
+      .select("-password")
+      .lean();
+    if (!user) {
+      return res.status(404).json({ message: "Not Found" });
+    }
+    res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: "server error" });
   }
@@ -574,5 +719,8 @@ module.exports = {
   getArticlesByAdmin,
   getAllUsers,
   getArticleByAdmin,
-  puslishArticle
+  puslishArticle,
+  createDisbursement,
+  getDetailUser,
+  getAllFund,
 };

@@ -134,3 +134,12 @@ export const addActivity = async (formData) => {
     return handleApiError(error);
   }
 };
+
+export const getArticleByQuest = async (id) => {
+  try {
+    const { data } = await API.get(`/article/get/by/quest/${id}`);
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};

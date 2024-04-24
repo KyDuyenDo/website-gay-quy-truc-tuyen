@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactPaginate from "react-paginate";
 import { Rating, Heart } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-
+import nothing from "../../assets/no_result.png";
 import {
   setDataProjects,
   setSearchClear,
@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 const ProjectMasonry = () => {
   const dispatch = useDispatch();
   const [dropbtn, setDropbtn] = useState("Trạng thái");
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(true);
   const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("new");
   const [selectCategory, setSelectCategory] = useState("Chọn danh mục");
@@ -42,6 +42,13 @@ const ProjectMasonry = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (projects?.length === 0) {
+      setSearch(false);
+    } else {
+      setSearch(true);
+    }
+  }, [projects]);
   const deadline = (createdAt, expireDate) => {
     const createdDate = new Date(createdAt);
     const deadline = new Date(
@@ -94,7 +101,7 @@ const ProjectMasonry = () => {
     );
     setItemProjectOffset(newOffset);
   };
-
+  console.log(currentItemsProject);
   return (
     <>
       <div className="row m-b30">
@@ -302,6 +309,19 @@ const ProjectMasonry = () => {
                 );
               })}
           </AnimatePresence>
+          {search !== true ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "14%",
+              }}
+            >
+              <img style={{ width: "400px" }} src={nothing} />
+            </div>
+          ) : (
+            ""
+          )}
         </ul>
       </div>
       {/* more */}

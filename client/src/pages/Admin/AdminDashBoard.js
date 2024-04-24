@@ -88,7 +88,7 @@ const AdminDashBoard = () => {
             className={activeItem === 4 ? "active" : ""}
             onClick={() => setActiveItem(4)}
           >
-            <Link to="/admin/management_user">
+            <Link to="/admin/user">
               <span className="bx bxs-dashboard">
                 <FontAwesomeIcon size="1x" icon={faUserFriends} />
               </span>

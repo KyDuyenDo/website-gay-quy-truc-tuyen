@@ -4,9 +4,10 @@ import "../css/projectList.css";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setDataProjects } from "../redux/actions/articleAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const Project = () => {
   const [search, setSearch] = useState("");
+  const projects = useSelector((state) => state.project.projects);
   const dispatch = useDispatch();
   const createQuerySearch = (title, sort) => {
     return new Promise((resolve, reject) => {
@@ -23,6 +24,7 @@ const Project = () => {
     createQuerySearch(search).then((query) => {
       dispatch(setDataProjects(query));
     });
+    console.log(projects?.length);
   };
   return (
     <>

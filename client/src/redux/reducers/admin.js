@@ -17,6 +17,7 @@ const initialState = {
   requestArticle: [],
   alluser: [],
   allArticle: [],
+  allFund: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -67,6 +68,11 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         alluser: payload ? payload : [],
+      };
+    case types.SET_ALL_FUND:
+      return {
+        ...state,
+        allFund: payload ? payload : [],
       };
     default:
       return state;

@@ -12,7 +12,6 @@ const ManagementProject = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const projectByUser = useSelector((state) => state.project.userProject);
-  console.log(projectByUser);
   useEffect(() => {
     const fetchData = async () => {
       try {

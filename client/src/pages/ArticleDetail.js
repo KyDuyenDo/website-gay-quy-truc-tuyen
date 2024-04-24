@@ -9,12 +9,16 @@ import GallerySlider from "../components/FundraiserDetail/GallerySlider";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import {
+  faLocation,
+  faBullseye,
+  faCircleDollarToSlot,
+  faCalendarDays,
+} from "@fortawesome/free-solid-svg-icons";
 import Comment from "../components/FundraiserDetail/Comment";
 import { setDataDetail } from "../redux/actions/detailAction";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setDataDetailDonation,
-} from "../redux/actions/donorsAction";
+import { setDataDetailDonation } from "../redux/actions/donorsAction";
 
 const ArticleDetail = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -95,7 +99,7 @@ const ArticleDetail = () => {
                     </span>
                   </h2>
                   {/* <!--  selection --> */}
-                  <div className="inner-section">
+                  <div className="inner-section" style={{ minHeight: "450px" }}>
                     <ul
                       className="step-section"
                       activeStep={activeStep}
@@ -162,8 +166,10 @@ const ArticleDetail = () => {
               {/* <!--  keep --> */}
               <div className="col-xl-4 col-lg-4">
                 <div>
-                  {deadline(detailArticle.releaseDate, detailArticle.expireDate) >
-                  0 ? (
+                  {deadline(
+                    detailArticle.releaseDate,
+                    detailArticle.expireDate
+                  ) > 0 ? (
                     <div className="widget style-1 widget_donate">
                       <Link
                         to={`/payment/${params.id}`}
@@ -203,11 +209,28 @@ const ArticleDetail = () => {
                         <span style={{ color: "#8d8d8d" }}>
                           Tiền ủng hộ được chuyển đến
                         </span>
-                        <h5>{detailArticle.groupName}</h5>
+                        <Link
+                          to={`/member-detail/${detailArticle?.userId?._id}`}
+                        >
+                          <h5>{detailArticle.groupName}</h5>
+                        </Link>
                       </div>
                     </div>
                     <hr className="horizontalLines" />
-
+                    <div>
+                      <FontAwesomeIcon
+                        style={{ color: "#1B8271" }}
+                        icon={faLocation}
+                      />{" "}
+                      <span
+                        style={{
+                          fontSize: "0.95rem",
+                          color: "rgb(141, 141, 141)",
+                        }}
+                      >
+                        {detailArticle?.addressId?.detail}
+                      </span>
+                    </div>
                     {/* <div className="ranking">
                       <span style={{ color: "#8d8d8d" }}>
                         Đánh giá chiến dịch{" "}
@@ -251,21 +274,35 @@ const ArticleDetail = () => {
                         ></div>
                       </div>
                     </div>
-                    <p style={{ color: "#8d8d8d" }}>
-                      Mục tiêu gây quỹ{" "}
+                    <FontAwesomeIcon
+                      style={{ color: "#1B8271" }}
+                      icon={faBullseye}
+                    />{" "}
+                    <span style={{ color: "#8d8d8d" }}>
+                      Mục tiêu{" "}
                       <span style={{ fontWeight: "bold", color: "#212529" }}>
                         {toDecimal(detailArticle.amountRaised)} VNĐ
                       </span>
-                    </p>
+                    </span>
                     <ul className="detail">
-                      <li className="d-flex">
-                        <h5>{toDecimal(detailArticle.totalDonations)}</h5>
+                      <li className="d-flex align-items-center">
+                        <FontAwesomeIcon
+                          style={{ color: "#1B8271", marginRight: "5px" }}
+                          icon={faCircleDollarToSlot}
+                        />{" "}
+                        <h5 className="m-0">
+                          {toDecimal(detailArticle.totalDonations)}
+                        </h5>
                         <span style={{ color: "#8d8d8d" }} className="ms-2">
                           quyên góp
                         </span>
                       </li>
-                      <li className="d-flex">
-                        <h5>
+                      <li className="d-flex align-items-center">
+                        <FontAwesomeIcon
+                          style={{ color: "#1B8271", marginRight: "5px" }}
+                          icon={faCalendarDays}
+                        />
+                        <h5 className="m-0">
                           {deadline(
                             detailArticle.releaseDate,
                             detailArticle.expireDate

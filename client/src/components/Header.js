@@ -8,7 +8,6 @@ import {
   faAngleRight,
   faBell,
   faCheck,
-  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal } from "react-bootstrap";
@@ -27,6 +26,7 @@ import {
   signUpAction,
   logoutAction,
 } from "../redux/actions/authActions";
+import { getNotify } from "../redux/actions/manageAction";
 import { setSearchProject } from "../redux/actions/articleAction";
 import { signInActionAdmin } from "../redux/actions/adminAction";
 import * as yup from "yup";
@@ -108,6 +108,7 @@ const Header = () => {
 
   /* for sticky header */
   const [headerFix, setheaderFix] = React.useState(false);
+  const notify = useSelector((state) => state.management.notify);
 
   window.addEventListener("scroll", () => {
     setheaderFix(window.scrollY > 50);
@@ -150,7 +151,17 @@ const Header = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
+  //Notify
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(getNotify());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   //Modal
   const [loginModal, setloginModal] = useState(false);
   const [resetModal, setResetModal] = useState(false);
@@ -187,6 +198,15 @@ const Header = () => {
     let subMenu = document.getElementById("notifies");
     subMenu.classList.toggle("open-notify");
   };
+  function truncateString(str, num) {
+    const wordCount = str.split(" ").length;
+    if (wordCount <= num) {
+      return str;
+    }
+
+    const truncatedString = str.split(" ").slice(0, num).join(" ");
+    return `${truncatedString}...`;
+  }
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
@@ -304,13 +324,55 @@ const Header = () => {
                             onClick={NotifyToggle}
                           >
                             <FontAwesomeIcon icon={faBell}></FontAwesomeIcon>
+                            {notify?.length === 0 ? (
+                              ""
+                            ) : (
+                              <span className="bell_inner_banner">
+                                {notify?.length}
+                              </span>
+                            )}
                           </div>
                           <ul
                             ref={notifyRef}
                             className="notifies"
                             id="notifies"
                           >
-                            <li className="item_notify">
+                            {notify?.map((item) => {
+                              return (
+                                <li key={item._id} className="item_notify">
+                                  <div
+                                    className="round"
+                                    style={
+                                      item.state === "success"
+                                        ? {
+                                            border: "2px solid green",
+                                            backgroundColor: "#11c011",
+                                            color: "#fff",
+                                          }
+                                        : {
+                                            border: "2px solid red",
+                                            backgroundColor: "#f75c5c",
+                                            color: "#fff",
+                                          }
+                                    }
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={faCheck}
+                                    ></FontAwesomeIcon>
+                                  </div>
+                                  <div className="text_inner">
+                                    <span>
+                                      Thông báo{" "}
+                                      {item.state === "success"
+                                        ? "Thành công"
+                                        : "Thất bại"}
+                                    </span>
+                                    <p>{truncateString(item?.message, 5)}</p>
+                                  </div>
+                                </li>
+                              );
+                            })}
+                            {/* <li className="item_notify">
                               <div
                                 className="round"
                                 style={{
@@ -359,11 +421,15 @@ const Header = () => {
                                 <span>Chấp nhận yêu cầu của bạn</span>
                                 <p>yêu cầu đăng ký làm người đại...</p>
                               </div>
-                            </li>
+                            </li> */}
                             <li className="show_more">
-                              <a onClick={NotifyToggle} href="#">
+                              <Link
+                                to="/management/notify"
+                                onClick={NotifyToggle}
+                                href="#"
+                              >
                                 Xem tất cả
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </div>

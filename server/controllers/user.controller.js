@@ -268,7 +268,7 @@ const getMemberDetail = async (req, res) => {
       )
       .populate(
         "userId",
-        "email username joindate youtubeUrl facebookUrl tiktokUrl avatar"
+        "email username joindate youtubeUrl facebookUrl tiktokUrl avatar intro"
       )
       .lean();
     if (!user) {

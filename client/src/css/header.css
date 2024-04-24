@@ -393,3 +393,19 @@
   padding-top: 10px;
   font-weight: bold;
 }
+.bell_inner{
+  position: relative;
+}
+.bell_inner_banner{
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  background-color: #F63B3B;
+  color: #fff;
+  border-radius: 50%;
+  top: 7px;
+  right: 3px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}

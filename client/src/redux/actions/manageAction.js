@@ -62,9 +62,8 @@ export const getUserDonation = () => async (dispatch) => {
 export const getNotify = () => async (dispatch) => {
   try {
     const data = await api.getNotify();
-    console.log(data.data);
     if (data && data.error === undefined) {
-      dispatch({ type: types.SET_NOTIFY, payload: data });
+      dispatch({ type: types.SET_NOTIFY, payload: data.reverse() });
     } else {
       dispatch({ type: types.SET_NOTIFY, payload: [] });
     }

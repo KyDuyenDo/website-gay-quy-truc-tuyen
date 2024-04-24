@@ -606,3 +606,7 @@ li {
 .icon-click{
   cursor: pointer;
 }
+
+.table-data p {
+  margin: 0px !important;
+}

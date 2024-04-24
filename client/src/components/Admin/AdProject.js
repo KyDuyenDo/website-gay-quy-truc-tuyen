@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import TotalManageProject from "./TotalManageProject";
 import Disbursement from "./Disbursement";
 import { Dropdown } from "react-bootstrap";
+import { setDataProjects } from "../../redux/actions/adminAction";
+import { useDispatch } from "react-redux";
 const AdProject = () => {
   const [selection, SetSelection] = useState(1);
   const [dropbtn, setDropbtn] = useState("Trạng thái");
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="head-title">
@@ -32,7 +36,7 @@ const AdProject = () => {
                     SetSelection(2);
                   }}
                 >
-                  Giải ngân (3)
+                  Giải ngân
                 </li>
               </ul>
               {selection === 1 ? (
@@ -45,6 +49,7 @@ const AdProject = () => {
                     <Dropdown.Item
                       onClick={() => {
                         setDropbtn("Tất cả");
+                        dispatch(setDataProjects(""));
                       }}
                     >
                       Tất cả
@@ -52,6 +57,7 @@ const AdProject = () => {
                     <Dropdown.Item
                       onClick={() => {
                         setDropbtn("Đang gây quỹ");
+                        dispatch(setDataProjects("?state=fundraising"));
                       }}
                     >
                       Đang gây quỹ
@@ -59,6 +65,7 @@ const AdProject = () => {
                     <Dropdown.Item
                       onClick={() => {
                         setDropbtn("Đã kết thúc");
+                        dispatch(setDataProjects("?state=finished"));
                       }}
                     >
                       Đã kết thúc

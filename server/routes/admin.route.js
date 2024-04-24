@@ -23,6 +23,9 @@ const {
   getAllUsers,
   getArticleByAdmin,
   puslishArticle,
+  createDisbursement,
+  getDetailUser,
+  getAllFund
 } = require("../controllers/admin.controller");
 
 router.post("/signin", signin);
@@ -31,10 +34,13 @@ router.get("/disbursement/:id", disbursementByArticle);
 router.post("/getDetailFundraiser", getDetailFundraiserAdmin);
 router.get("/returnRequestMember", returnRequestMember);
 router.get("/returnRequestArticle", returnRequestArticle);
+router.get("/get/all/fund", getAllFund);
 router.get("/getArticlesByAdmin", getArticlesByAdmin);
 router.get("/all/users", getAllUsers);
 router.get("/get/article/:id", getArticleByAdmin);
+router.get("/user/detail/:id", getDetailUser);
 router.use(requireAdminAuth);
+router.post("/create/disbursement", createDisbursement);
 router.post("/comfirm/article", confirmArticle);
 router.post("/detele/article", deleteArticle);
 router.post("/remove/pulished/article", removePublishedArticle);

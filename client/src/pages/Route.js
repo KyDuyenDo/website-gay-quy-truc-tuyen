@@ -40,6 +40,7 @@ import EidtProfile from "./EidtProfile";
 import AdDashBoard from "../components/Admin/AdDashBoard";
 import AdRequest from "../components/Admin/AdRequest";
 import AdProject from "../components/Admin/AdProject";
+import AdUsers from "../components/Admin/AdUsers";
 
 function Index() {
   return (
@@ -51,6 +52,7 @@ function Index() {
             <Route path="/admin/dashboar" element={<AdDashBoard />} />
             <Route path="/admin/request" element={<AdRequest />} />
             <Route path="/admin/project" element={<AdProject />} />
+            <Route path="/admin/user" element={<AdUsers />} />
           </Route>
           <Route
             path="/email-verified"

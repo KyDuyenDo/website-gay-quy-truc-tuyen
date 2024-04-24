@@ -16,7 +16,8 @@ import {
   faCircleMinus,
   faSearch,
   faCirclePlus,
-  faSquarePollVertical
+  faSquarePollVertical,
+  faChartSimple,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -24,8 +25,10 @@ const TotalManageProject = () => {
   const dispatch = useDispatch();
   const allArticle = useSelector((state) => state.admin.allArticle);
   const [loginModal, setloginModal] = useState(false);
+  const [logiModal2, setLoginModal2] = useState(false);
   const [selectArticle, setSelectArticle] = useState("");
   const [articleData, setArticleData] = useState();
+  const [search, setSearch] = useState("");
   useEffect(() => {
     async function fetchData() {
       dispatch(setDataProjects(""));
@@ -46,14 +49,6 @@ const TotalManageProject = () => {
     let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
     return formattedNumber;
   }
-  const converDate = (date) => {
-    const dateString = new Date(date).toLocaleDateString("vi-VN", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-    return dateString;
-  };
   const deadline = (createdAt, expireDate) => {
     const createdDate = new Date(createdAt);
     const deadline = new Date(
@@ -63,6 +58,22 @@ const TotalManageProject = () => {
     const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24)); // Chuyển đổi mili giây sang ngày
 
     return daysLeft;
+  };
+  const createQuerySearch = (title, sort) => {
+    return new Promise((resolve, reject) => {
+      try {
+        const encodedTitle = title.replace(/ /g, "%20");
+        const query = `?q=${encodedTitle}`;
+        resolve(query);
+      } catch (error) {
+        reject(error); // Handle potential errors
+      }
+    });
+  };
+  const handleSearchSubmit = () => {
+    createQuerySearch(search).then((query) => {
+      dispatch(setDataProjects(query));
+    });
   };
   return (
     <>
@@ -315,6 +326,101 @@ const TotalManageProject = () => {
             </div>
           </Modal.Body>
         </Modal>
+        <Modal
+          className="fade modal-wrapper auth-modal modal-lg"
+          id="modalLogin"
+          show={logiModal2}
+          onHide={setLoginModal2}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Thống kê chiến dịch</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="container">
+              <div className="row d-flex align-items-center">
+                <div className="col-12 col-md-6 total-item">
+                  <div className="spend">
+                    <p className="m-0 main-title">
+                      {" "}
+                      <span className="number-detail">
+                        {toDecimal(articleData?.totalSpend)}
+                      </span>{" "}
+                      VNĐ Tổng tiền đã chi
+                    </p>
+                    <FontAwesomeIcon
+                      size="xl"
+                      icon={faChartSimple}
+                    ></FontAwesomeIcon>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6 total-item">
+                  <div className="total">
+                    <p className="m-0 main-title">
+                      {" "}
+                      <span className="number-detail">
+                        {toDecimal(articleData?.amountRaised)}
+                      </span>{" "}
+                      VNĐ Tổng tiền gây quỹ
+                    </p>
+                    <FontAwesomeIcon
+                      size="xl"
+                      icon={faChartSimple}
+                    ></FontAwesomeIcon>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6 total-item">
+                  <div className="donors">
+                    <p className="m-0 main-title">
+                      {" "}
+                      <span className="number-detail">
+                        {articleData?.totalDonations}
+                      </span>{" "}
+                      Lượt đã hỗ trợ
+                    </p>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6 total-item">
+                  <div className="donors">
+                    <p className="m-0 main-title">
+                      {" "}
+                      <span className="number-detail">
+                        {toDecimal(articleData?.amountEarned)}
+                      </span>{" "}
+                      VNĐ số tiền nhận được
+                    </p>
+                    <FontAwesomeIcon
+                      size="xl"
+                      icon={faChartSimple}
+                    ></FontAwesomeIcon>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6 total-item">
+                  <div className="project">
+                    <p className="m-0 main-title">
+                      {" "}
+                      <span className="number-detail">
+                        {toDecimal(articleData?.averageRating)}
+                      </span>{" "}
+                      Xếp hạng quan tâm
+                    </p>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6 total-item">
+                  <div className="news">
+                    <p className="m-0 main-title">
+                      {" "}
+                      <span className="number-detail">
+                        {toDecimal(articleData?.totalComment)}
+                      </span>{" "}
+                      Số lượt bình luận
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
         <div className="order">
           <table>
             <thead>
@@ -326,6 +432,13 @@ const TotalManageProject = () => {
                         className="custom--input"
                         type="search"
                         placeholder="Tìm kiếm"
+                        value={search}
+                        onChange={(event) => setSearch(event.target.value)}
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter") {
+                            handleSearchSubmit();
+                          }
+                        }}
                       />
                       <button type="submit" className="search-btn">
                         <span className="bx bx-search">
@@ -401,8 +514,8 @@ const TotalManageProject = () => {
                       <FontAwesomeIcon
                         className="icon-click"
                         onClick={() => {
-                        //   setloginModal(true);
-                        //   setSelectArticle(article?._id);
+                          setLoginModal2(true);
+                          setSelectArticle(article?._id);
                         }}
                         size="sx"
                         icon={faSquarePollVertical}

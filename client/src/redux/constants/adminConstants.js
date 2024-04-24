@@ -9,3 +9,4 @@ export const SET_REQUEST_MEMBER = "SET_REQUEST_MEMBER";
 export const SET_REQUEST_ARTICLE = "SET_REQUEST_ARTICLE";
 export const SET_ALL_ARTICLE = "SET_ALL_ARTICLE";
 export const SET_ALL_USER = "SET_ALL_USER";
+export const SET_ALL_FUND = "SET_ALL_FUND";

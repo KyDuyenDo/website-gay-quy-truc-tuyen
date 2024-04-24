@@ -69,6 +69,19 @@ export const setRequestMember = () => async (dispatch) => {
     console.log(error);
   }
 };
+///get/all/fund
+export const getAllFundAction = (query) => async (dispatch) => {
+  try {
+    const data = await api.getAllFund(query);
+    if (!data.message) {
+      dispatch({ type: types.SET_ALL_FUND, payload: data });
+    } else {
+      dispatch({ type: types.SET_ALL_FUND, payload: [] });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 // SET_REQUEST_ARTICLE
 export const setRequestArticle = () => async (dispatch) => {
   try {
@@ -87,16 +100,24 @@ export const setRequestArticle = () => async (dispatch) => {
 export const setDataProjects = (query) => async (dispatch) => {
   try {
     const data = await api.getArticlesByAdmin(query);
-    dispatch({ type: types.SET_ALL_ARTICLE, payload: data });
+    if (data?.message !== "No articles found") {
+      dispatch({ type: types.SET_ALL_ARTICLE, payload: data });
+    } else {
+      dispatch({ type: types.SET_ALL_ARTICLE, payload: [] });
+    }
   } catch (error) {
     console.log(error);
   }
 };
 // SET_ALL_USER
-export const getAllUsers = () => async (dispatch) => {
+export const getAllUsers = (query) => async (dispatch) => {
   try {
-    const data = await api.getAllUsers();
-    dispatch({ type: types.SET_ALL_USER, payload: data });
+    const data = await api.getAllUsers(query);
+    if (!data.message) {
+      dispatch({ type: types.SET_ALL_USER, payload: data });
+    } else {
+      dispatch({ type: types.SET_ALL_USER, payload: [] });
+    }
   } catch (error) {
     console.log(error);
   }

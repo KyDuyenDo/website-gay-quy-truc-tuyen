@@ -281,7 +281,7 @@ const getMemberDetail = async (req, res) => {
       const totalAmountEarned = articles.reduce((acc, article) => {
         return acc + article.amountEarned;
       }, 0);
-      // user.totalAmountEarned = totalAmountEarned;
+      user.totalAmountEarned = totalAmountEarned;
       let totalDonation = 0;
       for (const article of articles) {
         const donations = await Donation.find({ articleId: article._id });

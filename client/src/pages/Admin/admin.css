@@ -193,40 +193,44 @@ li {
 #content-1 nav .nav-link:hover {
   color: var(--blue);
 }
-#content-1 nav form, .order form {
+#content-1 nav form,
+.order form {
   max-width: 400px;
   width: 100%;
   margin-right: auto;
 }
-#content-1 nav form .form-input, .order form .form-input  {
+#content-1 nav form .form-input,
+.order form .form-input {
   display: flex;
   align-items: center;
   height: 36px;
 }
-#content-1 nav form .form-input input, .order form .form-input input  {
+#content-1 nav form .form-input input,
+.order form .form-input input {
   flex-grow: 1;
   padding: 0 16px;
   height: 100%;
   border: none;
-  background: #EEEEEE;
+  background: #eeeeee;
   border-radius: 36px 0 0 36px;
   outline: none;
   width: 100%;
   color: var(--dark);
 }
-.order form{
+.order form {
   margin: 0px !important;
 }
 .order .custom-th {
   border: none !important;
 }
-#content-1 nav form .form-input button, .order form .form-input button {
+#content-1 nav form .form-input button,
+.order form .form-input button {
   width: 36px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #EEEEEE;
+  background: #eeeeee;
   color: var(--light);
   font-size: 18px;
   border: none;
@@ -391,7 +395,10 @@ li {
   background: #fdd2c1;
   color: #f68466;
 }
-
+#content-1 main .box-info li:nth-child(8) .bx {
+  background: var(--light-yellow);
+  color: var(--yellow);
+}
 #content-1 main .box-info li .text h3 {
   font-size: 24px;
   font-weight: 600;
@@ -599,11 +606,11 @@ li {
 .head-title .select-drop .select-drop-btn {
   padding: 8px 15px !important;
 }
-.order svg{
+.order svg {
   font-size: 18px;
-  color: #6F787F !important;
+  color: #6f787f !important;
 }
-.icon-click{
+.icon-click {
   cursor: pointer;
 }
 

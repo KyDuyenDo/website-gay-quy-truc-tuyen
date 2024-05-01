@@ -11,10 +11,14 @@ export const setAmountAction = (amount) => async (dispatch) => {
   dispatch({ type: types.SET_AMOUNT, payload: amount });
 };
 
-export const setAnonymous = (anonymous) => async (dispatch) => {
+export const setAnonymousAction = (anonymous) => async (dispatch) => {
   dispatch({ type: types.SET_ANONYMOUS, payload: anonymous });
 };
 
 export const setPayMethod = (payMethod) => async (dispatch) => {
   dispatch({ type: types.SET_PAY_METHOD, payload: payMethod });
+};
+// SET_AMOUNT
+export const setTipAction = (tip) => async (dispatch) => {
+  dispatch({ type: types.SET_MOUNT_TIP, payload: tip });
 };

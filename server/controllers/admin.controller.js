@@ -185,7 +185,6 @@ const acceptFundraiser = async (req, res) => {
     res.status(500).json({ message: "server error" });
   }
 };
-
 const rejectFundraiser = async (req, res) => {
   const { userId } = req.body;
   try {
@@ -222,7 +221,9 @@ const rejectFundraiser = async (req, res) => {
 
 const totalData = async (req, res) => {
   // tổng số dự án
-  const articles = await Article.find({}).populate("activities").lean();
+  const articles = await Article.find({ adminApproval: true })
+    .populate("activities")
+    .lean();
   // tổng số tiền thu được
   const totalPrice = articles.reduce(
     (acc, article) => acc + article.amountEarned,

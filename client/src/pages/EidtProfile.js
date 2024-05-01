@@ -186,6 +186,14 @@ const EidtProfile = () => {
                       upLoadImage("avatar", formImage).then((image) => {
                         dispatch(updateImage(image.imageURL));
                         formData.append("avatar", image.imageURL);
+                        const storedData = JSON.parse(
+                          localStorage.getItem("profile")
+                        );
+                        storedData.user.avatar = image.imageURL;
+                        localStorage.setItem(
+                          "profile",
+                          JSON.stringify(storedData)
+                        );
                         dispatch(setUpdateInfoAction(formData));
                       });
                     } else {

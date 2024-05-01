@@ -33,6 +33,13 @@ const ProjectHistory = () => {
     );
     return totalSpent;
   };
+  function toDecimal(number) {
+    if (typeof number !== "number") {
+      return 0;
+    }
+    let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
+    return formattedNumber;
+  }
   return (
     <div className="contain_project">
       <div className="header_content">
@@ -40,7 +47,7 @@ const ProjectHistory = () => {
           <li className="total_price">
             <FontAwesomeIcon size="2x" icon={faDonate}></FontAwesomeIcon>
             <p>Số tiền đã ủng hộ</p>
-            <p>{totalmount(history)} VNĐ</p>
+            <p>{toDecimal(totalmount(history))} VNĐ</p>
           </li>
           <li className="total_project">
             <FontAwesomeIcon size="2x" icon={faDashboard}></FontAwesomeIcon>
@@ -82,7 +89,7 @@ const ProjectHistory = () => {
                         </div>
                       </div>
                     </td>
-                    <th style={{ color: "#35A2EB" }}>+{data.donationAmount}</th>
+                    <th style={{ color: "#35A2EB" }}>+{toDecimal(data.donationAmount)}</th>
                     <th>{formatDate(new Date(data.donationDate))}</th>
                   </tr>
                 );

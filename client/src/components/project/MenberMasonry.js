@@ -28,7 +28,13 @@ const MenberMasonry = () => {
     };
     fetchData();
   }, []);
-
+  function toDecimal(number) {
+    if (typeof number !== "number") {
+      return 0;
+    }
+    let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
+    return formattedNumber;
+  }
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -166,7 +172,7 @@ const MenberMasonry = () => {
                         </span>
                         <p>Tham gia từ {formatDate(item.approvaldate)}</p>
                         <p>
-                          Số tiền gây quỹ <br /> {item.totalAmountRaised} VNĐ
+                          Số tiền gây quỹ <br /> {toDecimal(item.totalAmountRaised)} VNĐ
                         </p>
                         <Link to={`/member-detail/${item.userId}`}>
                           <button className="cta">

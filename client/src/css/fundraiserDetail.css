@@ -224,10 +224,11 @@
   margin-bottom: 15px;
 }
 .widget_avatar .avatar-wrapper .avatar-item .avatar-media img {
-  width: 100%;
+  width: 50px !important;
   border-style: none;
-  height: auto;
+  height: 50px !important;
   vertical-align: middle;
+  object-fit: cover;
 }
 .widget_avatar .avatar-wrapper .avatar-item .donors-item {
   color: #1b8271;

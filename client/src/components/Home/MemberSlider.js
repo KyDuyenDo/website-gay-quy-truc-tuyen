@@ -42,6 +42,13 @@ const MemberSlider = () => {
     const truncatedString = str.split(" ").slice(0, num).join(" ");
     return `${truncatedString}...`;
   }
+  function toDecimal(number) {
+    if (typeof number !== "number") {
+      return 0;
+    }
+    let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
+    return formattedNumber;
+  }
   return (
     <>
       <Swiper
@@ -90,7 +97,7 @@ const MemberSlider = () => {
                 </span>
                 <p>Tham gia từ {formatDate(d.approvaldate)}</p>
                 <p>
-                  Số tiền gây quỹ <br /> {d.totalAmountRaised} VNĐ
+                  Số tiền gây quỹ <br /> {toDecimal(d.totalAmountRaised)} VNĐ
                 </p>
                 <Link to={`/member-detail/${d.userId}`}>
                   <button className="cta">

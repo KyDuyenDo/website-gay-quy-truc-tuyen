@@ -33,6 +33,13 @@ const DashBoard = () => {
     };
     fetchData();
   }, []);
+  function toDecimal(number) {
+    if (typeof number !== "number") {
+      return 0;
+    }
+    let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
+    return formattedNumber;
+  }
   return (
     <div className="contain-dash">
       <div className="row d-flex align-items-center contain-total">
@@ -73,7 +80,7 @@ const DashBoard = () => {
             <p className="main-title">
               {" "}
               <span className="number-detail">
-                {totalProject.totalSpend}
+                {toDecimal(totalProject.totalSpend)}
               </span>{" "}
               VNĐ Tổng tiền đã chi
             </p>
@@ -85,7 +92,7 @@ const DashBoard = () => {
             <p className="main-title">
               {" "}
               <span className="number-detail">
-                {totalProject.totalRaise}
+                {toDecimal(totalProject.totalRaise)}
               </span>{" "}
               VNĐ Tổng tiền gây quỹ
             </p>
@@ -145,9 +152,9 @@ const DashBoard = () => {
                         </div>
                       </div>
                     </td>
-                    <td style={{ color: "#35A2EB" }}>{data.amountRaised}</td>
-                    <td style={{ color: "#35A2EB" }}>+{data.amountEarned}</td>
-                    <td style={{ color: "#FF6384" }}>-{data.totalSpent}</td>
+                    <td style={{ color: "#35A2EB" }}>{toDecimal(data.amountRaised)}</td>
+                    <td style={{ color: "#35A2EB" }}>+{toDecimal(data.amountEarned)}</td>
+                    <td style={{ color: "#FF6384" }}>-{toDecimal(data.totalSpent)}</td>
                   </tr>
                 );
               })}

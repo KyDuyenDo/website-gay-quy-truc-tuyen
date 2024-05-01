@@ -121,7 +121,9 @@ const Disbursement = () => {
               <Button
                 style={{ marginLeft: "10px" }}
                 onClick={() => {
-                  const message = `Chúng tôi đã thực hiện cập nhật giải ngân đợt ${step(
+                  const message = `Chúng tôi đã thực hiện cập nhật giải ngân cho chiến dịch ${
+                    articleData.articletitle
+                  } đợt ${step(
                     articleData?.expireDate,
                     Math.floor(
                       (new Date() - new Date(articleData?.releaseDate)) /
@@ -158,7 +160,7 @@ const Disbursement = () => {
                   createDisbursement(formData).then(() => {
                     sendNotify(formData);
                     dispatch(disbursement());
-                    setloginModal(false)
+                    setloginModal(false);
                   });
                 }}
                 variant="primary"

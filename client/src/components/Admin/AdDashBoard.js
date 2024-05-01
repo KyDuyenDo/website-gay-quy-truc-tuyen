@@ -6,7 +6,7 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { totalDataAction } from "../../redux/actions/adminAction";
+import { totalDataAction, disbursement } from "../../redux/actions/adminAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const AdDashBoard = () => {
   function toDecimal(number) {
@@ -18,9 +18,11 @@ const AdDashBoard = () => {
   }
   const dispatch = useDispatch();
   const data = useSelector((state) => state.admin.totalData);
+  const disbursementItem = useSelector((state) => state.admin.disbursements);
   useEffect(() => {
     async function fetchData() {
       dispatch(totalDataAction());
+      dispatch(disbursement());
     }
     fetchData();
   }, []);
@@ -93,6 +95,15 @@ const AdDashBoard = () => {
           <span className="text">
             <h3>{data.totalRequestArticle}</h3>
             <p>Yêu cầu đăng bài</p>
+          </span>
+        </li>
+        <li>
+          <span className="bx bxs-dollar-circle">
+            <FontAwesomeIcon icon={faSackDollar} />
+          </span>
+          <span className="text">
+            <h3>{disbursementItem?.length}</h3>
+            <p>Chờ giải ngân</p>
           </span>
         </li>
       </ul>

@@ -11,6 +11,7 @@ import manageReducer from "./reducers/management";
 import memberReducer from "./reducers/member";
 import userReducer from "./reducers/user";
 import adminReducer from "./reducers/admin";
+import paymentReducer from "./reducers/payment";
 const createAppStore = async () => {
   try {
     const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ const createAppStore = async () => {
       member: memberReducer,
       user: userReducer,
       admin: adminReducer,
+      payment: paymentReducer,
       // Add other reducers here
     });
     const store = configureStore({

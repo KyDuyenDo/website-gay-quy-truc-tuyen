@@ -4,9 +4,27 @@ import paypal from "../assets/logo/paypal.png";
 import vnpay from "../assets/logo/vnpay.png";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { getConfig } from "../redux/api/paymentAPI";
+import { createPaymentUrl } from "../redux/api/paymentAPI";
 import PayPalPayment from "../components/PayPalPayment";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import {
+  updatePayment,
+  checkPayment,
+  getPayment,
+  deletePayment,
+} from "../redux/api/paymentAPI";
+import { isProtected } from "../redux/api/userAPI";
+import { raiseAmountEarn } from "../redux/api/articleAPI";
+import {
+  createDonationPrivate,
+  createDonationPublic,
+} from "../redux/api/donationAPI";
+
+import { Modal } from "react-bootstrap";
 const Payment = () => {
+  const [showModal, setShowModal] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const progress = [
     {
       avt: "🙂",
@@ -95,12 +113,109 @@ const Payment = () => {
     addPayPal();
   }, []);
 
+  useEffect(() => {
+    const params_search = new URLSearchParams(location.search);
+    if (
+      params_search?.get("vnp_TransactionStatus") === "00" &&
+      localStorage.getItem("paymentId") !== null
+    ) {
+      console.log("Thanh toán thành công");
+      const formData = new FormData();
+      formData.append("status", "COMPLETED");
+      formData.append("TradingCode", params_search?.get("vnp_TransactionNo"));
+      updatePayment(localStorage.getItem("paymentId"), formData);
+      isProtected().then((res) => {
+        console.log(res);
+        if (res === true) {
+          console.log("Private");
+          getPayment(localStorage.getItem("paymentId")).then((payment) => {
+            if (
+              payment.message === "found" &&
+              payment.data.status === "COMPLETED"
+            ) {
+              console.log(payment);
+              const formData = new FormData();
+              const formRaiseAmount = new FormData();
+              formData.append("articleId", params.id);
+              formData.append("paymentId", payment.data._id);
+              formData.append("fullnameDonor", payment.data.payerName);
+              formData.append("donationAmount", payment.data.amount);
+              formData.append(
+                "anonymous",
+                payment.data.payerName === "" ? true : false
+              );
+              formRaiseAmount.append("postId", params.id);
+              formRaiseAmount.append("amount", payment.data.amount);
+              for (const pair of formData) {
+                const key = pair[0];
+                const value = pair[1];
+                console.log(`Key: ${key}, Value: ${value}`);
+              }
+              createDonationPrivate(formData).then((res) => {
+                if (
+                  res?.message !==
+                    "Donation with this paymentId already exists" ||
+                  res.message === undefined
+                ) {
+                  raiseAmountEarn(formRaiseAmount);
+                }
+              });
+              localStorage.removeItem("paymentId");
+            }
+          });
+        } else {
+          getPayment(localStorage.getItem("paymentId")).then((payment) => {
+            if (
+              payment.message === "found" &&
+              payment.data.status === "COMPLETED"
+            ) {
+              const formData = new FormData();
+              const formRaiseAmount = new FormData();
+              formData.append("articleId", params.id);
+              formData.append("paymentId", payment.data._id);
+              formData.append("fullnameDonor", payment.data.payerName);
+              formData.append("donationAmount", payment.data.amount);
+              formData.append(
+                "anonymous",
+                payment.data.payerName === "" ? true : false
+              );
+              formRaiseAmount.append("postId", params.id);
+              formRaiseAmount.append("amount", payment.data.amount);
+              createDonationPublic(formData).then((res) => {
+                if (
+                  res?.message !==
+                    "Donation with this paymentId already exists" ||
+                  res.message === undefined
+                ) {
+                  raiseAmountEarn(formRaiseAmount);
+                }
+              });
+              localStorage.removeItem("paymentId");
+            }
+          });
+        }
+      });
+      setShowModal(true);
+    }
+    // get paymentId in localStorage, then check status payment, if status payment is not COMPLETED then delete payment
+    else if (localStorage.getItem("paymentId") !== null) {
+      getPayment(localStorage.getItem("paymentId")).then((res) => {
+        if (res.message === "found" && res.data.status !== "COMPLETED") {
+          deletePayment(localStorage.getItem("paymentId")).then(() => {
+            localStorage.removeItem("paymentId");
+          });
+        }
+      });
+    }
+    // Check if the URL contains 'query_vnpay'
+  }, [location]);
+
   const initialOptions = {
     clientId: config,
     currency: "USD",
     intent: "capture",
   };
-  console.log(isMounted);
+
   return (
     <section
       style={{
@@ -142,12 +257,6 @@ const Payment = () => {
                   Phương thức thanh toán
                 </h4>
                 <div data-stripe-type="payment">
-                  <div className="cf-form__error-box">
-                    <div
-                      className="cf-form__error-text"
-                      data-error="true"
-                    ></div>
-                  </div>
                   <div data-stripe-element="payment" className="StripeElement">
                     <div
                       className="__PrivateStripeElement"
@@ -193,7 +302,9 @@ const Payment = () => {
                                 ></img>
                               </button>
                               <button
-                                onClick={() => setMethodpay("vnpay")}
+                                onClick={() => {
+                                  setMethodpay("vnpay");
+                                }}
                                 className={
                                   "vnpay " +
                                   (methodpay === "vnpay" ? "add-pay" : "")
@@ -272,9 +383,6 @@ const Payment = () => {
               ></div>
               <div className="cf-form__section">
                 <h3 className="cf-form__section-title">Tổng Kết</h3>
-                <h4 className="cf-form__section-secondary-title">
-                  Giúp nhà máy chưng cất Silver Circle di dời
-                </h4>
                 <div
                   className="cf-form__layout"
                   data-form-layout-padded="bottom"
@@ -439,49 +547,6 @@ const Payment = () => {
                 data-form-layout="full-width"
                 data-form-section="checkout-submit"
               >
-                {/* <div
-                  className="cf-form__group "
-                  data-field-name="checkout_type_neu[terms][crowdfunder_terms]"
-                  data-form-group="checkbox"
-                >
-                  {" "}
-                  <label
-                    className="cf-form__label"
-                    for="checkout_type_neu_terms_crowdfunder_terms"
-                  >
-                    <div className="round">
-                      <input type="checkbox" id="checkbox-16" />
-                      <label for="checkbox-16"></label>
-                    </div>
-
-                    <span className="cf-form__label-text" data-input-label="true">
-                      Tôi chấp nhận Điều khoản và điều kiện được cập nhật vào
-                      ngày 14/11/2022 và đã đọc hướng dẫn của Cơ quan quản lý
-                      việc gây quỹ.
-                    </span>
-                  </label>
-                </div>
-                <div
-                  className="cf-form__group "
-                  data-field-name="checkout_type_neu[terms][newsletter]"
-                  data-form-group="checkbox"
-                >
-                  {" "}
-                  <label
-                    className="cf-form__label"
-                    for="checkout_type_neu_terms_newsletter"
-                  >
-                    <div className="round">
-                      <input type="checkbox" id="checkbox-17" />
-                      <label for="checkbox-17"></label>
-                    </div>
-
-                    <span className="cf-form__label-text" data-input-label="true">
-                      Có - Tôi chọn tham gia nhận tin tức mới nhất từ Người gây
-                      quỹ cộng đồng thiện nguyện.
-                    </span>
-                  </label>
-                </div> */}
                 <p className="cf-form__general-text cf-text--spacer1">
                   Chúng tôi rất nghiêm túc trong bảo mật. Để tìm hiểu thêm, vui
                   lòng xem chính sách quyền riêng tư của chúng tôi
@@ -499,7 +564,7 @@ const Payment = () => {
                   ""
                 ) : isMounted === false ? (
                   ""
-                ) : (
+                ) : methodpay === "paypal" ? (
                   <div
                     className="cf-form__group"
                     data-form-layout-padded="bottom"
@@ -520,6 +585,45 @@ const Payment = () => {
                       />
                     </PayPalScriptProvider>
                   </div>
+                ) : (
+                  <div
+                    style={{
+                      paddingBottom: "0.5rem",
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    <button
+                      style={{
+                        width: "100%",
+                        backgroundColor: "#fff",
+                        border: "1px solid #555",
+                      }}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        const formData = new FormData();
+                        formData.append("articleId", params.id);
+                        formData.append("orderDescription", "donate");
+                        formData.append("orderType", "donate");
+                        formData.append("bankCode", "");
+                        formData.append("language", "vn");
+                        formData.append("payerName", fullname);
+                        formData.append("method", methodpay);
+                        formData.append("status", "pending");
+                        formData.append("amount", amount);
+                        formData.append("tip", amountTip);
+                        createPaymentUrl(formData).then((data) => {
+                          // console.log(data);
+                          window.location.href = data.vnpUrl;
+                          localStorage.setItem("paymentId", data.paymentId);
+                        });
+                      }}
+                    >
+                      <img
+                        src={vnpay}
+                        style={{ width: "125px", padding: "10px" }}
+                      />
+                    </button>
+                  </div>
                 )}
                 {methodpay === "" || errorText === true ? (
                   ""
@@ -533,6 +637,37 @@ const Payment = () => {
           </div>
         </form>
       </div>
+      {showModal && (
+        <Modal
+          className="modal fade modal-wrapper auth-modal"
+          show={showModal}
+          onHide={setShowModal}
+          backdrop="static"
+          centered
+        >
+          <div style={{ textAlign: "center" }}>
+            <h2 className="title">Thanh toán thành công</h2>
+            <h6 className="m-0">Chúng tôi rất cảm ơn sự ủng hộ của bạn!</h6>
+            <a
+              to="/"
+              className="sign-text d-block"
+              data-bs-toggle="collapse"
+              onClick={() => {
+                setShowModal(false);
+                // Replace the current URL with a new one
+                window.history.replaceState(
+                  {},
+                  document.title,
+                  `/payment/${params.id}`
+                );
+                navigate(`/article-detail/${params.id}`);
+              }}
+            >
+              Trở lại
+            </a>
+          </div>
+        </Modal>
+      )}
     </section>
   );
 };

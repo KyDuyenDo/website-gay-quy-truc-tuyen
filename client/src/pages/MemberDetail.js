@@ -63,7 +63,13 @@ const MemberDetail = () => {
 
     return daysLeft;
   };
-
+  function toDecimal(number) {
+    if (typeof number !== "number") {
+      return 0;
+    }
+    let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
+    return formattedNumber;
+  }
   //article Donate limit
   const itemsCommentPage = 6;
   const [currentItemsProject, setCurrentItemsProject] = useState(null);
@@ -125,7 +131,7 @@ const MemberDetail = () => {
                         <ul className="user-counters d-flex flex-row list-unstyled mb-0">
                           <li className="counter-item d-flex flex-column align-items-center">
                             <div className="text-bold text-dark font-size-20">
-                              {memberDetail.totalAmountDonate} VND
+                              {toDecimal(memberDetail.totalAmountDonate)} VNĐ
                             </div>
                             <div className="text-gray-800 font-size-12 font-size-md-16">
                               Số tiền ủng hộ
@@ -133,7 +139,7 @@ const MemberDetail = () => {
                           </li>
                           <li className="counter-item d-flex flex-column align-items-center">
                             <div className="text-bold text-dark font-size-20">
-                              <span>{memberDetail.totalAmountEarned} VNĐ</span>
+                              <span>{toDecimal(memberDetail.totalAmountEarned)} VNĐ</span>
                             </div>
                             <div className="text-gray-800 font-size-12 font-size-md-16">
                               Số tiền đã gây quỹ
@@ -141,7 +147,7 @@ const MemberDetail = () => {
                           </li>
                           <li className="counter-item d-flex flex-column align-items-center">
                             <div className="text-bold text-dark font-size-20">
-                              <span>{memberDetail.totalDonation}</span>
+                              <span>{toDecimal(memberDetail.totalDonation)}</span>
                             </div>
                             <div className="text-gray-800 font-size-12 font-size-md-16">
                               Lượt được ủng hộ
@@ -230,7 +236,10 @@ const MemberDetail = () => {
 
             {activeStep === 0 ? (
               <div className="row">
-                <div className="list_project" style={{ marginTop: "20px", minHeight:'300px' }}>
+                <div
+                  className="list_project"
+                  style={{ marginTop: "20px", minHeight: "300px" }}
+                >
                   {articleRaise?.map((data) => {
                     return (
                       <div class="card" key={data._id}>
@@ -256,7 +265,10 @@ const MemberDetail = () => {
             ) : (
               <>
                 <div className="row">
-                  <div className="list_project" style={{ marginTop: "20px",  minHeight:'300px' }}>
+                  <div
+                    className="list_project"
+                    style={{ marginTop: "20px", minHeight: "300px" }}
+                  >
                     {currentItemsProject?.map((data) => {
                       return (
                         <div class="card" key={data._id}>
@@ -284,7 +296,7 @@ const MemberDetail = () => {
                     })}
                   </div>
                 </div>
-                <div className="row">
+                <div className="mt-4 row">
                   <div className="col-12 m-sm-t0 m-t30">
                     <div className="contain-paginate">
                       <ReactPaginate

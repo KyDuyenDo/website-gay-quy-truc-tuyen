@@ -1,8 +1,8 @@
 import { API, handleApiError } from "./utils";
 
-export const getChartData = async () => {
+export const getChartData = async (date) => {
   try {
-    const { data } = await API.get("manage/chart");
+    const { data } = await API.get(`manage/chart/${date}`);
     return data;
   } catch (error) {
     return handleApiError(error);

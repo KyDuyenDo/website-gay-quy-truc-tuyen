@@ -306,6 +306,7 @@ const AdRequestArticle = () => {
                           deleteArticle(formData).then(() => {
                             sendNotify(formData);
                             setloginModal(false);
+                            dispatch(setRequestArticle());
                           });
                         }}
                       >
@@ -323,6 +324,7 @@ const AdRequestArticle = () => {
                           confirmArticle(formData).then(() => {
                             sendNotify(formData);
                             setloginModal(false);
+                            dispatch(setRequestArticle());
                           });
                         }}
                         variant="primary"
@@ -348,6 +350,7 @@ const AdRequestArticle = () => {
               {requestArticle?.map((article) => {
                 return (
                   <tr
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       setloginModal(true);
                       setSelectArticle(article?._id);

@@ -5,7 +5,6 @@ import ReactPaginate from "react-paginate";
 import { setDataDetailDonation } from "../../redux/actions/donorsAction";
 import { useSelector, useDispatch } from "react-redux";
 
-
 const DonorList = ({ itemsPerPage, articleId }) => {
   const donations = useSelector((state) => state.donation.donations);
   console.log(donations);
@@ -30,6 +29,13 @@ const DonorList = ({ itemsPerPage, articleId }) => {
     );
     setItemOffset(newOffset);
   };
+  function toDecimal(number) {
+    if (typeof number !== "number") {
+      return 0;
+    }
+    let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
+    return formattedNumber;
+  }
   return (
     <div className="MuiBox-root css-16k4iv4">
       <div className="list-donate-container">
@@ -76,7 +82,7 @@ const DonorList = ({ itemsPerPage, articleId }) => {
                   <tr>
                     <td>{item.anonymous === true ? "" : item.fullnameDonor}</td>
                     <td>
-                      <span>{item.donationAmount}</span> VND
+                      <span>{toDecimal(item.donationAmount)}</span> VND
                     </td>
                     <td>{item.donationDate} </td>
                   </tr>

@@ -216,6 +216,14 @@ const Payment = () => {
     intent: "capture",
   };
 
+  function toDecimal(number) {
+    if (typeof number !== "number") {
+      return 0;
+    }
+    let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
+    return formattedNumber;
+  }
+
   return (
     <section
       style={{
@@ -534,7 +542,7 @@ const Payment = () => {
                     </span>
                     <span className="cf-form__general-text cf-text--break-word">
                       <strong data-checkout-cart-total="true">
-                        {parseInt(amount) + parseInt(amountTip)} VNĐ
+                        {toDecimal(parseInt(amount) + parseInt(amountTip))} VNĐ
                       </strong>
                     </span>
                   </div>

@@ -6,6 +6,7 @@ import {
   getDetaiArticleByAdmin,
   removePublishedArticle,
   publishedArticle,
+  getDisbursementByArticle,
 } from "../../redux/api/adminAPI";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
@@ -58,6 +59,13 @@ const TotalManageProject = () => {
     const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24)); // Chuyển đổi mili giây sang ngày
 
     return daysLeft;
+  };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   };
   const createQuerySearch = (title, sort) => {
     return new Promise((resolve, reject) => {
@@ -417,6 +425,38 @@ const TotalManageProject = () => {
                     </p>
                   </div>
                 </div>
+                {/* createDisbursement */}
+                <div className="col-12">
+                  <label
+                    for="exampleFormControlTextarea1"
+                    style={{ paddingTop: "10px", fontSize: "20px" }}
+                    className="form-label"
+                  >
+                    Bảng giải ngân
+                  </label>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Ngày</th>
+                        <th scope="col">Số tiền</th>
+                        <th scope="col">Đợt</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {articleData?.disbursements.map((item, index) => {
+                        return (
+                          <tr>
+                            <th scope="row">{index + 1}</th>
+                            <td>{formatDate(item.time)}</td>
+                            <td>{toDecimal(item.amountDisburse)}</td>
+                            <td>{item.step}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </Modal.Body>
@@ -426,7 +466,12 @@ const TotalManageProject = () => {
             <thead>
               <tr>
                 <th>
-                  <form action="#">
+                  <form
+                    action="#"
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
                     <div className="form-input">
                       <input
                         className="custom--input"
@@ -549,14 +594,6 @@ const TotalManageProject = () => {
                           icon={faCirclePlus}
                         />
                       )}
-                    </td>
-                    <td>
-                      <FontAwesomeIcon
-                        className="icon-click"
-                        onClick={() => {}}
-                        size="sx"
-                        icon={faTrash}
-                      />
                     </td>
                   </tr>
                 );

@@ -33,12 +33,37 @@ const Notify = () => {
       {notify.map((data) => {
         return (
           <div class="item_card">
-            <div class="item_icon">
-              <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+            <div
+              className="round"
+              style={
+                data.state === "success"
+                  ? {
+                      border: "2px solid green",
+                      backgroundColor: "#11c011",
+                      color: "#fff",
+                      width: "40px",
+                      height: "35px",
+                    }
+                  : {
+                      border: "2px solid red",
+                      backgroundColor: "#f75c5c",
+                      color: "#fff",
+                      width: "40px",
+                      height: "35px",
+                    }
+              }
+            >
+              {
+                data.state === "success" ? (
+                  <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+                ) : (
+                  <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
+                ) // faX
+              }
             </div>
             <div class="item_text">
               <p class="item_text_title">
-                {data.state}{" "}
+                {data.state === "success" ? "Thành công" : " Thất bại"}{" "}
                 <span className="item_time">
                   {formatDate(new Date(data.time))}
                 </span>
@@ -52,16 +77,17 @@ const Notify = () => {
                   const formData = new FormData();
                   formData.append("notifyId", data._id);
                   dispatch(delNotify(formData));
+                  dispatch(getNotify());
                 }}
               >
                 <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
               </a>
-              <input
+              {/* <input
                 class="form-check-input"
                 type="checkbox"
                 value=""
                 id="flexCheckChecked"
-              />
+              /> */}
             </div>
           </div>
         );

@@ -1,9 +1,10 @@
 import * as api from "../api/managementAPI";
 import * as types from "../constants/projectConstants";
 
-export const getChartData = () => async (dispatch) => {
+export const getChartData = (date) => async (dispatch) => {
   try {
-    const data = await api.getChartData();
+    const data = await api.getChartData(date);
+    console.log(data);
     const labels = Object.keys(data.dataActivityChart);
     const dataActivityChart = Object.values(data.dataActivityChart);
     const dataDonationChart = Object.values(data.dataDonationChart);
@@ -63,7 +64,7 @@ export const getNotify = () => async (dispatch) => {
   try {
     const data = await api.getNotify();
     if (data && data.error === undefined) {
-      dispatch({ type: types.SET_NOTIFY, payload: data.reverse() });
+      dispatch({ type: types.SET_NOTIFY, payload: data });
     } else {
       dispatch({ type: types.SET_NOTIFY, payload: [] });
     }

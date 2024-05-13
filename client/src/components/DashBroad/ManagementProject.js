@@ -3,11 +3,13 @@ import { faPen, faSearch, faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { isFundraiser } from "../../redux/api/userAPI";
 import { Link, useNavigate } from "react-router-dom";
+import { getLimitArticle } from "../../redux/api/articleAPI";
 import { getUserProject } from "../../redux/actions/articleAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 const ManagementProject = () => {
   const [notifyAdd, setNotifyAdd] = useState(false);
+  const [NotifyMessage, setNotifyMessage] = useState("");
   const [action, setAction] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -117,7 +119,15 @@ const ManagementProject = () => {
               to="/create-project"
               onClick={async () => {
                 const res = await isFundraiser();
-                if (res !== true) {
+                const limit = await getLimitArticle();
+                if (res !== true || limit.success !== true) {
+                  limit.success === true
+                    ? setNotifyMessage(
+                        "Bạn cần đăng ký để tạo các bài đăng gây quỹ."
+                      )
+                    : setNotifyMessage(
+                        "Bạn đã đạt giới hạn bài viết gây quỹ (5 bài), hãy hoàn tất các chiến dịch hiện tại."
+                      );
                   setNotifyAdd(true);
                 } else {
                   navigate("/create-project");
@@ -210,16 +220,18 @@ const ManagementProject = () => {
           <h2 className="title" style={{ backgroundColor: "#F79E00" }}>
             Cảnh báo
           </h2>
-          <h6 className="m-0">Bạn cần đăng ký để tạo các bài đăng gây quỹ.</h6>
-          <a
-            className="sign-text d-block"
-            data-bs-toggle="collapse"
-            onClick={() => {
-              setNotifyAdd(false);
-            }}
-          >
-            Đăng ký ngay
-          </a>
+          <h6 className="m-0">{NotifyMessage}</h6>
+          {NotifyMessage === "Bạn cần đăng ký để tạo các bài đăng gây quỹ." && (
+            <a
+              className="sign-text d-block"
+              data-bs-toggle="collapse"
+              onClick={() => {
+                setNotifyAdd(false);
+              }}
+            >
+              Đăng ký ngay
+            </a>
+          )}
         </div>
       </Modal>
     </>

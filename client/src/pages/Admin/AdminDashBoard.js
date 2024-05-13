@@ -4,8 +4,6 @@ import {
   faMessage,
   faNewspaper,
   faUserFriends,
-  faSearch,
-  faBell,
   faList,
   faSignOut,
   faSmile,
@@ -32,7 +30,12 @@ const AdminDashBoard = () => {
   console.log(activeItem);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const returnName = () => {
+    const admin = localStorage.getItem("admin");
+    const adminObject = JSON.parse(admin);
+    console.log(adminObject);
+    return adminObject.user.username;
+  };
   useEffect(() => {
     async function fetchData() {
       const res = await verifyAdmin();
@@ -128,13 +131,14 @@ const AdminDashBoard = () => {
           <form action="#">
             <div className="form-input"></div>
           </form>
-          <a href="#" className="notification">
+          {/* <a href="#" className="notification">
             <span className="bx bxs-bell">
               <FontAwesomeIcon size="1x" icon={faBell} />
             </span>
             <span className="num">8</span>
-          </a>
+          </a> */}
           <a href="#" className="profile-img">
+            <span style={{marginRight: '5px'}}>{returnName()}</span>
             <img src="https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg" />
           </a>
         </nav>

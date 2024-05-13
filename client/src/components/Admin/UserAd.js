@@ -53,7 +53,7 @@ const UserAd = () => {
     });
   };
   const handleSearchSubmit = () => {
-      createQuerySearch(search).then((query) => {
+    createQuerySearch(search).then((query) => {
       dispatch(getAllUsers(query));
     });
   };
@@ -247,7 +247,12 @@ const UserAd = () => {
             <thead>
               <tr>
                 <th>
-                  <form action="#">
+                  <form
+                    action="#"
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
                     <div className="form-input">
                       <input
                         className="custom--input"
@@ -348,14 +353,6 @@ const UserAd = () => {
                           icon={faCirclePlus}
                         />
                       )}
-                    </td>
-                    <td>
-                      <FontAwesomeIcon
-                        className="icon-click"
-                        onClick={() => {}}
-                        size="sx"
-                        icon={faTrash}
-                      />
                     </td>
                   </tr>
                 );

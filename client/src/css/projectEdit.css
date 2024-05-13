@@ -163,3 +163,7 @@
 .contain-button button:last-child {
     margin-left: 15px;
 }
+
+.table.custom_table tr th {
+  background-color: #eee !important;
+}

@@ -17,7 +17,7 @@ const {
 router.get("/user/donation", requireAuth, decodeToken, getUserDonation);
 router.get("/notify", requireAuth, decodeToken, getNotify);
 router.post("/del/notify", requireAuth, decodeToken, delNotify);
-router.get("/chart", requireAuth, decodeToken, getChartData);
+router.get("/chart/:date", requireAuth, decodeToken, getChartData);
 router.get(
   "/get/detail/user",
   requireAuth,

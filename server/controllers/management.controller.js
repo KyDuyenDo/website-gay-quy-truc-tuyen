@@ -23,7 +23,10 @@ const getUserDonation = async (req, res) => {
 const getNotify = async (req, res) => {
   const userId = req.userId;
   try {
-    const notify = await Notify.find({ userId: userId }, "message state time");
+    const notify = await Notify.find(
+      { userId: userId },
+      "message state time"
+    ).sort({ time: -1 });
     if (!notify) {
       res.status(404).json({ message: "Not Found" });
     }
@@ -49,8 +52,8 @@ const delNotify = async (req, res) => {
   }
 };
 
-function getWeekDays() {
-  const today = new Date();
+function getWeekDays(date) {
+  const today = new Date(date);
   const startOfWeek = new Date(today);
   startOfWeek.setDate(
     startOfWeek.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1)
@@ -68,14 +71,26 @@ function getWeekDays() {
 function getDailyTotals(data, weekDays) {
   const dailyTotals = {}; // Object to store daily totals
   for (const item of weekDays) {
-    const dateString = item.toLocaleDateString();
+    const dateString = item.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
     dailyTotals[dateString] = 0;
   }
   for (const item of data) {
     const dateString =
       item.createdAt === undefined
-        ? item.donationDate.toLocaleDateString()
-        : item.createdAt.toLocaleDateString();
+        ? item.donationDate.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })
+        : item.createdAt.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          });
     if (dailyTotals[dateString] === undefined) {
       continue;
     } else {
@@ -92,8 +107,9 @@ function getDailyTotals(data, weekDays) {
 // trả về mảng danh số chi trong tuần được tổng hợp từ các activity và các donation
 const getChartData = async (req, res) => {
   try {
+    const date = req.params.date;
     const userId = req.userId;
-    const week = getWeekDays();
+    const week = getWeekDays(date);
 
     const articlesByUser = await Article.find({
       userId: userId,
@@ -101,9 +117,9 @@ const getChartData = async (req, res) => {
       $expr: {
         $lte: [
           {
-            $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+            $divide: [{ $subtract: [new Date(), "$releaseDate"] }, 86400000],
           },
-          { $add: ["$expireDate", 2] },
+          { $add: ["$expireDate"] },
         ],
       },
     }).exec();
@@ -156,9 +172,9 @@ const getDataUserProject = async (req, res) => {
       $expr: {
         $lte: [
           {
-            $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+            $divide: [{ $subtract: [new Date(), "$releaseDate"] }, 86400000],
           },
-          { $add: ["$expireDate", 2] },
+          { $add: ["$expireDate"] },
         ],
       }, // còn hạn
     });
@@ -167,9 +183,9 @@ const getDataUserProject = async (req, res) => {
       $expr: {
         $gt: [
           {
-            $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+            $divide: [{ $subtract: [new Date(), "$releaseDate"] }, 86400000],
           }, // Chuyển từ mili giây sang số ngày
-          { $add: ["$expireDate", 2] },
+          { $add: ["$expireDate"] },
         ],
       },
     });
@@ -214,9 +230,9 @@ const getDataFundraising = async (req, res) => {
       $expr: {
         $lte: [
           {
-            $divide: [{ $subtract: [new Date(), "$createdAt"] }, 86400000],
+            $divide: [{ $subtract: [new Date(), "$releaseDate"] }, 86400000],
           },
-          { $add: ["$expireDate", 2] },
+          { $add: ["$expireDate"] },
         ],
       }, // còn hạn
     })

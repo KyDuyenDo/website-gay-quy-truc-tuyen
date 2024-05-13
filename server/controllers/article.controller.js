@@ -337,7 +337,22 @@ const getArticles = async (req, res) => {
       },
       {
         $match: {
-          $and: [{ published: true }],
+          $and: [
+            { published: true },
+            {
+              $expr: {
+                $lte: [
+                  {
+                    $divide: [
+                      { $subtract: [new Date(), "$releaseDate"] },
+                      86400000,
+                    ],
+                  },
+                  "$expireDate",
+                ],
+              }, // còn hạn
+            },
+          ],
         },
       },
       {
@@ -443,7 +458,22 @@ const getArticleHighRating = async (req, res) => {
       },
       {
         $match: {
-          $and: [{ published: true }],
+          $and: [
+            { published: true },
+            {
+              $expr: {
+                $lte: [
+                  {
+                    $divide: [
+                      { $subtract: [new Date(), "$releaseDate"] },
+                      86400000,
+                    ],
+                  },
+                  "$expireDate",
+                ],
+              }, // còn hạn
+            },
+          ],
         },
       },
       {
@@ -572,7 +602,18 @@ const getArticleByQuest = async (req, res) => {
         articles = await Article.find({ userId: userId, adminApproval: false });
       }
     } else {
-      articles = await Article.find({ userId: userId });
+      articles = await Article.find({
+        userId: userId, // của người dùng
+        adminApproval: true, // đã đăng và chấp thuận bởi admin
+        $expr: {
+          $lte: [
+            {
+              $divide: [{ $subtract: [new Date(), "$releaseDate"] }, 86400000],
+            },
+            "$expireDate",
+          ],
+        }, // còn hạn
+      });
     }
     const distinctArticleIds = await Donation.aggregate([
       { $match: { donorId: new ObjectId(userId) } },
@@ -602,6 +643,7 @@ const isLimitArticleUp = async (req, res) => {
   const userId = req.userId;
   try {
     // không quá 5 bài kể cả bài yêu cầu và bài đã đăng
+    // article pending
     const articles = await Article.find({
       userId: userId,
       $expr: {
@@ -613,10 +655,13 @@ const isLimitArticleUp = async (req, res) => {
         ],
       },
     });
-    if (articles) {
-      return res.status(404).json({ message: "Not Found" });
-    }
-    if (articles.length <= 5) {
+    // article request
+    const articlesRequest = await Article.find({
+      userId: userId,
+      adminApproval: false,
+    });
+    const allArticles = articles?.concat(articlesRequest);
+    if (allArticles.length + 1 <= 5) {
       return res.status(200).json({ success: true });
     } else {
       return res.status(200).json({ success: false });
@@ -801,6 +846,7 @@ const getUserArticleDetail = async (req, res) => {
     const post = await Article.find({ _id: postId, userId: userId })
       .populate("activities")
       .populate("categotyId")
+      .populate("disbursements")
       .lean();
     if (!post) {
       return res.status(404).json({ message: "Post not found" });

@@ -8,6 +8,7 @@ import {
   faAngleRight,
   faBell,
   faCheck,
+  faX
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal } from "react-bootstrap";
@@ -17,7 +18,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import logo from "./logo.png";
-
+import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserClear } from "../redux/actions/userAction";
@@ -356,9 +357,17 @@ const Header = () => {
                                           }
                                     }
                                   >
-                                    <FontAwesomeIcon
-                                      icon={faCheck}
-                                    ></FontAwesomeIcon>
+                                    {
+                                      item.state === "success" ? (
+                                        <FontAwesomeIcon
+                                          icon={faCheck}
+                                        ></FontAwesomeIcon>
+                                      ) : (
+                                        <FontAwesomeIcon
+                                          icon={faX}
+                                        ></FontAwesomeIcon>
+                                      ) // faX
+                                    }
                                   </div>
                                   <div className="text_inner">
                                     <span>
@@ -522,6 +531,7 @@ const Header = () => {
             setLoading(false);
             if (localStorage.getItem("profile")) {
               setloginModal(false);
+              dispatch(getNotify());
             }
           })}
         >
@@ -869,4 +879,8 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  notifications: state.notifications, // Replace with the path to the notifications in your state
+});
+
+export default connect(mapStateToProps)(Header);

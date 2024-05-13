@@ -306,11 +306,23 @@ const ArticleDetail = () => {
                           {deadline(
                             detailArticle.releaseDate,
                             detailArticle.expireDate
-                          )}
+                          ) < 0
+                            ? "Đã kết thúc"
+                            : deadline(
+                                detailArticle.releaseDate,
+                                detailArticle.expireDate
+                              )}
                         </h5>
-                        <span style={{ color: "#8d8d8d" }} className="ms-2">
-                          ngày còn lại
-                        </span>
+                        {deadline(
+                          detailArticle.releaseDate,
+                          detailArticle.expireDate
+                        ) >= 0 ? (
+                          <span style={{ color: "#8d8d8d" }} className="ms-2">
+                            ngày còn lại
+                          </span>
+                        ) : (
+                          ""
+                        )}
                       </li>
                     </ul>
                   </div>

@@ -656,6 +656,7 @@ const getArticleByAdmin = async (req, res) => {
       .populate("addressId")
       .populate("categotyId")
       .populate("activities")
+      .populate("disbursements")
       .lean();
     if (!article) {
       return res.status(404).json({ message: "Not Fund" });

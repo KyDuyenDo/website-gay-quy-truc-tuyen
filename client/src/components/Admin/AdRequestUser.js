@@ -236,6 +236,7 @@ const AdRequestUser = () => {
               {requestMember?.map((req) => {
                 return (
                   <tr
+                  style={{cursor: "pointer"}}
                     onClick={() => {
                       setSelectUser(req.userId);
                       setloginModal(true);

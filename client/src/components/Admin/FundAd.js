@@ -7,6 +7,7 @@ import { getDetailFundraiserAdmin } from "../../redux/api/adminAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { event } from "jquery";
 const FundAd = () => {
   const dispatch = useDispatch();
   const allFund = useSelector((state) => state.admin.allFund);
@@ -212,7 +213,12 @@ const FundAd = () => {
             <thead>
               <tr>
                 <th style={{ border: "none" }}>
-                  <form action="#">
+                  <form
+                    action="#"
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
                     <div className="form-input">
                       <input
                         className="custom--input"
@@ -222,7 +228,6 @@ const FundAd = () => {
                         onChange={(event) => setSearch(event.target.value)}
                         onKeyDown={(event) => {
                           if (event.key === "Enter") {
-                            console.log("enter");
                             handleSearchSubmit();
                           }
                         }}
@@ -246,6 +251,7 @@ const FundAd = () => {
               {allFund?.map((req) => {
                 return (
                   <tr
+                  style={{cursor:'pointer'}}
                     onClick={() => {
                       setSelectUser(req.userId);
                       setloginModal(true);

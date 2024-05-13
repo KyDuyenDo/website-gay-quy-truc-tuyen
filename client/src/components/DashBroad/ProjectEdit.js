@@ -35,15 +35,13 @@ const ProjectEdit = () => {
   const detailArticle = useSelector(
     (state) => state.management.userArticleDetail
   );
-  function formatDate(date) {
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const month = date.getMonth() + 1;
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
     const day = date.getDate();
+    const month = date.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
     const year = date.getFullYear();
-
-    return `${month}/${day}/${year.toString().slice(-2)} - ${hours}:${minutes}`;
-  }
+    return `${day}/${month}/${year}`;
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -176,6 +174,31 @@ const ProjectEdit = () => {
                   value={detailArticle.expireDate}
                 />
               </div>
+            </div>
+          </div>
+          <div className="row mb-4">
+            <span className="header-title mb-4">Bảng giải ngân</span>
+            <div>
+              <table class="table custom_table">
+                <thead style={{ backgroundColor: "#eee" }}>
+                  <tr>
+                    <th scope="col">Ngày</th>
+                    <th scope="col">Số tiền</th>
+                    <th scope="col">Đợt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {detailArticle?.disbursements?.map((item, index) => {
+                    return (
+                      <tr>
+                        <td>{formatDate(item.time)}</td>
+                        <td>{item.amountDisburse}</td>
+                        <td>{item.step}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </form>

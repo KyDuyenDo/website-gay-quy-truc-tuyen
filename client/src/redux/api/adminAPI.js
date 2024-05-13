@@ -281,3 +281,12 @@ export const getUserDetail = async (id) => {
     return handleApiError(error);
   }
 };
+// get disbursement by article
+export const getDisbursementByArticle = async (id) => {
+  try {
+    const { data } = await ADMIN_API.get(`/admin/disbursement/article/${id}`);
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};

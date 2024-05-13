@@ -18,7 +18,7 @@ const ArticleSchema = new Schema({
   body: { type: String, require: true },
   state: { type: String, require: true },
   expireDate: { type: Number, require: true },
-  releaseDate: { type: String, require: true },
+  releaseDate: { type: Date, require: true },
   accountNumber: { type: String, require: true },
   emailPayPal: { type: String, require: true },
   methodPayment: { type: String, require: true },

@@ -1,35 +1,4 @@
-[{
-  "_id": {
-    "$oid": "662209cf5be689dbb54f7e73"
-  },
-  "length": 268579,
-  "chunkSize": 1048576,
-  "uploadDate": {
-    "$date": "2024-04-19T06:06:07.103Z"
-  },
-  "filename": "1713506767078-duyen1.jpg",
-  "metadata": {
-    "name": "duyen1.jpg",
-    "size": 268579,
-    "type": "image/jpeg"
-  }
-},
-{
-  "_id": {
-    "$oid": "662209cf5be689dbb54f7e74"
-  },
-  "length": 287694,
-  "chunkSize": 1048576,
-  "uploadDate": {
-    "$date": "2024-04-19T06:06:07.104Z"
-  },
-  "filename": "1713506767085-duyen2.jpg",
-  "metadata": {
-    "name": "duyen2.jpg",
-    "size": 287694,
-    "type": "image/jpeg"
-  }
-},
+[
 {
   "_id": {
     "$oid": "66220aa85be689dbb54f7e9c"

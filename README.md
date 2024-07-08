@@ -27,6 +27,7 @@ in need.
 Conclusion: The application of machine learning and facial identity verification in
 online fundraising is an important step towards a more sustainable and transparent
 online charity community.
+
 CDM
 ![image](https://github.com/KyDuyenDo/website-gay-quy-truc-tuyen/assets/84983247/0f9dfca5-7ec5-45fc-98ad-44d80d484a51)
 Model

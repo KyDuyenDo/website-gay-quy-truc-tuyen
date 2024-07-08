@@ -1,0 +1,169 @@
+[{
+  "_id": {
+    "$oid": "660ba52d9ca975cd9ff77087"
+  },
+  "city": "Sơn La",
+  "street": "",
+  "county": "Sông Mã",
+  "town": "",
+  "detail": "Sông Mã, Huyện Sông Mã, Tỉnh Sơn La, Việt Nam",
+  "lat": "21.0521811",
+  "lon": "103.7486557",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660ba8129ca975cd9ff770a4"
+  },
+  "city": "Hà Nội",
+  "street": "",
+  "county": "Quốc Oai",
+  "town": "Xã Hòa Thạch",
+  "detail": "Trạm y tế xã Hoà Thạch, Đường Hồ Chí Minh, Huyện Quốc Oai, Hà Nội, Lương Sơn, Hòa Bình, Việt Nam",
+  "lat": "20.946170600000002",
+  "lon": "105.57808878172658",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660baae89ca975cd9ff770be"
+  },
+  "city": "Hồ Chí Minh",
+  "street": "130 Lê Văn Thịnh",
+  "county": "Quận 2",
+  "town": "Bình Trưng Tây",
+  "detail": "Bệnh viện Lê Văn Thịnh, 130, Đường Lê Văn Thịnh, Phường Bình Trưng Tây, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 08408, Việt Nam",
+  "lat": "10.78226625",
+  "lon": "106.76849767389871",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660bac9b9ca975cd9ff770d8"
+  },
+  "city": "Đắk Lắk Buôn Ma Thuột ",
+  "street": "Xô Viết Nghệ Tĩnh ",
+  "county": "",
+  "town": "",
+  "detail": "Xô Viết Nghệ Tĩnh, Thành phố Buôn Ma Thuột, Tỉnh Đắk Lắk, 63107, Việt Nam",
+  "lat": "12.6849878",
+  "lon": "108.0406581",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660bae099ca975cd9ff770f2"
+  },
+  "city": "Hà Nội",
+  "street": "",
+  "county": "Thanh Trì",
+  "town": "Xã Tân Triều",
+  "detail": "Trường Mầm non xã Tân Triều, Đường Tân Triều, Huyện Thanh Trì, Hà Nội, 10136, Việt Nam",
+  "lat": "20.980223549999998",
+  "lon": "105.80299141936521",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660baf959ca975cd9ff7710c"
+  },
+  "city": "Đắk Lắk",
+  "street": "",
+  "county": "Huyện Krông Bông",
+  "town": "",
+  "detail": "Krông Bông, Tỉnh Đắk Lắk, Việt Nam",
+  "lat": "12.45150995",
+  "lon": "108.48816610434992",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660bb1429ca975cd9ff77127"
+  },
+  "city": "Hải Dương",
+  "street": "",
+  "county": "Thanh Miện",
+  "town": "",
+  "detail": "Thanh Miện, Hải Dương, Việt Nam",
+  "lat": "20.76602915",
+  "lon": "106.22868145662432",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660bb2649ca975cd9ff77141"
+  },
+  "city": "Thành phố Đồng Xoài",
+  "street": "",
+  "county": "Tỉnh Bình Phước",
+  "town": "Phường Tân Phú",
+  "detail": "Phường Tân Phú, Thành phố Đồng Xoài, Tỉnh Bình Phước, 67106, Việt Nam",
+  "lat": "11.5407846",
+  "lon": "106.8969782",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660bb3ae9ca975cd9ff7715b"
+  },
+  "city": "Hồ Chí Minh",
+  "street": "",
+  "county": "Quận Phú Nhuận",
+  "town": "Phường 2,",
+  "detail": "Phường 2, Quận Phú Nhuận, Thành phố Hồ Chí Minh, 72210, Việt Nam",
+  "lat": "10.7982822",
+  "lon": "106.6859046",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660bb47e9ca975cd9ff77175"
+  },
+  "city": "Cà Mau",
+  "street": "",
+  "county": "Phường 6",
+  "town": "",
+  "detail": "Phường 6, Thành phố Cà Mau, Tỉnh Cà Mau, Việt Nam",
+  "lat": "9.1749304",
+  "lon": "105.1619535",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660bb5ad9ca975cd9ff77191"
+  },
+  "city": "Hà Nội",
+  "street": "",
+  "county": "Quận Ba Đình",
+  "town": "Điện Biên",
+  "detail": "Phường Điện Biên, Quận Ba Đình, Hà Nội, Việt Nam",
+  "lat": "21.0323562",
+  "lon": "105.8365906",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662b73918d897939736d9411"
+  },
+  "city": "can tho",
+  "street": "",
+  "county": "",
+  "town": "",
+  "detail": "Thành phố Cần Thơ, Việt Nam",
+  "lat": "10.0364634",
+  "lon": "105.7875821",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6638508f6eef1d77c4e1655e"
+  },
+  "city": "Vũng Tàu",
+  "street": "",
+  "county": "Bà Rịa-Vũng Tàu",
+  "town": "Thắng Nhất",
+  "detail": "Phường Thắng Nhất, Thành phố Vũng Tàu, Tỉnh Bà Rịa - Vũng Tàu, 78000, Việt Nam",
+  "lat": "10.3846763",
+  "lon": "107.1065156",
+  "__v": 0
+}]

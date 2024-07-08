@@ -1,0 +1,70 @@
+[{
+  "_id": {
+    "$oid": "662f63f8d137aa94f0a24d97"
+  },
+  "articleId": {
+    "$oid": "660ba8129ca975cd9ff770a5"
+  },
+  "amountDisburse": 1200000,
+  "step": 1,
+  "time": {
+    "$date": "2024-04-29T09:10:16.259Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f63fcd137aa94f0a24da6"
+  },
+  "articleId": {
+    "$oid": "660baae89ca975cd9ff770bf"
+  },
+  "amountDisburse": 0,
+  "step": 1,
+  "time": {
+    "$date": "2024-04-29T09:10:20.928Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f63ffd137aa94f0a24db5"
+  },
+  "articleId": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "amountDisburse": 260000,
+  "step": 1,
+  "time": {
+    "$date": "2024-04-29T09:10:23.605Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f6402d137aa94f0a24dc4"
+  },
+  "articleId": {
+    "$oid": "660bb2649ca975cd9ff77142"
+  },
+  "amountDisburse": 0,
+  "step": 1,
+  "time": {
+    "$date": "2024-04-29T09:10:26.272Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663cdf929b9b3f342aabf988"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "amountDisburse": 7210000,
+  "step": 1,
+  "time": {
+    "$date": "2024-05-09T14:37:06.998Z"
+  },
+  "__v": 0
+}]

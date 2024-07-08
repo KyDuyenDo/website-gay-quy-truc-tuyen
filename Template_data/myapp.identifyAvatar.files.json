@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "6620e192fd756f6d519613a1"
+  },
+  "length": 18173,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-18T09:02:10.767Z"
+  },
+  "filename": "1713430930745-blob",
+  "metadata": {
+    "name": "blob",
+    "size": 18173,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ce2cc880b2f3c3b0896f"
+  },
+  "length": 20987,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T08:28:28.175Z"
+  },
+  "filename": "1713688108169-blob",
+  "metadata": {
+    "name": "blob",
+    "size": 20987,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624d39dd9a5c80be41bb318"
+  },
+  "length": 19977,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T08:51:41.252Z"
+  },
+  "filename": "1713689501244-blob",
+  "metadata": {
+    "name": "blob",
+    "size": 19977,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ec2dd9a5c80be41bb611"
+  },
+  "length": 14136,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T10:36:29.520Z"
+  },
+  "filename": "1713695789518-blob",
+  "metadata": {
+    "name": "blob",
+    "size": 14136,
+    "type": "image/jpeg"
+  }
+}]

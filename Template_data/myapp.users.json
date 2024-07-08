@@ -1,0 +1,414 @@
+[{
+  "_id": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "username": "Đỗ Kỳ Duyên",
+  "email": "duyenk200@gmail.com",
+  "password": "",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1713083792800-fec3ed08bb51150f4c40.jpg",
+  "phone": "0355544778",
+  "gender": "0",
+  "birthday": "03/02/2002",
+  "youtubeUrl": "",
+  "facebookUrl": "https://www.facebook.com/miku.do.3?locale=vi_VN",
+  "intro": "Tôi lớn lên ở một vùng quê nghèo, nơi cơ hội tiếp cận với sách vở còn nhiều hạn chế. Hồi nhỏ, ước mơ lớn nhất của tôi là được đọc nhiều sách để mở rộng kiến thức và khám phá thế giới bên ngoài. Tuy nhiên, thư viện ở địa phương tôi khi đó chỉ có rất ít sách, đa phần đã cũ và hư hỏng. Chính vì vậy, tôi mong muốn mang đến cho trẻ em ở những vùng sâu vùng xa cơ hội được đọc sách và học hỏi như tôi đã từng khao khát. Tôi tin rằng sách là chìa khóa mở ra cánh cửa tri thức và giúp các em có một tương lai tốt đẹp hơn.",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-01T16:18:40.364Z"
+  },
+  "__v": 0,
+  "tiktokUrl": ""
+},
+{
+  "_id": {
+    "$oid": "660bb6a39ca975cd9ff771a0"
+  },
+  "username": "Nguyễn Thành",
+  "email": "baotrovn@gmail.com",
+  "password": "$2b$10$HZXzFl1pjvjf.5kkBZDd9.Q0SxHo0STf0xZsl8/9AMoKQP0rLdnBi",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1713090175777-btro.jpg",
+  "phone": "0702884050",
+  "gender": "1",
+  "birthday": "20/03/1986",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "intro": "Với tầm nhìn xa hơn, Nhà Gây Quỹ hướng đến việc lan tỏa tinh thần hỗ trợ xã hội và tạo ra những thay đổi tích cực cho tất cả mọi người. Chúng tôi mong muốn được lan rộng hoạt động và kêu gọi sự tham gia từ mọi tầng lớp xã hội.\n\nNhà Gây Quỹ rất hân hạnh và quyết tâm tiếp tục đóng góp vào sự phát triển và cải thiện cuộc sống của cộng đồng. Sự ủng hộ và hợp tác từ mọi người sẽ là động lực lớn để chúng tôi thực hiện sứ mệnh cao cả này. Cảm ơn mọi người đã luôn đồng hành và tin tưởng vào chúng tôi!\n\nChúc mọi người một ngày tràn đầy niềm vui và ý nghĩa!",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  },
+  "__v": 0,
+  "tiktokUrl": ""
+},
+{
+  "_id": {
+    "$oid": "660bbcd186ade8974acad4f1"
+  },
+  "username": "Lê Đức Minh",
+  "email": "lethudtp@gmail.com",
+  "password": "$2b$10$6YFIDKVjCvknHTmaAKKrJuHVHttquUuSZwm9aABAXpu81lsuqA2HO",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1713092088305-bdtn.png",
+  "phone": "0702884035",
+  "gender": "1",
+  "birthday": "10/01/1984",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "intro": "Nhà Gây Quỹ là một tổ chức phi lợi nhuận cam kết hỗ trợ cộng đồng thông qua việc mobilize vốn từ cộng đồng và các nhà hảo tâm nhằm giải quyết các vấn đề xã hội, từ giáo dục, y tế đến bảo vệ môi trường và phát triển kinh tế. Với sứ mệnh cao cả là nâng cao chất lượng cuộc sống và tạo cơ hội mới cho những người cần giúp đỡ, Nhà Gây Quỹ luôn hoạt động với tinh thần nhân văn, đoàn kết, và mong muốn lan tỏa tinh thần hỗ trợ xã hội để thay đổi tích cực cho tất cả mọi người.",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-02T08:07:45.167Z"
+  },
+  "__v": 0,
+  "tiktokUrl": ""
+},
+{
+  "_id": {
+    "$oid": "660bc0da7a86b3716fd1030a"
+  },
+  "username": "Hoàng Hà",
+  "email": "binhphuocrc@gmail.com",
+  "password": "$2b$10$6YFIDKVjCvknHTmaAKKrJuHVHttquUuSZwm9aABAXpu81lsuqA2HO",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1713092331833-hctd.jpg",
+  "phone": "0702884053",
+  "gender": "1",
+  "birthday": "20/03/1996",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "intro": "Nhà Gây Quỹ tự hào về đội ngũ nhân sự đam mê, nhiệt huyết và giàu kinh nghiệm. Chúng tôi xây dựng một môi trường làm việc độc đáo, nơi mỗi thành viên được khuyến khích thúc đẩy sự sáng tạo và hiệu suất cao nhất. Với sứ mệnh lan tỏa niềm tin và hy vọng, chúng tôi không ngừng tìm kiếm cách tiếp cận các vấn đề xã hội quan trọng và cung cấp giải pháp bền vững. Sự ủng hộ từ cộng đồng và đối tác là động lực mạnh mẽ để Nhà Gây Quỹ tiếp tục truyền tải sứ mệnh và mang lại sự thay đổi tích cực cho xã hội.",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-02T08:07:45.167Z"
+  },
+  "__v": 0,
+  "tiktokUrl": ""
+},
+{
+  "_id": {
+    "$oid": "660bc3497a86b3716fd1031e"
+  },
+  "username": "Uyen Le",
+  "email": "ngocuyenspa@gmail.com",
+  "password": "$2b$10$6YFIDKVjCvknHTmaAKKrJuHVHttquUuSZwm9aABAXpu81lsuqA2HO",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1713092522058-uyenLe.jpg",
+  "phone": "0939281753",
+  "gender": "0",
+  "birthday": "20/11/1990",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "intro": "Tôi luôn làm việc chăm chỉ, sáng tạo và hiệu quả, với mục tiêu đạt được mục tiêu gây quỹ và tạo ra những thay đổi tích cực cho xã hội.\n\nTôi tin rằng việc gây quỹ là một công việc cao quý và ý nghĩa, giúp đỡ những người có hoàn cảnh khó khăn và tạo ra một thế giới tốt đẹp hơn.\n\nTôi luôn sẵn sàng hợp tác với các tổ chức và cá nhân để cùng nhau tạo ra những tác động tích cực cho cộng đồng.",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-02T08:07:45.167Z"
+  },
+  "__v": 0,
+  "tiktokUrl": ""
+},
+{
+  "_id": {
+    "$oid": "660bc4ce7a86b3716fd1032a"
+  },
+  "username": "Ho Cong Thanh",
+  "email": "gieomamxanhtoancau@gmail.com",
+  "password": "$2b$10$6YFIDKVjCvknHTmaAKKrJuHVHttquUuSZwm9aABAXpu81lsuqA2HO",
+  "role": "donor",
+  "state": "active",
+  "avatar": "https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg",
+  "phone": "",
+  "gender": "",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "intro": "Hoạt động \"Gieo mầm xanh\" là một hoạt động thiết thực và ý nghĩa nhằm nâng cao ý thức bảo vệ môi trường và giáo dục thế hệ trẻ về trách nhiệm giữ gìn thiên nhiên. Hoạt động này thường được tổ chức tại các trường học, khu dân cư, công viên, v.v. với sự tham gia của học sinh, sinh viên, cán bộ, công chức, đoàn viên, thanh niên và người dân địa phương.",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-02T08:07:45.167Z"
+  },
+  "__v": 0,
+  "tiktokUrl": ""
+},
+{
+  "_id": {
+    "$oid": "660bc5c37a86b3716fd1032f"
+  },
+  "username": "Lê Nghĩa",
+  "email": "thiennguyenclbhienmau@gmail.com",
+  "password": "$2b$10$6YFIDKVjCvknHTmaAKKrJuHVHttquUuSZwm9aABAXpu81lsuqA2HO",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1713092873579-vdhm.png",
+  "phone": "0702884037",
+  "gender": "1",
+  "birthday": "18/10/1985",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "intro": "Câu lạc bộ Hiến máu là một tổ chức phi lợi nhuận hoạt động nhằm mục đích tuyên truyền, vận động và tổ chức hiến máu nhân đạo để góp phần cứu sống người bệnh. Câu lạc bộ thường được thành lập tại các trường đại học, cao đẳng, các cơ quan, đoàn thể, khu dân cư, v.v.",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-02T08:07:45.167Z"
+  },
+  "__v": 0,
+  "tiktokUrl": ""
+},
+{
+  "_id": {
+    "$oid": "6624cabdc880b2f3c3b08933"
+  },
+  "username": "Phạm Thị Ngọc Giàu",
+  "email": "pgiau122002@gmail.com",
+  "password": "",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1713687740942-d495cd2c691cc7429e0d.jpg",
+  "phone": "0384623176",
+  "gender": "0",
+  "birthday": "03/12/2002",
+  "youtubeUrl": "",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=100011265454271&locale=vi_VN",
+  "tiktokUrl": "",
+  "intro": "Tôi đam mê việc giúp đỡ những người có hoàn cảnh khó khăn và tạo ra những thay đổi tích cực cho xã hội.\nMục tiêu của tôi là trở thành một nhà gây quỹ chuyên nghiệp, uy tín và tạo ra những tác động lâu dài cho cộng đồng.",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T08:13:49.787Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6624d05cd9a5c80be41bb2d8"
+  },
+  "username": "Lưu Hoàng Lỉnh",
+  "email": "lhlinh1707@gmail.com",
+  "password": "",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1713689254823-d8bd18207813d64d8f02.jpg",
+  "phone": "0795952382",
+  "gender": "1",
+  "birthday": "17/07/2002",
+  "youtubeUrl": "https://www.youtube.com/@HoangLinh17",
+  "facebookUrl": "https://www.facebook.com/hoanglinh1707",
+  "tiktokUrl": "https://www.tiktok.com/@hoanglinh181818181818?_t=8lhyHpXK3JR&_r=1",
+  "intro": "Kỹ năng giao tiếp và thuyết trình hiệu quả, có khả năng truyền tải thông điệp một cách hấp dẫn và thuyết phục.\nKhả năng xây dựng mối quan hệ tốt với các nhà tài trợ, đối tác và cộng đồng.\nCó kiến thức chuyên môn về các chiến lược gây quỹ khác nhau, bao gồm gây quỹ trực tiếp, gây quỹ trực tuyến, tổ chức sự kiện và viết lời kêu gọi gây quỹ.\nCam kết làm việc chăm chỉ, sáng tạo và hiệu quả để đạt được mục tiêu gây quỹ.",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T08:37:48.176Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6624eb1ed9a5c80be41bb5e6"
+  },
+  "username": "Trần Chí Thể",
+  "email": "tcthe13062002@gmail.com",
+  "password": "",
+  "role": "donor",
+  "state": "active",
+  "avatar": "https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg",
+  "phone": "",
+  "gender": "",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T10:31:58.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "username": "Trương Thanh",
+  "email": "truongthanh@gmail.com",
+  "password": "$2b$10$r3ebrAvVS9ucJVnihAXfHO9kgvh/RyQ6.0l1pD6HPnW2ACVpVtwG2",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1714378714594-truongthanh.jpg",
+  "phone": "",
+  "gender": "1",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T10:31:58.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "username": "Như Ý",
+  "email": "nhuy@gmail.com",
+  "password": "$2b$10$r3ebrAvVS9ucJVnihAXfHO9kgvh/RyQ6.0l1pD6HPnW2ACVpVtwG2",
+  "role": "donor",
+  "state": "active",
+  "avatar": "http://localhost:5000/image/avatar/1714381095027-33932_avatar.jpeg",
+  "phone": "",
+  "gender": "1",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T10:31:58.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f4cff41f3e877cc35e399"
+  },
+  "username": "Thanh Thư",
+  "email": "thanhthu@gmail.com",
+  "password": "$2b$10$r3ebrAvVS9ucJVnihAXfHO9kgvh/RyQ6.0l1pD6HPnW2ACVpVtwG2",
+  "role": "donor",
+  "state": "active",
+  "avatar": "https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg",
+  "phone": "",
+  "gender": "",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T10:31:58.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f4d1741f3e877cc35e39a"
+  },
+  "username": "Gia Bảo",
+  "email": "giabao@gmail.com",
+  "password": "$2b$10$r3ebrAvVS9ucJVnihAXfHO9kgvh/RyQ6.0l1pD6HPnW2ACVpVtwG2",
+  "role": "donor",
+  "state": "active",
+  "avatar": "https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg",
+  "phone": "",
+  "gender": "",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T10:31:58.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f4d4941f3e877cc35e39b"
+  },
+  "username": "Tố Quyên",
+  "email": "toquyen@gmail.com",
+  "password": "$2b$10$r3ebrAvVS9ucJVnihAXfHO9kgvh/RyQ6.0l1pD6HPnW2ACVpVtwG2",
+  "role": "donor",
+  "state": "active",
+  "avatar": "https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg",
+  "phone": "",
+  "gender": "",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T10:31:58.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f4d6541f3e877cc35e39c"
+  },
+  "username": "Hồng Ngọc",
+  "email": "hongngoc@gmail.com",
+  "password": "$2b$10$r3ebrAvVS9ucJVnihAXfHO9kgvh/RyQ6.0l1pD6HPnW2ACVpVtwG2",
+  "role": "donor",
+  "state": "active",
+  "avatar": "https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg",
+  "phone": "",
+  "gender": "",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T10:31:58.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f4db141f3e877cc35e39d"
+  },
+  "username": "Quốc Huy",
+  "email": "quochuy@gmail.com",
+  "password": "$2b$10$r3ebrAvVS9ucJVnihAXfHO9kgvh/RyQ6.0l1pD6HPnW2ACVpVtwG2",
+  "role": "donor",
+  "state": "active",
+  "avatar": "https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg",
+  "phone": "",
+  "gender": "",
+  "birthday": "",
+  "youtubeUrl": "",
+  "facebookUrl": "",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-04-21T10:31:58.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66383d97aa67502230a72bd7"
+  },
+  "username": "Đỗ Kỳ Duyên",
+  "email": "duyenb2012188@student.ctu.edu.vn",
+  "password": "",
+  "role": "donor",
+  "state": "active",
+  "avatar": "https://raw.githubusercontent.com/nz-m/public-files/main/dp.jpg",
+  "phone": "0355544778",
+  "gender": "0",
+  "birthday": "03/02/2002",
+  "youtubeUrl": "",
+  "facebookUrl": "https://www.facebook.com/miku.do.3?locale=vi_VN",
+  "tiktokUrl": "",
+  "intro": "",
+  "isEmailVerified": true,
+  "joindate": {
+    "$date": "2024-05-06T02:16:55.354Z"
+  },
+  "__v": 0
+}]

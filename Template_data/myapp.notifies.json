@@ -1,0 +1,84 @@
+[{
+  "_id": {
+    "$oid": "662f63ffd137aa94f0a24db9"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "message": "Chúng tôi đã thực hiện cập nhật giải ngân đợt 1 cho bạn với số tiền 260.000 VNĐ. Liên hệ với chúng tôi nếu bạn có bất kì vấn đề gì.",
+  "state": "success",
+  "time": {
+    "$date": "2024-04-29T09:10:23.628Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f6402d137aa94f0a24dc8"
+  },
+  "userId": {
+    "$oid": "660bc0da7a86b3716fd1030a"
+  },
+  "message": "Chúng tôi đã thực hiện cập nhật giải ngân đợt 1 cho bạn với số tiền 0 VNĐ. Liên hệ với chúng tôi nếu bạn có bất kì vấn đề gì.",
+  "state": "success",
+  "time": {
+    "$date": "2024-04-29T09:10:26.297Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6637b98da341a0ffd370feb9"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "message": "Yêu cầu đăng bài gây quỹ cho chiến dịch Cầu đi học cho các bạn vùng cao Bản Mòn, Chiềng Khoong, Sông Mã, của bạn đã bị từ chối, do hồ sơ của bản không đáp ứng đủ yêu cầu. Nếu có bất kì câu hỏi nào hãy liên hệ với chúng tôi qua địa chỉ hỗ trợ.",
+  "state": "error",
+  "time": {
+    "$date": "2024-05-05T16:53:33.164Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663c7ce9a8c64da7c8d6d00a"
+  },
+  "userId": {
+    "$oid": "6624cabdc880b2f3c3b08933"
+  },
+  "message": "Yêu cầu đăng bài gây quỹ cho chiến dịch Giúp đỡ em Thanh Hạp làm bảo vệ mắc bệnh nặng không có tiền điều trị, của bạn đã bị từ chối, do hồ sơ của bản không đáp ứng đủ yêu cầu. Nếu có bất kì câu hỏi nào hãy liên hệ với chúng tôi qua địa chỉ hỗ trợ.",
+  "state": "error",
+  "time": {
+    "$date": "2024-05-09T07:36:09.040Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663cdf939b9b3f342aabf98c"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "message": "Chúng tôi đã thực hiện cập nhật giải ngân cho chiến dịch Cầu đi học cho các bạn vùng cao Bản Mòn, Chiềng Khoong, Sông Mã đợt 1 cho bạn với số tiền 7.210.000 VNĐ. Liên hệ với chúng tôi nếu bạn có bất kì vấn đề gì.",
+  "state": "success",
+  "time": {
+    "$date": "2024-05-09T14:37:07.041Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663d707d5302575eb672388a"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "message": "Yêu cầu đăng bài gây quỹ cho chiến dịch Bữa Sáng Yêu Thương, của bạn đã bị từ chối, do hồ sơ của bản không đáp ứng đủ yêu cầu. Nếu có bất kì câu hỏi nào hãy liên hệ với chúng tôi qua địa chỉ hỗ trợ.",
+  "state": "error",
+  "time": {
+    "$date": "2024-05-10T00:55:25.794Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,153 @@
+[{
+  "_id": {
+    "$oid": "662f5b8e9c26d3d057f39beb"
+  },
+  "reviewerId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "articleId": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "rating": 5,
+  "comment": "Là một thành viên của cộng đồng, tôi mong muốn kêu gọi mọi người cùng chung tay góp sức ủng hộ cho Gia Đình Bình Minh. Mỗi đóng góp, dù là nhỏ bé nhất, cũng sẽ góp phần mang đến cho các bé những điều kiện sống tốt đẹp hơn, giúp các bé có cơ hội phát triển và hòa nhập với cộng đồng.",
+  "createdAt": {
+    "$date": "2024-04-29T08:34:22.365Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f5cf09c26d3d057f39c7e"
+  },
+  "reviewerId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "rating": 5,
+  "comment": "Câu chuyện về điểm trường Bản Mòn, trường tiểu học Hải Sơn khiến tôi vô cùng lo lắng và xót xa cho các em học sinh nơi đây. Để đến trường, các em phải di chuyển quãng đường xa xôi, khó khăn, đặc biệt là vào mùa mưa lũ",
+  "createdAt": {
+    "$date": "2024-04-29T08:40:16.093Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f5dd89c26d3d057f39cc8"
+  },
+  "reviewerId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "articleId": {
+    "$oid": "660ba8129ca975cd9ff770a5"
+  },
+  "rating": 5,
+  "comment": "Câu chuyện về mái ấm của 52 cụ già neo đơn khiến lòng tôi vô cùng xúc động và trân trọng. Nơi đây là mái ấm yêu thương, là chốn bình yên cho những con người già yếu, cô đơn, không nơi nương tựa.",
+  "createdAt": {
+    "$date": "2024-04-29T08:44:08.652Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f5e6e9c26d3d057f39d11"
+  },
+  "reviewerId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "articleId": {
+    "$oid": "660bb5ad9ca975cd9ff77192"
+  },
+  "rating": 5,
+  "comment": "Hậu quả của tình trạng thiếu dinh dưỡng ở trẻ em vùng cao vô cùng nghiêm trọng. Trẻ em suy dinh dưỡng thấp còi sẽ có sức đề kháng yếu, dễ mắc bệnh, ảnh hưởng đến sự phát triển thể chất và trí tuệ. Khi lớn lên, các em sẽ gặp nhiều khó khăn trong học tập, lao động và hòa nhập xã hội.",
+  "createdAt": {
+    "$date": "2024-04-29T08:46:38.235Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f5f099c26d3d057f39d82"
+  },
+  "reviewerId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "articleId": {
+    "$oid": "660bb47e9ca975cd9ff77176"
+  },
+  "rating": 4,
+  "comment": "Tôi nghĩ là mục tiêu này là quá sức, nhưng cũng hy vọng chiến dịch này sẽ thành công.",
+  "createdAt": {
+    "$date": "2024-04-29T08:49:13.249Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f61949c26d3d057f39efd"
+  },
+  "reviewerId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "rating": 5,
+  "comment": "Huyện Sông Mã cần ưu tiên đầu tư xây dựng đường giao thông kiên cố, đảm bảo an toàn cho việc di chuyển của học sinh. Con đường cần được mở rộng, rải nhựa hoặc bê tông, có hệ thống thoát nước tốt để hạn chế tình trạng trơn trượt, sạt lở vào mùa mưa.",
+  "createdAt": {
+    "$date": "2024-04-29T09:00:04.901Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f62159c26d3d057f39f5a"
+  },
+  "reviewerId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "articleId": {
+    "$oid": "660bb5ad9ca975cd9ff77192"
+  },
+  "rating": 5,
+  "comment": "Nhiều phụ huynh ở vùng cao còn thiếu hiểu biết về tầm quan trọng của dinh dưỡng đối với trẻ em. Họ chưa biết cách chế biến thức ăn hợp lý để cung cấp đầy đủ vitamin và khoáng chất cho con em mình.",
+  "createdAt": {
+    "$date": "2024-04-29T09:02:13.348Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f66b7d137aa94f0a24f41"
+  },
+  "reviewerId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "articleId": {
+    "$oid": "660bb2649ca975cd9ff77142"
+  },
+  "rating": 5,
+  "comment": "Cố gắng lên nhé!, hy vọng là em sẽ thực hiện được mơ ước của mình, và học tập thật tốt!",
+  "createdAt": {
+    "$date": "2024-04-29T09:21:59.571Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66383e18aa67502230a72c15"
+  },
+  "reviewerId": {
+    "$oid": "66383d97aa67502230a72bd7"
+  },
+  "articleId": {
+    "$oid": "660ba8129ca975cd9ff770a5"
+  },
+  "rating": 5,
+  "comment": "Chiến dịch này thật sự rất ý nghĩa",
+  "createdAt": {
+    "$date": "2024-05-06T02:19:04.707Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,224 @@
+[{
+  "_id": {
+    "$oid": "662209cf5be689dbb54f7e73"
+  },
+  "length": 268579,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-19T06:06:07.103Z"
+  },
+  "filename": "1713506767078-duyen1.jpg",
+  "metadata": {
+    "name": "duyen1.jpg",
+    "size": 268579,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "662209cf5be689dbb54f7e74"
+  },
+  "length": 287694,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-19T06:06:07.104Z"
+  },
+  "filename": "1713506767085-duyen2.jpg",
+  "metadata": {
+    "name": "duyen2.jpg",
+    "size": 287694,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "66220aa85be689dbb54f7e9c"
+  },
+  "length": 15446,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-19T06:09:44.928Z"
+  },
+  "filename": "1713506984924-nguyenThanh.jpg",
+  "metadata": {
+    "name": "nguyenThanh.jpg",
+    "size": 15446,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "66220aa85be689dbb54f7e9d"
+  },
+  "length": 16795,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-19T06:09:44.929Z"
+  },
+  "filename": "1713506984925-nguyenThanh-down.jpg",
+  "metadata": {
+    "name": "nguyenThanh-down.jpg",
+    "size": 16795,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "66220b5f5be689dbb54f7ec1"
+  },
+  "length": 16619,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-19T06:12:47.471Z"
+  },
+  "filename": "1713507167464-nghia1.jpg",
+  "metadata": {
+    "name": "nghia1.jpg",
+    "size": 16619,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "66220b5f5be689dbb54f7ec3"
+  },
+  "length": 19596,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-19T06:12:47.473Z"
+  },
+  "filename": "1713507167470-nghia2.jpg",
+  "metadata": {
+    "name": "nghia2.jpg",
+    "size": 19596,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "66220c1c5be689dbb54f7ee6"
+  },
+  "length": 24831,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-19T06:15:56.097Z"
+  },
+  "filename": "1713507356089-up1.jpg",
+  "metadata": {
+    "name": "up1.jpg",
+    "size": 24831,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "66220c1c5be689dbb54f7ee7"
+  },
+  "length": 26588,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-19T06:15:56.098Z"
+  },
+  "filename": "1713507356090-up2.jpg",
+  "metadata": {
+    "name": "up2.jpg",
+    "size": 26588,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ce2cc880b2f3c3b0896b"
+  },
+  "length": 24831,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T08:28:28.151Z"
+  },
+  "filename": "1713688108141-up1.jpg",
+  "metadata": {
+    "name": "up1.jpg",
+    "size": 24831,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ce2cc880b2f3c3b0896c"
+  },
+  "length": 26588,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T08:28:28.153Z"
+  },
+  "filename": "1713688108147-up2.jpg",
+  "metadata": {
+    "name": "up2.jpg",
+    "size": 26588,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624d39dd9a5c80be41bb315"
+  },
+  "length": 26588,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T08:51:41.219Z"
+  },
+  "filename": "1713689501209-up2.jpg",
+  "metadata": {
+    "name": "up2.jpg",
+    "size": 26588,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624d39dd9a5c80be41bb314"
+  },
+  "length": 24831,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T08:51:41.228Z"
+  },
+  "filename": "1713689501207-up1.jpg",
+  "metadata": {
+    "name": "up1.jpg",
+    "size": 24831,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ec2dd9a5c80be41bb60d"
+  },
+  "length": 24831,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T10:36:29.503Z"
+  },
+  "filename": "1713695789491-up1.jpg",
+  "metadata": {
+    "name": "up1.jpg",
+    "size": 24831,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ec2dd9a5c80be41bb60e"
+  },
+  "length": 26588,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T10:36:29.504Z"
+  },
+  "filename": "1713695789492-up2.jpg",
+  "metadata": {
+    "name": "up2.jpg",
+    "size": 26588,
+    "type": "image/jpeg"
+  }
+}]

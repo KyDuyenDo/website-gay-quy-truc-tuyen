@@ -1,0 +1,150 @@
+[{
+  "_id": {
+    "$oid": "66015efef33fbdcf59d0459e"
+  },
+  "description": "Chiến lược nhằm cung cấp trực tiếp đồng tiền cho những người nghèo để giúp họ tự cải thiện đời sống",
+  "icon": "faMoneyBillWheat",
+  "popular": 0,
+  "title": "Xóa nghèo",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66016237f33fbdcf59d045a1"
+  },
+  "description": "Chương trình tập trung vào việc bảo vệ, giáo dục và cung cấp các dịch vụ cần thiết cho trẻ em.",
+  "icon": "faChild",
+  "popular": 0,
+  "title": "Trẻ em",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6601628ff33fbdcf59d045a4"
+  },
+  "description": "Danh mục người già bao gồm các chương trình và dự án nhằm cung cấp hỗ trợ và chăm sóc cho người cao tuổi.",
+  "icon": "faPersonCane",
+  "popular": 0,
+  "title": "Người già",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660163b1f33fbdcf59d045a7"
+  },
+  "description": "Các hoạt động trong danh mục này thường bao gồm cung cấp đồ ăn, hỗ trợ tiền, chăm sóc sức khỏe, giáo dục, việc làm, hỗ trợ xây dựng cơ sở hạ tầng.",
+  "icon": "faCommentDollar",
+  "popular": 0,
+  "title": "Người nghèo",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6601643cf33fbdcf59d045aa"
+  },
+  "description": "Danh mục gây quỹ hỗ trợ các hoạt động chăm sóc, hỗ trợ và tạo cơ hội cho người khuyết tật",
+  "icon": "faWheelchair",
+  "popular": 0,
+  "title": "Người khuyết tật",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660164a7f33fbdcf59d045ad"
+  },
+  "description": "Danh mục bệnh hiểm nghèo trong các danh mục gây quỹ hỗ trợ chương trình y tế cho những người nghèo.",
+  "icon": "faSyringe",
+  "popular": 0,
+  "title": "Bệnh hiểm nghèo",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660164faf33fbdcf59d045b0"
+  },
+  "description": "Danh mục dân tộc tiểu số trong các danh mục gây quỹ hỗ trợ phát triển cộng đồng, văn hóa và giáo dục cho cộng đồng dân tộc thiểu số.",
+  "icon": "faMountainSun",
+  "popular": 0,
+  "title": "Dân tộc tiểu số",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66016531f33fbdcf59d045b3"
+  },
+  "description": "Danh mục môi trường trong các danh mục gây quỹ hỗ trợ các hoạt động bảo vệ, tái tạo và giảm thiểu tác động tiêu cực đến môi trường.",
+  "icon": "faTree",
+  "popular": 0,
+  "title": "Môi trường",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66016567f33fbdcf59d045b6"
+  },
+  "description": "Danh mục giáo dục trong các nguồn gây quỹ hỗ trợ xây dựng cơ sở vật chất, cải thiện chất lượng giáo dục và tạo cơ hội học tập cho mọi đối tượng.",
+  "icon": "faSchool",
+  "popular": 0,
+  "title": "Giáo dục",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660165aaf33fbdcf59d045b9"
+  },
+  "description": "Danh mục người vô gia cư trong các danh mục gây quỹ hỗ trợ cung cấp nhà ở và các dịch vụ hỗ trợ cho người vô gia cư.",
+  "icon": "faHouse",
+  "popular": 0,
+  "title": "Người vô gia cư",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66016655f33fbdcf59d045bc"
+  },
+  "description": "Danh mục xây dựng trong các nguồn gây quỹ hỗ trợ các dự án xây dựng hạ tầng, nhà ở và cơ sở dân cư, cầu, đường cho cộng đồng.",
+  "icon": "faBridge",
+  "popular": 0,
+  "title": "Xây dựng",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66016745f33fbdcf59d045bf"
+  },
+  "description": "Danh mục khởi nghiệp trong các nguồn gây quỹ hỗ trợ việc khởi tạo và phát triển doanh nghiệp, tạo ra cơ hội kinh doanh và tăng cường nền kinh tế.",
+  "icon": "faPlaneDeparture",
+  "popular": 0,
+  "title": "Khởi nghiệp",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6601678bf33fbdcf59d045c2"
+  },
+  "description": "Danh mục động vật trong các nguồn gây quỹ hỗ trợ bảo vệ loài và hệ sinh thái, cứu trợ động vật hoang dã và xây dựng cơ sở nuôi dưỡng.",
+  "icon": "faOtter",
+  "popular": 0,
+  "title": "Động vật",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66016891f33fbdcf59d045c5"
+  },
+  "description": "Danh mục nghiên cứu khoa học trong các nguồn gây quỹ hỗ trợ các dự án nghiên cứu, phát triển công nghệ và khám phá khoa học.",
+  "icon": "faDna",
+  "popular": 0,
+  "title": "Nghiên cứu khoa học",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660169a6f33fbdcf59d045c8"
+  },
+  "description": "Danh mục gây quỹ hỗ trợ các hoạt động văn hóa, nghệ thuật, sân khấu, thể thao, và các sự kiện giải trí.",
+  "icon": "faTableTennisPaddleBall",
+  "popular": 0,
+  "title": "Thể thao, giải trí",
+  "__v": 0
+}]

@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "66383601aa67502230a729b7"
+  },
+  "length": 81411,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-05-06T01:44:34.007Z"
+  },
+  "filename": "1714959873989-image004-15735316478491643220212-crop-15735319098971840916188.jpg",
+  "metadata": {
+    "name": "image004-15735316478491643220212-crop-15735319098971840916188.jpg",
+    "size": 81411,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6638367daa67502230a72a0f"
+  },
+  "length": 234003,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-05-06T01:46:37.047Z"
+  },
+  "filename": "1714959997042-vbf-2022318152627pul.jpg",
+  "metadata": {
+    "name": "vbf-2022318152627pul.jpg",
+    "size": 234003,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "663845d36eef1d77c4e163da"
+  },
+  "length": 38160,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-05-06T02:52:03.345Z"
+  },
+  "filename": "1714963923313-images1203516_Bang_nui_vuot_be_cheo_thuyen_hoc_chu_datviet.vn_04.jpg",
+  "metadata": {
+    "name": "images1203516_Bang_nui_vuot_be_cheo_thuyen_hoc_chu_datviet.vn_04.jpg",
+    "size": 38160,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "663849396eef1d77c4e164e8"
+  },
+  "length": 81916,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-05-06T03:06:33.555Z"
+  },
+  "filename": "1714964793551-7-768x432.jpg",
+  "metadata": {
+    "name": "7-768x432.jpg",
+    "size": 81916,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "663d71e55302575eb67239df"
+  },
+  "length": 616962,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-05-10T01:01:25.797Z"
+  },
+  "filename": "1715302885786-a8668afc-dbb9-4e5d-b796-2d7cfe94f206.jpg",
+  "metadata": {
+    "name": "a8668afc-dbb9-4e5d-b796-2d7cfe94f206.jpg",
+    "size": 616962,
+    "type": "image/jpeg"
+  }
+}]

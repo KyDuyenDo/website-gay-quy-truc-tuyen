@@ -1,0 +1,290 @@
+[{
+  "_id": {
+    "$oid": "660b8c9b2f8deb623d4fdf3b"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "fullname": "Đỗ Kỳ Duyên",
+  "birthday": "03/02/2002",
+  "numberPhone": "0355544778",
+  "emailContact": "duyenb2012188@student.ctu.edu.vn",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713506767078-duyen1.jpg",
+    "http://localhost:5000/image/identifyCard/1713506767085-duyen2.jpg"
+  ],
+  "type": "only",
+  "adminApproval": true,
+  "groupName": "Đỗ Kỳ Duyên",
+  "describe": "Với kinh nghiệm lâu năm trong việc gây quỹ và phát triển cộng đồng, tôi cam kết đem lại ảnh hưởng tích cực và bền vững thông qua việc hỗ trợ và tạo ra cơ hội cho những người xung quanh. Bằng cách xây dựng các chiến lược gây quỹ hiệu quả và tương tác chặt chẽ với cộng đồng, tôi luôn nỗ lực để đạt được mục tiêu và tạo nên sự thay đổi tích cực. Mục tiêu của tôi là xây dựng cấu trúc gây quỹ bền vững và mang lại giá trị lâu dài cho những dự án và tổ chức mà tôi đại diện. Rất hân hạnh được hợp tác và làm việc cùng các đối tác, nhà hảo tâm và những người có ảnh hưởng để thúc đẩy sự phát triển xã hội và môi trường. Cảm ơn vì đã dành thời gian để nghe lời giới thiệu của tôi.",
+  "introLink": "https://www.facebook.com/miku.do.3?locale=vi_VN",
+  "approvaldate": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1713430930745-blob",
+  "createdAt": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660bb8699ca975cd9ff771ad"
+  },
+  "userId": {
+    "$oid": "660bb6a39ca975cd9ff771a0"
+  },
+  "fullname": "Nguyễn Thành",
+  "birthday": "20/03/1996",
+  "numberPhone": "0355544678",
+  "emailContact": "thanh123@gmail.com",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713506984924-nguyenThanh.jpg",
+    "http://localhost:5000/image/identifyCard/1713506984925-nguyenThanh-down.jpg"
+  ],
+  "type": "group",
+  "adminApproval": true,
+  "groupName": "Quỹ Bảo trợ trẻ em Việt Nam",
+  "describe": "Quỹ Bảo trợ trẻ em Việt Nam là một tổ chức phi lợi nhuận hoạt động với mục tiêu bảo vệ và chăm sóc cho trẻ em tại Việt Nam, đặc biệt là những trẻ em khó khăn, mắc phải bạo lực hay các hoàn cảnh đặc biệt. Quỹ thường tập trung vào việc cung cấp giáo dục, y tế, chăm sóc tâm lý và đảm bảo quyền lợi cơ bản cho trẻ em. Đồng thời, tổ chức này cũng thúc đẩy các chương trình và chiến dịch nhằm nâng cao nhận thức cộng đồng về vấn đề bảo vệ trẻ em và xây dựng môi trường tốt hơn cho sự phát triển toàn diện của trẻ em tại Việt Nam.",
+  "introLink": "https://www.facebook.com/nfvc.org.vn/?locale=vi_VN",
+  "approvaldate": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1712044137314-blob",
+  "createdAt": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660bbd2a7a86b3716fd10302"
+  },
+  "userId": {
+    "$oid": "660bbcd186ade8974acad4f1"
+  },
+  "fullname": "Lê Đức Minh",
+  "birthday": "20/03/1996",
+  "numberPhone": "0355544678",
+  "emailContact": "lethudtp@gmail.com",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713507356089-up1.jpg",
+    "http://localhost:5000/image/identifyCard/1713507356090-up2.jpg"
+  ],
+  "type": "group",
+  "adminApproval": true,
+  "groupName": "BỒ ĐỀ THIỆN NGUYỆN",
+  "describe": "Quỹ Bảo trợ trẻ em Việt Nam là một tổ chức phi lợi nhuận hoạt động với mục tiêu bảo vệ và chăm sóc cho trẻ em tại Việt Nam, đặc biệt là những trẻ em khó khăn, mắc phải bạo lực hay các hoàn cảnh đặc biệt. Quỹ thường tập trung vào việc cung cấp giáo dục, y tế, chăm sóc tâm lý và đảm bảo quyền lợi cơ bản cho trẻ em. Đồng thời, tổ chức này cũng thúc đẩy các chương trình và chiến dịch nhằm nâng cao nhận thức cộng đồng về vấn đề bảo vệ trẻ em và xây dựng môi trường tốt hơn cho sự phát triển toàn diện của trẻ em tại Việt Nam.",
+  "introLink": "https://www.facebook.com/nfvc.org.vn/?locale=vi_VN",
+  "approvaldate": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1712044137314-blob",
+  "createdAt": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660bc2307a86b3716fd10315"
+  },
+  "userId": {
+    "$oid": "660bc0da7a86b3716fd1030a"
+  },
+  "fullname": "Hoàng Hà",
+  "birthday": "20/03/1996",
+  "numberPhone": "0355544678",
+  "emailContact": "binhphuocrc@gmail.com",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713507356089-up1.jpg",
+    "http://localhost:5000/image/identifyCard/1713507356090-up2.jpg"
+  ],
+  "type": "group",
+  "adminApproval": true,
+  "groupName": "Hội Chữ thập đỏ tỉnh Bình Phước",
+  "describe": "Quỹ Bảo trợ trẻ em Việt Nam là một tổ chức phi lợi nhuận hoạt động với mục tiêu bảo vệ và chăm sóc cho trẻ em tại Việt Nam, đặc biệt là những trẻ em khó khăn, mắc phải bạo lực hay các hoàn cảnh đặc biệt. Quỹ thường tập trung vào việc cung cấp giáo dục, y tế, chăm sóc tâm lý và đảm bảo quyền lợi cơ bản cho trẻ em. Đồng thời, tổ chức này cũng thúc đẩy các chương trình và chiến dịch nhằm nâng cao nhận thức cộng đồng về vấn đề bảo vệ trẻ em và xây dựng môi trường tốt hơn cho sự phát triển toàn diện của trẻ em tại Việt Nam.",
+  "introLink": "https://www.facebook.com/nfvc.org.vn/?locale=vi_VN",
+  "approvaldate": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1712044137314-blob",
+  "createdAt": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660bc3a77a86b3716fd10320"
+  },
+  "userId": {
+    "$oid": "660bc3497a86b3716fd1031e"
+  },
+  "fullname": "Uyen Le",
+  "birthday": "20/03/1996",
+  "numberPhone": "0355544678",
+  "emailContact": "ngocuyenspa@gmail.com",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713507356089-up1.jpg",
+    "http://localhost:5000/image/identifyCard/1713507356090-up2.jpg"
+  ],
+  "type": "only",
+  "adminApproval": true,
+  "groupName": "Uyen Le",
+  "describe": "Quỹ Bảo trợ trẻ em Việt Nam là một tổ chức phi lợi nhuận hoạt động với mục tiêu bảo vệ và chăm sóc cho trẻ em tại Việt Nam, đặc biệt là những trẻ em khó khăn, mắc phải bạo lực hay các hoàn cảnh đặc biệt. Quỹ thường tập trung vào việc cung cấp giáo dục, y tế, chăm sóc tâm lý và đảm bảo quyền lợi cơ bản cho trẻ em. Đồng thời, tổ chức này cũng thúc đẩy các chương trình và chiến dịch nhằm nâng cao nhận thức cộng đồng về vấn đề bảo vệ trẻ em và xây dựng môi trường tốt hơn cho sự phát triển toàn diện của trẻ em tại Việt Nam.",
+  "introLink": "https://www.facebook.com/nfvc.org.vn/?locale=vi_VN",
+  "approvaldate": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1712044137314-blob",
+  "createdAt": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660bc50b7a86b3716fd1032c"
+  },
+  "userId": {
+    "$oid": "660bc4ce7a86b3716fd1032a"
+  },
+  "fullname": "Ho Cong Thanh",
+  "birthday": "20/03/1996",
+  "numberPhone": "0355544678",
+  "emailContact": "gieomamxanhtoancau@gmail.com",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713507356089-up1.jpg",
+    "http://localhost:5000/image/identifyCard/1713507356090-up2.jpg"
+  ],
+  "type": "only",
+  "adminApproval": true,
+  "groupName": "Ho Cong Thanh",
+  "describe": "Quỹ Bảo trợ trẻ em Việt Nam là một tổ chức phi lợi nhuận hoạt động với mục tiêu bảo vệ và chăm sóc cho trẻ em tại Việt Nam, đặc biệt là những trẻ em khó khăn, mắc phải bạo lực hay các hoàn cảnh đặc biệt. Quỹ thường tập trung vào việc cung cấp giáo dục, y tế, chăm sóc tâm lý và đảm bảo quyền lợi cơ bản cho trẻ em. Đồng thời, tổ chức này cũng thúc đẩy các chương trình và chiến dịch nhằm nâng cao nhận thức cộng đồng về vấn đề bảo vệ trẻ em và xây dựng môi trường tốt hơn cho sự phát triển toàn diện của trẻ em tại Việt Nam.",
+  "introLink": "https://www.facebook.com/nfvc.org.vn/?locale=vi_VN",
+  "approvaldate": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1712044137314-blob",
+  "createdAt": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660bc6057a86b3716fd10331"
+  },
+  "userId": {
+    "$oid": "660bc5c37a86b3716fd1032f"
+  },
+  "fullname": "Lê Nghĩa",
+  "birthday": "20/03/1996",
+  "numberPhone": "0355544678",
+  "emailContact": "thiennguyenclbhienmau@gmail.com",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713507167464-nghia1.jpg",
+    "http://localhost:5000/image/identifyCard/1713507167470-nghia2.jpg"
+  ],
+  "type": "group",
+  "adminApproval": true,
+  "groupName": "CLB Hiến Máu Khu Vực Tây Nguyên",
+  "describe": "Quỹ Bảo trợ trẻ em Việt Nam là một tổ chức phi lợi nhuận hoạt động với mục tiêu bảo vệ và chăm sóc cho trẻ em tại Việt Nam, đặc biệt là những trẻ em khó khăn, mắc phải bạo lực hay các hoàn cảnh đặc biệt. Quỹ thường tập trung vào việc cung cấp giáo dục, y tế, chăm sóc tâm lý và đảm bảo quyền lợi cơ bản cho trẻ em. Đồng thời, tổ chức này cũng thúc đẩy các chương trình và chiến dịch nhằm nâng cao nhận thức cộng đồng về vấn đề bảo vệ trẻ em và xây dựng môi trường tốt hơn cho sự phát triển toàn diện của trẻ em tại Việt Nam.",
+  "introLink": "https://www.facebook.com/nfvc.org.vn/?locale=vi_VN",
+  "approvaldate": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1712044137314-blob",
+  "createdAt": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ce2cc880b2f3c3b08969"
+  },
+  "userId": {
+    "$oid": "6624cabdc880b2f3c3b08933"
+  },
+  "fullname": "Phạm Thị Ngọc Giàu",
+  "birthday": "03/12/2002",
+  "numberPhone": "0384623176",
+  "emailContact": "giaub2012198@student.ctu.edu.vn",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713688108141-up1.jpg",
+    "http://localhost:5000/image/identifyCard/1713688108147-up2.jpg"
+  ],
+  "type": "only",
+  "adminApproval": true,
+  "groupName": "Giàu",
+  "describe": "Tôi lớn lên ở một vùng quê nghèo, nơi cơ hội tiếp cận với sách vở còn nhiều hạn chế. Hồi nhỏ, ước mơ lớn nhất của tôi là được đọc nhiều sách để mở rộng kiến thức và khám phá thế giới bên ngoài. Tuy nhiên, thư viện ở địa phương tôi khi đó chỉ có rất ít sách, đa phần đã cũ và hư hỏng.\n\nChính vì vậy, tôi mong muốn mang đến cho trẻ em ở những vùng sâu vùng xa cơ hội được đọc sách và học hỏi như tôi đã từng khao khát. Tôi tin rằng sách là chìa khóa mở ra cánh cửa tri thức và giúp các em có một tương lai tốt đẹp hơn.",
+  "introLink": "https://www.facebook.com/nfvc.org.vn/?locale=vi_VN",
+  "approvaldate": {
+    "$date": "2024-04-21T08:37:48.176Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1713688108169-blob",
+  "createdAt": {
+    "$date": "2024-04-02T07:41:23.100Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624d39dd9a5c80be41bb312"
+  },
+  "userId": {
+    "$oid": "6624d05cd9a5c80be41bb2d8"
+  },
+  "fullname": "Lưu Hoàng Lỉnh",
+  "birthday": "17/07/2002",
+  "numberPhone": "0795952382",
+  "emailContact": "lhlinh1707@gmail.com",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713689501207-up1.jpg",
+    "http://localhost:5000/image/identifyCard/1713689501209-up2.jpg"
+  ],
+  "type": "only",
+  "adminApproval": true,
+  "groupName": "Lưu Hoàng Lỉnh",
+  "describe": "Tôi lớn lên ở một vùng quê nghèo, nơi cơ hội tiếp cận với sách vở còn nhiều hạn chế. Hồi nhỏ, ước mơ lớn nhất của tôi là được đọc nhiều sách để mở rộng kiến thức và khám phá thế giới bên ngoài. Tuy nhiên, thư viện ở địa phương tôi khi đó chỉ có rất ít sách, đa phần đã cũ và hư hỏng.\n\nChính vì vậy, tôi mong muốn mang đến cho trẻ em ở những vùng sâu vùng xa cơ hội được đọc sách và học hỏi như tôi đã từng khao khát. Tôi tin rằng sách là chìa khóa mở ra cánh cửa tri thức và giúp các em có một tương lai tốt đẹp hơn.",
+  "introLink": "https://www.facebook.com/hoanglinh1707",
+  "approvaldate": {
+    "$date": "2024-04-21T08:37:48.176Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1713689501244-blob",
+  "createdAt": {
+    "$date": "2024-04-21T08:37:48.176Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ec2dd9a5c80be41bb60b"
+  },
+  "userId": {
+    "$oid": "6624eb1ed9a5c80be41bb5e6"
+  },
+  "fullname": "Trần Chí Thể",
+  "birthday": "13/06/2002",
+  "numberPhone": "0837084562",
+  "emailContact": "tcthe13062002@gmail.com",
+  "identificationCard": [
+    "http://localhost:5000/image/identifyCard/1713695789491-up1.jpg",
+    "http://localhost:5000/image/identifyCard/1713695789492-up2.jpg"
+  ],
+  "type": "only",
+  "adminApproval": true,
+  "groupName": "Trần Chí Thể",
+  "describe": "Tôi lớn lên ở một vùng quê nghèo, nơi cơ hội tiếp cận với sách vở còn nhiều hạn chế. Hồi nhỏ, ước mơ lớn nhất của tôi là được đọc nhiều sách để mở rộng kiến thức và khám phá thế giới bên ngoài. Tuy nhiên, thư viện ở địa phương tôi khi đó chỉ có rất ít sách, đa phần đã cũ và hư hỏng.\n\nChính vì vậy, tôi mong muốn mang đến cho trẻ em ở những vùng sâu vùng xa cơ hội được đọc sách và học hỏi như tôi đã từng khao khát. Tôi tin rằng sách là chìa khóa mở ra cánh cửa tri thức và giúp các em có một tương lai tốt đẹp hơn.",
+  "introLink": "https://www.facebook.com/hoanglinh1707",
+  "approvaldate": {
+    "$date": "2024-05-10T01:02:29.699Z"
+  },
+  "__v": 1,
+  "identificationImage": "http://localhost:5000/image/identifyAvatar/1713695789518-blob",
+  "createdAt": {
+    "$date": "2024-04-21T08:37:48.176Z"
+  }
+}]

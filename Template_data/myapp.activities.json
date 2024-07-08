@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "66383602aa67502230a729bd"
+  },
+  "addedBy": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "image": "http://localhost:5000/image/activity/1714959873989-image004-15735316478491643220212-crop-15735319098971840916188.jpg",
+  "state": "",
+  "body": "Các em nhỏ sẽ không còn phải lội nước đi học hay chui túi nilon băng sông; không còn đối mặt với rủi ro trượt chân té ngã hay phải vào lớp với bộ quần áo ướt.",
+  "amountSpent": 0,
+  "document": [],
+  "createdAt": {
+    "$date": "2024-05-06T01:44:34.035Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6638367daa67502230a72a15"
+  },
+  "addedBy": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "image": "http://localhost:5000/image/activity/1714959997042-vbf-2022318152627pul.jpg",
+  "state": "",
+  "body": "Xây cầu đến lớp’ vẫn được hoàn thành đúng tiến độ. Đặc biệt khi mùa mưa lũ sắp đến, cây cầu này càng có thêm ý nghĩa khi sẽ giúp các em học sinh, thầy cô giáo đến trường an toàn, giảm thiểu tai nạn đuối nước vì các em sẽ không còn phải vượt suối đi học như trước. Chúng tôi sẽ tiếp tục phối hợp chặt chẽ cùng Quỹ Bảo trợ trẻ em Việt Nam để xây dựng thêm nhiều cây cầu nữa, góp phần mang đến những thay đổi thật sự ý nghĩa và tích cực để nâng cao chất lượng cuộc sống của người dân Việt Nam.”",
+  "amountSpent": 0,
+  "document": [],
+  "createdAt": {
+    "$date": "2024-05-06T01:46:37.069Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663845d36eef1d77c4e163e0"
+  },
+  "addedBy": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "image": "http://localhost:5000/image/activity/1714963923313-images1203516_Bang_nui_vuot_be_cheo_thuyen_hoc_chu_datviet.vn_04.jpg",
+  "state": "",
+  "body": "Nhiều em phải trèo đèo, lội suối, băng rừng để tới trường. Có em phải đi từ 4h – 5h sáng với chặng đường gần chục cây số để đến kịp giờ học.",
+  "amountSpent": 0,
+  "document": [],
+  "createdAt": {
+    "$date": "2024-05-06T02:52:03.377Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663849396eef1d77c4e164ee"
+  },
+  "addedBy": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "image": "http://localhost:5000/image/activity/1714964793551-7-768x432.jpg",
+  "state": "",
+  "body": "Mặc dù mỗi ngày vẫn phải đi bộ mất cả nửa ngày đường trên những con dốc cao, đất đá hiểm trở mới đến được trường học, nhưng các học sinh vẫn miệt mài bám trường lớp, thầy cô.",
+  "amountSpent": 0,
+  "document": [],
+  "createdAt": {
+    "$date": "2024-05-06T03:06:33.579Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663d71e55302575eb67239e5"
+  },
+  "addedBy": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "articleId": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "image": "http://localhost:5000/image/activity/1715302885786-a8668afc-dbb9-4e5d-b796-2d7cfe94f206.jpg",
+  "state": "",
+  "body": "Chương trình \"Thiện Nhân và những người bạn\" được bắt đầu từ câu chuyện của chính Thiện Nhân, cậu bé bị bỏ rơi trong rừng từ khi lọt lòng, bị thú hoang ăn mất bộ phận sinh dục và một chân",
+  "amountSpent": 12000,
+  "document": [],
+  "createdAt": {
+    "$date": "2024-05-10T01:01:25.823Z"
+  },
+  "__v": 0
+}]

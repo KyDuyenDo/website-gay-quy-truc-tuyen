@@ -1,0 +1,160 @@
+[{
+  "_id": {
+    "$oid": "661b959099e329412ccc8bf5"
+  },
+  "length": 223129,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-14T08:36:32.806Z"
+  },
+  "filename": "1713083792800-fec3ed08bb51150f4c40.jpg",
+  "metadata": {
+    "name": "fec3ed08bb51150f4c40.jpg",
+    "size": 223129,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bae7f99e329412ccc8dd3"
+  },
+  "length": 187075,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-14T10:22:55.780Z"
+  },
+  "filename": "1713090175777-btro.jpg",
+  "metadata": {
+    "name": "btro.jpg",
+    "size": 187075,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bb5f899e329412ccc8ee3"
+  },
+  "length": 9638,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-14T10:54:48.339Z"
+  },
+  "filename": "1713092088305-bdtn.png",
+  "metadata": {
+    "name": "bdtn.png",
+    "size": 9638,
+    "type": "image/png"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bb6eb99e329412ccc8f16"
+  },
+  "length": 219554,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-14T10:58:51.858Z"
+  },
+  "filename": "1713092331833-hctd.jpg",
+  "metadata": {
+    "name": "hctd.jpg",
+    "size": 219554,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bb7aa99e329412ccc8f2d"
+  },
+  "length": 133932,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-14T11:02:02.061Z"
+  },
+  "filename": "1713092522058-uyenLe.jpg",
+  "metadata": {
+    "name": "uyenLe.jpg",
+    "size": 133932,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "661bb90999e329412ccc8f46"
+  },
+  "length": 11780,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-14T11:07:53.581Z"
+  },
+  "filename": "1713092873579-vdhm.png",
+  "metadata": {
+    "name": "vdhm.png",
+    "size": 11780,
+    "type": "image/png"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624ccbcc880b2f3c3b08945"
+  },
+  "length": 175765,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T08:22:20.958Z"
+  },
+  "filename": "1713687740942-d495cd2c691cc7429e0d.jpg",
+  "metadata": {
+    "name": "d495cd2c691cc7429e0d.jpg",
+    "size": 175765,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "6624d2a6d9a5c80be41bb2f4"
+  },
+  "length": 236868,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-21T08:47:34.830Z"
+  },
+  "filename": "1713689254823-d8bd18207813d64d8f02.jpg",
+  "metadata": {
+    "name": "d8bd18207813d64d8f02.jpg",
+    "size": 236868,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "662f57da9c26d3d057f39aad"
+  },
+  "length": 47214,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-29T08:18:34.600Z"
+  },
+  "filename": "1714378714594-truongthanh.jpg",
+  "metadata": {
+    "name": "truongthanh.jpg",
+    "size": 47214,
+    "type": "image/jpeg"
+  }
+},
+{
+  "_id": {
+    "$oid": "662f61279c26d3d057f39ea6"
+  },
+  "length": 105087,
+  "chunkSize": 1048576,
+  "uploadDate": {
+    "$date": "2024-04-29T08:58:15.033Z"
+  },
+  "filename": "1714381095027-33932_avatar.jpeg",
+  "metadata": {
+    "name": "33932_avatar.jpeg",
+    "size": 105087,
+    "type": "image/jpeg"
+  }
+}]

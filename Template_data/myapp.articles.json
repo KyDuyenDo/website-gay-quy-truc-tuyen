@@ -1,0 +1,537 @@
+[{
+  "_id": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "categotyId": {
+    "$oid": "66016237f33fbdcf59d045a1"
+  },
+  "addressId": {
+    "$oid": "660ba52d9ca975cd9ff77087"
+  },
+  "address": "Sông Mã, Huyện Sông Mã, Tỉnh Sơn La, Việt Nam, Xã  chiềng Khoong, Trường Tiểu Học Chiềng Khoong",
+  "addedBy": "Đỗ Kỳ Duyên",
+  "articletitle": "Cầu đi học cho các bạn vùng cao Bản Mòn, Chiềng Khoong, Sông Mã",
+  "image": [
+    "http://localhost:5000/image/article/1712039213616-project1.jpg",
+    "http://localhost:5000/image/article/1712039213621-project2.jpg",
+    "http://localhost:5000/image/article/1712039213630-project3.jpg"
+  ],
+  "body": "Chi tiết điểm trường:\nĐiểm trường Bản Mòn, trường tiểu học Hải Sơn, Xã Chiềng Khoong, Huyện Sông Mã.\nKhoảng cách: \nĐi từ trung tâm huyện đến điểm Bản Mòn khoảng 20 km, trong đó có hơn 10km ( nếu trời mưa thì chỉ đi được xe máy và đi bộ, khoảng 600m đến điểm trường phải đi qua suối đi bộ.\n\nMỗi mùa mưa tới các em nhỏ băng qua suối rất nguy hiểm, đôi khi mưa lớn, không thể đi qua được, các em nhỏ phải nghỉ lại tại trường đợi khi mưa ngớt.",
+  "state": "pending",
+  "expireDate": 120,
+  "releaseDate": {
+    "$date": "2024-03-16T07:01:00.605Z"
+  },
+  "accountNumber": "8526191432198",
+  "emailPayPal": "duyenk200@gmail.com",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 250000000,
+  "amountEarned": 8210000,
+  "comments": [
+    {
+      "$oid": "662f5cf09c26d3d057f39c7e"
+    },
+    {
+      "$oid": "662f61949c26d3d057f39efd"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "66383602aa67502230a729bd"
+    },
+    {
+      "$oid": "6638367daa67502230a72a15"
+    },
+    {
+      "$oid": "663845d36eef1d77c4e163e0"
+    },
+    {
+      "$oid": "663849396eef1d77c4e164ee"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-04-02T06:26:53.484Z"
+  },
+  "__v": 1,
+  "disbursements": [
+    {
+      "$oid": "663cdf929b9b3f342aabf988"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "660ba8129ca975cd9ff770a5"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "categotyId": {
+    "$oid": "6601628ff33fbdcf59d045a4"
+  },
+  "addressId": {
+    "$oid": "660ba8129ca975cd9ff770a4"
+  },
+  "address": "Trạm y tế xã Hoà Thạch, Đường Hồ Chí Minh, Huyện Quốc Oai, Hà Nội, Lương Sơn, Hòa Bình, Việt Nam, Bệnh Viện Da Liễu Cơ Sở 3",
+  "addedBy": "Đỗ Kỳ Duyên",
+  "articletitle": "VIỆN PHONG YÊU THƯƠNG",
+  "image": [
+    "http://localhost:5000/image/article/1712039954123-project2.jpg",
+    "http://localhost:5000/image/article/1712039954124-project2-1.jpg",
+    "http://localhost:5000/image/article/1712039954125-project2-2.jpg"
+  ],
+  "body": "VIỆN PHONG YÊU THƯƠNG\n\n❓Bạn muốn có trải nghiệm tình nguyện cho các chuyến đi gần ngoại thành Hà Nội vì bạn không có thời gian đi xa?\n❓Bạn muốn có sức khỏe tốt cả thể chất và tinh thần?- Hãy giúp người khác khỏe mạnh.\n❓Bạn đang cô đơn, muốn tìm người yêu/bạn đời hoàn hảo?- Hãy cho đi sự bầu bạn, yêu thương.\n❓Bạn đang gặp trục trặc trong các mối quan hệ với người thân và muốn các mối quan hệ hoà hợp hơn?- Hãy giúp người khác có mối quan hệ hòa hợp.\n❓Bạn đang cần nguồn lực: tài chính, cơ hội, vật chất, nhân lực,.... để hoàn thành các dự án, mục tiêu của mình?- Hãy cho đi nguồn lực.\n…………\n🔅Bí mật để có tất cả những điều trên là “Cho đi điều mình muốn”\n\n Sau khi nhận được thông tin, Quỹ Biến Ước Mơ Thành Hiện Thực và Quỹ Từ Tâm đã tổ chức buổi khảo sát thực tế đến Viện Da Liễu Hà Nội cơ sở 3 (Viện Phong Xuân Mai) tại Xuân Mai, Xã Đông Yên, Huyện Quốc Oai, Thành Phố Hà Nội. \n\n Nơi đây là tổ ấm của 52 cụ (14 cụ ông, 36 cụ bà). Các cụ già cả rồi, lớn tuổi nhất 104 tuổi, còn lại 45 tuổi trở lên. Dù đã hết bệnh Phong nhưng những di chứng nặng nề để lại như mắt thỏ, mất sụn mũi, cụt rụt móng, chân đi cất cần, chi dưới bị cắt cụt,..... khiến các cụ gặp rất nhiều khó khăn trong sinh hoạt. Đa số các cụ đều không có con cái, gia đình, quê hương hoặc có người thân nhưng bị xa lánh. Họ thật sự cần sự bầu bạn,chia sẻ, sự cảm thông dù chỉ là một lời hỏi thăm, một món quà nhỏ… và những điều nhỏ nhặt ấy khiến cuộc sống của họ có ý nghĩa hơn.",
+  "state": "pending",
+  "expireDate": 35,
+  "releaseDate": {
+    "$date": "2024-04-02T06:39:14.070Z"
+  },
+  "accountNumber": "5798459170488",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 8000000,
+  "amountEarned": 1200000,
+  "comments": [
+    {
+      "$oid": "662f5dd89c26d3d057f39cc8"
+    },
+    {
+      "$oid": "66383e18aa67502230a72c15"
+    }
+  ],
+  "activities": [],
+  "createdAt": {
+    "$date": "2024-04-02T06:39:14.070Z"
+  },
+  "__v": 1,
+  "disbursements": [
+    {
+      "$oid": "662f63f8d137aa94f0a24d97"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "categotyId": {
+    "$oid": "6601643cf33fbdcf59d045aa"
+  },
+  "addressId": {
+    "$oid": "660bac9b9ca975cd9ff770d8"
+  },
+  "address": "Xô Viết Nghệ Tĩnh, Thành phố Buôn Ma Thuột, Tỉnh Đắk Lắk, 63107, Việt Nam, 248d Phường Thành Công",
+  "addedBy": "Đỗ Kỳ Duyên",
+  "articletitle": "MUA GIƯỜNG CHO MÁI ẤM NUÔI TRẺ HỘI CHỨNG DOWN",
+  "image": [
+    "http://localhost:5000/image/article/1712041115379-project4-1.jpg",
+    "http://localhost:5000/image/article/1712041115383-project4-2.jpg",
+    "http://localhost:5000/image/article/1712041115381-project4-3.jpg"
+  ],
+  "body": "Gia Đình Bình Minh là nơi tiếp nhận và nuôi dạy trẻ bị hội chứng Down đến từ nhiều tỉnh thành trên cả nước, do các nữ tu dòng Nữ Vương Hòa Bình quản lý. Hiện tại đây đang có 55 trẻ bị Down thuộc 6 dân tộc đang được chăm sóc chu đáo. Đa số trẻ đều có gia cảnh đặc biệt khó khăn nên không đóng được tiền ăn, học phí cũng như chi phí mua sắm các vật dụng cần thiết.\nDù Gia Đình Bình Minh đã hoạt động đến 22 năm nhưng tới nay vẫn chưa nhận được sự quan tâm, giúp đỡ của xã hội. Nhiều vật dụng dành cho các bé đã xuống cấp và rất cần được mua mới, cụ thể là giường và bàn học.\nRất mong các nhà hảo tâm ủng hộ kinh phí, cùng Hội Từ Tâm Đắk Lắk mua sắm giường và bàn tặng các bé không may mắc chứng bệnh khó chữa này!",
+  "state": "pending",
+  "expireDate": 60,
+  "releaseDate": {
+    "$date": "2024-04-02T06:58:35.344Z"
+  },
+  "accountNumber": "3370791314",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 20000000,
+  "amountEarned": 1260000,
+  "comments": [
+    {
+      "$oid": "662f5b8e9c26d3d057f39beb"
+    }
+  ],
+  "activities": [
+    {
+      "$oid": "663d71e55302575eb67239e5"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-04-02T06:58:35.344Z"
+  },
+  "__v": 1,
+  "disbursements": [
+    {
+      "$oid": "662f63ffd137aa94f0a24db5"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "660bae099ca975cd9ff770f3"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "categotyId": {
+    "$oid": "660164a7f33fbdcf59d045ad"
+  },
+  "addressId": {
+    "$oid": "660bae099ca975cd9ff770f2"
+  },
+  "address": "Trường Mầm non xã Tân Triều, Đường Tân Triều, Huyện Thanh Trì, Hà Nội, 10136, Việt Nam, Bệnh Viện K Cơ Sở Tân Triều",
+  "addedBy": "Đỗ Kỳ Duyên",
+  "articletitle": "Suất ăn chiều với giá 2.000 đồng cho bệnh nhân viện K Tân Triều",
+  "image": [
+    "http://localhost:5000/image/article/1712041481891-project5-1.jpg",
+    "http://localhost:5000/image/article/1712041481889-project5-2.jpg",
+    "http://localhost:5000/image/article/1712041481891-project5-3.jpg"
+  ],
+  "body": "https://humanactprize.org/quan-nu-cuoi-shinbi-com-2k-1991000000151.htm\n\nQuán Nụ Cười Shinbi - cơm 2k thực hiện việc cung cấp suất ăn chiều với giá tượng trưng (2.000 đồng), từ những ngày đầu ra đời với số lượng 80 suất ăn/bữa, cho đến hiện tại - sau gần 1 năm tháng hoạt động, là từ 350 đến 900 suất/bữa. Tiêu chuẩn mỗi bữa ăn của quán gồm 2 món mặn, một món rau, một món canh, hoa quả tráng miệng cùng một phần quà là chè, sữa, cháo, khẩu trang... Mỗi người đến quán sẽ được ăn tại chỗ một suất, đồng thời được mua một suất mang về cho người bệnh - nếu có nhu cầu.",
+  "state": "pending",
+  "expireDate": 120,
+  "releaseDate": {
+    "$date": "2024-04-02T07:04:41.854Z"
+  },
+  "accountNumber": "4841945513",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 500000000,
+  "amountEarned": 60000,
+  "comments": [],
+  "activities": [],
+  "createdAt": {
+    "$date": "2024-04-02T07:04:41.854Z"
+  },
+  "__v": 1,
+  "disbursements": []
+},
+{
+  "_id": {
+    "$oid": "660baf959ca975cd9ff7710d"
+  },
+  "userId": {
+    "$oid": "660bc5c37a86b3716fd1032f"
+  },
+  "categotyId": {
+    "$oid": "660164faf33fbdcf59d045b0"
+  },
+  "addressId": {
+    "$oid": "660baf959ca975cd9ff7710c"
+  },
+  "address": "Krông Bông, Tỉnh Đắk Lắk, Việt Nam, Xã Cư Pui, Trường Tiểu Học Cư Pui 2",
+  "addedBy": "Lê Nghĩa",
+  "articletitle": "GÓP GẠO NUÔI BÉ - VÙNG CAO TÂY NGUYÊN",
+  "image": [
+    "http://localhost:5000/image/article/1712041877885-project6-1.jpg",
+    "http://localhost:5000/image/article/1712041877881-project6-2.jpg",
+    "http://localhost:5000/image/article/1712041877879-project6-3.jpg"
+  ],
+  "body": "Dự án Góp Gạo Nuôi Bé\nMục đích: hỗ trợ trẻ em dân tộc thiểu số vùng sâu vùng xa tại Tây Nguyên được no bụng hơn khi đến trường, khuyến khích cha mẹ cho con em đi học đều đặn hơn.\n- Anh/chị tham gia dự án với mức hỗ trợ 200k/bé/tháng và cam kết hỗ trợ tối thiểu 1 năm.\n- Sau khi đồng ý tham gia dự án, anh/chị sẽ nhận được thông tin, hình ảnh và mã nhận nuôi.\n- Chuyển khoản vào STK thiện nguyện MB Bank 3872 - Hoàng Công Minh (quý anh/chị có thể theo dõi chi tiết sao kê trên app Thiện Nguyện)\n- Sđt phụ trách dự án: 0849.925.925\nRất mong nhận được sự đồng hành của quý nhà hảo tâm gần xa, cùng chung tay để giúp cho các bé có tương lai tươi sáng hơn!",
+  "state": "pending",
+  "expireDate": 273,
+  "releaseDate": {
+    "$date": "2024-04-02T07:11:17.816Z"
+  },
+  "accountNumber": "4841945513",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 1000000000,
+  "amountEarned": 2300000,
+  "comments": [],
+  "activities": [],
+  "createdAt": {
+    "$date": "2024-04-02T07:11:17.816Z"
+  },
+  "__v": 1,
+  "disbursements": []
+},
+{
+  "_id": {
+    "$oid": "660bb1429ca975cd9ff77128"
+  },
+  "userId": {
+    "$oid": "660bc4ce7a86b3716fd1032a"
+  },
+  "categotyId": {
+    "$oid": "66016531f33fbdcf59d045b3"
+  },
+  "addressId": {
+    "$oid": "660bb1429ca975cd9ff77127"
+  },
+  "address": "Thanh Miện, Hải Dương, Việt Nam, Đảng Ủy Hđnd-ubnd, Thị Trấn Thanh Miện",
+  "addedBy": "Ho Cong Thanh",
+  "articletitle": "Phát động chiến dịch Tết trồng cây 3 miền Bắc - Trung - Nam",
+  "image": [
+    "http://localhost:5000/image/article/1712042306303-project7-1.jpg",
+    "http://localhost:5000/image/article/1712042306302-project7-2.jpg",
+    "http://localhost:5000/image/article/1712042306299-project7-3.jpg"
+  ],
+  "body": "☘ 🌿 Những ngày qua, cộng đồng Gieo Mầm Xanh tại nhiều địa phương đã và đang nô nức đón nhận những chuyến xe chở hàng ngàn cây xanh phục vụ cho Tết trồng cây 3 miền: Bắc- Trung- Nam \n/-heart 🎋 Tổng số cây gỗ lớn đã gieo trồng cập nhật ngày hôm nay là 18.765 , với tổng số tiền 338.400.000 đồng, tiền đã thanh toán 131.500.000, số tiền còn thiếu 206. 840.000 - Đây có thể coi là chiến dịch trồng cây lớn nhất của GMX từ trước đến nay. \n🌳 🌿 Chỉ với 20k cho 1 cây xanh => Nhận 1 bao lì xì trên tay, các em nhỏ cũng có thể trao cây xanh mừng tuổi Mẹ Thiên Nhiên; còn những người lớn có thể chọn gửi thêm 1 bao lì xì năm mới có ghi tấm lòng tri ân Đất Mẹ. \nGieo 1 hạt lành để mùa xuân thêm vui, để tạo thêm nhiều phước báu cho hôm nay và cả thế hệ mai sau. \n_()_ STK Thiện nguyện: 4131- Mb Bank Công ty TNHH Gieo Mầm Xanh Toàn Cầu\nTri ân và Biết ơn rất nhiều!!!! Mong cộng đồng sẽ cùng chung tay để lan tỏa một mùa xuân An Vui, Hạnh Phúc !!!!",
+  "state": "pending",
+  "expireDate": 120,
+  "releaseDate": {
+    "$date": "2024-04-02T07:18:26.246Z"
+  },
+  "accountNumber": "4841945513",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 330000000,
+  "amountEarned": 1500000,
+  "comments": [],
+  "activities": [],
+  "createdAt": {
+    "$date": "2024-04-02T07:18:26.246Z"
+  },
+  "__v": 1,
+  "disbursements": []
+},
+{
+  "_id": {
+    "$oid": "660bb2649ca975cd9ff77142"
+  },
+  "userId": {
+    "$oid": "660bc0da7a86b3716fd1030a"
+  },
+  "categotyId": {
+    "$oid": "66016567f33fbdcf59d045b6"
+  },
+  "addressId": {
+    "$oid": "660bb2649ca975cd9ff77141"
+  },
+  "address": "Phường Tân Phú, Thành phố Đồng Xoài, Tỉnh Bình Phước, 67106, Việt Nam, Hội Chữ Thập Đỏ",
+  "addedBy": "Hoàng Hà",
+  "articletitle": "Xin quý Nhà hảo tâm hãy chung tay chắp cánh ước mơ đến trường cho nữ sinh 11 năm học xuất sắc và người cha bệnh tật hiểm nghèo.",
+  "image": [
+    "http://localhost:5000/image/article/1712042596745-project8-1.jpg",
+    "http://localhost:5000/image/article/1712042596742-project8-2.jpg",
+    "http://localhost:5000/image/article/1712042596745-project8-3.jpg"
+  ],
+  "body": "Em Trần Thị Hồng Gấm - Lớp 11A5, trường THPT Nguyễn Du, T.p Đồng Xoài, tỉnh Bình Phước. Nhiều năm liền, em đều đạt danh hiệu học sinh giỏi toàn diện. Em luôn ước mơ thi đại học sư phạm, ngành ngôn ngữ Anh, để mang kiến thức về các vùng khó khăn trên quê hương Bình Phước.\n\n     Ước mơ trong sáng của Gấm là thế nhưng có quá nhiều khó khăn, thiếu thốn đang bủa vây con đường đến trường của em khiến cô học trò nghèo lặng lẽ rơi nước mắt: \n\n      😢Gấm vừa chào đời thì Mẹ của em phát hiện căn bệnh ung thư quái ác. Bao nhiều tài sản, kể cả mảnh vườn tích lũy trước đó đều bán sạch, để cầm cự thuốc men, nhưng Mẹ vẫn không qua khỏi. \n\n     Gấm mồ côi Mẹ khi mới là học sinh lớp 5, sống cảnh cút côi cùng cha Trần Văn Trạch trong căn nhà tình thương ở ấp 5, xã Đồng Tiến, huyện Đồng Phú. \n\n    Ở  tuổi hơn 70, Ông Trạch không còn sức lao động, lại mang trong người căn bệnh tim mãn tính và xơ gan, không còn tiền để đi bệnh viện, chỉ uống cây thuốc nam cầm cự. \n\n     Nguồn sinh hoạt hằng ngày nhờ sự trợ cấp từ chính quyền, hàng xóm và thầy cô giáo trong trường giúp đỡ. \n\n      “ Lo lắng nhất của con là bệnh tim của cha ngày càng nặng, có hôm cả đêm đau không ngủ, sáng lại phải chở con đi học với quãng đường hơn 28km. Mấy lần con định nghỉ ngang để đi làm mướn để kiếm tiền trang trải cuộc sống và dành tiền chữa bệnh cho ba\" - Nói đến đó thôi thì hai cha con buồn bã chảy nước mắt \"nghĩ tâm nguyện của Mẹ cũng không đạt thành nên con lại cố gắng học tập chăm chỉ. Để giảm chi phí tối đa, cách vở, quần áo, dụng cụ học tập con đều xin lại từ các anh chị khóa trước”.\n\n       Đầu năm mới, mong đón nhận được tình thương của \nnhững tấm lòng nhân ái, giúp cô học trò ngoan hiền không phải nghỉ học giữa chừng.",
+  "state": "pending",
+  "expireDate": 60,
+  "releaseDate": {
+    "$date": "2024-04-02T07:23:16.689Z"
+  },
+  "accountNumber": "4841945513",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 20000000,
+  "amountEarned": 12000000,
+  "comments": [
+    {
+      "$oid": "662f66b7d137aa94f0a24f41"
+    }
+  ],
+  "activities": [],
+  "createdAt": {
+    "$date": "2024-04-02T07:23:16.689Z"
+  },
+  "__v": 1,
+  "disbursements": [
+    {
+      "$oid": "662f6402d137aa94f0a24dc4"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "660bb3ae9ca975cd9ff7715c"
+  },
+  "userId": {
+    "$oid": "660bc3497a86b3716fd1031e"
+  },
+  "categotyId": {
+    "$oid": "660165aaf33fbdcf59d045b9"
+  },
+  "addressId": {
+    "$oid": "660bb3ae9ca975cd9ff7715b"
+  },
+  "address": "Phường 2, Quận Phú Nhuận, Thành phố Hồ Chí Minh, 72210, Việt Nam, 67 Cù Lao",
+  "addedBy": "Uyen Le",
+  "articletitle": "Dự án xây nhà dành cho Tình nguyện viên",
+  "image": [
+    "http://localhost:5000/image/article/1712042926371-project9-1.jpg",
+    "http://localhost:5000/image/article/1712042926370-project9-2.jpg",
+    "http://localhost:5000/image/article/1712042926371-project9-3.jpg"
+  ],
+  "body": "DỰ ÁN XÂY DỰNG NHÀ Ở CHO TÌNH NGUYỆN VIÊN THAM GIA THI CÔNG BẢO THÁP tại Núi Kim Cương - ĐỢT 2\n\n DMI trân trọng biết ơn sự đóng góp của Quý Mạnh Thường Quân cùng các TTs SCIM tại đợt 1 - DỰ ÁN XÂY DỰNG NHÀ Ở CHO TÌNH NGUYỆN VIÊN THAM GIA THI CÔNG BẢO THÁP tại Núi Kim Cương, với số tiền đã đóng góp được 16.000USD. \nTrong tình hình bất ổn như hiện nay trên TG, sự đóng góp của Quý vị là vô cùng to lớn để giúp cho các tình nguyện viên di cư từ các vùng chiến tranh sẽ có được nơi ở an toàn, thuận lợi, phụng sự xây Bảo Tháp, phụng sự bậc thầy cao quý.\nTiếp nối sự thành công đợt 1, chúng tôi tha thiết tiếp tục nhận được sự đồng hành của Quý Mạnh Thường Quân, với số tiền mong muốn quyên góp Đợt 2 là 10.000USD (khoảng 250 triệu đồng). \no Nội dung: Tên_xay nha Voluteers_SDT\n\n  Việc gieo hạt xây dựng khu nhà ở cho TNV chẳng những có lợi ích cho việc tạo nơi trú ngụ an toàn, mà còn góp phần to lớn cho việc xây dựng 08 Bảo Tháp Phật Dược Sư , góp phần cầu nguyện cho sự Bình An, Hạnh Phúc và Thịnh Vượng trở lại cho toàn thế giới. \n  Một lần nữa, Chúng tôi xin gửi lời biết ơn sâu sắc đến những tấm lòng hảo tâm của quý mạnh thường quân vào đợt 2 của dự án với tổng số tiền cần kêu gọi 250 triệu đồng 🎼  💎 .",
+  "state": "pending",
+  "expireDate": 120,
+  "releaseDate": {
+    "$date": "2024-04-02T07:28:46.344Z"
+  },
+  "accountNumber": "4841945513",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 250000000,
+  "amountEarned": 1000000,
+  "comments": [],
+  "activities": [],
+  "createdAt": {
+    "$date": "2024-04-02T07:28:46.344Z"
+  },
+  "__v": 1,
+  "disbursements": []
+},
+{
+  "_id": {
+    "$oid": "660bb47e9ca975cd9ff77176"
+  },
+  "userId": {
+    "$oid": "660bbcd186ade8974acad4f1"
+  },
+  "categotyId": {
+    "$oid": "66016655f33fbdcf59d045bc"
+  },
+  "addressId": {
+    "$oid": "660bb47e9ca975cd9ff77175"
+  },
+  "address": "Phường 6, Thành phố Cà Mau, Tỉnh Cà Mau, Việt Nam",
+  "addedBy": "Lê Đức Minh",
+  "articletitle": "Mục tiêu 8 Cây Cầu Bồ Đề cho 2024",
+  "image": [
+    "http://localhost:5000/image/article/1712043134902-project10-1.jpg",
+    "http://localhost:5000/image/article/1712043134905-project10-2.jpg",
+    "http://localhost:5000/image/article/1712043134904-project10-3.jpg"
+  ],
+  "body": "Kết thúc 2023 Bồ Đề Quyến Thuộc đã chính thức khánh thành Bồ Đề 8 trong niềm hân hoan vì sự đồng hành và sẽ chia của những tấm lòng yêu thương khắp mọi miền đất nước.\n\nCàng đồng hành cùng bà con để xây dựng những cây cầu kết nối, nhóm Bồ Đề càng nổ lực hơn để làm nhiều hơn nữa và mang thêm nhiều cánh tay kết nối để càng nhiều cây cầu bắc nhịp yêu thương và phát triển kinh tế của nhiều địa phương.\n\nBồ Đề chúng con hiểu rằng mọi giấc mơ lớn đều đến từ những điều nho nhỏ hôm nay ( như Thầy Minh Niệm đã từng nói), chúng con mơ giấc mơ của nhóm đến hết 2024 sẽ xây tiếp thêm 8 Bồ Đề cho bà con.\n\nGiấc mơ đó sẽ thành hiện thực, bởi vì tình yêu thương luôn được lan tỏa và sự cho đi ấy không hề có giới hạn.💜💜💜💜🙏🙏🙏",
+  "state": "pending",
+  "expireDate": 272,
+  "releaseDate": {
+    "$date": "2024-04-02T07:32:14.855Z"
+  },
+  "accountNumber": "4841945513",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 800000000,
+  "amountEarned": 1000000,
+  "comments": [
+    {
+      "$oid": "662f5f099c26d3d057f39d82"
+    }
+  ],
+  "activities": [],
+  "createdAt": {
+    "$date": "2024-04-02T07:32:14.855Z"
+  },
+  "__v": 1,
+  "disbursements": []
+},
+{
+  "_id": {
+    "$oid": "660bb5ad9ca975cd9ff77192"
+  },
+  "userId": {
+    "$oid": "660bb6a39ca975cd9ff771a0"
+  },
+  "categotyId": {
+    "$oid": "66016237f33fbdcf59d045a1"
+  },
+  "addressId": {
+    "$oid": "660bb5ad9ca975cd9ff77191"
+  },
+  "address": "Phường Điện Biên, Quận Ba Đình, Hà Nội, Việt Nam, 35 Trần Phú",
+  "addedBy": "Nguyễn Thành",
+  "articletitle": "Hỗ trợ dinh dưỡng cho trẻ em vùng cao",
+  "image": [
+    "http://localhost:5000/image/article/1712043437292-project11-1.jpg",
+    "http://localhost:5000/image/article/1712043437289-project11-2.jpg",
+    "http://localhost:5000/image/article/1712043437290-project11-3.jpg"
+  ],
+  "body": "Trẻ em các dân tộc thiểu số, vùng cao ở Việt Nam thường xuyên đối mặt với tình trạng thiếu dinh dưỡng. Số liệu cho thấy có 38% trẻ em dân tộc thiểu số dưới 5 tuổi bị suy dinh dưỡng thấp còi. Trẻ em vùng cao thường xuyên phải chịu cảnh thiếu thốn từ miếng cơm, manh áo đến thiết bị, đồ dùng học tập và các điều kiện vui chơi, giải trí. Rất dễ dàng bắt gặp hình ảnh những em bé cơm không đủ ăn, quần áo không đủ mặc, gầy gò, nheo nhóc trên những nẻo đường, đồi núi hay ngồi lê trước bãi hiên nhà.\n\nĐể góp phần làm giảm bớt tỷ lệ trẻ em bị suy dinh dưỡng, thấp còi, góp phần cải thiện chế độ dinh dưỡng cho trẻ em có hoàn cảnh đặc biệt, khó khăn, giúp các em có cơ hội được sống bình đẳng, phát triển toàn diện về thể chất và trí tuệ; Quỹ BTTEVN rất mong nhận được sự đóng góp và đồng hành từ các cơ quan, các tổ chức xã hội, các doanh nghiệp, các nhà hảo tâm và cộng đồng xã hội để Quỹ BTTEVN có thêm kinh phí hỗ trợ tăng khẩu phần ăn cho trẻ em khó khăn vùng cao và dân tộc thiểu số. Mỗi đóng góp từ Quý vị dù là nhỏ nhất cũng đều vô cùng quý giá đối với Quỹ BTTEVN và đặc biệt là với những đối tượng trẻ em khó khăn Quỹ hướng tới.\n\nSự ủng hộ của Quý vị chính là nguồn động lực to lớn để Quỹ BTTEVN hiện thực hóa thành hành động, tổ chức cho trẻ em các vùng sâu, vùng xa, vùng dân tộc thiểu số có thêm những bữa ăn ngon, giúp cải thiện khẩu phần ăn, mang lại cuộc sống đầy đủ hơn cho trẻ em thiếu thốn dinh dưỡng tại Việt Nam, để các em có cơ hội được phát triển toàn diện và hướng đến một tương lai tươi sáng hơn.",
+  "state": "pending",
+  "expireDate": 88,
+  "releaseDate": {
+    "$date": "2024-04-02T07:37:17.255Z"
+  },
+  "accountNumber": "4841945513",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970419",
+  "adminApproval": true,
+  "published": true,
+  "amountRaised": 500000000,
+  "amountEarned": 7800000,
+  "comments": [
+    {
+      "$oid": "662f5e6e9c26d3d057f39d11"
+    },
+    {
+      "$oid": "662f62159c26d3d057f39f5a"
+    }
+  ],
+  "activities": [],
+  "createdAt": {
+    "$date": "2024-04-02T07:37:17.255Z"
+  },
+  "__v": 1,
+  "disbursements": []
+},
+{
+  "_id": {
+    "$oid": "663d71255302575eb67238fb"
+  },
+  "userId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "categotyId": {
+    "$oid": "6601628ff33fbdcf59d045a4"
+  },
+  "addressId": {
+    "$oid": "662b73918d897939736d9411"
+  },
+  "address": "Thành phố Cần Thơ, Việt Nam",
+  "addedBy": "Đỗ Kỳ Duyên",
+  "articletitle": "TRẠM PHÓNG TƯƠNG LAI - Xây dựng & sửa chữa điểm trường Lê ",
+  "image": [
+    "http://localhost:5000/image/article/1715302693175-797901ec-55b3-4cb6-a752-38c131fe850b.jpg",
+    "http://localhost:5000/image/article/1715302693222-a8668afc-dbb9-4e5d-b796-2d7cfe94f206.jpg",
+    "http://localhost:5000/image/article/1715302693229-f6e6b70f-cdc0-4338-814a-71d928428c48.jpg"
+  ],
+  "body": "TRẠM PHÓNG TƯƠNG LAI - Xây dựng & sửa chữa điểm trường Lê Văn Tám tại Thôn 4 X. Ea M’Đoal H. M’Drắk, Đắk Lắk\nTrường Tiểu Học Lê Văn Tám,Xã Ea M'Doal,Huyện M'Đrăk,Tỉnh Đắk Lắk\nĐiểm trường Tiểu học LêVăn Tám tại Thôn 4, Xã Ea M'Đoal, Huyện M'Drắk, Tỉnh Đắk Lắk là điểm trường phụ với khoảng 150 em gồm 5 lớp từ lớp 1 đến 5. Hiện trạng trường đang thiếu thốn rất nhiều về mặt vật chất, cần nhất là nhà vệ sinh xuống cấp không đảm bảo vệ sinh sinh hoạt, cũng như chưa có công trình sân chơi cho các em giải trí. Vì vậy dự án Trạm Phóng Tương Lai chọn điểm đến tại đây để sửa chữa - làm mới cổng trường, lớp học cũng như xây mới nhà vệ sinh, nâng cấp sân chơi. Thời gian dự kiến thi công vào cuối tháng 5, thời điểm các em vừa được nghỉ hè.",
+  "state": "pending",
+  "expireDate": 60,
+  "releaseDate": null,
+  "accountNumber": "4841945513",
+  "emailPayPal": "duyenb2012188@student.ctu.edu.vn",
+  "methodPayment": "both",
+  "bankcode": "970416",
+  "adminApproval": false,
+  "published": false,
+  "amountRaised": 10000000,
+  "amountEarned": 0,
+  "comments": [],
+  "activities": [],
+  "disbursements": [],
+  "createdAt": {
+    "$date": "2024-05-10T00:58:13.037Z"
+  },
+  "__v": 1
+}]

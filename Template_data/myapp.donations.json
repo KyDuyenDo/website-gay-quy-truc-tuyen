@@ -1,0 +1,714 @@
+[{
+  "_id": {
+    "$oid": "66161962421931a1a0287ce8"
+  },
+  "articleId": {
+    "$oid": "660bae099ca975cd9ff770f3"
+  },
+  "paymentId": {
+    "$oid": "66161962421931a1a0287ce6"
+  },
+  "donorId": {
+    "$oid": "661617ff421931a1a0283c20"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 10000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-10T04:45:22.082Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66164c8f842f223026729ded"
+  },
+  "articleId": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "paymentId": {
+    "$oid": "66164c8f842f223026729deb"
+  },
+  "donorId": {
+    "$oid": "66163c1d842f2230267136f4"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 10000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-10T08:23:43.662Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "661a355a02c2c3f5248c37b7"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "661a355a02c2c3f5248c37b1"
+  },
+  "donorId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "fullnameDonor": "Đỗ Kỳ Duyên",
+  "donationAmount": 120000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-13T07:33:46.216Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "661a358e02c2c3f5248c37d8"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "661a358e02c2c3f5248c37d3"
+  },
+  "donorId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "fullnameDonor": "Đỗ Kỳ Duyên",
+  "donationAmount": 50000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-13T07:34:38.854Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "661a35e602c2c3f5248c37fa"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "661a35e602c2c3f5248c37f5"
+  },
+  "donorId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 180000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-13T07:36:06.998Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "661f551b2a410e9c77bcd02c"
+  },
+  "articleId": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "paymentId": {
+    "$oid": "661f551b2a410e9c77bcd02a"
+  },
+  "donorId": {
+    "$oid": "661f54072a410e9c77bcd007"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 50000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-17T04:50:35.379Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662b54dc8d897939736d9019"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "662b54dc8d897939736d9014"
+  },
+  "donorId": {
+    "$oid": "660bb6a39ca975cd9ff771a0"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 50000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-26T07:16:44.892Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662b70d98d897939736d936b"
+  },
+  "articleId": {
+    "$oid": "660bae099ca975cd9ff770f3"
+  },
+  "paymentId": {
+    "$oid": "662b70d98d897939736d9365"
+  },
+  "donorId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "fullnameDonor": "Đỗ Kỳ Duyên",
+  "donationAmount": 50000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-26T09:16:09.682Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f4ffc9c26d3d057f39967"
+  },
+  "articleId": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "paymentId": {
+    "$oid": "662f4ffc9c26d3d057f39962"
+  },
+  "donorId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "fullnameDonor": "Trương Thanh",
+  "donationAmount": 200000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T07:45:00.204Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f5c9a9c26d3d057f39c5a"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "662f5c9a9c26d3d057f39c56"
+  },
+  "donorId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "fullnameDonor": "Trương Thanh",
+  "donationAmount": 300000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T08:38:50.457Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f5d9e9c26d3d057f39ca9"
+  },
+  "articleId": {
+    "$oid": "660ba8129ca975cd9ff770a5"
+  },
+  "paymentId": {
+    "$oid": "662f5d9e9c26d3d057f39ca4"
+  },
+  "donorId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "fullnameDonor": "Trương Thanh",
+  "donationAmount": 200000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T08:43:10.530Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f5e149c26d3d057f39cf1"
+  },
+  "articleId": {
+    "$oid": "660bb5ad9ca975cd9ff77192"
+  },
+  "paymentId": {
+    "$oid": "662f5e139c26d3d057f39ced"
+  },
+  "donorId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "fullnameDonor": "Trương Thanh",
+  "donationAmount": 300000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T08:45:08.014Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f5fa29c26d3d057f39dcd"
+  },
+  "articleId": {
+    "$oid": "660bb1429ca975cd9ff77128"
+  },
+  "paymentId": {
+    "$oid": "662f5fa29c26d3d057f39dc8"
+  },
+  "donorId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 500000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-29T08:51:46.481Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f60189c26d3d057f39e5f"
+  },
+  "articleId": {
+    "$oid": "660baf959ca975cd9ff7710d"
+  },
+  "paymentId": {
+    "$oid": "662f60189c26d3d057f39e5a"
+  },
+  "donorId": {
+    "$oid": "662f4c9a41f3e877cc35e397"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 300000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-29T08:53:44.127Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f61699c26d3d057f39ed3"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "662f61699c26d3d057f39ecf"
+  },
+  "donorId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "fullnameDonor": "Như Ý",
+  "donationAmount": 1000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T08:59:21.517Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f61e99c26d3d057f39f36"
+  },
+  "articleId": {
+    "$oid": "660bb5ad9ca975cd9ff77192"
+  },
+  "paymentId": {
+    "$oid": "662f61e99c26d3d057f39f30"
+  },
+  "donorId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "fullnameDonor": "Như Ý",
+  "donationAmount": 2000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T09:01:29.671Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f639ed137aa94f0a24d31"
+  },
+  "articleId": {
+    "$oid": "660ba8129ca975cd9ff770a5"
+  },
+  "paymentId": {
+    "$oid": "662f639ed137aa94f0a24d2b"
+  },
+  "donorId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "fullnameDonor": "Như Ý",
+  "donationAmount": 1000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T09:08:46.923Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f63dcd137aa94f0a24d70"
+  },
+  "articleId": {
+    "$oid": "660baf959ca975cd9ff7710d"
+  },
+  "paymentId": {
+    "$oid": "662f63dcd137aa94f0a24d6b"
+  },
+  "donorId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "fullnameDonor": "Như Ý",
+  "donationAmount": 2000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T09:09:48.205Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f6685d137aa94f0a24f22"
+  },
+  "articleId": {
+    "$oid": "660bb2649ca975cd9ff77142"
+  },
+  "paymentId": {
+    "$oid": "662f6685d137aa94f0a24f1d"
+  },
+  "donorId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "fullnameDonor": "Như Ý",
+  "donationAmount": 1000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-29T09:21:09.817Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f67bfd137aa94f0a24fe7"
+  },
+  "articleId": {
+    "$oid": "660bb3ae9ca975cd9ff7715c"
+  },
+  "paymentId": {
+    "$oid": "662f67bfd137aa94f0a24fe2"
+  },
+  "donorId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 1000000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-29T09:26:23.179Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f67ffd137aa94f0a2501d"
+  },
+  "articleId": {
+    "$oid": "660bb47e9ca975cd9ff77176"
+  },
+  "paymentId": {
+    "$oid": "662f67ffd137aa94f0a25018"
+  },
+  "donorId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 1000000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-29T09:27:27.520Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "662f6869d137aa94f0a25077"
+  },
+  "articleId": {
+    "$oid": "660bb5ad9ca975cd9ff77192"
+  },
+  "paymentId": {
+    "$oid": "662f6869d137aa94f0a25072"
+  },
+  "donorId": {
+    "$oid": "662f4cd541f3e877cc35e398"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 5000000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-29T09:29:13.264Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6630bc7c984efacc936504e5"
+  },
+  "articleId": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "paymentId": {
+    "$oid": "6630bc7c984efacc936504e0"
+  },
+  "donorId": {
+    "$oid": "662f4cff41f3e877cc35e399"
+  },
+  "fullnameDonor": "Thanh Thu",
+  "donationAmount": 500000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-30T09:40:12.441Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6630bcbf984efacc9365052c"
+  },
+  "articleId": {
+    "$oid": "660bb2649ca975cd9ff77142"
+  },
+  "paymentId": {
+    "$oid": "6630bcbf984efacc93650526"
+  },
+  "donorId": {
+    "$oid": "662f4cff41f3e877cc35e399"
+  },
+  "fullnameDonor": "Thanh Thu",
+  "donationAmount": 5000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-04-30T09:41:19.768Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66321f93a7a4482cb002759d"
+  },
+  "articleId": {
+    "$oid": "660bb1429ca975cd9ff77128"
+  },
+  "paymentId": {
+    "$oid": "66321f37a7a4482cb002759c"
+  },
+  "donorId": {
+    "$oid": "662f4cff41f3e877cc35e399"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 1000000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-04-29T08:51:46.481Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66324f3e60cb74faaea852cd"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "66324dfb60cb74faaea85296"
+  },
+  "donorId": {
+    "$oid": "662f4d1741f3e877cc35e39a"
+  },
+  "fullnameDonor": "Giao Bảo",
+  "donationAmount": 10000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-05-01T14:18:38.824Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6632525b60cb74faaea853e5"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "6632522960cb74faaea853d1"
+  },
+  "donorId": {
+    "$oid": "662f4d4941f3e877cc35e39b"
+  },
+  "fullnameDonor": "Tố Quyên",
+  "donationAmount": 5000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-05-01T14:31:55.823Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66325809aa9f5e36b81ad787"
+  },
+  "articleId": {
+    "$oid": "660bb2649ca975cd9ff77142"
+  },
+  "paymentId": {
+    "$oid": "663257ccaa9f5e36b81ad770"
+  },
+  "donorId": {
+    "$oid": "662f4db141f3e877cc35e39d"
+  },
+  "fullnameDonor": "Quốc Huy",
+  "donationAmount": 5000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-05-01T14:56:09.359Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663259b1aa9f5e36b81ad939"
+  },
+  "articleId": {
+    "$oid": "660bb5ad9ca975cd9ff77192"
+  },
+  "paymentId": {
+    "$oid": "66325985aa9f5e36b81ad926"
+  },
+  "donorId": {
+    "$oid": "662f4db141f3e877cc35e39d"
+  },
+  "fullnameDonor": "Quốc Huy",
+  "donationAmount": 500000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-05-01T15:03:13.128Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66382f28aa67502230a72919"
+  },
+  "articleId": {
+    "$oid": "660bac9b9ca975cd9ff770d9"
+  },
+  "paymentId": {
+    "$oid": "66382f28aa67502230a72915"
+  },
+  "donorId": {
+    "$oid": "663829a1aa67502230a72889"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 500000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-05-06T01:15:20.816Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66383cceaa67502230a72b84"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "66383cceaa67502230a72b7d"
+  },
+  "donorId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "fullnameDonor": "",
+  "donationAmount": 500000,
+  "anonymous": true,
+  "donationDate": {
+    "$date": "2024-05-06T02:13:34.693Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663c7baba8c64da7c8d6cfbc"
+  },
+  "articleId": {
+    "$oid": "660bb2649ca975cd9ff77142"
+  },
+  "paymentId": {
+    "$oid": "663c7baba8c64da7c8d6cfb5"
+  },
+  "donorId": {
+    "$oid": "660ade60a2b0a6bc4696271f"
+  },
+  "fullnameDonor": "khang",
+  "donationAmount": 1000000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-05-09T07:30:51.694Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663d70015302575eb672377a"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "663d6fbe5302575eb6723773"
+  },
+  "donorId": {
+    "$oid": "663d62825302575eb67236d6"
+  },
+  "fullnameDonor": "Đỗ Kỳ Duyên",
+  "donationAmount": 500000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-05-10T00:53:21.844Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "663d70015302575eb672377d"
+  },
+  "articleId": {
+    "$oid": "660ba52d9ca975cd9ff77088"
+  },
+  "paymentId": {
+    "$oid": "663d6fbe5302575eb6723773"
+  },
+  "donorId": {
+    "$oid": "663d62825302575eb67236d6"
+  },
+  "fullnameDonor": "Đỗ Kỳ Duyên",
+  "donationAmount": 500000,
+  "anonymous": false,
+  "donationDate": {
+    "$date": "2024-05-10T00:53:21.870Z"
+  },
+  "__v": 0
+}]

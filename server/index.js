@@ -12,7 +12,6 @@ const adminRoutes = require("./routes/admin.route");
 const vnpayRoutes = require("./routes/vnpay.route");
 const cookieParser = require("cookie-parser");
 const MongoDB = require("./utils/mongodb.util");
-const decodeToken = require("./middleware/decodeToken");
 
 const app = express();
 
@@ -20,7 +19,7 @@ const cors = require("cors");
 const passport = require("passport");
 
 //connect mongodb
-MongoDB.connect(process.env.MONGODB_URI);
+MongoDB.connect(process.env.MONGODB_URI_ATLAS);
 
 app.use(express.static("client"));
 app.use(cors());

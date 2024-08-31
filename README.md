@@ -34,5 +34,6 @@ Model
 ![image](https://github.com/KyDuyenDo/website-gay-quy-truc-tuyen/assets/84983247/67914414-d8c5-4731-8dc4-3c7f38d63043)
 FaceNet
 ![image](https://github.com/KyDuyenDo/website-gay-quy-truc-tuyen/assets/84983247/f711ded8-b7bb-4fcb-80df-11035e545bd3)
+https://zengive.onrender.com
 
 

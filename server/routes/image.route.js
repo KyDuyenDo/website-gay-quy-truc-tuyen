@@ -30,7 +30,7 @@ router.post("/upload/:type", async function (request, result) {
     )
     .on("finish", function () {
       return result.status(200).json({
-        imageURL: `http://localhost:5000/image/${type}/${filePath}`,
+        imageURL: process.env.SERVER_URL + `/image/${type}/${filePath}`,
       });
     });
 });

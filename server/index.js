@@ -22,7 +22,7 @@ const passport = require("passport");
 MongoDB.connect(process.env.MONGODB_URI_ATLAS);
 
 app.use(express.static("client"));
-app.use(cors());
+app.use(cors({ origin: ["http://localhost:3000", "https://zengive.onrender.com"] }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());

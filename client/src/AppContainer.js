@@ -18,7 +18,7 @@ const AppContainer = () => {
   useEffect(() => {
     const checkServerStatus = async () => {
       try {
-        await axios.get("/server-status");
+        await axios.get(process.env.REACT_APP_API_URL + "/server-status");
       } catch (err) {
         setError("Server is down. Please try again later.");
       } finally {
@@ -35,7 +35,7 @@ const AppContainer = () => {
         const appStore = await createAppStore();
         setStore(appStore);
       } catch (err) {
-        console.log(err)
+        console.log(err);
         setError(`Error initializing the app: ${err.message}`);
       } finally {
         setLoading(false);
@@ -48,7 +48,7 @@ const AppContainer = () => {
   if (loading || error) {
     return (
       <div className="flex items-center justify-center h-screen">
-        {loading ? <LoadingArea/> : <ErrorComponent errorMessage={error} />}
+        {loading ? <LoadingArea /> : <ErrorComponent errorMessage={error} />}
       </div>
     );
   }

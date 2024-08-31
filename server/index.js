@@ -19,6 +19,9 @@ const cors = require("cors");
 const passport = require("passport");
 
 //connect mongodb
+// i use mongodb atlas for my deployment, change the uri to your own after making database
+// if you use this uri, some images may not be displayed
+// change the uri to localhost 5000 in env file for local development
 MongoDB.connect(process.env.MONGODB_URI_ATLAS);
 
 app.use(express.static("client"));

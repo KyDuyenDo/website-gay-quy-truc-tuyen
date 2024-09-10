@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,26 +6,32 @@ import { Autoplay } from "swiper/modules";
 import { faCoins, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Rating, Heart } from "@smastrom/react-rating";
+import { useDispatch, useSelector } from "react-redux";
 import "@smastrom/react-rating/style.css";
-
-import { getArticleHighRating } from "../../redux/api/articleAPI";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { getHighRatingProjects } from "../../redux/actions/articleAction";
 
 import "../../css/project.css";
-// Import Swiper styles
-import "swiper/css";
-
-//SwiperCore.use([EffectCoverflow,Pagination]);
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const RecentProjectsSlider = () => {
-  const [projects, setProjects] = useState([]);
+  const dispatch = useDispatch();
+  const projects = useSelector((state) => state.project.highRatingProjects);
+  const loading = useSelector((state) => state.project.loading);
   useEffect(() => {
-    getArticleHighRating().then((res) => {
-      if (res.length !== 0) {
-        setProjects(res);
+    const fetchData = async () => {
+      try {
+        dispatch(getHighRatingProjects());
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    });
-    // console.log(returnFund("660ade60a2b0a6bc4696271f"))
+    };
+    fetchData();
   }, []);
+
   const deadline = (createdAt, expireDate) => {
     const createdDate = new Date(createdAt);
     const deadline = new Date(
@@ -37,7 +43,7 @@ const RecentProjectsSlider = () => {
     return daysLeft;
   };
 
-  function truncateString(str,num) {
+  function truncateString(str, num) {
     const wordCount = str.split(" ").length;
     if (wordCount <= num) {
       return str;
@@ -46,14 +52,81 @@ const RecentProjectsSlider = () => {
     const truncatedString = str.split(" ").slice(0, num).join(" ");
     return `${truncatedString}...`;
   }
+
+  if (loading) {
+    // Skeleton loading UI
+    return (
+      <div className="recent-blog p-b5">
+        <Swiper
+          speed={1500}
+          slidesPerView={3}
+          spaceBetween={30}
+          loop={true}
+          slidesPerGroup={1}
+          slidesPerGroupSkip={1}
+          autoplay={{
+            delay: 3000,
+          }}
+          modules={[Autoplay]}
+          breakpoints={{
+            1200: {
+              slidesPerView: 3,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            320: {
+              slidesPerView: 1,
+            },
+          }}
+        >
+          {[1, 2, 3].map((index) => (
+            <SwiperSlide key={index}>
+              <div className="dz-card style-2">
+                <div className="dz-media">
+                  <Skeleton height={200} />
+                </div>
+                <div className="dz-info">
+                  <ul className="dz-category d-flex flex-row justify-content-between align-items-center">
+                    <li>
+                      <Skeleton width={80} />
+                    </li>
+                    <li>
+                      <Skeleton width={50} />
+                    </li>
+                  </ul>
+                  <h5 className="dz-title">
+                    <Skeleton width={`60%`} />
+                  </h5>
+                  <div className="progress-bx style-1">
+                    <Skeleton height={20} />
+                    <ul className="progress-tag">
+                      <li className="raised">
+                        <Skeleton width={120} />
+                      </li>
+                      <li className="goal">
+                        <Skeleton width={100} />
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    );
+  }
+
   return (
     <>
       <Swiper
         className="recent-blog p-b5"
         speed={1500}
-        //parallax= {true}
         slidesPerView={3}
         spaceBetween={30}
+        slidesPerGroup={1}
+        slidesPerGroupSkip={1}
         loop={true}
         autoplay={{
           delay: 3000,
@@ -71,14 +144,14 @@ const RecentProjectsSlider = () => {
           },
         }}
       >
-        {projects.map((data) => (
+        {projects?.map((data) => (
           <SwiperSlide key={data._id}>
             <Link to={`/article-detail/${data._id}`}>
               <div
                 className="dz-card style-2 overlay-skew wow fadeInUp"
                 data-wow-delay="0.2s"
               >
-                <div className="dz-media">
+                <div className="dz-media" style={{ minHeight: "200px" }}>
                   <img src={data.image[0]} alt="" />
                 </div>
                 <div className="dz-info">
@@ -147,7 +220,9 @@ const RecentProjectsSlider = () => {
                         >
                           {data.type === "only" ? "Cá nhân" : "Tổ chức"}
                         </span>
-                        <h6 className="author-name">{truncateString(data.groupName, 6)}</h6>
+                        <h6 className="author-name">
+                          {truncateString(data.groupName, 6)}
+                        </h6>
                       </div>
                     </div>
                   </div>

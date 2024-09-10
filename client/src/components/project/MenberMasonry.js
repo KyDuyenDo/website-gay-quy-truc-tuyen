@@ -12,7 +12,6 @@ const MenberMasonry = () => {
   const dispatch = useDispatch();
   const allmember = useSelector((state) => state.member.memberList);
   const search = useSelector((state) => state.member.search);
-  console.log(search);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -69,15 +68,11 @@ const MenberMasonry = () => {
 
   useEffect(() => {
     const endOffset = itemMemberOffset + itemsMemberPage;
-    console.log(`Loading items from ${itemMemberOffset} to ${endOffset}`);
     setCurrentItemsMember(allmember.slice(itemMemberOffset, endOffset));
     setPageCountMember(Math.ceil(allmember.length / itemsMemberPage));
   }, [itemMemberOffset, itemsMemberPage, allmember]);
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsMemberPage) % allmember.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemMemberOffset(newOffset);
   };
 

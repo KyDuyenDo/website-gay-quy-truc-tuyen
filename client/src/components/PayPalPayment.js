@@ -52,7 +52,6 @@ const PayPalPayment = ({
           formPayment.append("amount", parseInt(amount) + parseInt(amountTip));
           formPayment.append("tip", amountTip);
           if (res === true) {
-            console.log("true");
             createPayment(formPayment).then((payment) => {
               formData.append("articleId", articleId);
               formData.append("paymentId", payment._id);
@@ -67,7 +66,6 @@ const PayPalPayment = ({
               });
             });
           } else {
-            console.log("false");
             createPayment(formPayment).then((payment) => {
               formData.append("articleId", articleId);
               formData.append("paymentId", payment._id);

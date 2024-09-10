@@ -7,7 +7,6 @@ export const getConfig = async () => {
 
 export const createOrderPayPal = async (payload) => {
   const { order } = await API.post(`/paypal/create-paypal-order`, payload);
-  console.log(order);
   return order.id;
 };
 
@@ -25,7 +24,6 @@ export const createPayment = async (formData) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(data);
     return data;
   } catch (error) {
     return handleApiError(error);
@@ -39,7 +37,6 @@ export const createPaymentUrl = async (formData) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(data);
     return data;
   } catch (error) {
     return handleApiError(error);
@@ -53,7 +50,6 @@ export const vnpayReturn = async (formData) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(data);
     return data;
   } catch (error) {
     return handleApiError(error);

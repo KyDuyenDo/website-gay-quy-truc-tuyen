@@ -20,11 +20,6 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 export default function GallerySlider({ image }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  // const swiperFirst = [
-  //   { image: imageURL1 },
-  //   { image: imageURL2 },
-  //   { image: imageURL3 },
-  // ];
   return (
     <>
       <Swiper

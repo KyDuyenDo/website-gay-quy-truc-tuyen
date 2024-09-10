@@ -132,7 +132,6 @@ const ThirdStep = ({ register, lackAddMess, getValues, setValue }) => {
                   .then((res) => {
                     if (res.status !== 400) {
                       return res.text().then((result) => {
-                        console.log(JSON.parse(result));
                         setListPlace(JSON.parse(result));
                       });
                     } else {
@@ -177,7 +176,6 @@ const ThirdStep = ({ register, lackAddMess, getValues, setValue }) => {
                         : `, ${getValues("detail")}`);
                     setValue("address", detail);
                     setValue("total", item.display_name);
-                    console.log(getValues("total"));
                     setListPlace([]);
                   }}
                 >

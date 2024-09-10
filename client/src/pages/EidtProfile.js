@@ -167,12 +167,6 @@ const EidtProfile = () => {
                       "info",
                       data.intro === "" ? intro : data.intro
                     );
-                    // for (const pair of formData) {
-                    //   const key = pair[0];
-                    //   const value = pair[1];
-                    //   console.log(`Key: ${key}, Value: ${value}`);
-                    // }
-                    // console.log(data.avatar.length !== 0)
                     if (data.avatar.length !== 0) {
                       if (
                         avatar !==

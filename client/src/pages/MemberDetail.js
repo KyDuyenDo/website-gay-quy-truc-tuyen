@@ -7,62 +7,68 @@ import { getArticleByQuest } from "../redux/api/articleAPI";
 import { Link, useParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ScrollToTop from "../components/ScrollToTop";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import {
   faFacebook,
   faTiktok,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+
 const MemberDetail = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const [articleRaise, setArticleRaise] = useState();
-  const [articleDonate, setArticleDonate] = useState();
+  const [articleRaise, setArticleRaise] = useState([]);
+  const [articleDonate, setArticleDonate] = useState([]);
   const [activeStep, setActiveStep] = useState(0);
   const memberDetail = useSelector((state) => state.member.memberDetail);
+  const loading = useSelector((state) => state.member.loading);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         dispatch(getMemberDetail(params.id));
-        getArticleByQuest(params.id).then((res) => {
-          console.log(res);
-          setArticleRaise(res.articleRaise);
-          setArticleDonate(res.articleDonate);
-        });
+        const res = await getArticleByQuest(params.id);
+        setArticleRaise(res.articleRaise);
+        setArticleDonate(res.articleDonate);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
-  }, []);
+  }, [dispatch, params.id]);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
-    const month = date.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0
+    const month = date.getMonth() + 1; // Months are 0-based in JavaScript
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
+
   const handleStepClick = (step) => {
     setActiveStep(step);
   };
+
   function truncateString(str, num) {
     const wordCount = str.split(" ").length;
     if (wordCount <= num) {
       return str;
     }
-
     const truncatedString = str.split(" ").slice(0, num).join(" ");
     return `${truncatedString}...`;
   }
+
   const deadline = (createdAt, expireDate) => {
     const createdDate = new Date(createdAt);
     const deadline = new Date(
       createdDate.setDate(createdDate.getDate() + expireDate)
-    ); // Thêm expireDate + 2 ngày
+    );
     const today = new Date();
-    const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24)); // Chuyển đổi mili giây sang ngày
-
+    const daysLeft = Math.floor((deadline - today) / (1000 * 3600 * 24));
     return daysLeft;
   };
+
   function toDecimal(number) {
     if (typeof number !== "number") {
       return 0;
@@ -70,26 +76,21 @@ const MemberDetail = () => {
     let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
     return formattedNumber;
   }
-  //article Donate limit
-  const itemsCommentPage = 6;
-  const [currentItemsProject, setCurrentItemsProject] = useState(null);
-  const [pageCountProject, setPageCountProject] = useState(0);
 
+  const itemsCommentPage = 6;
+  const [currentItemsProject, setCurrentItemsProject] = useState([]);
+  const [pageCountProject, setPageCountProject] = useState(0);
   const [itemProjectOffset, setItemProjectOffset] = useState(0);
 
   useEffect(() => {
-    // console.log(comments);
     const endOffset = itemProjectOffset + itemsCommentPage;
-    console.log(`Loading items from ${itemProjectOffset} to ${endOffset}`);
-    setCurrentItemsProject(articleDonate?.slice(itemProjectOffset, endOffset));
-    setPageCountProject(Math.ceil(articleDonate?.length / itemsCommentPage));
+    setCurrentItemsProject(articleDonate.slice(itemProjectOffset, endOffset));
+    setPageCountProject(Math.ceil(articleDonate.length / itemsCommentPage));
   }, [itemProjectOffset, itemsCommentPage, articleDonate]);
+
   const handlePageClick = (event) => {
     const newOffset =
-      (event.selected * itemsCommentPage) % articleDonate?.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+      (event.selected * itemsCommentPage) % articleDonate.length;
     setItemProjectOffset(newOffset);
   };
 
@@ -99,17 +100,21 @@ const MemberDetail = () => {
         <div className="user-header-section">
           <div className="container">
             <div className="row">
-              <div className="col-3  py-5">
+              <div className="col-3 py-5">
                 <div className="user-avatar d-flex justify-content-end flex-shrink-0 flex-basis-0 ">
-                  <img
-                    src={memberDetail.userId.avatar}
-                    alt="Như chưa hề có cuộc chia ly"
-                    style={{
-                      height: "152px",
-                      width: "152px",
-                      objectFit: "cover",
-                    }}
-                  />
+                  {loading ? (
+                    <Skeleton circle={true} height={152} width={152} />
+                  ) : (
+                    <img
+                      src={memberDetail.userId.avatar}
+                      alt="Avatar"
+                      style={{
+                        height: "152px",
+                        width: "152px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  )}
                 </div>
               </div>
               <div className="col-9 py-5">
@@ -118,20 +123,39 @@ const MemberDetail = () => {
                     <div className="d-flex flex-row flex-wrap">
                       <div className="username-row flex-fill d-flex flex-column flex-shrink-1">
                         <h2 className="text-single-line text-dark text-bold font-size-20 font-size-md-24 mt-2 mb-0">
-                          {memberDetail.groupName}
+                          {loading ? (
+                            <Skeleton width={200} />
+                          ) : (
+                            memberDetail.groupName
+                          )}
                         </h2>
                         <div className="mt-2 text-gray-900">
-                          {memberDetail.emailContact}
+                          {loading ? (
+                            <Skeleton width={150} />
+                          ) : (
+                            memberDetail.emailContact
+                          )}
                         </div>
                         <div className="mt-2 font-size-15 font-size-md-16">
-                          Tham gia từ: {formatDate(memberDetail.approvaldate)}
+                          Tham gia từ:{" "}
+                          {loading ? (
+                            <Skeleton width={150} />
+                          ) : (
+                            formatDate(memberDetail.approvaldate)
+                          )}
                         </div>
                       </div>
                       <div className="counter-row d-none d-md-block">
                         <ul className="user-counters d-flex flex-row list-unstyled mb-0">
                           <li className="counter-item d-flex flex-column align-items-center">
                             <div className="text-bold text-dark font-size-20">
-                              {toDecimal(memberDetail.totalAmountDonate)} VNĐ
+                              {loading ? (
+                                <Skeleton width={120} />
+                              ) : (
+                                `${toDecimal(
+                                  memberDetail.totalAmountDonate
+                                )} VNĐ`
+                              )}
                             </div>
                             <div className="text-gray-800 font-size-12 font-size-md-16">
                               Số tiền ủng hộ
@@ -139,7 +163,13 @@ const MemberDetail = () => {
                           </li>
                           <li className="counter-item d-flex flex-column align-items-center">
                             <div className="text-bold text-dark font-size-20">
-                              <span>{toDecimal(memberDetail.totalAmountEarned)} VNĐ</span>
+                              {loading ? (
+                                <Skeleton width={120} />
+                              ) : (
+                                `${toDecimal(
+                                  memberDetail.totalAmountEarned
+                                )} VNĐ`
+                              )}
                             </div>
                             <div className="text-gray-800 font-size-12 font-size-md-16">
                               Số tiền đã gây quỹ
@@ -147,7 +177,11 @@ const MemberDetail = () => {
                           </li>
                           <li className="counter-item d-flex flex-column align-items-center">
                             <div className="text-bold text-dark font-size-20">
-                              <span>{toDecimal(memberDetail.totalDonation)}</span>
+                              {loading ? (
+                                <Skeleton width={120} />
+                              ) : (
+                                toDecimal(memberDetail.totalDonation)
+                              )}
                             </div>
                             <div className="text-gray-800 font-size-12 font-size-md-16">
                               Lượt được ủng hộ
@@ -158,7 +192,11 @@ const MemberDetail = () => {
                     </div>
                     <div className="bio-row flex-shrink-0 d-none d-md-block mt-3">
                       <span className="text-gray-800 font-size-15 font-size-md-18">
-                        {memberDetail?.userId?.intro}
+                        {loading ? (
+                          <Skeleton width={300} />
+                        ) : (
+                          memberDetail?.userId?.intro
+                        )}
                       </span>
                     </div>
                     <div className="mt-2 font-size-15 font-size-md-16">
@@ -170,21 +208,21 @@ const MemberDetail = () => {
                           size="2x"
                           className="media-item face"
                           icon={faFacebook}
-                        ></FontAwesomeIcon>
+                        />
                       </a>
                       <a href={memberDetail?.userId?.youtubeUrl}>
                         <FontAwesomeIcon
                           size="2x"
                           className="media-item youtube"
                           icon={faYoutube}
-                        ></FontAwesomeIcon>
+                        />
                       </a>
                       <a href={memberDetail?.userId?.tiktokUrl}>
                         <FontAwesomeIcon
                           size="lg"
                           className="media-item tiktok"
                           icon={faTiktok}
-                        ></FontAwesomeIcon>
+                        />
                       </a>
                       <a>
                         <svg
@@ -236,30 +274,55 @@ const MemberDetail = () => {
 
             {activeStep === 0 ? (
               <div className="row">
-                <div
-                  className="list_project"
-                  style={{ marginTop: "20px", minHeight: "300px" }}
-                >
-                  {articleRaise?.map((data) => {
-                    return (
-                      <div class="card" key={data._id}>
-                        <div class="card-top">
-                          <img src={data.image[0]} alt="Blog Name" />
-                        </div>
-                        <div class="card-info">
-                          <h2>{truncateString(data.articletitle, 15)}</h2>
-                        </div>
-                        <div class="card-bottom flex-row">
-                          <Link
-                            to={`/article-detail/${data._id}`}
-                            class="read-more"
+                <div className="list_project" style={{ marginTop: "20px" }}>
+                  {loading
+                    ? Array.from({ length: 3 }).map((_, index) => (
+                        <div className="card" key={index}>
+                          <div
+                            className="card-top"
+                            style={{ minHeight: "231px" }}
                           >
-                            Đến bài viết
-                          </Link>
+                            <Skeleton height={200} />
+                          </div>
+                          <div className="card-info">
+                            <Skeleton width={150} />
+                          </div>
+                          <div className="card-bottom flex-row">
+                            <Skeleton width={100} />
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      ))
+                    : articleRaise.map((data) => (
+                        <div className="card" key={data._id}>
+                          <div
+                            className="card-top"
+                            style={{ minHeight: "231px" }}
+                          >
+                            <img src={data.image[0]} alt="Blog Name" />
+                          </div>
+                          <div className="card-info">
+                            <h2>{truncateString(data.articletitle, 15)}</h2>
+                          </div>
+                          <div className="card-bottom flex-row">
+                            <Link
+                              to={`/article-detail/${data._id}`}
+                              className="read-more"
+                            >
+                              Đến bài viết
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                </div>
+                <div>
+                  {articleRaise.length === 0 && !loading && (
+                    <div
+                      style={{ minHeight: "300px" }}
+                      className="d-flex justify-content-center align-items-center text-center"
+                    >
+                      <p style={{opacity: '0.6'}}>Chưa có chiến dịch nào</p>
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (
@@ -267,34 +330,62 @@ const MemberDetail = () => {
                 <div className="row">
                   <div
                     className="list_project"
-                    style={{ marginTop: "20px", minHeight: "300px" }}
+                    style={{ marginTop: "20px"}}
                   >
-                    {currentItemsProject?.map((data) => {
-                      return (
-                        <div class="card" key={data._id}>
-                          <div class="card-top">
-                            <img src={data.image[0]} alt="Blog Name" />
-                          </div>
-                          <div class="card-info">
-                            <h2>{truncateString(data.articletitle, 15)}</h2>
-                          </div>
-                          <div class="card-bottom flex-row">
-                            <Link
-                              to={`/article-detail/${data._id}`}
-                              class="read-more"
+                    {loading
+                      ? Array.from({ length: 6 }).map((_, index) => (
+                          <div className="card" key={index}>
+                            <div
+                              className="card-top"
+                              style={{ minHeight: "231px" }}
                             >
-                              Đến bài viết
-                            </Link>
-                            <span>
-                              {deadline(data.createdAt, data.expireDate) > 0
-                                ? "Đang gây quỹ"
-                                : "Đã kết thúc"}
-                            </span>
+                              <Skeleton height={200} />
+                            </div>
+                            <div className="card-info">
+                              <Skeleton width={150} />
+                            </div>
+                            <div className="card-bottom flex-row">
+                              <Skeleton width={100} />
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        ))
+                      : currentItemsProject.map((data) => (
+                          <div className="card" key={data._id}>
+                            <div
+                              className="card-top"
+                              style={{ minHeight: "231px" }}
+                            >
+                              <img src={data.image[0]} alt="Blog Name" />
+                            </div>
+                            <div className="card-info">
+                              <h2>{truncateString(data.articletitle, 15)}</h2>
+                            </div>
+                            <div className="card-bottom flex-row">
+                              <Link
+                                to={`/article-detail/${data._id}`}
+                                className="read-more"
+                              >
+                                Đến bài viết
+                              </Link>
+                              <span>
+                                {deadline(data.createdAt, data.expireDate) > 0
+                                  ? "Đang gây quỹ"
+                                  : "Đã kết thúc"}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
                   </div>
+                  <div>
+                  {currentItemsProject.length === 0 && !loading && (
+                    <div
+                      style={{ minHeight: "300px" }}
+                      className="d-flex justify-content-center align-items-center text-center"
+                    >
+                      <p style={{opacity: '0.6'}}>Chưa có chiến dịch nào</p>
+                    </div>
+                  )}
+                </div>
                 </div>
                 <div className="mt-4 row">
                   <div className="col-12 m-sm-t0 m-t30">

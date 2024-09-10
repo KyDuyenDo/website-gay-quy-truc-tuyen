@@ -195,7 +195,6 @@ const ProjectCreate = () => {
                     {goSteps === 1 && (
                       <form
                         onSubmit={handleSubmit((data) => {
-                          // console.log(data)
                           setGoSteps(2);
                         })}
                       >
@@ -213,7 +212,6 @@ const ProjectCreate = () => {
                     {goSteps === 2 && (
                       <form
                         onSubmit={handleSubmit((data) => {
-                          console.log(data.total);
                           if (data.total !== "") {
                             setLackAddMess("");
                             setGoSteps(3);
@@ -279,12 +277,6 @@ const ProjectCreate = () => {
                             formData.append("lon", data.lon);
                             formData.append("street", data.street);
                             formData.append("town", data.town);
-
-                            // for (const pair of formData) {
-                            //   const key = pair[0];
-                            //   const value = pair[1];
-                            //   console.log(`Key: ${key}, Value: ${value}`);
-                            // }
                             const formDataImage = new FormData();
                             addArticle(formData)
                               .then((result) => {

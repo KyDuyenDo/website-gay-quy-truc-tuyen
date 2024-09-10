@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-// Import Swiper React components
 import "../../css/member.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
-import "swiper/css";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getHighRaiseMember } from "../../redux/actions/memberAction";
-// import Swiper core and required modules
 import { Autoplay } from "swiper/modules";
-
-//SwiperCore.use([EffectCoverflow,Pagination]);
 
 const MemberSlider = () => {
   const dispatch = useDispatch();
   const members = useSelector((state) => state.member.members);
+  const loading = useSelector((state) => state.member.loading);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,16 +48,76 @@ const MemberSlider = () => {
     let formattedNumber = number.toLocaleString("en").replace(/,/g, ".");
     return formattedNumber;
   }
+
+  if (loading) {
+    // Hiển thị skeleton khi đang tải dữ liệu
+    return (
+      <div className="team-slider">
+        <Swiper
+          speed={1500}
+          slidesPerView={3}
+          spaceBetween={0}
+          loop={true}
+          slidesPerGroup={1}
+          slidesPerGroupSkip={1}
+          autoplay={{
+            delay: 3000,
+          }}
+          modules={[Autoplay]}
+          breakpoints={{
+            1200: {
+              slidesPerView: 3,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            320: {
+              slidesPerView: 1,
+            },
+          }}
+        >
+          {[1, 2, 3].map((index) => (
+            <SwiperSlide key={index}>
+              <div className="member d-flex flex-row">
+                <div>
+                  <Skeleton
+                    circle
+                    width={110}
+                    height={110}
+                    style={{
+                      borderRadius: "50%",
+                      border: "2px solid #B1DAE7",
+                    }}
+                  />
+                </div>
+                <div className="member-info">
+                  <Skeleton width={100} height={20} />
+                  <p>
+                    <Skeleton width={150} />
+                  </p>
+                  <p>
+                    <Skeleton width={150} />
+                  </p>
+                  <Skeleton width={100} height={30} />
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    );
+  }
+
   return (
     <>
       <Swiper
         className="team-slider"
         speed={1500}
-        //parallax= {true}
         slidesPerView={3}
         spaceBetween={0}
-        //centeredSlides= {true}
         loop={true}
+        slidesPerGroup={1}
+        slidesPerGroupSkip={1}
         autoplay={{
           delay: 3000,
         }}
@@ -75,7 +134,7 @@ const MemberSlider = () => {
           },
         }}
       >
-        {members.map((d) => (
+        {members?.map((d) => (
           <SwiperSlide key={d._id}>
             <div className="member d-flex flex-row">
               <div className="">

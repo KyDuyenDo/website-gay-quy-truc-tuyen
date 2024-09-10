@@ -119,21 +119,17 @@ const Payment = () => {
       params_search?.get("vnp_TransactionStatus") === "00" &&
       localStorage.getItem("paymentId") !== null
     ) {
-      console.log("Thanh toán thành công");
       const formData = new FormData();
       formData.append("status", "COMPLETED");
       formData.append("TradingCode", params_search?.get("vnp_TransactionNo"));
       updatePayment(localStorage.getItem("paymentId"), formData);
       isProtected().then((res) => {
-        console.log(res);
         if (res === true) {
-          console.log("Private");
           getPayment(localStorage.getItem("paymentId")).then((payment) => {
             if (
               payment.message === "found" &&
               payment.data.status === "COMPLETED"
             ) {
-              console.log(payment);
               const formData = new FormData();
               const formRaiseAmount = new FormData();
               formData.append("articleId", params.id);
@@ -149,7 +145,6 @@ const Payment = () => {
               for (const pair of formData) {
                 const key = pair[0];
                 const value = pair[1];
-                console.log(`Key: ${key}, Value: ${value}`);
               }
               createDonationPrivate(formData).then((res) => {
                 if (
@@ -620,7 +615,6 @@ const Payment = () => {
                         formData.append("amount", amount);
                         formData.append("tip", amountTip);
                         createPaymentUrl(formData).then((data) => {
-                          // console.log(data);
                           window.location.href = data.vnpUrl;
                           localStorage.setItem("paymentId", data.paymentId);
                         });

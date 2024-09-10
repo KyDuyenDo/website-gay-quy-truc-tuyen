@@ -86,7 +86,6 @@ const Map = () => {
         .then((res) => {
           if (res.status !== 400) {
             return res.text().then((result) => {
-              console.log(JSON.parse(result));
               setLocationList(JSON.parse(result));
             });
           } else {

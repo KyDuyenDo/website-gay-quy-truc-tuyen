@@ -1,8 +1,8 @@
 import * as types from "../constants/projectConstants";
 
-
 const initialState = {
   categories: [],
+  loading: false,
 };
 
 const categoryReducer = (state = initialState, action) => {
@@ -13,6 +13,11 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         categories: payload ? payload : [],
+      };
+    case types.CATEGORIES_LOADING:
+      return {
+        ...state,
+        loading: payload,
       };
     case types.CLEAR_CATEGORIES:
       return {

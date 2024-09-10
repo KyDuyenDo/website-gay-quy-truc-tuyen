@@ -14,20 +14,11 @@ import {
   faHouse,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-//import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-// Import Swiper styles
-import "swiper/css";
-
-import "swiper/css/pagination";
-
-// import Swiper core and required modules
-//import { Autoplay, Pagination } from "swiper";
-
-//SwiperCore.use([EffectCoverflow,Pagination]);
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const dataBlog = [
   { icon: faMoneyBillWheat, title: "Xóa nghèo" },
@@ -43,35 +34,20 @@ const dataBlog = [
 ];
 
 const CategoriesSlider = () => {
-  //const navigationPrevRef = React.useRef(null)
-  //const navigationNextRef = React.useRef(null)
   const paginationRef = React.useRef(null);
   return (
     <>
       <Swiper
         className="categories-swiper"
         speed={1500}
-        //parallax= {true}
         slidesPerView={6}
         spaceBetween={30}
+        slidesPerGroup={1}
+        slidesPerGroupSkip={1}
         loop={false}
         autoplay={{
           delay: 3000,
         }}
-        //pagination={{ clickable: true }}
-        onSwiper={(swiper) => {
-          setTimeout(() => {
-            //swiper.params.navigation.prevEl = navigationPrevRef.current
-            //swiper.params.navigation.nextEl = navigationNextRef.current
-            //swiper.navigation.destroy()
-            //swiper.navigation.init()
-            //swiper.navigation.update()
-          });
-        }}
-        // pagination= {{
-        //     el= {.swiper-pagination}
-        //     clickable= {true}
-        // }}
         modules={[Autoplay, Pagination]}
         breakpoints={{
           1191: {

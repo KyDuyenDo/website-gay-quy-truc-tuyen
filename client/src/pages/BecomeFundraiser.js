@@ -140,7 +140,6 @@ const BecomeFundraiser = () => {
                                 setErroravt("");
                                 setGoSteps(1);
                               }
-                              // console.log(getValues("identificationImage").length);
                             }}
                           >
                             Sau
@@ -190,7 +189,6 @@ const BecomeFundraiser = () => {
                     {goSteps === 2 && (
                       <form
                         onSubmit={handleSubmit((data) => {
-                          console.log(data);
                           setGoSteps(3);
                         })}
                       >
@@ -223,11 +221,6 @@ const BecomeFundraiser = () => {
                           formData.append("groupName", data.groupName);
                           formData.append("describe", data.describe);
                           formData.append("introLink", data.introLink);
-                          // for (const pair of formData) {
-                          //   const key = pair[0];
-                          //   const value = pair[1];
-                          //   console.log(`Key: ${key}, Value: ${value}`);
-                          // }
                           setLoading(true);
                           setNotifyAdd(true);
                           try {

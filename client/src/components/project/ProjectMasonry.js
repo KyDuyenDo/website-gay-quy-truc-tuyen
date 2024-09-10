@@ -88,20 +88,14 @@ const ProjectMasonry = () => {
   const [itemProjectOffset, setItemProjectOffset] = useState(0);
 
   useEffect(() => {
-    // console.log(comments);
     const endOffset = itemProjectOffset + itemsCommentPage;
-    console.log(`Loading items from ${itemProjectOffset} to ${endOffset}`);
     setCurrentItemsProject(projects.slice(itemProjectOffset, endOffset));
     setPageCountProject(Math.ceil(projects.length / itemsCommentPage));
   }, [itemProjectOffset, itemsCommentPage, projects]);
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsCommentPage) % projects.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemProjectOffset(newOffset);
   };
-  console.log(currentItemsProject);
   return (
     <>
       <div className="row m-b30">
@@ -219,7 +213,10 @@ const ProjectMasonry = () => {
                         className="dz-card style-2 overlay-skew wow fadeInUp"
                         data-wow-delay="0.2s"
                       >
-                        <div className="dz-media">
+                        <div
+                          className="dz-media"
+                          style={{ minHeight: "200px" }}
+                        >
                           <img src={data.image[0]} alt="" />
                         </div>
                         <div className="dz-info">

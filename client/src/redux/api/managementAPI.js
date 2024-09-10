@@ -21,7 +21,6 @@ export const getUserDonation = async () => {
 export const getNotify = async () => {
   try {
     const { data } = await API.get("manage/notify");
-    console.log(data);
     return data;
   } catch (error) {
     return handleApiError(error);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-//import {Link, useNavigate} from 'react-router-dom';
 import {
   faLocationDot,
   faEnvelope,
@@ -8,7 +7,7 @@ import {
   faAngleRight,
   faBell,
   faCheck,
-  faX
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal } from "react-bootstrap";
@@ -19,7 +18,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import logo from "./logo.png";
 import { connect } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserClear } from "../redux/actions/userAction";
 import {
@@ -78,6 +77,8 @@ const schema2 = yup.object().shape({
 });
 
 const Header = () => {
+  const [active, setActive] = useState("");
+  const location = useLocation();
   const {
     register,
     formState: { errors },
@@ -210,6 +211,12 @@ const Header = () => {
   }
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const { pathname } = location;
+    setActive(pathname);
+  }, [location]);
+
   return (
     <>
       <header className="site-header mo-left header style-1">
@@ -282,13 +289,39 @@ const Header = () => {
                     <Offcanvas.Body>
                       <Nav className="custom_nav justify-content-start flex-grow-1 pe-3">
                         <Nav.Item>
-                          <Link to={"/project"}>Chiến dịch</Link>
+                          <Link to={"/project"}>
+                            <span
+                              style={
+                                active === "/project"
+                                  ? { color: "#234567" }
+                                  : {}
+                              }
+                            >
+                              Chiến dịch
+                            </span>
+                          </Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Link to={"/member"}>Thành viên</Link>
+                          <Link to={"/member"}>
+                            <span
+                              style={
+                                active === "/member" ? { color: "#234567" } : {}
+                              }
+                            >
+                              Thành viên
+                            </span>
+                          </Link>
                         </Nav.Item>
                         <Nav.Item>
-                          <Link to={"/map"}>Bản đồ</Link>
+                          <Link to={"/map"}>
+                            <span
+                              style={
+                                active === "/map" ? { color: "#234567" } : {}
+                              }
+                            >
+                              Bản đồ
+                            </span>
+                          </Link>
                         </Nav.Item>
                       </Nav>
                       <div className="search_contain">
@@ -381,56 +414,6 @@ const Header = () => {
                                 </li>
                               );
                             })}
-                            {/* <li className="item_notify">
-                              <div
-                                className="round"
-                                style={{
-                                  border: "2px solid green",
-                                  backgroundColor: "#11c011",
-                                  color: "#fff",
-                                }}
-                              >
-                                <FontAwesomeIcon
-                                  icon={faCheck}
-                                ></FontAwesomeIcon>
-                              </div>
-                              <div className="text_inner">
-                                <span>Chấp nhận yêu cầu của bạn</span>
-                                <p>yêu cầu đăng ký làm người đại...</p>
-                              </div>
-                            </li>
-                            <li className="item_notify">
-                              <div
-                                className="round"
-                                style={{
-                                  border: "2px solid red",
-                                  backgroundColor: "#f75c5c",
-                                  color: "#fff",
-                                }}
-                              >
-                                <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
-                              </div>
-                              <div className="text_inner">
-                                <span>Từ chối yêu cầu của bạn</span>
-                                <p>yêu cầu đăng ký làm người đại...</p>
-                              </div>
-                            </li>
-                            <li className="item_notify">
-                              <div
-                                className="round"
-                                style={{
-                                  border: "2px solid green",
-                                  backgroundColor: "#11c011",
-                                  color: "#fff",
-                                }}
-                              >
-                                <FontAwesomeIcon icon={faX}></FontAwesomeIcon>
-                              </div>
-                              <div className="text_inner">
-                                <span>Chấp nhận yêu cầu của bạn</span>
-                                <p>yêu cầu đăng ký làm người đại...</p>
-                              </div>
-                            </li> */}
                             <li className="show_more">
                               <Link
                                 to="/management/notify"
@@ -628,7 +611,6 @@ const Header = () => {
           onSubmit={handleSubmitForm1(async (data) => {
             setLoading(true);
             const formData = new FormData();
-            console.log(data.username, data.password);
             formData.append("username", data.username);
             formData.append("password", data.password);
             await dispatch(signInActionAdmin(formData));

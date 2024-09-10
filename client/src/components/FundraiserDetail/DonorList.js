@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 const DonorList = ({ itemsPerPage, articleId }) => {
   const donations = useSelector((state) => state.donation.donations);
-  console.log(donations);
   const dispatch = useDispatch();
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
@@ -16,7 +15,6 @@ const DonorList = ({ itemsPerPage, articleId }) => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(donations.formatDonation.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(donations.formatDonation.length / itemsPerPage));
   }, [itemOffset, itemsPerPage]);
@@ -24,9 +22,6 @@ const DonorList = ({ itemsPerPage, articleId }) => {
   const handlePageClick = (event) => {
     const newOffset =
       (event.selected * itemsPerPage) % donations.formatDonation.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemOffset(newOffset);
   };
   function toDecimal(number) {

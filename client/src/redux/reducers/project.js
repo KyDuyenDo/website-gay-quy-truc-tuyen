@@ -2,9 +2,11 @@ import * as types from "../constants/projectConstants";
 
 const initialState = {
   projects: [],
+  highRatingProjects: [],
   articleId: null,
   search: null,
   userProject: [],
+  loading: false,
 };
 
 const projectReducer = (state = initialState, action) => {
@@ -20,6 +22,11 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         userProject: payload ? payload : [],
+      };
+    case types.SET_HIGH_RATING_PROJECTS:
+      return {
+        ...state,
+        highRatingProjects: payload ? payload :[],
       };
     case types.SET_ARTICLE_ID:
       return {
@@ -46,6 +53,11 @@ const projectReducer = (state = initialState, action) => {
         ...state,
         projects: [],
         articleId: null,
+      };
+    case types.PROJECT_LOADING:
+      return {
+        ...state,
+        loading: payload,
       };
     default:
       return state;

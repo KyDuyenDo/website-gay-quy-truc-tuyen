@@ -49,6 +49,7 @@ const initialState = {
     averageRating: 0,
   },
   topDonorsWithDetails: [],
+  loading: false,
 };
 
 const detailReducer = (state = initialState, action) => {
@@ -78,6 +79,11 @@ const detailReducer = (state = initialState, action) => {
         ...state,
         detail: {},
         topDonorsWithDetails: [],
+      };
+    case types.DETAIL_LOADING:
+      return {
+        ...state,
+        loading: payload,
       };
     default:
       return state;

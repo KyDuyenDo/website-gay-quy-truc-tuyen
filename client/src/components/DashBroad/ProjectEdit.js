@@ -213,14 +213,12 @@ const ProjectEdit = () => {
             className="main-contain-up-activity"
             style={{ marginTop: "25px" }}
             onSubmit={handleSubmit(async (data) => {
-              console.log(data);
               const formData = new FormData();
               const formImage = new FormData();
               formImage.append("file", data.activityImage[0]);
 
               try {
                 const image = await upLoadImage("activity", formImage);
-                console.log(image);
                 formData.append("image", image.imageURL);
                 formData.append("content", data.content);
                 formData.append("amountSpent", data.amountSpend);

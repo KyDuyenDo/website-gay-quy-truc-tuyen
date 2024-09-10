@@ -262,7 +262,6 @@ const UserAd = () => {
                         onChange={(event) => setSearch(event.target.value)}
                         onKeyDown={(event) => {
                           if (event.key === "Enter") {
-                            console.log("enter");
                             handleSearchSubmit();
                           }
                         }}

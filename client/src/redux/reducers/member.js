@@ -29,6 +29,7 @@ const initialState = {
   },
   memberId: "",
   search: "",
+  loading: false,
 };
 
 const memberReducer = (state = initialState, action) => {
@@ -59,6 +60,11 @@ const memberReducer = (state = initialState, action) => {
       return {
         ...state,
         search: "",
+      };
+    case types.MEMBER_LOADING:
+      return {
+        ...state,
+        loading: payload,
       };
     default:
       return state;

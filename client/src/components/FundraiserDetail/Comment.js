@@ -103,17 +103,12 @@ const Comment = ({ articleId }) => {
   const [itemCommentOffset, setItemCommentOffset] = useState(0);
 
   useEffect(() => {
-    // console.log(comments);
     const endOffset = itemCommentOffset + itemsCommentPage;
-    console.log(`Loading items from ${itemCommentOffset} to ${endOffset}`);
     setCurrentItemsComment(comments.slice(itemCommentOffset, endOffset));
     setPageCountComment(Math.ceil(comments.length / itemsCommentPage));
   }, [itemCommentOffset, itemsCommentPage, comments]);
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsCommentPage) % comments.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemCommentOffset(newOffset);
   };
   return (

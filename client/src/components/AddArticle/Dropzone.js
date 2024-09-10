@@ -8,7 +8,6 @@ const Dropzone = ({ className, setValue, errorImage }) => {
 
   useEffect(() => {
     setValue("image", files);
-    console.log(files);
   }, [files]);
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
@@ -19,7 +18,6 @@ const Dropzone = ({ className, setValue, errorImage }) => {
         ),
       ]);
     }
-    console.log(rejectedFiles);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

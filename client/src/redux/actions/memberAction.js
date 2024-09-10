@@ -1,22 +1,35 @@
 import * as api from "../api/userAPI";
 import * as types from "../constants/projectConstants";
 
-export const getAllMember = (query) => async (dispatch) => {
+export const fetchData = (apiCall, onSuccess) => async (dispatch) => {
+  dispatch({ type: types.MEMBER_LOADING, payload: true });
+
   try {
-    const data = await api.getAllMember(query);
-    dispatch({ type: types.SET_MEMBER_LIST, payload: data });
+    const data = await apiCall();
+    onSuccess(data, dispatch); 
   } catch (error) {
-    console.log(error);
+    console.error('Failed to fetch data:', error); 
+  } finally {
+    dispatch({ type: types.MEMBER_LOADING, payload: false });
   }
 };
 
-export const getMemberDetail = (id) => async (dispatch) => {
-  try {
-    const data = await api.getMemberDetail(id);
-    dispatch({ type: types.SET_MEMBER_DETAIL, payload: data });
-  } catch (error) {
-    console.log(error);
-  }
+export const getAllMember = (query) => {
+  return fetchData(
+    () => api.getAllMember(query),
+    (data, dispatch) => {       
+      dispatch({ type: types.SET_MEMBER_LIST, payload: data });
+    }
+  );
+};
+
+export const getMemberDetail = (id) => {
+  return fetchData(
+    () => api.getMemberDetail(id),
+    (data, dispatch) => {       
+      dispatch({ type: types.SET_MEMBER_DETAIL, payload: data });
+    }
+  );
 };
 
 export const getHighRaiseMember = () => async (dispatch) => {

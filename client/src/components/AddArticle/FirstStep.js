@@ -33,7 +33,6 @@ const FirstStep = ({ setValue, errors, erroravt }) => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImg(imageSrc);
     const imageData = imageSrc.split(",")[1];
-    console.log(imageData);
     setValue("image", [imageData]);
   }, [webcamRef]);
   useEffect(() => {

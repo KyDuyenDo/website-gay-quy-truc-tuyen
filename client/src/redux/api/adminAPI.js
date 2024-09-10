@@ -203,7 +203,6 @@ export const getAllFund = async (query) => {
   try {
     if (query) {
       const { data } = await ADMIN_API.get(`/admin/get/all/fund${query}`);
-      console.log(data);
       return data;
     } else {
       const { data } = await ADMIN_API.get(`/admin/get/all/fund`);

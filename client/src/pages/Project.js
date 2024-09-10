@@ -24,7 +24,6 @@ const Project = () => {
     createQuerySearch(search).then((query) => {
       dispatch(setDataProjects(query));
     });
-    console.log(projects?.length);
   };
   return (
     <>
@@ -59,7 +58,7 @@ const Project = () => {
           </div>
         </section>
         <div className="call-action style-1 content-inner-1">
-          <div className="container">{/* <UpdateBlog />         */}</div>
+          <div className="container"></div>
         </div>
       </div>
     </>

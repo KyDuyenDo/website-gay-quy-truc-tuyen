@@ -27,13 +27,11 @@ const AdminDashBoard = () => {
       ? 3
       : 4
   );
-  console.log(activeItem);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const returnName = () => {
     const admin = localStorage.getItem("admin");
     const adminObject = JSON.parse(admin);
-    console.log(adminObject);
     return adminObject.user.username;
   };
   useEffect(() => {

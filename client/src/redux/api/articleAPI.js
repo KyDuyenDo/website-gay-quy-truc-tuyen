@@ -68,7 +68,7 @@ export const getArticlesByLocation = async (formData) => {
   }
 };
 
-export const getArticleHighRating = async () => {
+export const getHighRatingArticles = async () => {
   try {
     const { data } = await API.get(`/article/get/high/rating`);
     return data;
